@@ -244,6 +244,7 @@ table.tco-c tfoot td{font-weight:600;border-bottom:0;border-top:2px solid var(--
 .st-chg{font:600 15px var(--f-mono);font-variant-numeric:tabular-nums}
 .st-chg.gain{color:var(--down)} .st-chg.loss{color:var(--up)}
 .st-chg span{font:400 14px var(--f-body);color:var(--ink-2)}
+.st-chg .pill{display:inline-block;padding:1px 8px;margin-right:6px;border-radius:6px;background:color-mix(in srgb,currentColor 13%,transparent)}
 .st-asof{font-size:13px;color:var(--ink-3)}
 .stockc{position:relative}
 .stockc svg{touch-action:pan-y}
@@ -450,11 +451,11 @@ footer p{margin:0;max-width:80ch}
           <span class="eyebrow" id="h-wmx">BMV: WALMEX · Walmart de México y Centroamérica</span>
           <div class="st-px"><span id="wPx">–</span><small>MXN</small></div>
           <div class="st-chg" id="wChg"></div>
-          <div class="st-asof" id="wAsOf">Cargando cierres semanales…</div>
+          <div class="st-asof" id="wAsOf">Cargando cierres…</div>
         </div>
         <div class="ctrls">
           <div class="seg" role="group" aria-label="Periodo" id="wRange">
-            <button data-v="1m" aria-pressed="false">1 M</button><button data-v="6m" aria-pressed="false">6 M</button><button data-v="ytd" aria-pressed="false">En el año</button><button data-v="1y" aria-pressed="true">1 A</button><button data-v="5y" aria-pressed="false">5 A</button>
+            <button data-v="5d" aria-pressed="false">5 D</button><button data-v="1m" aria-pressed="false">1 M</button><button data-v="6m" aria-pressed="false">6 M</button><button data-v="ytd" aria-pressed="false">En el año</button><button data-v="1y" aria-pressed="true">1 A</button><button data-v="5y" aria-pressed="false">5 A</button>
           </div>
         </div>
         <div id="wChart" class="chart stockc"></div>
@@ -837,76 +838,100 @@ function renderCalc(){
 }
 
 // ---------- Walmart (WALMEX) ----------
-// Datos de mercado que no salen de la serie semanal; la rutina del lunes los revisa.
+// Datos de mercado que no salen de los cierres; la rutina del lunes los revisa.
 const WMX_FACTS = {asOf:"24 sep 2026", src:"Stock Analysis", url:"https://stockanalysis.com/quote/bmv/WALMEX/",
   pe:15.87, div:1.16, divY:2.52, target:58.04, cons:"Mantener", nAn:18, next:"27 oct 2026 (estimada)"};
-const WMX_R = [["1m","1 mes",5],["6m","6 meses",26],["ytd","en el año",0],["1y","el último año",52],["5y","5 años",260]];
+// Periodos y textos como en Google Finance; meses hacia atrás desde el último cierre
+const WMX_R = [["5d","en los últimos 5 días"],["1m","en el último mes",1],["6m","en los últimos 6 meses",6],["ytd","en lo que va del año"],["1y","en el último año",12],["5y","en los últimos 5 años",60]];
 const wmx = { range:"1y" };
 try { Object.assign(wmx, JSON.parse(localStorage.getItem("pc-wmx")||"{}")); } catch(e){}
+if (!WMX_R.some(x=>x[0]===wmx.range)) wmx.range = "1y";
+const DIAS = ["dom","lun","mar","mié","jue","vie","sáb"], DIAS_L = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+const MESES_L = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
 const addD = (d,k) => { const t = new Date(d+"T12:00:00Z"); t.setUTCDate(t.getUTCDate()+k); return t.toISOString().slice(0,10); };
-const dLabel = (d, yr=true) => { const [y,m,dd] = addD(d,4).split("-"); return `${+dd} ${MESES[+m-1]}${yr?" "+y:""}`; };
+const wday = d => new Date(d+"T12:00:00Z").getUTCDay();
+const dLabel = (d, yr=true) => { const [y,m,dd] = d.split("-"); return `${+dd} ${MESES[+m-1]}${yr?" "+y:""}`; };
 const fx2 = v => v.toLocaleString("es-MX",{minimumFractionDigits:2,maximumFractionDigits:2});
-function wmxRange(all, r){
-  if (r==="ytd"){ const y = all.at(-1).d.slice(0,4); const i = all.findIndex(p=>addD(p.d,4)>=y+"-01-01"); return all.slice(Math.max(0,i-1)); }
-  const n = (WMX_R.find(x=>x[0]===r)||WMX_R[3])[2]; return all.slice(-(n+1));
+const monthsAgo = (d, k) => { const [y,m,dd] = d.split("-").map(Number), t = new Date(Date.UTC(y, m-1-k, 1));
+  const end = new Date(Date.UTC(t.getUTCFullYear(), t.getUTCMonth()+1, 0)).getUTCDate();
+  return `${t.getUTCFullYear()}-${String(t.getUTCMonth()+1).padStart(2,"0")}-${String(Math.min(dd,end)).padStart(2,"0")}`; };
+// Cierres diarios (walmex_d) para 5 D a 1 A; cierres semanales (walmex_wk, d = lunes) más el último cierre diario para 5 A
+function wmxData(){
+  const srt = a => (a||[]).filter(p=>p.d && p.v!=null).sort((x,y)=>x.d<y.d?-1:1);
+  const wk = srt(SERIES.walmex_wk?.points).map(p=>({d:addD(p.d,4), v:p.v, wk:true})), day = srt(SERIES.walmex_d?.points);
+  if (!day.length) return {day:wk, wk};
+  const last = day.at(-1), mon = addD(last.d, -((wday(last.d)+6)%7));
+  return {day, wk: wk.filter(p => addD(p.d,-4) < mon).concat([last])};
 }
-function drawStock(el, pts){
+// Base del cambio como en Google: primer cierre dentro del periodo; en el año, el último cierre del año anterior
+function wmxRange(D, r){
+  const all = r==="5y" ? D.wk : D.day, lastD = all.at(-1).d;
+  if (r==="5d") return all.slice(-6);
+  if (r==="ytd"){ const i = all.findIndex(p=>p.d>=lastD.slice(0,4)+"-01-01"); return all.slice(Math.max(0,i-1)); }
+  const start = monthsAgo(lastD, (WMX_R.find(x=>x[0]===r)||WMX_R[4])[2]);
+  return all.slice(Math.max(0, all.findIndex(p=>p.d>=start)));
+}
+function drawStock(el, pts, r){
   const narrow = (el.clientWidth||760) < 560, W=narrow?340:900, H=narrow?220:290, L=6, R=narrow?40:52, T=14, B=26;
   const vs = pts.map(p=>p.v); let lo=Math.min(...vs), hi=Math.max(...vs); const pad=(hi-lo)*0.1||1; lo-=pad; hi+=pad;
   const nice = x=>{ const e=Math.pow(10,Math.floor(Math.log10(x))); const f=x/e; return (f<1.5?1:f<3?2:f<7?5:10)*e; };
   const step = nice((hi-lo)/4), ticks=[]; for (let t=Math.ceil(lo/step)*step; t<=hi; t+=step) ticks.push(+t.toFixed(6));
   const n = pts.length, sx = i => L + (n<2?0:i/(n-1))*(W-L-R), sy = v => T + (hi-v)/(hi-lo)*(H-T-B);
-  const cls = pts.at(-1).v>=pts[0].v ? "gain" : "loss";
-  let s = `<svg viewBox="0 0 ${W} ${H}" class="${cls}" role="img" aria-label="WALMEX, cierre semanal: de ${fx2(pts[0].v)} a ${fx2(pts.at(-1).v)} pesos">`;
+  const cls = pts.at(-1).v>=pts[0].v ? "gain" : "loss", weekly = r==="5y";
+  let s = `<svg viewBox="0 0 ${W} ${H}" class="${cls}" role="img" aria-label="WALMEX, cierre ${weekly?"semanal":"diario"}: de ${fx2(pts[0].v)} a ${fx2(pts.at(-1).v)} pesos">`;
   ticks.forEach(t=>{ s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${sy(t)}" y2="${sy(t)}"/><text class="yl" x="${W-R+6}" y="${sy(t)+4}">${t.toFixed(step<1?1:0)}</text>`; });
   s += `<line class="base" x1="${L}" x2="${W-R}" y1="${sy(pts[0].v)}" y2="${sy(pts[0].v)}"/>`;
   const xy = pts.map((p,i)=>[sx(i),sy(p.v)]), line = xy.map(a=>a.map(v=>v.toFixed(1)).join(",")).join(" ");
   s += `<polygon points="${xy[0][0].toFixed(1)},${H-B} ${line} ${xy.at(-1)[0].toFixed(1)},${H-B}" fill="currentColor" fill-opacity=".1" stroke="none"/>`;
   s += `<polyline points="${line}" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>`;
-  // Etiquetas del eje x: inicio de cada año (rangos largos), de cada mes (medianos) o semanas (cortos), sin encimarse
-  const span = mDiff(pts[0].d.slice(0,7), pts.at(-1).d.slice(0,7)), k = narrow?4:6, fri = pts.map(p=>addD(p.d,4));
-  let marks = fri.map((d,i)=>i).filter(i => i>0 && (span>30 ? fri[i].slice(0,4)!==fri[i-1].slice(0,4) : span>6 ? fri[i].slice(0,7)!==fri[i-1].slice(0,7) : true));
+  // Eje x: años (5 A), meses (6 M, en el año, 1 A), semanas (1 M) o días (5 D), sin encimarse ni pegarse a las orillas
+  const ds = pts.map(p=>p.d), k = narrow?4:6;
+  const brk = r==="5y" ? i => ds[i].slice(0,4)!==ds[i-1].slice(0,4)
+            : r==="1m" ? i => wday(ds[i]) < wday(ds[i-1]) || addD(ds[i-1],7) <= ds[i]
+            : i => ds[i].slice(0,7)!==ds[i-1].slice(0,7);
+  const lab = d => { const [y,m,dd] = d.split("-");
+    return r==="5y" ? y : (r==="1m"||r==="5d") ? `${+dd} ${MESES[+m-1]}` : (m==="01" && r!=="ytd" ? y : MESES[+m-1]); };
+  let marks = ds.map((_,i)=>i).filter(i => r==="5d" || (i>0 && brk(i)));
   const stride = Math.max(1, Math.ceil(marks.length/k)); marks = marks.filter((_,j)=>j%stride===0);
-  const gap = (W-L-R)/(k+1)*0.6; marks = marks.filter(i => sx(i)-L > gap*0.5 && W-R-sx(i) > gap*0.45);
-  marks.forEach(i => { const [y,m,dd] = fri[i].split("-");
-    const t = span>30 ? y : span>6 ? `${MESES[+m-1]} ${y.slice(2)}` : `${+dd} ${MESES[+m-1]}`;
-    s += `<line class="grid" x1="${sx(i)}" x2="${sx(i)}" y1="${H-B}" y2="${H-B+4}"/><text x="${sx(i)}" y="${H-8}" text-anchor="middle">${t}</text>`; });
+  const gap = (W-L-R)/(k+1)*0.6; if (r!=="5d") marks = marks.filter(i => sx(i)-L > gap*0.5 && W-R-sx(i) > gap*0.45);
+  marks.forEach(i => { const an = i===0 && r==="5d" ? "start" : i===n-1 && r==="5d" ? "end" : "middle";
+    s += `<line class="grid" x1="${sx(i)}" x2="${sx(i)}" y1="${H-B}" y2="${H-B+4}"/><text x="${sx(i)}" y="${H-8}" text-anchor="${an}">${lab(ds[i])}</text>`; });
   s += `<line class="cross" x1="0" x2="0" y1="${T}" y2="${H-B}" visibility="hidden"/><circle class="dot" r="4.5" fill="currentColor" stroke="var(--surface)" stroke-width="2" visibility="hidden"/>`;
-  s += `<rect class="hit" x="${L}" y="0" width="${W-L-R}" height="${H}"/></svg><div class="st-tip" hidden></div>`;
+  s += `<rect class="hit" x="${L}" y="0" width="${W-L}" height="${H}"/></svg><div class="st-tip" hidden></div>`;
   el.innerHTML = s;
+  const yr = ds[0].slice(0,4)!==ds.at(-1).slice(0,4);
   const svg = el.querySelector("svg"), hit = el.querySelector("rect.hit"), xh = el.querySelector(".cross"), dot = el.querySelector(".dot"), tip = el.querySelector(".st-tip");
-  const show = e => { const r = svg.getBoundingClientRect(), x = (e.clientX - r.left) * W / r.width;
-    const i = Math.max(0, Math.min(n-1, Math.round((x-L)/(W-L-R)*(n-1)))), [cx,cy] = xy[i];
+  const show = e => { const rc = svg.getBoundingClientRect(), x = (e.clientX - rc.left) * W / rc.width;
+    const i = Math.max(0, Math.min(n-1, Math.round((x-L)/(W-L-R)*(n-1)))), [cx,cy] = xy[i], p = pts[i];
     xh.setAttribute("x1",cx); xh.setAttribute("x2",cx); dot.setAttribute("cx",cx); dot.setAttribute("cy",cy);
     xh.setAttribute("visibility","visible"); dot.setAttribute("visibility","visible");
-    tip.innerHTML = `<b>${fx2(pts[i].v)}</b> · semana al ${dLabel(pts[i].d)}`; tip.hidden = false;
-    const px = cx * r.width / W, half = tip.offsetWidth/2; tip.style.left = Math.max(half, Math.min(r.width-half, px)) + "px"; };
+    tip.innerHTML = `<b>${fx2(p.v)} MXN</b> · ${p.wk ? "semana al "+dLabel(p.d) : DIAS[wday(p.d)]+" "+dLabel(p.d, yr)}`; tip.hidden = false;
+    const px = cx * rc.width / W, half = tip.offsetWidth/2; tip.style.left = Math.max(half, Math.min(rc.width-half, px)) + "px"; };
   const hide = () => { tip.hidden = true; xh.setAttribute("visibility","hidden"); dot.setAttribute("visibility","hidden"); };
   hit.addEventListener("pointermove", show); hit.addEventListener("pointerdown", show); hit.addEventListener("pointerleave", hide);
 }
 function renderWalmex(){
   document.querySelectorAll("#wRange button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.v===wmx.range)));
-  const s = SERIES.walmex_wk, all = s ? (s.points||[]).filter(p=>p.d && p.v!=null).sort((a,b)=>a.d<b.d?-1:1) : [];
-  const el = document.getElementById("wChart");
-  if (all.length<2){ el.innerHTML = '<p class="muted empty">Los cierres semanales se ven al abrir el tablero desde claude.ai con tu sesión iniciada.</p>'; return; }
-  const last = all.at(-1), pts = wmxRange(all, wmx.range), first = pts[0], d = last.v-first.v, pc = d/first.v*100;
-  const rl = (WMX_R.find(x=>x[0]===wmx.range)||WMX_R[3])[1];
+  const D = wmxData(), el = document.getElementById("wChart");
+  if (D.day.length<7){ el.innerHTML = '<p class="muted empty">Los cierres se ven al abrir el tablero desde claude.ai con tu sesión iniciada.</p>'; return; }
+  const last = D.day.at(-1), pts = wmxRange(D, wmx.range), first = pts[0], d = last.v-first.v, pc = d/first.v*100, up = d>=0;
   document.getElementById("wPx").textContent = fx2(last.v);
-  const chg = document.getElementById("wChg"); chg.className = "st-chg " + (d>=0?"gain":"loss");
-  chg.innerHTML = `${d>=0?"+":"−"}${fx2(Math.abs(d))} (${d>=0?"+":"−"}${Math.abs(pc).toFixed(2)}%) <span>${rl}</span>`;
-  document.getElementById("wAsOf").textContent = `Cierre de la semana al ${dLabel(last.d)}. Se actualiza cada lunes.`;
-  drawStock(el, pts);
-  const y52 = all.slice(-52).map(p=>p.v), prev = all.at(-2), ytd0 = wmxRange(all,"ytd")[0], y1 = all.at(-53) || all[0];
+  const chg = document.getElementById("wChg"); chg.className = "st-chg " + (up?"gain":"loss");
+  chg.innerHTML = `<b class="pill">${up?"↑":"↓"} ${Math.abs(pc).toFixed(2)}%</b>${up?"+":"−"}${fx2(Math.abs(d))} <span>${(WMX_R.find(x=>x[0]===wmx.range)||WMX_R[4])[1]}</span>`;
+  const [y,m,dd] = last.d.split("-");
+  document.getElementById("wAsOf").textContent = `Cierre del ${DIAS_L[wday(last.d)]} ${+dd} de ${MESES_L[+m-1]} de ${y}. Se actualiza cada lunes.`;
+  drawStock(el, pts, wmx.range);
+  const y52 = D.day.filter(p=>p.d>=monthsAgo(last.d,12)).map(p=>p.v), prev = D.day.at(-2);
   const chgTxt = (a,b) => { const v=(b/a-1)*100; return (v>=0?"+":"−")+Math.abs(v).toFixed(1)+"%"; };
-  const F = WMX_FACTS;
+  const F = WMX_FACTS, daily = SERIES.walmex_d || SERIES.walmex_wk || {};
   document.getElementById("wStats").innerHTML = [
-    ["Semana anterior", fx2(prev.v)], ["Rango 52 semanas", `${fx2(Math.min(...y52))} – ${fx2(Math.max(...y52))}`],
-    ["Cambio en el año", chgTxt(ytd0.v,last.v)], ["Cambio 12 meses", chgTxt(y1.v,last.v)],
+    ["Cierre anterior", fx2(prev.v)], ["Rango 52 semanas", `${fx2(Math.min(...y52))} – ${fx2(Math.max(...y52))}`],
+    ["Cambio en el año", chgTxt(wmxRange(D,"ytd")[0].v,last.v)], ["Cambio 12 meses", chgTxt(wmxRange(D,"1y")[0].v,last.v)],
     ["P/U", F.pe.toFixed(1)], ["Dividendo anual", `${fx2(F.div)} (${F.divY.toFixed(1)}%)`],
     ["Consenso de analistas", `${F.cons} (${F.nAn})`], ["Precio objetivo promedio", fx2(F.target)],
     ["Próximo reporte", F.next]
   ].map(([k,v])=>`<div><span>${k}</span><b>${v}</b></div>`).join("");
-  document.getElementById("wSrc").innerHTML = `Cierres semanales: <a href="${s.url}" target="_blank" rel="noopener">Yahoo Finanzas</a> (cierre del último día hábil de cada semana, sin ajustar por dividendos). Rango de 52 semanas calculado con cierres semanales. P/U, dividendo, consenso y fecha del próximo reporte: <a href="${F.url}" target="_blank" rel="noopener">${F.src}</a>, ${F.asOf}.`;
+  document.getElementById("wSrc").innerHTML = `Cierres diarios de la BMV vía <a href="${daily.url||"https://finance.yahoo.com/quote/WALMEX.MX/history/"}" target="_blank" rel="noopener">Yahoo Finanzas</a>: son los mismos cierres que muestra Google Finance, sin ajustar por dividendos. La vista de 5 años usa el cierre de cada semana. Rango de 52 semanas con cierres diarios. P/U, dividendo, consenso y fecha del próximo reporte: <a href="${F.url}" target="_blank" rel="noopener">${F.src}</a>, ${F.asOf}.`;
 }
 document.getElementById("wRange").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; wmx.range = b.dataset.v; try{localStorage.setItem("pc-wmx",JSON.stringify(wmx));}catch(err){} renderWalmex(); });
 // Pestañas
