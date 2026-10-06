@@ -263,6 +263,72 @@ footer{font-size:13px;color:var(--ink-3);border-top:1px solid var(--line);paddin
 footer p{margin:0;max-width:80ch}
 @media (max-width:560px){.risk{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+/* Onepager: hoja de una página con lo importante de la semana */
+header.hero .hero-act{position:relative;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.opbtn{display:inline-flex;align-items:center;gap:8px;font:700 14px var(--f-display);border:0;border-radius:8px;padding:9px 14px;background:var(--hero-accent);color:var(--hero);cursor:pointer}
+.opbtn svg{width:18px;height:18px}
+.opbtn:focus-visible{outline:2px solid var(--hero-ink);outline-offset:2px}
+body.op-open{overflow:hidden}
+.op-back{position:fixed;inset:0;z-index:50;background:rgba(8,16,21,.8);overflow-y:auto;padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(24px + env(safe-area-inset-bottom,0px))}
+.op-dlg{max-width:860px;margin:0 auto;display:grid;gap:10px}
+.op-bar{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;background:var(--surface);border-radius:12px;padding:10px 12px 10px 16px}
+.op-bar .op-msg{flex:1 1 200px;font-size:13px;color:var(--ink-2)}
+.op-acts{display:flex;gap:8px;flex-wrap:wrap}
+.opb{font:600 14px var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:7px 14px;cursor:pointer}
+.opb.pri{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.opb:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.op-sheet{background:var(--surface);color:var(--ink);border-radius:12px;padding:28px 30px 22px;display:grid;gap:18px;font-size:13.5px;line-height:1.45}
+.op-hd{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:6px 16px;border-bottom:3px solid var(--ink);padding-bottom:10px}
+.op-hd h2{font-size:24px;font-weight:800;margin:0;letter-spacing:-.01em}
+.op-hd .wk{font:600 12px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2)}
+.op-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.op-kpis div{border-left:3px solid var(--accent);padding:2px 0 2px 10px;display:grid;gap:1px;min-width:0}
+.op-kpis .k{font:600 11px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3)}
+.op-kpis .v{font:700 21px var(--f-display);font-variant-numeric:tabular-nums}
+.op-kpis .v small{font:600 12px var(--f-mono);color:var(--ink-3)}
+.op-kpis .n{font-size:12.5px;color:var(--ink-2)}
+.op-sec{display:grid;gap:8px;min-width:0;align-content:start}
+.op-sec h3{font:600 11.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0}
+.op-sec ol,.op-sec ul{margin:0;padding-left:20px;display:grid;gap:6px}
+.op-2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px 24px}
+.op-risk{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 10px;align-items:start}
+.op-risk .lvl{font-size:10.5px;padding:2px 6px}
+.op-risk p{margin:0}
+.op-risk .t{font-weight:600}
+.op-risk .s{font-size:12px;color:var(--ink-3)}
+.op-risks{display:grid;gap:10px;align-content:start}
+table.op-t{width:100%;min-width:0;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+table.op-t th{font:600 11px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);text-align:left;border-bottom:1px solid var(--line);padding:4px 6px}
+table.op-t td{border-bottom:1px solid var(--line);padding:5px 6px}
+table.op-t .num{text-align:right;white-space:nowrap}
+table.op-t .lvl{font-size:10px;padding:1px 5px}
+.op-ev{list-style:none;padding:0!important}
+.op-ev li{display:grid;grid-template-columns:7.5em minmax(0,1fr);gap:8px}
+.op-ev b{font:600 12.5px var(--f-mono)}
+.op-ev small{display:block;color:var(--ink-3);font-size:12px}
+.op-ft{font-size:12px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:8px;display:grid;gap:3px}
+.op-ft p{margin:0}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:640px){
+  .op-sheet{padding:20px 16px 16px}
+  .op-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .op-2{grid-template-columns:minmax(0,1fr)}
+  table.op-t .c-ytd{display:none}
+  table.op-t th,table.op-t td{padding:5px 4px}
+}
+@media print{
+  :root:not(#x),:root[data-theme]{--bg:#fff;--surface:#fff;--ink:#15212b;--ink-2:#4a5866;--ink-3:#6b7884;--line:#d5dce2;--accent:#0b5d6b;--accent-soft:#e1eff1;--up:#b4361f;--up-soft:#fbe9e5;--down:#1f6f4a;--down-soft:#e3f2ea;--warn:#9a6400;--warn-soft:#fbf1dc;color-scheme:light}
+  @page{size:letter;margin:11mm}
+  body{background:#fff;padding:0;font-size:12px}
+  body.op-open .wrap,body.op-open .tip{display:none!important}
+  body.op-open .op-back{position:static;background:none;padding:0;overflow:visible}
+  .op-bar{display:none!important}
+  .op-sheet{border-radius:0;padding:0;gap:10px;font-size:11.5px;line-height:1.38}
+  .op-kpis .v{font-size:18px}
+  .op-sec ol,.op-sec ul,.op-risks{gap:5px}
+  table.op-t td{padding:3px 6px}
+  .op-ft{font-size:10.5px;padding-top:6px;break-inside:avoid}
+}
 </style>
 </head>
 <body>
@@ -275,9 +341,12 @@ footer p{margin:0;max-width:80ch}
       <h1>Pulso de Compras México</h1>
       <p>Mercado mexicano para tus 7 categorías GNFR de construcción que más mueven la aguja, con foco en estructura metálica: materias primas mes a mes, riesgos y noticias.</p>
     </div>
-    <div class="toggle" role="group" aria-label="Moneda">
-      <button id="btnMXN" aria-pressed="true">MXN</button>
-      <button id="btnUSD" aria-pressed="false">USD</button>
+    <div class="hero-act">
+      <button class="opbtn" id="btnOP" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 12h7M9 15.5h7M9 19h4"/></svg>Onepager</button>
+      <div class="toggle" role="group" aria-label="Moneda">
+        <button id="btnMXN" aria-pressed="true">MXN</button>
+        <button id="btnUSD" aria-pressed="false">USD</button>
+      </div>
     </div>
   </header>
 
@@ -500,6 +569,19 @@ footer p{margin:0;max-width:80ch}
     <p>Actualizado el lunes 5 de octubre de 2026. Se actualiza solo cada lunes a las 7:00 am (hora del centro de México).</p>
     <p>Categorías: Estructura Metálica, Sistema Contra Incendio, ANSUL, Pintura, Equipo Hidroneumático, PTARs y Sonido, solo México. Datos de fuentes públicas (INEGI vía informes CMIC CEICO como fuente principal; Banxico para tipo de cambio; LME, PetroIntelligence y Drewry solo como referencia). Úsalo como referencia de mercado, no como cotización.</p>
   </footer>
+</div>
+<div class="op-back" id="op" hidden>
+  <div class="op-dlg" role="dialog" aria-modal="true" aria-labelledby="op-title">
+    <div class="op-bar">
+      <span class="op-msg" id="opMsg" role="status">Resumen de una página con lo importante de la semana.</span>
+      <div class="op-acts">
+        <button class="opb pri" id="opCopy">Copiar para correo</button>
+        <button class="opb" id="opPrint" hidden>Imprimir o guardar PDF</button>
+        <button class="opb" id="opClose">Cerrar</button>
+      </div>
+    </div>
+    <article class="op-sheet" id="opSheet"></article>
+  </div>
 </div>
 <div class="tip" id="tip" hidden></div>
 
@@ -946,6 +1028,121 @@ function showTab(id, focus){
 document.querySelector(".tabs").addEventListener("click", e => { const b = e.target.closest("[role=tab]"); if (b) showTab(b.id.slice(2)); });
 document.querySelector(".tabs").addEventListener("keydown", e => { if (e.key!=="ArrowRight" && e.key!=="ArrowLeft") return; const cur = document.querySelector('.tabs [aria-selected="true"]').id.slice(2); showTab(cur==="mercado"?"walmex":"mercado", true); });
 
+
+// ---------- Onepager ----------
+// Fechas que mueven precios en las próximas semanas (la rutina del lunes las revisa). d = fecha para ordenar y vencer; dl = cómo se muestra.
+const EVENTS = [
+  {d:"2026-10-27", dl:"27 oct", t:"Walmex reporta el tercer trimestre (fecha estimada)", cats:"Presupuesto de todas tus categorías", lvl:"medio"},
+  {d:"2026-10-31", dl:"oct", t:"Posible acuerdo con EE.UU. para bajar aranceles al acero (revisión del T-MEC)", cats:"Estructura Metálica", lvl:"alto"},
+  {d:"2026-12-05", dl:"5 dic, a más tardar", t:"Resolución final del antidumping a lámina rolada en frío de EE.UU., China y Malasia", cats:"Estructura Metálica y Sistema Contra Incendio", lvl:"alto"},
+  {d:"2026-12-10", dl:"dic", t:"Anuncio del salario mínimo 2027", cats:"Instalación y mantenimiento de todas", lvl:"alto"},
+  {d:"2027-01-01", dl:"1 ene 2027", t:"La jornada laboral baja de 48 a 46 horas", cats:"Instalación y mantenimiento de todas", lvl:"medio"}
+];
+const DASH_URL = window.__STATIC__ ? "https://j0s151t.github.io/pulso-compras/" : "https://claude.ai/artifact/RNbnGAatVz42BP1jsWmjkF";
+const txt = el => el ? el.textContent.replace(/\s+/g," ").trim() : "";
+const catLvl = (c, st) => { let l = !st || st.y12==null ? "bajo" : st.y12>25 ? "alto" : st.y12>5 ? "medio" : "bajo"; if (c.extra && RANK[c.extra]>RANK[l]) l = c.extra; return l; };
+// Junta los datos del onepager; html, text y mail salen de aquí para que el botón y el correo digan lo mismo.
+function opModel(){
+  const ser = emSeries(); if (!ser.length) return null;
+  const today = new Date().toISOString().slice(0,10);
+  const last = ser.at(-1), ya = ser.find(p=>p.m===addM(last.m,-12)), dec = ser.find(p=>p.m===(+last.m.slice(0,4)-1)+"-12");
+  const cats = CATS.map(c=>{ const st = catStats(c), t = tcoOf(c); return {n:c.name, st, lvl:catLvl(c,st), tco:t && t.y12, top:t && t.top}; }).filter(x=>x.st && x.st.y12!=null).sort((a,b)=>b.st.y12-a.st.y12);
+  const mp = MP.map(m=>({m, d:BY[m.main]})).filter(({d})=>d && !d.stale && !d.ref && !d.qual).map(({m,d})=>({n:m.short||m.name, y:yoy(d), aff:m.aff.some(a=>a[0]==="Todas") ? "todas tus categorías" : listY(m.aff.map(a=>a[0]))})).filter(x=>x.y!=null && x.y>5).sort((a,b)=>b.y-a.y);
+  const risks = [...document.querySelectorAll("#tab-mercado .risk")].map(r=>{ const l = r.querySelector(".lvl"); return {lvl:["alto","medio","bajo"].find(k=>l.classList.contains(k))||"bajo",
+    t:txt(r.querySelector("h3")), aff:txt(r.querySelector(".aff")), doIt:txt(r.querySelector(".do")).replace(/^Qué haría:\s*/,""), src:txt(r.querySelector(".src"))}; })
+    .sort((a,b)=>RANK[b.lvl]-RANK[a.lvl]).slice(0,3);
+  const D = wmxData(), wl = D.day.length ? D.day.at(-1) : null, wy = wl ? wmxRange(D,"ytd")[0] : null;
+  const tc = cats.filter(x=>x.tco!=null).sort((a,b)=>b.tco-a.tco)[0];
+  const up = cats[0], dn = cats.at(-1);
+  const know = [];
+  know.push(`Tus categorías que más suben en 12 meses: ${listY(cats.slice(0,2).map(x=>`${x.n} (${pct(x.st.y12)})`))}${dn && dn.st.y12<0 ? `; la que más baja es ${dn.n} (${pct(dn.st.y12)})` : ""}. Dato INEGI a ${mLabel(up.st.last)}.`);
+  if (mp.length) know.push(`Materias primas arriba de 5% en 12 meses: ${listY(mp.slice(0,3).map(x=>`${x.n} ${pct(x.y)} (pega en ${x.aff})`))}. Si te piden aumentos en esas categorías, compáralos contra el índice antes de aprobarlos.`);
+  if (tc && tc.top) know.push(`${tc.n} es la categoría cuyo costo total más sube: ${pct(tc.tco)} en 12 meses, sobre todo por ${lc(TCO_COMP[tc.top.k])} (${pct(tc.top.y12)}).`);
+  return { week: txt(document.getElementById("week")), today,
+    kpis: [
+      {k:"Estructura Metálica", v:`$${fmt(last.v)}`, u:"MXN/kg", n:`${ya?pct((last.v/ya.v-1)*100)+" en 12 meses":""}${dec?" · "+pct((last.v/dec.v-1)*100)+" en el año":""}`},
+      {k:"Dólar FIX", v:`$${FX_NOW.toFixed(2)}`, u:"MXN", n:txt(document.querySelector(".macro > div .n"))},
+      {k:"Materias primas >5%", v:String(mp.length), u:"de "+MP.length, n:mp.length ? mp.slice(0,3).map(x=>x.n).join(", ") + (mp.length>3 ? ` y ${mp.length-3} más` : "") : "Ninguna sube más de 5%"},
+      wl ? {k:"WALMEX", v:fx2(wl.v), u:"MXN", n:`${pct((wl.v/wy.v-1)*100)} en el año · cierre ${dLabel(wl.d,false)}`} : null
+    ].filter(Boolean),
+    know, risks, cats, mpCount: mp.length,
+    events: EVENTS.filter(e=>e.d>=today).slice(0,5),
+    asOf: mLabel(up.st.last), emAsOf: mLabel(last.m), url: DASH_URL };
+}
+const opEsc = s => esc(s);
+const p1 = v => Math.abs(v)<0.05 ? "0.0%" : pct(v);
+function opHtml(o){
+  return `<header class="op-hd"><div><span class="wk">${opEsc(o.week)}</span><h2 id="op-title">Pulso de Compras México</h2></div><span class="wk">GNFR Construcciones · México</span></header>
+  <div class="op-kpis">${o.kpis.map(k=>`<div><span class="k">${k.k}</span><span class="v">${k.v} <small>${k.u}</small></span><span class="n">${opEsc(k.n)}</span></div>`).join("")}</div>
+  <section class="op-sec"><h3>Lo que tienes que saber</h3><ol>${o.know.map(x=>`<li>${opEsc(x)}</li>`).join("")}</ol></section>
+  <div class="op-2">
+    <section class="op-sec"><h3>Riesgos y qué haría</h3><div class="op-risks">${o.risks.map(r=>`<div class="op-risk"><span class="lvl ${r.lvl}">${r.lvl}</span><div><p class="t">${opEsc(r.t)}</p><p><b>Qué haría:</b> ${opEsc(r.doIt)}</p><p class="s">${opEsc(r.aff)} · ${opEsc(r.src)}</p></div></div>`).join("")}</div></section>
+    <div class="op-sec" style="align-content:start;gap:16px">
+      <section class="op-sec"><h3>Tus 7 categorías</h3><div style="overflow-x:auto"><table class="op-t"><thead><tr><th>Categoría</th><th class="num">12 m</th><th class="num c-ytd">En el año</th><th class="num" title="Costo total de propiedad">TCO</th><th><span class="vh">Nivel</span></th></tr></thead><tbody>${
+        o.cats.map(x=>`<tr><td>${opEsc(x.n)}</td><td class="num">${pct(x.st.y12)}</td><td class="num c-ytd">${x.st.ytd!=null?p1(x.st.ytd):"–"}</td><td class="num">${x.tco!=null?pct(x.tco):"–"}</td><td><span class="lvl ${x.lvl}">${x.lvl}</span></td></tr>`).join("")}</tbody></table></div></section>
+      <section class="op-sec"><h3>Próximas fechas</h3><ul class="op-ev">${o.events.map(e=>`<li><b>${opEsc(e.dl)}</b><span>${opEsc(e.t)}<small>${opEsc(e.cats)}</small></span></li>`).join("")}</ul></section>
+    </div>
+  </div>
+  <footer class="op-ft"><p>Índices de categoría: INEGI, INPP a ${o.asOf}; costo total con salario IMSS e INPP de servicios. Estructura por kg estimada a ${o.emAsOf}. Dólar: Banxico FIX. WALMEX: cierre de la BMV. Riesgos con su fuente en el tablero.</p><p>Tablero completo: <a href="${o.url}" target="_blank" rel="noopener">${o.url.replace("https://","")}</a></p></footer>`;
+}
+function opText(o){
+  const L = [`PULSO DE COMPRAS MÉXICO · ${o.week}`, ""];
+  o.kpis.forEach(k=>L.push(`• ${k.k}: ${k.v} ${k.u} (${k.n})`));
+  L.push("", "LO QUE TIENES QUE SABER"); o.know.forEach((x,i)=>L.push(`${i+1}. ${x}`));
+  L.push("", "RIESGOS Y QUÉ HARÍA"); o.risks.forEach(r=>L.push(`[${r.lvl.toUpperCase()}] ${r.t}. Qué haría: ${r.doIt} (${r.aff} · ${r.src})`));
+  L.push("", "TUS 7 CATEGORÍAS (12 meses · en el año · costo total de propiedad)"); o.cats.forEach(x=>L.push(`${x.n}: ${pct(x.st.y12)} · ${x.st.ytd!=null?p1(x.st.ytd):"s/d"} · ${x.tco!=null?pct(x.tco):"s/d"} · nivel ${x.lvl}`));
+  L.push("", "PRÓXIMAS FECHAS"); o.events.forEach(e=>L.push(`${e.dl}: ${e.t} (${e.cats})`));
+  L.push("", `Fuentes: INEGI (INPP a ${o.asOf}), Banxico FIX, BMV. Tablero completo: ${o.url}`);
+  return L.join("\n");
+}
+// Versión para correo: tablas y estilos en línea, porque los clientes de correo ignoran las hojas de estilo.
+function opMail(o){
+  const C = {ink:"#15212b", ink2:"#4a5866", ink3:"#6b7884", line:"#dde3e8", acc:"#0b5d6b", alto:["#fbe9e5","#b4361f"], medio:["#fbf1dc","#9a6400"], bajo:["#e3f2ea","#1f6f4a"]};
+  const tag = l => `<span style="display:inline-block;font:600 10px Menlo,Consolas,monospace;text-transform:uppercase;letter-spacing:.05em;padding:2px 6px;border-radius:5px;background:${C[l][0]};color:${C[l][1]}">${l}</span>`;
+  const h3 = t => `<h3 style="font:600 11px Menlo,Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;color:${C.acc};margin:20px 0 8px">${t}</h3>`;
+  const td = (s, x="") => `<td style="padding:5px 6px;border-bottom:1px solid ${C.line};${x}">${s}</td>`;
+  return `<div style="max-width:680px;margin:0 auto;font:14px/1.45 'Segoe UI',Roboto,Arial,sans-serif;color:${C.ink}">
+  <p style="font:600 11px Menlo,Consolas,monospace;letter-spacing:.05em;text-transform:uppercase;color:${C.ink2};margin:0">${opEsc(o.week)}</p>
+  <h2 style="font:800 24px Arial,sans-serif;margin:2px 0 10px;padding-bottom:8px;border-bottom:3px solid ${C.ink}">Pulso de Compras México</h2>
+  <table role="presentation" style="width:100%;border-collapse:collapse"><tr>${o.kpis.map(k=>`<td style="vertical-align:top;padding:4px 8px 4px 10px;border-left:3px solid ${C.acc};width:25%"><div style="font:600 10px Menlo,Consolas,monospace;text-transform:uppercase;color:${C.ink3}">${k.k}</div><div style="font:700 19px Arial,sans-serif">${k.v} <span style="font:600 11px Menlo,monospace;color:${C.ink3}">${k.u}</span></div><div style="font-size:12px;color:${C.ink2}">${opEsc(k.n)}</div></td>`).join("")}</tr></table>
+  ${h3("Lo que tienes que saber")}<ol style="margin:0;padding-left:20px">${o.know.map(x=>`<li style="margin:0 0 6px">${opEsc(x)}</li>`).join("")}</ol>
+  ${h3("Riesgos y qué haría")}${o.risks.map(r=>`<p style="margin:0 0 10px">${tag(r.lvl)} <b>${opEsc(r.t)}</b><br><b>Qué haría:</b> ${opEsc(r.doIt)}<br><span style="font-size:12px;color:${C.ink3}">${opEsc(r.aff)} · ${opEsc(r.src)}</span></p>`).join("")}
+  ${h3("Tus 7 categorías")}<table style="width:100%;border-collapse:collapse;font-size:13px"><tr>${["Categoría","12 m","En el año","TCO",""].map((t,i)=>`<th style="font:600 10px Menlo,monospace;text-transform:uppercase;color:${C.ink3};text-align:${i&&i<4?"right":"left"};padding:4px 6px;border-bottom:1px solid ${C.line}">${t}</th>`).join("")}</tr>${
+    o.cats.map(x=>`<tr>${td(opEsc(x.n))}${td(pct(x.st.y12),"text-align:right")}${td(x.st.ytd!=null?p1(x.st.ytd):"–","text-align:right")}${td(x.tco!=null?pct(x.tco):"–","text-align:right")}${td(tag(x.lvl))}</tr>`).join("")}</table>
+  ${h3("Próximas fechas")}<table role="presentation" style="width:100%;border-collapse:collapse;font-size:13px">${o.events.map(e=>`<tr><td style="vertical-align:top;padding:3px 10px 3px 0;white-space:nowrap;font:600 12px Menlo,monospace">${opEsc(e.dl)}</td><td style="padding:3px 0">${opEsc(e.t)}<br><span style="font-size:12px;color:${C.ink3}">${opEsc(e.cats)}</span></td></tr>`).join("")}</table>
+  <p style="font-size:12px;color:${C.ink3};border-top:1px solid ${C.line};padding-top:8px;margin-top:18px">Índices de categoría: INEGI, INPP a ${o.asOf}. Estructura por kg estimada a ${o.emAsOf}. Dólar: Banxico FIX. WALMEX: cierre de la BMV.<br><a href="${o.url}" style="color:${C.acc}">Abrir el tablero completo</a></p></div>`;
+}
+window.onePager = () => { const o = opModel(); if (!o) return null;
+  return {subject:`Pulso de Compras · ${o.week.replace(/^Semana del /,"semana del ")}: estructura ${o.kpis[0].v}/kg`, text:opText(o), html:opHtml(o), mail:opMail(o)}; };
+const opEl = document.getElementById("op"), opSheet = document.getElementById("opSheet"), opMsg = document.getElementById("opMsg");
+let opRet = null;
+function renderOP(){ const o = opModel(); opSheet.innerHTML = o ? opHtml(o) : '<h2 id="op-title" class="muted" style="font-size:16px">Cargando datos del tablero…</h2>'; document.getElementById("opCopy").disabled = !o; }
+function openOP(){ opRet = document.activeElement; renderOP(); opMsg.textContent = "Resumen de una página con lo importante de la semana."; opEl.hidden = false; document.body.classList.add("op-open"); opEl.scrollTop = 0; document.getElementById("opClose").focus(); }
+function closeOP(){ opEl.hidden = true; document.body.classList.remove("op-open"); if (opRet && opRet.focus) opRet.focus(); }
+document.getElementById("btnOP").addEventListener("click", openOP);
+document.getElementById("opClose").addEventListener("click", closeOP);
+opEl.addEventListener("click", e => { if (e.target===opEl) closeOP(); });
+opEl.addEventListener("keydown", e => {
+  if (e.key==="Escape"){ e.preventDefault(); closeOP(); return; }
+  if (e.key!=="Tab") return;
+  const f = [...opEl.querySelectorAll("button:not([hidden]):not(:disabled),a[href]")]; if (!f.length) return;
+  if (e.shiftKey && document.activeElement===f[0]){ e.preventDefault(); f.at(-1).focus(); }
+  else if (!e.shiftKey && document.activeElement===f.at(-1)){ e.preventDefault(); f[0].focus(); }
+});
+document.getElementById("opCopy").addEventListener("click", () => {
+  const r = window.onePager(); if (!r) return;
+  const ok = m => { opMsg.textContent = m; };
+  const pick = () => { const s = getSelection(), rg = document.createRange(); rg.selectNodeContents(opSheet); s.removeAllRanges(); s.addRange(rg);
+    ok("Tu navegador no dejó copiar directo. Ya seleccioné el resumen: cópialo con Ctrl+C (o Copiar en el celular)."); };
+  try {
+    const p = window.ClipboardItem && navigator.clipboard && navigator.clipboard.write
+      ? navigator.clipboard.write([new ClipboardItem({"text/html":new Blob([r.mail],{type:"text/html"}), "text/plain":new Blob([r.text],{type:"text/plain"})})])
+      : navigator.clipboard.writeText(r.text);
+    p.then(() => ok("Copiado. Pégalo en un correo nuevo."), () => navigator.clipboard.writeText(r.text).then(() => ok("Copiado como texto. Pégalo en un correo nuevo."), pick));
+  } catch(e){ pick(); }
+});
+if (window.__STATIC__){ const pb = document.getElementById("opPrint"); pb.hidden = false; pb.addEventListener("click", () => window.print()); }
+
 // ---------- Explorador ----------
 function seriesChips(){
   const groups = [["acero","Acero y estructura"],["insumos","Otras materias primas"],["logistica","Logística"],["macro","Macro"],["inegi","INEGI · variación anual"],["propios","Tus precios"]];
@@ -1194,7 +1391,7 @@ window.renderTco = function(){
   document.getElementById("tcoNote").innerHTML = `Los pesos de cada parte son una estimación típica por categoría con referencias de la industria, no salen de tus contratos; si tus números son distintos, pídeme ajustarlos. La variación de 12 meses de cada parte combina: canasta INEGI de la categoría (compra), transporte y diésel (flete), salario y construcción (instalación), energía (operación), servicios, salario y refacciones (mantenimiento) e INPC (cumplimiento y reposición).${srcs.length?" Fuentes: "+srcs.join("; ")+".":""}`;
 };
 
-function renderSeries(){ addVirtual(); window.renderCatsSeries(); renderTiles(); renderEm(); renderCalc(); renderExplorer(); window.renderCatTrend && window.renderCatTrend(); window.renderTco && window.renderTco(); if (!document.getElementById("tab-walmex").hidden) renderWalmex(); }
+function renderSeries(){ addVirtual(); window.renderCatsSeries(); renderTiles(); renderEm(); renderCalc(); renderExplorer(); window.renderCatTrend && window.renderCatTrend(); window.renderTco && window.renderTco(); if (!document.getElementById("tab-walmex").hidden) renderWalmex(); if (!opEl.hidden) renderOP(); }
 const EX_HIDE = ["inpp_soldadura_yoy","inpp_alambron_yoy","inpp_fundidas_yoy","inpp_perfiles_yoy","inpp_bano_yoy","inpp_vidrio_yoy","inpp_cemento_yoy","inpp_imper_yoy","inpp_comercial_yoy","inpp_aluminio_yoy","inpp_concreto_yoy","inpp_cables_yoy","aluminio_lme"];
 const EX_LBL = {inpp_varilla_yoy:"Acero (INEGI)", inpp_cobre_yoy:"Cobre (INEGI)", inpp_tubplastico_yoy:"Plásticos (INEGI)", inpp_pinturas_yoy:"Pinturas (INEGI)", inpp_bombas_yoy:"Bombas (INEGI)", inpp_diesel_yoy:"Diésel (INEGI)"};
 function addVirtual(){
@@ -1216,6 +1413,7 @@ window.renderSeries = renderSeries;
 
 { let t0 = "mercado"; try { t0 = localStorage.getItem("pc-tab") || t0; } catch(e){} if (location.hash==="#walmex") t0 = "walmex"; if (t0==="walmex") showTab("walmex"); }
 renderSeries();
+if (location.hash==="#onepager") openOP();
 (async () => {
   const db = await window.claude?.use?.("db");
   if (!db){ document.getElementById("emTiles").innerHTML = '<p class="muted">Las series mensuales se ven al abrir el tablero desde claude.ai con tu sesión iniciada.</p>'; document.getElementById("explorer").innerHTML = '<p class="muted empty">Sin acceso a las series en esta vista.</p>'; return; }
