@@ -1,0 +1,1281 @@
+{
+ "aluminio_lme": {
+  "cur": "USD",
+  "group": "insumos",
+  "kind": "price",
+  "name": "Aluminio LME (referencia)",
+  "order": 3,
+  "points": [
+   {
+    "m": "2025-10",
+    "v": 2720
+   },
+   {
+    "m": "2026-10",
+    "v": 3123.5
+   }
+  ],
+  "short": "Aluminio LME",
+  "src": "Trading Economics (oct-25 aprox.)",
+  "unit": "t",
+  "url": "https://tradingeconomics.com/commodity/aluminum"
+ },
+ "cobre_lme": {
+  "cur": "USD",
+  "group": "insumos",
+  "kind": "price",
+  "name": "Cobre LME (referencia para cotizar en México)",
+  "order": 2,
+  "points": [
+   {
+    "m": "2025-10",
+    "v": 10990
+   },
+   {
+    "m": "2026-10",
+    "v": 14286
+   }
+  ],
+  "short": "Cobre LME",
+  "src": "LME vía prensa (oct-25 aprox.)",
+  "unit": "t",
+  "url": "https://brecorder.com/news/40442691/copper-ticks-up-as-fed-rate-hike-bets-cool"
+ },
+ "diesel": {
+  "cur": "MXN",
+  "group": "insumos",
+  "kind": "price",
+  "name": "Diésel promedio nacional",
+  "order": 1,
+  "points": [
+   {
+    "m": "2025-10",
+    "v": 26.21
+   },
+   {
+    "m": "2026-01",
+    "v": 26.4
+   },
+   {
+    "m": "2026-04",
+    "v": 28.5
+   },
+   {
+    "m": "2026-05",
+    "v": 27.67
+   },
+   {
+    "m": "2026-08",
+    "v": 26.87
+   },
+   {
+    "m": "2026-10",
+    "v": 27.01
+   }
+  ],
+  "short": "Diésel",
+  "src": "PetroIntelligence, Profeco, Tresearch vía prensa",
+  "unit": "L",
+  "url": "https://www.unotv.com/negocios/precio-promedio-de-la-gasolina-magna-premium-y-diesel-en-mexico/"
+ },
+ "estructura_pagada": {
+  "cur": "MXN",
+  "group": "acero",
+  "kind": "price",
+  "name": "Estructura Metálica, precio por kg fabricado y montado (tus precios)",
+  "order": 3,
+  "own": true,
+  "points": [],
+  "short": "Tu precio Estructura",
+  "src": "Tus RFPs y subastas",
+  "unit": "kg",
+  "url": ""
+ },
+ "flete_mzo": {
+  "cur": "USD",
+  "group": "logistica",
+  "kind": "price",
+  "name": "Flete Asia → Manzanillo 40' (tus cotizaciones)",
+  "order": 1,
+  "own": true,
+  "points": [],
+  "short": "Flete Manzanillo",
+  "src": "Tus cotizaciones",
+  "unit": "40'",
+  "url": ""
+ },
+ "fx": {
+  "cur": "ratio",
+  "group": "macro",
+  "kind": "price",
+  "name": "Dólar FIX (MXN por USD, cierre de mes)",
+  "order": 1,
+  "points": [
+   {
+    "m": "2024-10",
+    "v": 20.0378
+   },
+   {
+    "m": "2024-11",
+    "v": 20.3212
+   },
+   {
+    "m": "2024-12",
+    "v": 20.7862
+   },
+   {
+    "m": "2025-01",
+    "v": 20.6068
+   },
+   {
+    "m": "2025-02",
+    "v": 20.508
+   },
+   {
+    "m": "2025-03",
+    "v": 20.438
+   },
+   {
+    "m": "2025-04",
+    "v": 19.6095
+   },
+   {
+    "m": "2025-05",
+    "v": 19.3858
+   },
+   {
+    "m": "2025-06",
+    "v": 18.8332
+   },
+   {
+    "m": "2025-07",
+    "v": 18.7963
+   },
+   {
+    "m": "2025-08",
+    "v": 18.644
+   },
+   {
+    "m": "2025-09",
+    "v": 18.3342
+   },
+   {
+    "m": "2025-10",
+    "v": 18.5725
+   },
+   {
+    "m": "2025-11",
+    "v": 18.3075
+   },
+   {
+    "m": "2025-12",
+    "v": 18.0012
+   },
+   {
+    "m": "2026-01",
+    "v": 17.331
+   },
+   {
+    "m": "2026-02",
+    "v": 17.2193
+   },
+   {
+    "m": "2026-03",
+    "v": 18.0033
+   },
+   {
+    "m": "2026-04",
+    "v": 17.5118
+   },
+   {
+    "m": "2026-05",
+    "v": 17.3505
+   },
+   {
+    "m": "2026-06",
+    "v": 17.4693
+   },
+   {
+    "m": "2026-07",
+    "v": 17.3288
+   },
+   {
+    "m": "2026-08",
+    "v": 17.0147
+   },
+   {
+    "m": "2026-09",
+    "v": 18.0692
+   }
+  ],
+  "short": "Dólar FIX",
+  "src": "Banxico vía DOF",
+  "unit": "MXN por USD",
+  "url": "https://dolardof.com/"
+ },
+ "inpc_yoy": {
+  "cur": "pct",
+  "group": "macro",
+  "kind": "yoy",
+  "name": "INPC inflación general, variación anual",
+  "order": 21,
+  "points": [
+   {
+    "m": "2026-09",
+    "v": 3.42
+   }
+  ],
+  "short": "INPC",
+  "src": "INEGI",
+  "unit": "%",
+  "url": "https://www.razon.com.mx/mexico/2026/09/24/inflacion-en-primera-quincena-de-septiembre-de-2026-subio-a-342-inegi/"
+ },
+ "inpp_alambron_yoy": {
+  "cur": "pct",
+  "group": "acero",
+  "kind": "yoy",
+  "name": "INEGI alambrón, variación anual",
+  "order": 12,
+  "points": [
+   {
+    "m": "2025-03",
+    "v": -7.6
+   },
+   {
+    "m": "2025-04",
+    "v": -3.9
+   },
+   {
+    "m": "2025-05",
+    "v": -0.7
+   },
+   {
+    "m": "2025-06",
+    "v": -2.8
+   },
+   {
+    "m": "2025-08",
+    "v": -0.8
+   }
+  ],
+  "short": "INEGI alambrón",
+  "src": "INEGI vía CMIC CEICO",
+  "unit": "%",
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2025/09_Septiembre/CEICO_Informe_Septiembre_2025_Variacion_precio_materiales.pdf"
+ },
+ "inpp_aluminio_yoy": {
+  "cur": "pct",
+  "group": "insumos",
+  "kind": "yoy",
+  "name": "INEGI aluminio laminado (perfiles, láminas), variación anual",
+  "order": 21,
+  "points": [
+   {
+    "m": "2025-03",
+    "v": 41.3
+   },
+   {
+    "m": "2025-04",
+    "v": 19.2
+   },
+   {
+    "m": "2025-05",
+    "v": 15.6
+   },
+   {
+    "m": "2025-06",
+    "v": 12
+   },
+   {
+    "m": "2025-07",
+    "v": 16.4
+   },
+   {
+    "m": "2025-08",
+    "v": 12.2
+   },
+   {
+    "m": "2026-04",
+    "v": 27.23
+   },
+   {
+    "m": "2026-05",
+    "v": 29.42
+   },
+   {
+    "m": "2026-06",
+    "v": 21.11
+   },
+   {
+    "m": "2026-07",
+    "v": 10.13
+   },
+   {
+    "m": "2026-08",
+    "v": 11.62
+   }
+  ],
+  "short": "INEGI aluminio",
+  "src": "INEGI vía CMIC CEICO",
+  "unit": "%",
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"
+ },
+ "inpp_bano_yoy": {
+  "cur": "pct",
+  "group": "insumos",
+  "kind": "yoy",
+  "name": "INEGI muebles y accesorios para baño, variación anual",
+  "order": 30,
+  "points": [
+   {
+    "m": "2025-03",
+    "v": 8.3
+   },
+   {
+    "m": "2025-04",
+    "v": 7
+   },
+   {
+    "m": "2025-05",
+    "v": 3.2
+   },
+   {
+    "m": "2025-06",
+    "v": 2.7
+   },
+   {
+    "m": "2025-08",
+    "v": 1.8
+   }
+  ],
+  "short": "INEGI muebles de baño",
+  "src": "INEGI vía CMIC CEICO",
+  "unit": "%",
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2025/09_Septiembre/CEICO_Informe_Septiembre_2025_Variacion_precio_materiales.pdf"
+ },
+ "inpp_bombas_yoy": {
+  "cur": "pct",
+  "group": "insumos",
+  "kind": "yoy",
+  "name": "INEGI bombas, variación anual",
+  "order": 32,
+  "points": [
+   {
+    "m": "2025-03",
+    "v": 15.2
+   },
+   {
+    "m": "2025-04",
+    "v": 13.1
+   },
+   {
+    "m": "2025-05",
+    "v": 11
+   }
+  ],
+  "short": "INEGI bombas",
+  "src": "INEGI vía CMIC CEICO",
+  "unit": "%",
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2025/09_Septiembre/CEICO_Informe_Septiembre_2025_Variacion_precio_materiales.pdf"
+ },
+ "inpp_cables_yoy": {
+  "cur": "pct",
+  "group": "insumos",
+  "kind": "yoy",
+  "name": "INEGI alambres y cables con aislamiento, variación anual",
+  "order": 23,
+  "points": [
+   {
+    "m": "2025-04",
+    "v": 13
+   },
+   {
+    "m": "2025-05",
+    "v": 14.4
+   },
+   {
+    "m": "2025-06",
+    "v": 12.7
+   },
+   {
+    "m": "2025-07",
+    "v": 12.3
+   },
+   {
+    "m": "2025-08",
+    "v": 16.23
+   },
+   {
+    "m": "2025-09",
+    "v": 15.7
+   },
+   {
+    "m": "2026-04",
+    "v": 14.04
+   },
+   {
+    "m": "2026-05",
+    "v": 15.19
+   },
+   {
+    "m": "2026-06",
+    "v": 17.4
+   },
+   {
+    "m": "2026-07",
+    "v": 20.46
+   },
+   {
+    "m": "2026-08",
+    "v": 17.15
+   }
+  ],
+  "short": "INEGI cables",
+  "src": "INEGI vía CMIC CEICO",
+  "unit": "%",
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"
+ },
+ "inpp_cemento_yoy": {
+  "cur": "pct",
+  "group": "insumos",
+  "kind": "yoy",
+  "name": "INEGI cemento, variación anual",
+  "order": 27,
+  "points": [
+   {
+    "m": "2025-03",
+    "v": 3.4
+   },
+   {
+    "m": "2025-04",
+    "v": 5
+   },
+   {
+    "m": "2025-05",
+    "v": 5.1
+   },
+   {
+    "m": "2025-06",
+    "v": 5
+   },
+   {
+    "m": "2025-08",
+    "v": 4.8
+   },
+   {
+    "m": "2025-09",
+    "v": 5.55
+   }
+  ],
+  "short": "INEGI cemento",
+  "src": "INEGI vía CMIC CEICO",
+  "unit": "%",
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2025/09_Septiembre/CEICO_Informe_Septiembre_2025_Variacion_precio_materiales.pdf"
+ },
+ "inpp_cobre_yoy": {
+  "cur": "pct",
+  "group": "insumos",
+  "kind": "yoy",
+  "name": "INEGI tubos de cobre, variación anual",
+  "order": 22,
+  "points": [
+   {
+    "m": "2025-03",
+    "v": 20.1
+   },
+   {
+    "m": "2025-04",
+    "v": 21.4
+   },
+   {
+    "m": "2025-05",
+    "v": 11
+   },
+   {
+    "m": "2025-06",
+    "v": 8.3
+   },
+   {
+    "m": "2025-07",
+    "v": 7.4
+   },
+   {
+    "m": "2025-08",
+    "v": 10.15
+   },
+   {
+    "m": "2025-09",
+    "v": 5.7
+   },
+   {
+    "m": "2026-04",
+    "v": 18.84
+   },
+   {
+    "m": "2026-05",
+    "v": 22.29
+   },
+   {
+    "m": "2026-06",
+    "v": 26.01
+   },
+   {
+    "m": "2026-07",
+    "v": 26.74
+   },
+   {
+    "m": "2026-08",
+    "v": 22.27
+   }
+  ],
+  "short": "INEGI tubo de cobre",
+  "src": "INEGI vía CMIC CEICO",
+  "unit": "%",
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"
+ },
+ "inpp_comercial_yoy": {
+  "cur": "pct",
+  "group": "macro",
+  "kind": "yoy",
+  "name": "INEGI inmuebles comerciales y de servicios, variación anual",
+  "order": 22,
+  "points": [
+   {
+    "m": "2025-03",
+    "v": 3.2
+   },
+   {
+    "m": "2025-04",
+    "v": 4.22
+   },
+   {
+    "m": "2025-05",
+    "v": 4.19
+   },
+   {
+    "m": "2025-06",
+    "v": 3.66
+   },
+   {
+    "m": "2025-07",
+    "v": 3.54
+   },
+   {
+    "m": "2025-08",
+    "v": 3.35
+   },
+   {
+    "m": "2025-09",
+    "v": 3.05
+   },
+   {
+    "m": "2026-04",
+    "v": 3.97
+   },
+   {
+    "m": "2026-05",
+    "v": 4.37
+   },
+   {
+    "m": "2026-06",
+    "v": 4.93
+   },
+   {
+    "m": "2026-07",
+    "v": 5.45
+   },
+   {
+    "m": "2026-08",
+    "v": 5.57
+   }
+  ],
+  "short": "INEGI inmuebles comerciales",
+  "src": "INEGI vía CMIC CEICO",
+  "unit": "%",
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"
+ },
+ "inpp_concreto_yoy": {
+  "cur": "pct",
+  "group": "insumos",
+  "kind": "yoy",
+  "name": "INEGI concreto premezclado, variación anual",
+  "order": 26,
+  "points": [
+   {
+    "m": "2025-03",
+    "v": 7.8
+   },
+   {
+    "m": "2025-04",
+    "v": 7.3
+   },
+   {
+    "m": "2025-05",
+    "v": 7.1
+   },
+   {
+    "m": "2025-06",
+    "v": 7.2
+   },
+   {
+    "m": "2025-07",
+    "v": 7.2
+   },
+   {
+    "m": "2025-08",
+    "v": 7.84
+   },
+   {
+    "m": "2025-09",
+    "v": 8.74
+   },
+   {
+    "m": "2026-04",
+    "v": 7.07
+   },
+   {
+    "m": "2026-06",
+    "v": 6.83
+   }
+  ],
+  "short": "INEGI concreto",
+  "src": "INEGI vía CMIC CEICO",
+  "unit": "%",
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2025/09_Septiembre/CEICO_Informe_Septiembre_2025_Variacion_precio_materiales.pdf"
+ },
+ "inpp_construccion_mom": {
+  "cur": "pct",
+  "group": "macro",
+  "kind": "mom",
+  "name": "INPP Construcción, variación mensual",
+  "order": 90,
+  "points": [
+   {
+    "m": "2023-12",
+    "v": 0.21
+   },
+   {
+    "m": "2024-01",
+    "v": 1.54
+   },
+   {
+    "m": "2024-02",
+    "v": 0.63
+   },
+   {
+    "m": "2024-03",
+    "v": 0.1
+   },
+   {
+    "m": "2024-04",
+    "v": -0.11
+   },
+   {
+    "m": "2024-05",
+    "v": 0.19
+   },
+   {
+    "m": "2024-06",
+    "v": 0.48
+   },
+   {
+    "m": "2024-07",
+    "v": 0.11
+   },
+   {
+    "m": "2024-08",
+    "v": 0.25
+   },
+   {
+    "m": "2024-09",
+    "v": 0.61
+   },
+   {
+    "m": "2024-10",
+    "v": -0.41
+   },
+   {
+    "m": "2024-11",
+    "v": 0.03
+   },
+   {
+    "m": "2024-12",
+    "v": 0.01
+   },
+   {
+    "m": "2025-01",
+    "v": 1.27
+   },
+   {
+    "m": "2025-02",
+    "v": 0.78
+   },
+   {
+    "m": "2025-03",
+    "v": 0.49
+   },
+   {
+    "m": "2025-04",
+    "v": 0.81
+   },
+   {
+    "m": "2025-05",
+    "v": 0.17
+   },
+   {
+    "m": "2025-06",
+    "v": -0.1
+   },
+   {
+    "m": "2025-07",
+    "v": -0.07
+   },
+   {
+    "m": "2025-08",
+    "v": 0.04
+   },
+   {
+    "m": "2025-09",
+    "v": 0.36
+   },
+   {
+    "m": "2025-10",
+    "v": 0.16
+   },
+   {
+    "m": "2025-11",
+    "v": -0.11
+   },
+   {
+    "m": "2025-12",
+    "v": 0.07
+   },
+   {
+    "m": "2026-01",
+    "v": 1.29
+   },
+   {
+    "m": "2026-02",
+    "v": 0.9
+   },
+   {
+    "m": "2026-03",
+    "v": 0.41
+   },
+   {
+    "m": "2026-04",
+    "v": 0.96
+   },
+   {
+    "m": "2026-05",
+    "v": 0.59
+   },
+   {
+    "m": "2026-06",
+    "v": 0.47
+   },
+   {
+    "m": "2026-07",
+    "v": 0.5
+   },
+   {
+    "m": "2026-08",
+    "v": 0.16
+   }
+  ],
+  "short": "Construcción mensual (INEGI)",
+  "src": "INEGI, boletín INPP",
+  "unit": "% mensual",
+  "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"
+ },
+ "inpp_construccion_yoy": {
+  "cur": "pct",
+  "group": "macro",
+  "kind": "yoy",
+  "name": "INEGI construcción total, variación anual",
+  "order": 20,
+  "points": [
+   {
+    "m": "2023-12",
+    "v": 3.78
+   },
+   {
+    "m": "2024-01",
+    "v": 2.72
+   },
+   {
+    "m": "2024-02",
+    "v": 2.34
+   },
+   {
+    "m": "2024-03",
+    "v": 1.48
+   },
+   {
+    "m": "2024-04",
+    "v": 1.21
+   },
+   {
+    "m": "2024-05",
+    "v": 1.17
+   },
+   {
+    "m": "2024-06",
+    "v": 2.05
+   },
+   {
+    "m": "2024-07",
+    "v": 2.71
+   },
+   {
+    "m": "2024-08",
+    "v": 3.27
+   },
+   {
+    "m": "2024-09",
+    "v": 4.07
+   },
+   {
+    "m": "2024-10",
+    "v": 3.75
+   },
+   {
+    "m": "2024-11",
+    "v": 3.68
+   },
+   {
+    "m": "2024-12",
+    "v": 3.46
+   },
+   {
+    "m": "2025-01",
+    "v": 3.18
+   },
+   {
+    "m": "2025-02",
+    "v": 3.34
+   },
+   {
+    "m": "2025-03",
+    "v": 3.75
+   },
+   {
+    "m": "2025-04",
+    "v": 4.71
+   },
+   {
+    "m": "2025-05",
+    "v": 4.69
+   },
+   {
+    "m": "2025-06",
+    "v": 4.08
+   },
+   {
+    "m": "2025-07",
+    "v": 3.9
+   },
+   {
+    "m": "2025-08",
+    "v": 3.68
+   },
+   {
+    "m": "2025-09",
+    "v": 3.42
+   },
+   {
+    "m": "2025-10",
+    "v": 4.01
+   },
+   {
+    "m": "2025-11",
+    "v": 3.87
+   },
+   {
+    "m": "2025-12",
+    "v": 3.93
+   },
+   {
+    "m": "2026-01",
+    "v": 3.95
+   },
+   {
+    "m": "2026-02",
+    "v": 4.08
+   },
+   {
+    "m": "2026-03",
+    "v": 4
+   },
+   {
+    "m": "2026-04",
+    "v": 4.15
+   },
+   {
+    "m": "2026-05",
+    "v": 4.59
+   },
+   {
+    "m": "2026-06",
+    "v": 5.2
+   },
+   {
+    "m": "2026-07",
+    "v": 5.79
+   },
+   {
+    "m": "2026-08",
+    "v": 5.91
+   }
+  ],
+  "short": "INEGI construcción",
+  "src": "INEGI vía CMIC CEICO",
+  "unit": "%",
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"
+ },
+ "inpp_diesel_yoy": {
+  "cur": "pct",
+  "group": "insumos",
+  "kind": "yoy",
+  "name": "INEGI diésel, variación anual",
+  "order": 25,
+  "points": [
+   {
+    "m": "2026-05",
+    "v": 29.83
+   },
+   {
+    "m": "2026-06",
+    "v": 17.55
+   },
+   {
+    "m": "2026-07",
+    "v": 17.04
+   }
+  ],
+  "short": "INEGI diésel",
+  "src": "INEGI vía CMIC CEICO",
+  "unit": "%",
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"
+ },
+ "inpp_fundidas_yoy": {
+  "cur": "pct",
+  "group": "acero",
+  "kind": "yoy",
+  "name": "INEGI piezas metálicas fundidas y moldeadas, variación anual",
+  "order": 13,
+  "points": [
+   {
+    "m": "2025-03",
+    "v": 14.3
+   },
+   {
+    "m": "2025-04",
+    "v": 14.7
+   },
+   {
+    "m": "2025-05",
+    "v": 11.4
+   }
+  ],
+  "short": "INEGI piezas fundidas",
+  "src": "INEGI vía CMIC CEICO",
+  "unit": "%",
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2025/09_Septiembre/CEICO_Informe_Septiembre_2025_Variacion_precio_materiales.pdf"
+ },
+ "inpp_imper_yoy": {
+  "cur": "pct",
+  "group": "insumos",
+  "kind": "yoy",
+  "name": "INEGI impermeabilizantes, variación anual",
+  "order": 29,
+  "points": [
+   {
+    "m": "2025-03",
+    "v": 3.1
+   },
+   {
+    "m": "2025-04",
+    "v": 3.2
+   },
+   {
+    "m": "2025-05",
+    "v": 2.5
+   },
+   {
+    "m": "2025-06",
+    "v": 4.1
+   },
+   {
+    "m": "2025-08",
+    "v": 4.7
+   },
+   {
+    "m": "2025-09",
+    "v": 4.6
+   }
+  ],
+  "short": "INEGI impermeabilizantes",
+  "src": "INEGI vía CMIC CEICO",
+  "unit": "%",
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2025/09_Septiembre/CEICO_Informe_Septiembre_2025_Variacion_precio_materiales.pdf"
+ },
+ "inpp_naves_yoy": {
+  "cur": "pct",
+  "group": "acero",
+  "kind": "yoy",
+  "name": "INEGI naves y plantas industriales (costo de obra), variación anual",
+  "order": 9,
+  "points": [
+   {
+    "m": "2025-03",
+    "v": 1.53
+   },
+   {
+    "m": "2025-04",
+    "v": 2.67
+   },
+   {
+    "m": "2025-05",
+    "v": 2.59
+   },
+   {
+    "m": "2025-06",
+    "v": 2.11
+   },
+   {
+    "m": "2025-07",
+    "v": 2.21
+   },
+   {
+    "m": "2025-08",
+    "v": 1.98
+   },
+   {
+    "m": "2025-09",
+    "v": 1.55
+   },
+   {
+    "m": "2026-04",
+    "v": 3.18
+   },
+   {
+    "m": "2026-05",
+    "v": 3.71
+   },
+   {
+    "m": "2026-06",
+    "v": 4.27
+   },
+   {
+    "m": "2026-07",
+    "v": 4.87
+   },
+   {
+    "m": "2026-08",
+    "v": 5.1
+   }
+  ],
+  "short": "INEGI naves industriales",
+  "src": "INEGI vía CMIC CEICO",
+  "unit": "%",
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"
+ },
+ "inpp_pinturas_yoy": {
+  "cur": "pct",
+  "group": "insumos",
+  "kind": "yoy",
+  "name": "INEGI pinturas, variación anual",
+  "order": 28,
+  "points": [
+   {
+    "m": "2025-03",
+    "v": 5.2
+   },
+   {
+    "m": "2025-04",
+    "v": 4.8
+   },
+   {
+    "m": "2025-05",
+    "v": 3.1
+   },
+   {
+    "m": "2025-06",
+    "v": 2.7
+   },
+   {
+    "m": "2025-08",
+    "v": 3.9
+   }
+  ],
+  "short": "INEGI pinturas",
+  "src": "INEGI vía CMIC CEICO",
+  "unit": "%",
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2025/09_Septiembre/CEICO_Informe_Septiembre_2025_Variacion_precio_materiales.pdf"
+ },
+ "inpp_soldadura_yoy": {
+  "cur": "pct",
+  "group": "acero",
+  "kind": "yoy",
+  "name": "INEGI soldaduras, variación anual",
+  "order": 11,
+  "points": [
+   {
+    "m": "2025-03",
+    "v": 8.5
+   },
+   {
+    "m": "2025-04",
+    "v": 9.7
+   },
+   {
+    "m": "2025-05",
+    "v": 2.5
+   },
+   {
+    "m": "2025-06",
+    "v": 1.4
+   },
+   {
+    "m": "2025-08",
+    "v": 0.8
+   },
+   {
+    "m": "2026-04",
+    "v": 6.83
+   },
+   {
+    "m": "2026-05",
+    "v": 7.16
+   },
+   {
+    "m": "2026-06",
+    "v": 7.19
+   },
+   {
+    "m": "2026-07",
+    "v": 8.47
+   },
+   {
+    "m": "2026-08",
+    "v": 8.53
+   }
+  ],
+  "short": "INEGI soldaduras",
+  "src": "INEGI vía CMIC CEICO",
+  "unit": "%",
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"
+ },
+ "inpp_tubplastico_yoy": {
+  "cur": "pct",
+  "group": "insumos",
+  "kind": "yoy",
+  "name": "INEGI tubería de plástico (PVC, PEAD), variación anual",
+  "order": 24,
+  "points": [
+   {
+    "m": "2026-05",
+    "v": 8.73
+   },
+   {
+    "m": "2026-06",
+    "v": 14.97
+   },
+   {
+    "m": "2026-07",
+    "v": 17.46
+   },
+   {
+    "m": "2026-08",
+    "v": 16.35
+   }
+  ],
+  "short": "INEGI tubería plástica",
+  "src": "INEGI vía CMIC CEICO",
+  "unit": "%",
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"
+ },
+ "inpp_varilla_yoy": {
+  "cur": "pct",
+  "group": "acero",
+  "kind": "yoy",
+  "name": "INEGI varilla corrugada, variación anual",
+  "order": 10,
+  "points": [
+   {
+    "m": "2025-03",
+    "v": -8.8
+   },
+   {
+    "m": "2025-04",
+    "v": -4.6
+   },
+   {
+    "m": "2025-05",
+    "v": -5
+   },
+   {
+    "m": "2025-06",
+    "v": -6.1
+   },
+   {
+    "m": "2025-08",
+    "v": -6.4
+   },
+   {
+    "m": "2026-04",
+    "v": 6.68
+   },
+   {
+    "m": "2026-05",
+    "v": 8.12
+   },
+   {
+    "m": "2026-06",
+    "v": 11.02
+   },
+   {
+    "m": "2026-07",
+    "v": 7.77
+   }
+  ],
+  "short": "INEGI varilla",
+  "src": "INEGI vía CMIC CEICO",
+  "unit": "%",
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/08_Agosto/CEICO_Informe_Agosto_2026_Variacion_precio_materiales.pdf"
+ },
+ "inpp_vidrio_yoy": {
+  "cur": "pct",
+  "group": "insumos",
+  "kind": "yoy",
+  "name": "INEGI vidrio plano, variación anual",
+  "order": 31,
+  "points": [
+   {
+    "m": "2025-03",
+    "v": 4.8
+   },
+   {
+    "m": "2025-04",
+    "v": 4.1
+   },
+   {
+    "m": "2025-05",
+    "v": 2.3
+   },
+   {
+    "m": "2025-06",
+    "v": 0.5
+   },
+   {
+    "m": "2025-08",
+    "v": -2.7
+   }
+  ],
+  "short": "INEGI vidrio",
+  "src": "INEGI vía CMIC CEICO",
+  "unit": "%",
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2025/09_Septiembre/CEICO_Informe_Septiembre_2025_Variacion_precio_materiales.pdf"
+ }
+}
