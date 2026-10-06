@@ -15,7 +15,7 @@
   --accent:#0b5d6b; --accent-soft:#e1eff1;
   --up:#b4361f; --up-soft:#fbe9e5; --down:#1f6f4a; --down-soft:#e3f2ea; --warn:#9a6400; --warn-soft:#fbf1dc;
   --bar-up:#c8553d; --bar-down:#3a8a68;
-  --s1:#0b7285; --s2:#d9480f; --s3:#6741d9; --s4:#5c940d;
+  --s1:#0b7285; --s2:#d9480f; --s3:#6741d9; --s4:#5c940d; --s5:#c2255c; --s6:#b07800; --s7:#6b7884; --on-s:#ffffff;
   --hero:#10303a; --hero-2:#174552; --hero-ink:#eef6f7; --hero-dim:#a9c6cc; --hero-accent:#f2a541;
   --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
   --f-body:"Source Sans 3","Segoe UI",Roboto,Arial,sans-serif;
@@ -26,12 +26,12 @@
   --bg:#0f161c; --surface:#16212a; --ink:#e6edf2; --ink-2:#a9b7c3; --ink-3:#7d8b97; --line:#26343f;
   --accent:#5cc0cf; --accent-soft:#163740;
   --up:#ff8c73; --up-soft:#3a1e18; --down:#6fd3a2; --down-soft:#15302a; --warn:#f0bd5a; --warn-soft:#352a12;
-  --bar-up:#e7735a; --bar-down:#55b58b; --s1:#3bc9db; --s2:#ff8a4c; --s3:#a48bff; --s4:#94d82d; color-scheme:dark}}
+  --bar-up:#e7735a; --bar-down:#55b58b; --s1:#3bc9db; --s2:#ff8a4c; --s3:#a48bff; --s4:#94d82d; --s5:#f06595; --s6:#fcc419; --s7:#9aa8b4; --on-s:#0f161c; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0f161c; --surface:#16212a; --ink:#e6edf2; --ink-2:#a9b7c3; --ink-3:#7d8b97; --line:#26343f;
   --accent:#5cc0cf; --accent-soft:#163740;
   --up:#ff8c73; --up-soft:#3a1e18; --down:#6fd3a2; --down-soft:#15302a; --warn:#f0bd5a; --warn-soft:#352a12;
-  --bar-up:#e7735a; --bar-down:#55b58b; --s1:#3bc9db; --s2:#ff8a4c; --s3:#a48bff; --s4:#94d82d; color-scheme:dark}
+  --bar-up:#e7735a; --bar-down:#55b58b; --s1:#3bc9db; --s2:#ff8a4c; --s3:#a48bff; --s4:#94d82d; --s5:#f06595; --s6:#fcc419; --s7:#9aa8b4; --on-s:#0f161c; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5;padding:24px 16px 48px}
 .wrap{max-width:1080px;margin:0 auto;display:grid;gap:28px;grid-template-columns:minmax(0,1fr)}
@@ -152,6 +152,41 @@ table.nave{min-width:640px} table.nave td{font-size:14px} table.nave td.src div{
 .sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:middle}
 .empty{padding:40px 0;text-align:center}
 table.xt{min-width:0}
+#tco{display:grid;gap:14px}
+#tco .sec-hd{margin-bottom:0}
+.tco-brief{background:linear-gradient(135deg,var(--hero),var(--hero-2));color:var(--hero-ink);border-radius:12px;padding:18px 20px;display:grid;gap:10px}
+.tco-brief .tag{font:600 11.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--hero-accent)}
+.tco-brief ol{margin:0;padding-left:22px;display:grid;gap:8px;color:var(--hero-dim);font-size:14.5px;max-width:95ch}
+.tco-brief li::marker{color:var(--hero-accent);font-family:var(--f-mono);font-weight:600}
+.tco-brief b{color:var(--hero-ink)}
+.tbar{display:flex;gap:2px;height:30px;border-radius:7px;overflow:hidden}
+.tbar span{background:var(--c);min-width:3px;display:grid;place-items:center;font:600 11.5px var(--f-mono);color:var(--on-s);overflow:hidden;white-space:nowrap}
+.tbar.sm{height:10px;border-radius:4px;gap:1px;min-width:120px}
+table.tco-t{min-width:680px}
+table.tco-t tr.on td{background:var(--accent-soft)}
+table.tco-t td{vertical-align:middle}
+.tco-t .nmb{display:flex;gap:8px;align-items:center;background:none;border:0;padding:0;font:600 14px var(--f-body);color:var(--ink);cursor:pointer;text-align:left}
+.tco-t .nmb .ico{width:28px;height:28px}.tco-t .nmb .ico svg{width:16px;height:16px}
+.tco-t .nmb:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tco-t td.why{font-size:13px;color:var(--ink-2)}
+.tco-det{display:grid;gap:14px}
+.tco-det h3{display:flex;gap:10px;align-items:center;font-size:17px}
+.tco-det h4{font:600 11.5px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin:0 0 8px}
+.tco-det ul{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);font-size:14px}
+.tco-det .box{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px;min-width:0}
+.tco-det .box p{margin:0;color:var(--ink-2);font-size:14px}
+.tco-det .box p+p{margin-top:8px}
+table.tco-c{min-width:620px} table.tco-c td{vertical-align:middle;font-size:14px} table.tco-c td small{color:var(--ink-3);font-size:11.5px}
+.tco-c .drvm{display:none;font-size:12px;color:var(--ink-3);margin-top:2px}
+@media (max-width:560px){
+  table.tco-t,table.tco-c{min-width:0}
+  table.tco-t th:nth-child(2),table.tco-t td:nth-child(2),table.tco-t th:nth-child(4),table.tco-t td:nth-child(4),table.tco-t th:nth-child(6),table.tco-t td:nth-child(6){display:none}
+  table.tco-c th:nth-child(3),table.tco-c td:nth-child(3),table.tco-c th:nth-child(5),table.tco-c td:nth-child(5){display:none}
+  table.tco-t th,table.tco-c th{white-space:normal}
+  .tco-c .drvm{display:block}
+  table.tco-t th,table.tco-t td,table.tco-c th,table.tco-c td{padding:9px 8px}
+}
+table.tco-c tfoot td{font-weight:600;border-bottom:0;border-top:2px solid var(--ink)}
 #explorer svg{width:100%;height:auto;display:block}
 @media (max-width:560px){.calc{grid-template-columns:1fr}.chipgrp .lbl{min-width:0;width:100%}}
 .risks{display:grid;gap:10px}
@@ -272,6 +307,21 @@ footer p{margin:0;max-width:80ch}
       <div id="trOut" class="chart"></div>
       <p class="src" id="trNote"></p>
     </div>
+  </section>
+
+  <section id="tco" aria-labelledby="h-tco">
+    <div class="sec-hd">
+      <div><span class="eyebrow">Costo total de propiedad</span><h2 id="h-tco">TCO por categoría</h2></div>
+      <p class="src">Lo que cuesta cada categoría en toda su vida útil, no solo al comprarla: compra, flete, instalación, operación, mantenimiento, cumplimiento y reposición. Cada parte se mueve con su propio índice.</p>
+    </div>
+    <div class="tco-brief" id="tcoBrief"><span class="tag">Lectura de la semana</span><p class="muted">Cargando índices…</p></div>
+    <div class="panel">
+      <h3>Todas tus categorías</h3>
+      <p class="src" style="margin:4px 0 12px">Ordenadas por cuánto subió su costo total en 12 meses. Toca una para ver su detalle abajo.</p>
+      <div id="tcoTable"></div>
+    </div>
+    <div class="panel tco-det" id="tcoDet"></div>
+    <p class="src" id="tcoNote"></p>
   </section>
 
   <section>
@@ -401,6 +451,64 @@ const CATS = [
   {name:"Casetas Móviles", idx:[["prodmet",40],["plast",20],["metbas",15],["electr",15],["constr",10]], note:"Estructura, paneles, aluminio e instalación eléctrica."}
 ];
 const IDX_LBL = {em:"Estructura por kg", metbas:"Metálicas básicas", prodmet:"Productos metálicos", quim:"Química", plast:"Plástico y hule", minnomet:"Minerales no metálicos", maq:"Maquinaria y equipo", electron:"Equipo electrónico", electr:"Equipo eléctrico", petro:"Derivados del petróleo", constr:"Construcción", fx:"Dólar FIX"};
+// TCO: estructura típica del costo total en la vida útil (% del total, estimada con referencias de la industria, no de contratos).
+// Partes: adq compra · log flete y logística · ins instalación · ope operación (energía, agua, consumibles) · mto mantenimiento y refacciones · cum cumplimiento (normas, pruebas, seguros) · fin reposición y retiro.
+// Cada parte se mueve con una mezcla de índices [clave, peso]; "cat" es la canasta INEGI de la categoría. d sobrescribe la mezcla de TCO_DEF.
+const TCO_COMP = {adq:"Compra", log:"Flete y logística", ins:"Instalación", ope:"Operación", mto:"Mantenimiento", cum:"Cumplimiento", fin:"Reposición y retiro"};
+const TCO_DEF = {adq:[["cat",100]], log:[["trans",70],["diesel",30]], ins:[["mo",60],["constr",40]], ope:[["energia",100]], mto:[["mo",45],["serv",35],["cat",20]], cum:[["serv",50],["inpc",50]], fin:[["inpc",100]]};
+// Índices que no salen de la colección "series"; la rutina semanal los actualiza.
+const TCO_DRV = {
+  mo:      {lbl:"Mano de obra (salario promedio IMSS)", y12:6.7, asOf:"ago 26", src:"IMSS, salario base de cotización promedio, $673.1 diarios", url:"https://www.imss.gob.mx/sites/all/statics/i2f_news/2026-8-31%20Boletin%20Afiliacion%20IMSS.pdf"},
+  energia: {lbl:"Energía eléctrica, agua y gas (INPP)", y12:-6.57, asOf:"ago 26", src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"},
+  trans:   {lbl:"Transporte y almacenamiento (INPP)", y12:4.90, asOf:"ago 26", src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"},
+  serv:    {lbl:"Otros servicios, incluye reparación (INPP)", y12:5.56, asOf:"ago 26", src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"}
+};
+// Notas fijas del consultor para la lectura semanal (las actualiza la rutina).
+const TCO_NOTES = [
+  "La jornada de 40 horas ya es ley: baja de 48 a 46 horas en enero de 2027 y llega a 40 en 2030, con registro electrónico de asistencia obligatorio desde 2027. Para una cuadrilla de 48 horas, el costo por hora sube entre 4% y 5% cada año solo por esto. En pólizas de mantenimiento e instalación que pasen de 2026, pide que el precio ya lo incluya para evitar reclamos de ajuste.",
+  "El salario mínimo subió 13% en 2026 ($315.04 diarios) y el siguiente aumento se anuncia en diciembre. Pega más en servicios con mucha mano de obra, como la limpieza de trampas de grasa y los ayudantes de instalación: deja en tu presupuesto 2027 un ajuste de mano de obra arriba de la inflación."
+];
+const TCO = {
+  "Estructura Metálica": {h:20, p:{adq:66, log:3, ins:13, mto:13, cum:3, fin:2}, d:{mto:[["mo",50],["quim",30],["serv",20]]},
+    ask:["Precio por kg con acero, fabricación, flete y montaje por separado.","Sistema de pintura anticorrosiva especificado (micras y años de garantía): define cuánto repintas en 20 años.","Escalatoria atada a INEGI (construcción y naves) en lugar de ajustes abiertos."],
+    risk:"El acero es casi todo el costo. El costo oculto está en el repintado y la revisión de tornillería durante la vida de la nave."},
+  "Anclaje": {h:20, p:{adq:52, log:4, ins:38, cum:6}, d:{ins:[["mo",60],["quim",20],["constr",20]]},
+    ask:["Precio instalado (perforación, epóxico y prueba de extracción), no solo por pieza.","Pruebas de tensión incluidas en el alcance."],
+    risk:"La instalación pesa casi lo mismo que la pieza. Un reproceso por mala colocación duplica el costo."},
+  "Sistema Contra Incendio": {h:15, p:{adq:34, log:3, ins:22, ope:4, mto:20, cum:14, fin:3},
+    ask:["Pruebas e inspección NFPA 25 cotizadas junto con el suministro.","Rociadores y válvulas listados UL/FM con refacciones disponibles en México.","Póliza de mantenimiento con precio fijo por 3 años."],
+    risk:"Pruebas, inspecciones y dictámenes suman un tercio del costo. Un hallazgo de la aseguradora obliga a gastar fuera de presupuesto."},
+  "ANSUL": {h:12, p:{adq:34, log:3, ins:10, mto:30, cum:15, fin:8}, d:{mto:[["mo",35],["serv",25],["quim",20],["fx",20]]},
+    ask:["Inspección semestral, fusibles y recarga de agente con precio fijo por 2 a 3 años.","Lista de refacciones en USD con tipo de cambio pactado.","Prueba hidrostática de cilindros (cada 12 años) dentro de la propuesta."],
+    risk:"El mantenimiento y la certificación pesan más que el equipo, y el agente y las refacciones se cotizan en dólares."},
+  "Pintura": {h:10, p:{adq:28, log:2, ins:50, mto:17, cum:3}, d:{ins:[["mo",85],["constr",15]], mto:[["mo",60],["cat",40]]},
+    ask:["Precio por m² aplicado, con la preparación de superficie especificada (SSPC).","Años garantizados sin repintar: compara costo por m² por año, no por litro.","Espesor de película seca medido en sitio."],
+    risk:"La mano de obra es la mitad del costo. Una pintura barata que dura menos sale más cara."},
+  "Equipo Hidroneumático": {h:10, p:{adq:24, log:2, ins:8, ope:46, mto:15, cum:1, fin:4},
+    ask:["Curva de la bomba y consumo en kWh por año en el punto de operación.","Variador de frecuencia incluido o cotizado aparte.","Comparar ofertas a 10 años: precio, energía y mantenimiento."],
+    risk:"Casi la mitad del costo es electricidad. Una bomba 5% menos eficiente se come el ahorro de la compra."},
+  "PTARs": {h:15, p:{adq:30, log:3, ins:12, ope:32, mto:13, cum:8, fin:2}, d:{ope:[["energia",45],["quim",30],["mo",25]]},
+    ask:["Costo mensual de operación garantizado (energía, químicos, lodos y operador).","Cumplimiento NOM-001/002-SEMARNAT con análisis de laboratorio incluidos el primer año.","Penalización si el agua tratada no cumple."],
+    risk:"Operar la planta cuesta más que comprarla, y un incumplimiento ambiental trae multas."},
+  "Trampas de Grasa": {h:10, p:{adq:18, log:3, ins:12, mto:57, cum:8, fin:2}, d:{mto:[["serv",55],["mo",25],["diesel",20]]},
+    ask:["Contrato de limpieza y disposición con manifiesto, con precio por servicio indexado.","Tamaño de trampa según frecuencia de limpieza: una más grande reduce visitas.","Disposición de residuos con empresa autorizada."],
+    risk:"La limpieza y la disposición son más de la mitad del costo; el precio de la trampa casi no cuenta."},
+  "Refacciones de Baños": {h:10, p:{adq:40, log:4, ins:16, ope:16, mto:19, fin:5},
+    ask:["Consumo de agua certificado (litros por descarga y por minuto).","Refacciones estándar del mercado mexicano (cartuchos, válvulas).","Garantía de grifería y fluxómetros."],
+    risk:"El agua y las refacciones pesan más que la diferencia de precio entre marcas."},
+  "Puertas": {h:10, p:{adq:44, log:4, ins:12, ope:4, mto:30, cum:2, fin:4},
+    ask:["Póliza de mantenimiento preventivo (motor, resortes, sensores) con precio fijo.","Tiempo de respuesta y costo del panel de reposición cuando un montacargas golpea la puerta.","Ciclos garantizados del motor."],
+    risk:"Golpes y desgaste hacen que el mantenimiento sea casi un tercio del costo."},
+  "Sonido": {h:7, p:{adq:44, log:3, ins:20, ope:5, mto:13, cum:6, fin:9}, d:{cum:[["inpc",100]], fin:[["fx",50],["inpc",50]]},
+    ask:["Precio con cableado e instalación, no solo equipo.","Soporte y refacciones en México por al menos 5 años.","País de origen (T-MEC o no), por el riesgo de aranceles."],
+    risk:"Equipo importado en dólares que se vuelve obsoleto antes que el resto de la tienda."},
+  "Contenedores Marítimos": {h:10, p:{adq:54, log:22, ins:5, mto:11, cum:2, fin:6}, d:{log:[["trans",50],["diesel",20],["fx",30]], mto:[["mo",50],["quim",30],["serv",20]]},
+    ask:["Precio puesto en sitio (Manzanillo a tienda, grúa y maniobras) separado del contenedor.","Grado del contenedor (nuevo, cargo-worthy, as-is) y estado del piso.","Valor de recompra al terminar su uso."],
+    risk:"El flete y las maniobras son la quinta parte del costo y se mueven con el diésel y el dólar."},
+  "Casetas Móviles": {h:10, p:{adq:45, log:8, ins:8, ope:18, mto:15, cum:1, fin:5},
+    ask:["Aislamiento térmico y aire acondicionado con consumo especificado.","Precio de traslado entre sitios.","Garantía de estructura y paneles."],
+    risk:"El aire acondicionado y los traslados entre obras pesan más de lo que parece al comprar."}
+};
 // Íconos de línea (24×24) por categoría
 const ICON_PATHS = {
   "Estructura Metálica":'<path d="M4 4h16M4 20h16M12 4v16"/>',
@@ -797,7 +905,85 @@ window.renderCatTrend = function(){
 };
 document.getElementById("trView").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; tr.view = b.dataset.v; try{localStorage.setItem("pc-tr",JSON.stringify(tr));}catch(err){} window.renderCatTrend(); });
 
-function renderSeries(){ addVirtual(); window.renderCatsSeries(); renderTiles(); renderEm(); renderCalc(); renderExplorer(); window.renderCatTrend && window.renderCatTrend(); }
+const TCO_C = {adq:"var(--s1)", log:"var(--s2)", ins:"var(--s3)", ope:"var(--s4)", mto:"var(--s5)", cum:"var(--s6)", fin:"var(--s7)"};
+function tcoDrv(k, c){
+  if (k==="cat"){ const s = catStats(c); return s ? s.y12 : null; }
+  if (TCO_DRV[k]) return TCO_DRV[k].y12;
+  if (k==="inpc"){ const d = DATA.find(x=>x.id==="inpc"); return d ? d.yoyPct : null; }
+  if (k==="diesel"){ const d = DATA.find(x=>x.id==="diesel"); return d && d.ya ? (d.now/d.ya-1)*100 : null; }
+  const s = catStats({idx:[[k,100]]}); return s ? s.y12 : null;
+}
+const tcoLbl = k => k==="cat" ? "Precio de la categoría (INEGI)" : TCO_DRV[k] ? TCO_DRV[k].lbl : ({inpc:"Inflación (INPC)", diesel:"Diésel (precio promedio)"}[k] || IDX_LBL[k] || k);
+function tcoOf(c){
+  const t = TCO[c.name]; if (!t) return null;
+  const tot = Object.values(t.p).reduce((a,b)=>a+b,0);
+  const parts = Object.keys(TCO_COMP).filter(k=>t.p[k]).map(k => {
+    const mix = (t.d && t.d[k]) || TCO_DEF[k]; let s = 0, w = 0;
+    const ds = mix.map(([dk,wt]) => { const v = tcoDrv(dk,c); if (v!=null){ s += wt*v; w += wt; } return {k:dk, w:wt, v}; });
+    const share = t.p[k]/tot*100, y12 = w ? s/w : null;
+    return {k, share, ds, y12, contrib: y12==null ? 0 : share*y12/100};
+  });
+  const kw = parts.filter(p=>p.y12!=null).reduce((a,p)=>a+p.share,0);
+  const adq = parts.find(p=>p.k==="adq");
+  return { t, parts, y12: kw ? parts.reduce((a,p)=>a+p.contrib,0)*100/kw : null, adqShare: adq ? adq.share : 0, adqY12: adq ? adq.y12 : null,
+    top: [...parts].sort((a,b)=>b.contrib-a.contrib)[0],
+    expo: dk => parts.reduce((a,p)=>{ const tw = p.ds.reduce((x,d)=>x+d.w,0), dw = p.ds.filter(d=>d.k===dk).reduce((x,d)=>x+d.w,0); return a + p.share*dw/tw; }, 0) };
+}
+const tcoBar = (r, cls="") => `<div class="tbar ${cls}" role="img" aria-label="${r.parts.map(p=>`${TCO_COMP[p.k]} ${p.share.toFixed(0)}%`).join(", ")}">${r.parts.map(p=>`<span style="--c:${TCO_C[p.k]};flex:${p.share}" title="${TCO_COMP[p.k]} ${p.share.toFixed(0)}%">${cls?"":p.share>=8?p.share.toFixed(0)+"%":""}</span>`).join("")}</div>`;
+const lc = s => s.charAt(0).toLowerCase() + s.slice(1);
+const mv = v => v>=0.05 ? `sube ${v.toFixed(1)}%` : v<=-0.05 ? `baja ${Math.abs(v).toFixed(1)}%` : "se mantiene";
+const listY = arr => arr.length<2 ? arr.join("") : arr.slice(0,-1).join(", ") + " y " + arr.at(-1);
+const tco = { sel:null };
+try { Object.assign(tco, JSON.parse(localStorage.getItem("pc-tco")||"{}")); } catch(e){}
+window.renderTco = function(){
+  const brief = document.getElementById("tcoBrief"), tbl = document.getElementById("tcoTable"), det = document.getElementById("tcoDet");
+  const all = CATS.map(c=>({c, r:tcoOf(c)})).filter(x=>x.r && x.r.y12!=null && x.r.adqY12!=null).sort((a,b)=>b.r.y12-a.r.y12);
+  if (!all.length){ tbl.innerHTML = '<p class="muted empty">Cargando índices INEGI…</p>'; det.innerHTML = ""; return; }
+  // Lectura de la semana
+  const b = [], t1 = all[0];
+  b.push(`<b>${t1.c.name}</b> es la categoría cuyo costo total más sube: <b>${pct(t1.r.y12)}</b> en 12 meses. Lo empuja sobre todo ${lc(TCO_COMP[t1.r.top.k])} (${pct(t1.r.top.y12)}).`);
+  const gaps = all.filter(x=>x.r.adqY12!=null).map(x=>({...x, g:x.r.y12-x.r.adqY12})).sort((a,b)=>b.g-a.g);
+  const hi = gaps[0], lo = gaps.at(-1);
+  if (hi && hi.g>1){ const p = hi.r.parts.filter(p=>p.k!=="adq").sort((a,b)=>b.contrib-a.contrib)[0];
+    b.push(`Costo oculto en <b>${hi.c.name}</b>: la cotización ${mv(hi.r.adqY12)}, pero el costo total ${hi.r.y12<0?"solo ":""}<b>${mv(hi.r.y12)}</b>. La presión está en ${lc(TCO_COMP[p.k])} (${pct(p.y12)}), que no aparece en el precio.`); }
+  if (lo && lo.g<-1) b.push(`En <b>${lo.c.name}</b> pasa lo contrario: el precio de compra ${mv(lo.r.adqY12)}, pero el costo total ${lo.r.y12>0?"solo ":""}${mv(lo.r.y12)}, porque la compra es ${lo.r.adqShare.toFixed(0)}% del total. Ahí conviene negociar servicio y operación, no solo precio.`);
+  const mo = TCO_DRV.mo.y12;
+  if (mo!=null){ const ex = all.map(x=>({n:x.c.name, e:x.r.expo("mo")})).sort((a,b)=>b.e-a.e).slice(0,3);
+    b.push(`La mano de obra <b>${mv(mo)}</b> en 12 meses (salario promedio IMSS) y es ${listY(ex.map((x,i)=>`${x.e.toFixed(0)}% ${i?"del de":"del costo total de"} ${x.n}`))}. Pide tarifas de mano de obra fijas por 12 meses o indexadas al salario IMSS.`); }
+  const en = TCO_DRV.energia.y12;
+  if (en!=null){ const ex = all.map(x=>({n:x.c.name, e:x.r.expo("energia")})).sort((a,b)=>b.e-a.e).filter(x=>x.e>=10).slice(0,2);
+    if (ex.length) b.push(`La energía ${mv(en)} en 12 meses (INPP) y pesa ${listY(ex.map(x=>`${x.e.toFixed(0)}% en ${x.n}`))}. Evalúa esas ofertas por consumo en kWh a lo largo de su vida, no solo por precio.`); }
+  TCO_NOTES.forEach(n=>b.push(n));
+  brief.innerHTML = `<span class="tag">Lectura de la semana</span><ol>${b.slice(0,7).map(x=>`<li>${x}</li>`).join("")}</ol>`;
+  // Tabla general
+  const sel = tco.sel && all.some(x=>x.c.name===tco.sel) ? tco.sel : all[0].c.name;
+  tbl.innerHTML = `<div class="tbl-wrap"><table class="tco-t"><thead><tr><th>Categoría</th><th>Composición</th><th class="num">Compra en el TCO</th><th class="num">Precio de compra 12 m</th><th class="num">TCO 12 m</th><th>Lo que más empuja</th></tr></thead><tbody>${
+    all.map(({c,r})=>`<tr${c.name===sel?' class="on"':""}><td><button class="nmb" data-n="${esc(c.name)}" aria-pressed="${c.name===sel}">${icon(c.name)}${esc(c.name)}</button></td><td>${tcoBar(r,"sm")}</td><td class="num">${r.adqShare.toFixed(0)}%</td><td class="num">${r.adqY12!=null?pct(r.adqY12):"–"}</td><td class="num">${pill(r.y12)}</td><td class="why">${TCO_COMP[r.top.k]} <span class="muted">${pct(r.top.y12)}</span></td></tr>`).join("")
+  }</tbody></table></div>
+  <div class="legend" style="margin-top:10px">${Object.keys(TCO_COMP).map(k=>`<span><i class="sw" style="background:${TCO_C[k]}"></i>${TCO_COMP[k]}</span>`).join("")}</div>`;
+  tbl.querySelectorAll(".nmb").forEach(btn=>btn.onclick=()=>{ tco.sel = btn.dataset.n; try{localStorage.setItem("pc-tco",JSON.stringify(tco));}catch(e){} window.renderTco(); document.getElementById("tcoDet").scrollIntoView({behavior:"smooth", block:"nearest"}); });
+  // Detalle
+  const {c, r} = all.find(x=>x.c.name===sel), t = r.t;
+  const per100 = r.adqShare ? Math.round(100*100/r.adqShare) : null;
+  det.innerHTML = `<h3>${icon(c.name)}${esc(c.name)} <span class="muted" style="font:400 13px var(--f-body)">horizonte ${t.h} años</span></h3>
+    <div class="tiles">
+      <div class="tile"><span class="k">La compra es</span><span class="v">${r.adqShare.toFixed(0)}%</span><span class="n">del costo total en ${t.h} años</span></div>
+      <div class="tile"><span class="k">Por cada $100 de compra</span><span class="v">$${per100}</span><span class="n">pagas en total en ${t.h} años</span></div>
+      <div class="tile"><span class="k">Costo total, 12 meses</span><span class="v">${pct(r.y12)}</span><span class="n">precio de compra ${r.adqY12!=null?pct(r.adqY12):"s/d"}</span></div>
+    </div>
+    ${tcoBar(r)}
+    <div class="tbl-wrap"><table class="tco-c"><thead><tr><th>Parte del costo</th><th class="num">Peso</th><th>Qué la mueve</th><th class="num">12 meses</th><th class="num">Aporta al TCO</th></tr></thead><tbody>${
+      r.parts.map(p=>`<tr><td><i class="sw" style="background:${TCO_C[p.k]}"></i>${TCO_COMP[p.k]}<div class="drvm">${p.ds.map(d=>tcoLbl(d.k)).join(" · ")}</div></td><td class="num">${p.share.toFixed(0)}%</td><td>${p.ds.map(d=>`${tcoLbl(d.k)}${p.ds.length>1?` <small>${d.w}%</small>`:""}${d.v==null?' <small>(s/d)</small>':""}`).join("<br>")}</td><td class="num">${pill(p.y12)}</td><td class="num">${p.y12==null?"–":(p.contrib>=0?"+":"")+p.contrib.toFixed(2)+" pts"}</td></tr>`).join("")
+    }</tbody><tfoot><tr><td>Costo total</td><td class="num">100%</td><td></td><td class="num">${pill(r.y12)}</td><td class="num">${(r.y12>=0?"+":"")+r.y12.toFixed(2)} pts</td></tr></tfoot></table></div>
+    <div class="grid2" style="gap:12px">
+      <div class="box"><h4>Qué pedir en tu próximo concurso</h4><ul>${t.ask.map(a=>`<li>${a}</li>`).join("")}</ul></div>
+      <div class="box"><h4>Riesgo a vigilar</h4><p>${t.risk}</p><p>Esta semana lo que más empuja es <b>${lc(TCO_COMP[r.top.k])}</b> (${pct(r.top.y12)}), que aporta ${r.top.contrib.toFixed(1)} de los ${r.y12.toFixed(1)} puntos.</p></div>
+    </div>`;
+  const srcs = Object.values(TCO_DRV).filter(d=>d.src).map(d=>d.url?`<a href="${d.url}" target="_blank" rel="noopener">${esc(d.lbl)}</a>: ${esc(d.src)}${d.asOf?`, ${esc(d.asOf)}`:""}`:`${esc(d.lbl)}: ${esc(d.src)}`);
+  document.getElementById("tcoNote").innerHTML = `Los pesos de cada parte son una estimación típica por categoría con referencias de la industria, no salen de tus contratos; si tus números son distintos, pídeme ajustarlos. La variación de 12 meses de cada parte combina: canasta INEGI de la categoría (compra), transporte y diésel (flete), salario y construcción (instalación), energía (operación), servicios, salario y refacciones (mantenimiento) e INPC (cumplimiento y reposición).${srcs.length?" Fuentes: "+srcs.join("; ")+".":""}`;
+};
+
+function renderSeries(){ addVirtual(); window.renderCatsSeries(); renderTiles(); renderEm(); renderCalc(); renderExplorer(); window.renderCatTrend && window.renderCatTrend(); window.renderTco && window.renderTco(); }
 function addVirtual(){ const ser = emSeries(); if (ser.length) SERIES.em_kg = {name:"Estructura Metálica, precio estimado por kg", short:"Estructura $/kg", group:"acero", kind:"price", cur:"MXN", unit:"kg", order:0, src:"INEGI (construcción y naves) + precio de mercado", points:ser, virtual:true}; }
 window.renderSeries = renderSeries;
 
