@@ -1121,6 +1121,79 @@
   "unit": "%",
   "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"
  },
+ "inpp_perfiles_yoy": {
+  "name": "INEGI: perfiles de hierro y acero, variación anual",
+  "short": "Perfiles de acero (INEGI)",
+  "group": "acero",
+  "kind": "yoy",
+  "cur": "pct",
+  "unit": "%",
+  "order": 11,
+  "src": "INEGI vía CMIC CEICO (con huecos: solo se publica cuando entra al top 10 del mes)",
+  "url": "https://www.cmic.org.mx/ceico/registros/carrusel/portadas/CEICO_Informe_Febrero_2026_Variacion_precio_materiales2.pdf",
+  "points": [
+   {
+    "m": "2023-12",
+    "v": -4.9
+   },
+   {
+    "m": "2024-01",
+    "v": -0.3
+   },
+   {
+    "m": "2024-02",
+    "v": -1.2
+   },
+   {
+    "m": "2024-03",
+    "v": -2.8
+   },
+   {
+    "m": "2024-04",
+    "v": -10.0
+   },
+   {
+    "m": "2024-05",
+    "v": -16.8
+   },
+   {
+    "m": "2024-06",
+    "v": -18.0
+   },
+   {
+    "m": "2024-07",
+    "v": -18.1
+   },
+   {
+    "m": "2024-08",
+    "v": -13.4
+   },
+   {
+    "m": "2024-09",
+    "v": -8.9
+   },
+   {
+    "m": "2024-10",
+    "v": -4.7
+   },
+   {
+    "m": "2024-11",
+    "v": -4.2
+   },
+   {
+    "m": "2024-12",
+    "v": -8.1
+   },
+   {
+    "m": "2025-01",
+    "v": -13.8
+   },
+   {
+    "m": "2026-01",
+    "v": 5.96
+   }
+  ]
+ },
  "inpp_pinturas_yoy": {
   "cur": "pct",
   "group": "insumos",
