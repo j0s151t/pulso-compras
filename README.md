@@ -4,7 +4,7 @@ Tablero semanal de inteligencia de mercado para compras de construcción (GNFR) 
 
 ## Cómo se ve
 
-Abre `index.html` desde GitHub Pages. La página lee las series mensuales de `data/series.json`.
+Abre `index.html` desde GitHub Pages. La página lee las series mensuales de `data/series.json`. 
 
 ## Datos
 
