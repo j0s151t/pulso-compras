@@ -109,6 +109,27 @@ tr:last-child td{border-bottom:0}
 .catc .est{font-size:13px;color:var(--ink-2)} .catc .est b{font:600 15px var(--f-mono);color:var(--ink)}
 .drv span{font:12px var(--f-mono);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:2px 6px;color:var(--ink-2)}
 .drv b{font-weight:600}
+table.mp-t{min-width:760px}
+.mp-t td{vertical-align:top}
+.mp-t .cat a{color:inherit}
+.mp-t .mp-more ul{margin:0;padding:0;list-style:none;display:grid;gap:3px;font-size:12.5px;color:var(--ink-2)}
+.mp-t .mp-more a{color:var(--ink-2)}
+.mp-t .aff{display:flex;flex-wrap:wrap;gap:6px}
+.mp-t .aff>span{display:inline-grid;grid-template-columns:auto minmax(0,1fr);min-width:0;column-gap:6px;align-items:center;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:4px 8px 4px 6px;font-size:12.5px;line-height:1.25}
+.mp-t .aff .ico{grid-row:span 2;width:20px;height:20px}
+.mp-t .aff .ico svg{width:16px;height:16px}
+.mp-t .aff b{font-weight:600;color:var(--ink)}
+.mp-t .aff small{color:var(--ink-3);font-size:11.5px}
+@media (max-width:560px){
+  table.mp-t{min-width:0}
+  .mp-t thead,.mp-t td:nth-child(3){display:none}
+  .mp-t tbody{display:block}
+  .mp-t tr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 10px;padding:12px;border-bottom:1px solid var(--line)}
+  .mp-t tr:last-child{border-bottom:0}
+  .mp-t td{display:block;padding:0;border:0}
+  .mp-t td:nth-child(4){grid-column:1 / -1}
+  .mp-t .aff>span{max-width:100%;grid-template-columns:auto minmax(0,1fr)}
+}
 .drv .u{color:var(--up)} .drv .d{color:var(--down)}
 .sec-hd{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:8px 24px;margin-bottom:12px}
 .sec-hd h2{margin:2px 0 0}.sec-hd .src{margin:0;max-width:60ch}
@@ -225,7 +246,7 @@ footer p{margin:0;max-width:80ch}
     <div class="meta">
       <div class="brand"><span class="logo" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 23h22M5 23V12L14 5l9 7v11"/><path d="M5 12h18M9 17h2.5l1.5-3 2.5 6 1.5-3H19"/></svg></span><span class="eyebrow" id="week">Semana del 5 de octubre de 2026</span></div>
       <h1>Pulso de Compras México</h1>
-      <p>Mercado mexicano para tus categorías GNFR de construcción, con foco en estructura metálica: precios mes a mes, riesgos y noticias.</p>
+      <p>Mercado mexicano para tus 7 categorías GNFR de construcción que más mueven la aguja, con foco en estructura metálica: materias primas mes a mes, riesgos y noticias.</p>
     </div>
     <div class="toggle" role="group" aria-label="Moneda">
       <button id="btnMXN" aria-pressed="true">MXN</button>
@@ -296,7 +317,7 @@ footer p{margin:0;max-width:80ch}
 
   <section>
     <h2>Tus categorías</h2>
-    <p class="src" style="margin:-6px 0 12px">Cada categoría se mide con una canasta de sus elementos más representativos, cada uno con su índice INEGI mensual y su peso. Nivel: ámbar si sube más de 5% en 12 meses, rojo si sube más de 25%, o más alto si hay riesgos sin índice como aranceles.</p>
+    <p class="src" style="margin:-6px 0 12px">Las 7 categorías que más mueven tu gasto. Cada una se mide con las materias primas que la componen y su peso, con índices INEGI mes a mes. Nivel: ámbar si sube más de 5% en 12 meses, rojo si sube más de 25%, o más alto si hay riesgos sin índice como aranceles.</p>
     <div class="cats" id="cats"></div>
   </section>
 
@@ -332,28 +353,31 @@ footer p{margin:0;max-width:80ch}
     <p class="src" id="tcoNote"></p>
   </section>
 
-  <section>
-    <h2>Precios clave</h2>
+  <section id="mp" aria-labelledby="h-mp">
+    <div class="sec-hd">
+      <div><span class="eyebrow">Qué mueve tus precios</span><h2 id="h-mp">Materias primas y a qué categoría afectan</h2></div>
+      <p class="src">Una línea por materia prima, con su dato INEGI y las categorías donde pega. El acero va en una sola línea: varilla, perfiles, lámina y soldadura se mueven juntos.</p>
+    </div>
     <div class="tbl-wrap">
-      <table aria-label="Precios clave">
-        <thead><tr><th>Commodity</th><th class="num">Precio actual</th><th class="num">Hace 1 año</th><th class="num">Var. anual</th><th class="num">Var. reciente</th><th>Fuente</th></tr></thead>
+      <table class="mp-t" aria-label="Materias primas">
+        <thead><tr><th>Materia prima</th><th class="num">Var. anual</th><th>Datos de apoyo</th><th>Afecta a</th></tr></thead>
         <tbody id="rows"></tbody>
       </table>
     </div>
-    <p class="src" style="margin-top:8px">Las variaciones se recalculan en la moneda elegida, así que incluyen el efecto del tipo de cambio. <span class="approx">≈</span> indica un dato de hace un año aproximado o derivado de la variación publicada.</p>
+    <p class="src" style="margin-top:8px">Var. anual: dato INEGI más reciente (mes entre paréntesis). Diésel y dólar se recalculan en la moneda elegida. Los datos de apoyo internacionales (LME, Brent, TiO2 en China) son solo referencia.</p>
   </section>
 
   <section class="grid2">
     <div class="panel chart">
-      <h2>Variación anual por commodity</h2>
+      <h2>Variación anual por materia prima</h2>
       <p class="src" style="margin:-6px 0 10px">Línea punteada: tu umbral de alerta de +5%. Rojo = más caro que hace un año.</p>
       <div id="chart"></div>
     </div>
     <div class="panel qual">
       <h2>Lo que dice INEGI</h2>
       <div><h3>Naves industriales: +5.1% anual</h3><p>Costo total de obra de naves y plantas industriales, agosto 2025 a agosto 2026. Subió cada mes desde abril (3.2% → 5.1%). Es tu mejor referencia general para revisar precios de nave.</p></div>
-      <div><h3>Acero y soldadura</h3><p>Varilla corrugada +7.8% (julio) y soldaduras +8.5% (agosto). La construcción en general sube 5.9% anual y aceleró desde enero (0.4% a 1.3% por mes).</p><p>Perfiles de hierro y acero: +6.0% anual en enero, la última vez que INEGI los publicó; la lámina no se publica cada mes. En agosto, lingote y plancha de acero bajaron 6.0% en el mes, una señal de que el acero podría moderarse (lectura nuestra).</p></div>
-      <div><h3>Lo que más sube</h3><p>Tubos de cobre +22.3%, cables +17.2%, tubería plástica +16.4%, diésel +17.0% y aluminio laminado +11.6%. Pega en SCI, hidroneumáticos, PTARs, baños y puertas.</p><p class="src"><a href="https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf">CMIC CEICO con datos INEGI, septiembre 2026</a></p></div>
+      <div><h3>Acero: +7.8% anual</h3><p>El acero en México sube 7.8% contra hace un año (INEGI, julio). Soldaduras (+8.5%) y perfiles (+6.0% en enero, último dato) van en la misma dirección. En agosto, lingote y plancha bajaron 6.0% en el mes, una señal de que podría moderarse (lectura nuestra). La construcción en general sube 5.9% anual.</p></div>
+      <div><h3>Lo que más sube</h3><p>Cobre +22.3% (tubo) y +17.2% (cables), plásticos +16.4% y diésel +17.0%. Pega en SCI, hidroneumáticos y PTARs.</p><p class="src"><a href="https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf">CMIC CEICO con datos INEGI, septiembre 2026</a></p></div>
     </div>
   </section>
 
@@ -361,34 +385,33 @@ footer p{margin:0;max-width:80ch}
     <div class="panel">
       <h2>Mapa de riesgos</h2>
       <div class="risks">
-        <div class="risk"><span class="lvl alto">Alto</span><div><h3>Energía y metales muy arriba de 2025</h3><p class="aff">Precio · Estructura Metálica, Equipo Hidroneumático, Refacciones de Baños, Pintura</p><p>Brent +58% y cobre +30% contra hace un año. El acero en México sube +7.8% (INEGI, varilla). El +39% de EE.UU. se debe a su arancel y solo sirve de referencia.</p><p class="do"><b>Qué haría:</b> revisar las escalatorias abiertas de estructura y pedir al equipo de validación que compare cada adicional contra INEGI naves (+5.1%) antes de aprobarlo.</p><span class="src">INEGI vía CMIC CEICO, jul 2026 · LME y Brent, consultados el 5 oct 2026</span></div></div>
-        <div class="risk"><span class="lvl alto">Alto</span><div><h3>Revisión del T-MEC en curso</h3><p class="aff">Aranceles · Estructura Metálica, Anclaje, Puertas, Sonido, Contenedores Marítimos</p><p>EE.UU. cobra 50% al acero y aluminio mexicano y 25% a autos. La cuarta ronda se aplazó a octubre y hay un posible acuerdo para bajar autos a 15%. México cobra hasta 50% a importaciones de Asia sin tratado.</p><p class="do"><b>Qué haría:</b> pedir precio firme de 60 a 90 días en acero mientras se define la ronda, y exigir país de origen en equipo importado (Sonido, contenedores) para saber si paga arancel.</p><span class="src">El Financiero, 1 oct 2026</span></div></div>
-        <div class="risk"><span class="lvl alto">Alto</span><div><h3>Lámina más cara por antidumping y aranceles</h3><p class="aff">Aranceles · Estructura Metálica, Puertas, Casetas Móviles, Anclaje</p><p>Desde el 4 de septiembre la lámina rolada en caliente de China paga USD 0.31 por kg y la de Vietnam USD 0.29, además del arancel de 35% vigente desde enero. La resolución sobre lámina rolada en frío (cubiertas) debe salir a más tardar el 5 de diciembre.</p><p class="do"><b>Qué haría:</b> pedir a cada fabricante de estructura el origen de su lámina y placa. Si es nacional, no aceptar el antidumping como motivo de aumento; si es importada, pedir el pedimento. Cerrar ya los volúmenes de cubierta antes de diciembre.</p><span class="src">DOF vía CJ Aduanero, 3 sep 2026 · trade.gov, 17 feb 2026</span></div></div>
-        <div class="risk"><span class="lvl medio">Medio</span><div><h3>Mano de obra más cara desde 2027</h3><p class="aff">Mano de obra · Pintura, Anclaje, Trampas de Grasa, pólizas de SCI y ANSUL</p><p>El salario promedio IMSS sube 6.7% anual y el mínimo subió 13% en 2026. La jornada baja de 48 a 46 horas en enero de 2027 y a 40 en 2030, lo que sube entre 4% y 5% al año el costo por hora de una cuadrilla.</p><p class="do"><b>Qué haría:</b> en contratos de instalación y mantenimiento que pasen de 2026, pedir que el precio ya incluya la jornada nueva para evitar reclamos de ajuste.</p><span class="src">IMSS, ago 2026 · DOF, 3 mar 2026</span></div></div>
-        <div class="risk"><span class="lvl medio">Medio</span><div><h3>Fletes Asia → Manzanillo en temporada alta</h3><p class="aff">Logística · Contenedores Marítimos, Sonido, refacciones de ANSUL</p><p>De septiembre a noviembre las tarifas a Manzanillo pueden duplicarse (rango de mercado US$2,500–5,500 por contenedor de 40'). Las navieras cancelan salidas y la Semana Dorada en China puede retrasar embarques.</p><p class="do"><b>Qué haría:</b> mover a diciembre los embarques que no sean urgentes y cerrar tarifa anual con la naviera para 2027.</p><span class="src">GetCastores y CM Logistics, consultados el 5 oct 2026</span></div></div>
-        <div class="risk"><span class="lvl medio">Medio</span><div><h3>Cobre y zinc con oferta apretada</h3><p class="aff">Escasez · Equipo Hidroneumático, Refacciones de Baños, Sistema Contra Incendio, galvanizado</p><p>Escondida (Chile) está detenida tras un accidente y con huelga aprobada. La producción de zinc de Perú cayó 12% y los inventarios LME están bajos.</p><p class="do"><b>Qué haría:</b> pedir vigencias cortas en tubería de cobre, cableado y grifería, y adelantar las compras del primer trimestre si ya tienen proyecto.</p><span class="src">LME vía Business Recorder y Trading Economics, consultados el 5 oct 2026</span></div></div>
-        <div class="risk"><span class="lvl medio">Medio</span><div><h3>Peso presionado por dólar fuerte</h3><p class="aff">Tipo de cambio · Sonido, ANSUL, Contenedores Marítimos, rociadores de SCI</p><p>El FIX llegó a 18.37, su nivel más débil desde noviembre de 2025. La Fed sube tasas y los bonos de EE.UU. rinden cerca de 5.3%.</p><p class="do"><b>Qué haría:</b> fijar el tipo de cambio en la orden de compra o pedir precio en pesos con vigencia.</p><span class="src">Banxico vía N+, 2 oct 2026</span></div></div>
-        <div class="risk"><span class="lvl bajo">Bajo</span><div><h3>Temporada de huracanes hasta el 30 de noviembre</h3><p class="aff">Clima · Contenedores Marítimos y todo lo que entra por Manzanillo, Altamira o Veracruz</p><p>Sin alerta activa relevante esta semana.</p><p class="do"><b>Qué haría:</b> nada por ahora; si hay alerta, mover fechas de entrega antes de que el proveedor lo pida.</p><span class="src">Revisión semanal, 5 oct 2026</span></div></div>
+        <div class="risk"><span class="lvl alto">Alto</span><div><h3>Energía y metales muy arriba de 2025</h3><p class="aff">Precio · Estructura Metálica, Equipo Hidroneumático, Sistema Contra Incendio, Pintura</p><p>Brent +58% y cobre +30% contra hace un año. El acero en México sube +7.8% (INEGI, varilla). El +39% de EE.UU. se debe a su arancel y solo sirve de referencia.</p><p class="do"><b>Qué haría:</b> revisar las escalatorias abiertas de estructura y pedir al equipo de validación que compare cada adicional contra INEGI naves (+5.1%) antes de aprobarlo.</p><span class="src">INEGI vía CMIC CEICO, jul 2026 · LME y Brent, consultados el 5 oct 2026</span></div></div>
+        <div class="risk"><span class="lvl alto">Alto</span><div><h3>Revisión del T-MEC en curso</h3><p class="aff">Aranceles · Estructura Metálica, Sistema Contra Incendio, Sonido</p><p>EE.UU. cobra 50% al acero y aluminio mexicano y 25% a autos. La cuarta ronda se aplazó a octubre y hay un posible acuerdo para bajar autos a 15%. México cobra hasta 50% a importaciones de Asia sin tratado.</p><p class="do"><b>Qué haría:</b> pedir precio firme de 60 a 90 días en acero mientras se define la ronda, y exigir país de origen en equipo importado (Sonido, ANSUL) para saber si paga arancel.</p><span class="src">El Financiero, 1 oct 2026</span></div></div>
+        <div class="risk"><span class="lvl alto">Alto</span><div><h3>Lámina más cara por antidumping y aranceles</h3><p class="aff">Aranceles · Estructura Metálica, Sistema Contra Incendio (tubería y soportes)</p><p>Desde el 4 de septiembre la lámina rolada en caliente de China paga USD 0.31 por kg y la de Vietnam USD 0.29, además del arancel de 35% vigente desde enero. La resolución sobre lámina rolada en frío (cubiertas) debe salir a más tardar el 5 de diciembre.</p><p class="do"><b>Qué haría:</b> pedir a cada fabricante de estructura el origen de su lámina y placa. Si es nacional, no aceptar el antidumping como motivo de aumento; si es importada, pedir el pedimento. Cerrar ya los volúmenes de cubierta antes de diciembre.</p><span class="src">DOF vía CJ Aduanero, 3 sep 2026 · trade.gov, 17 feb 2026</span></div></div>
+        <div class="risk"><span class="lvl medio">Medio</span><div><h3>Mano de obra más cara desde 2027</h3><p class="aff">Mano de obra · Pintura, PTARs, instalación y pólizas de SCI y ANSUL</p><p>El salario promedio IMSS sube 6.7% anual y el mínimo subió 13% en 2026. La jornada baja de 48 a 46 horas en enero de 2027 y a 40 en 2030, lo que sube entre 4% y 5% al año el costo por hora de una cuadrilla.</p><p class="do"><b>Qué haría:</b> en contratos de instalación y mantenimiento que pasen de 2026, pedir que el precio ya incluya la jornada nueva para evitar reclamos de ajuste.</p><span class="src">IMSS, ago 2026 · DOF, 3 mar 2026</span></div></div>
+        <div class="risk"><span class="lvl medio">Medio</span><div><h3>Fletes Asia → Manzanillo en temporada alta</h3><p class="aff">Logística · Sonido, refacciones de ANSUL, rociadores de SCI</p><p>De septiembre a noviembre las tarifas a Manzanillo pueden duplicarse (rango de mercado US$2,500–5,500 por contenedor de 40'). Las navieras cancelan salidas y la Semana Dorada en China puede retrasar embarques.</p><p class="do"><b>Qué haría:</b> mover a diciembre los embarques que no sean urgentes y cerrar tarifa anual con la naviera para 2027.</p><span class="src">GetCastores y CM Logistics, consultados el 5 oct 2026</span></div></div>
+        <div class="risk"><span class="lvl medio">Medio</span><div><h3>Cobre y zinc con oferta apretada</h3><p class="aff">Escasez · Equipo Hidroneumático, Sistema Contra Incendio, PTARs</p><p>Escondida (Chile) está detenida tras un accidente y con huelga aprobada. La producción de zinc de Perú cayó 12% y los inventarios LME están bajos.</p><p class="do"><b>Qué haría:</b> pedir vigencias cortas en cableado, motores y válvulas de bronce, y adelantar las compras del primer trimestre si ya tienen proyecto.</p><span class="src">LME vía Business Recorder y Trading Economics, consultados el 5 oct 2026</span></div></div>
+        <div class="risk"><span class="lvl medio">Medio</span><div><h3>Peso presionado por dólar fuerte</h3><p class="aff">Tipo de cambio · Sonido, ANSUL, rociadores de SCI</p><p>El FIX llegó a 18.37, su nivel más débil desde noviembre de 2025. La Fed sube tasas y los bonos de EE.UU. rinden cerca de 5.3%.</p><p class="do"><b>Qué haría:</b> fijar el tipo de cambio en la orden de compra o pedir precio en pesos con vigencia.</p><span class="src">Banxico vía N+, 2 oct 2026</span></div></div>
+        <div class="risk"><span class="lvl bajo">Bajo</span><div><h3>Temporada de huracanes hasta el 30 de noviembre</h3><p class="aff">Clima · todo lo importado que entra por Manzanillo, Altamira o Veracruz (Sonido, ANSUL)</p><p>Sin alerta activa relevante esta semana.</p><p class="do"><b>Qué haría:</b> nada por ahora; si hay alerta, mover fechas de entrega antes de que el proveedor lo pida.</p><span class="src">Revisión semanal, 5 oct 2026</span></div></div>
       </div>
     </div>
     <div class="panel">
       <h2>Noticias que mueven precios</h2>
       <ul class="news">
-        <li><div class="nh"><span class="lvl alto">Alto</span><span class="t">Aranceles · Estructura Metálica, Puertas, Casetas</span></div><a href="https://blog.cjaduanero.com/resolucion-final-antidumping-sobre-aceros-laminados-en-caliente-de-china-y-vietnam-cuotas-compensatorias-definitivas-desde-septiembre-de-2026/">Antidumping definitivo a la lámina rolada en caliente de China y Vietnam</a><p><b>Por qué te importa:</b> USD 0.31/kg a China y 0.29/kg a Vietnam desde el 4 de septiembre, encima del arancel de 35%. La lámina en caliente es la base de placa, polines y largueros; sin competencia asiática, las acereras nacionales tienen margen para subir precio.</p><p><b>Qué haría:</b> que el equipo de validación pida el origen de la lámina en cada aumento de estructura; solo aplica a material importado.</p><span class="src">DOF vía CJ Aduanero · 3 sep 2026</span></li>
+        <li><div class="nh"><span class="lvl alto">Alto</span><span class="t">Aranceles · Estructura Metálica, SCI</span></div><a href="https://blog.cjaduanero.com/resolucion-final-antidumping-sobre-aceros-laminados-en-caliente-de-china-y-vietnam-cuotas-compensatorias-definitivas-desde-septiembre-de-2026/">Antidumping definitivo a la lámina rolada en caliente de China y Vietnam</a><p><b>Por qué te importa:</b> USD 0.31/kg a China y 0.29/kg a Vietnam desde el 4 de septiembre, encima del arancel de 35%. La lámina en caliente es la base de placa, polines y largueros; sin competencia asiática, las acereras nacionales tienen margen para subir precio.</p><p><b>Qué haría:</b> que el equipo de validación pida el origen de la lámina en cada aumento de estructura; solo aplica a material importado.</p><span class="src">DOF vía CJ Aduanero · 3 sep 2026</span></li>
         <li><div class="nh"><span class="lvl medio">Medio</span><span class="t">Materias primas · Pintura</span></div><a href="https://www.bloominglobal.com/media/detail/titanium-dioxide-price-increase-chinas-2026-tio2-rally">Dióxido de titanio: sexta alza conjunta de 2026 en China</a><p><b>Por qué te importa:</b> el rutilo en China cerró agosto en CNY 13,650/t, entre 3% y 8% arriba de hace un año, y en septiembre los productores anunciaron +RMB 700/t. Kronos, en cambio, reporta precios de venta 3% abajo anual.</p><p><b>Qué haría:</b> si un proveedor de pintura pide aumento por pigmento, aceptar como máximo ese rango sobre la parte de pigmento, no sobre el litro completo.</p><span class="src">SMM · 2 sep 2026 · Blooming · 15 sep 2026 · Kronos · 5 ago 2026</span></li>
-        <li><div class="nh"><span class="lvl alto">Alto</span><span class="t">Aranceles · Estructura Metálica, Puertas</span></div><a href="https://www.elfinanciero.com.mx/economia/2026/10/01/revision-del-t-mec-mexico-esta-cerca-de-acuerdo-con-eu-para-bajar-aranceles-a-autos-y-acero/">México está cerca de un acuerdo con EE.UU. para bajar aranceles a autos y acero</a><p><b>Por qué te importa:</b> si EE.UU. baja el 50% al acero mexicano, las acereras vuelven a exportar y el precio local puede subir; sin acuerdo, el acero se queda en México y presiona a la baja.</p><p><b>Qué haría:</b> no firmar escalatorias abiertas de acero hasta conocer el resultado de octubre.</p><span class="src">El Financiero · 1 oct 2026</span></li>
-        <li><div class="nh"><span class="lvl alto">Alto</span><span class="t">Metales · Equipo Hidroneumático, Baños, SCI</span></div><a href="https://copper.com.au/news/mining/copper-weekly-brief-week-ending-2-october-2026/">Cobre cae 3% en la semana pero sigue 30% arriba en el año</a><p><b>Por qué te importa:</b> el cobre está en motores, cableado, tubería y grifería de latón; Chile y China mantienen el mercado físico apretado.</p><p><b>Qué haría:</b> aprovechar la baja de la semana para cotizar con vigencia corta los proyectos del primer trimestre.</p><span class="src">Copper.com.au · semana al 2 oct 2026</span></li>
+        <li><div class="nh"><span class="lvl alto">Alto</span><span class="t">Aranceles · Estructura Metálica</span></div><a href="https://www.elfinanciero.com.mx/economia/2026/10/01/revision-del-t-mec-mexico-esta-cerca-de-acuerdo-con-eu-para-bajar-aranceles-a-autos-y-acero/">México está cerca de un acuerdo con EE.UU. para bajar aranceles a autos y acero</a><p><b>Por qué te importa:</b> si EE.UU. baja el 50% al acero mexicano, las acereras vuelven a exportar y el precio local puede subir; sin acuerdo, el acero se queda en México y presiona a la baja.</p><p><b>Qué haría:</b> no firmar escalatorias abiertas de acero hasta conocer el resultado de octubre.</p><span class="src">El Financiero · 1 oct 2026</span></li>
+        <li><div class="nh"><span class="lvl alto">Alto</span><span class="t">Metales · Equipo Hidroneumático, SCI, PTARs</span></div><a href="https://copper.com.au/news/mining/copper-weekly-brief-week-ending-2-october-2026/">Cobre cae 3% en la semana pero sigue 30% arriba en el año</a><p><b>Por qué te importa:</b> el cobre está en motores, cableado y válvulas de bronce; Chile y China mantienen el mercado físico apretado.</p><p><b>Qué haría:</b> aprovechar la baja de la semana para cotizar con vigencia corta los proyectos del primer trimestre.</p><span class="src">Copper.com.au · semana al 2 oct 2026</span></li>
         <li><div class="nh"><span class="lvl medio">Medio</span><span class="t">Energía · Pintura, PTARs, fletes</span></div><a href="https://www.onevalor.com/oil-gas-prices/">Brent cerca de US$102 con el estrecho de Ormuz bajo tensión</a><p><b>Por qué te importa:</b> solventes y resinas de pintura y el diésel de los fletes siguen al crudo con uno a tres meses de rezago; sigue cerca de 58% arriba de hace un año.</p><p><b>Qué haría:</b> pedir listas de precios de pintura con vigencia de 90 días y revisar recargos por combustible en fletes.</p><span class="src">Valor · consultado el 5 oct 2026</span></li>
-        <li><div class="nh"><span class="lvl medio">Medio</span><span class="t">Tipo de cambio · equipo importado</span></div><a href="https://www.nmas.com.mx/economia/dolar/tipo-de-cambio-peso-dolar-estadounidense-mexico-viernes-2-octubre-2026/">El peso toca su nivel más débil desde noviembre de 2025</a><p><b>Por qué te importa:</b> con FIX de 18.37, todo lo que cotizas en dólares (Sonido, ANSUL, contenedores) cuesta más en pesos.</p><p><b>Qué haría:</b> fijar tipo de cambio en las órdenes de este mes.</p><span class="src">N+ · 2 oct 2026</span></li>
-        <li><div class="nh"><span class="lvl medio">Medio</span><span class="t">Logística · Contenedores, Sonido</span></div><a href="https://getcastores.mx/blog/importar-china-manzanillo-costos-tiempos-errores/">Shanghai–Manzanillo: 22 a 28 días de tránsito y temporada alta hasta noviembre</a><p><b>Por qué te importa:</b> no hay índice público semanal para Manzanillo y la tarifa puede duplicarse en temporada alta.</p><p><b>Qué haría:</b> cerrar contrato anual con la naviera para fijar tarifa.</p><span class="src">GetCastores · consultado el 5 oct 2026</span></li>
-        <li><div class="nh"><span class="lvl bajo">Bajo</span><span class="t">Metales · Puertas, Casetas Móviles</span></div><a href="https://tradingeconomics.com/commodity/aluminum">Aluminio en mínimos desde julio</a><p><b>Por qué te importa:</b> el reinicio de fundidoras y las exportaciones chinas (+17%) bajan el precio.</p><p><b>Qué haría:</b> cerrar el volumen de puertas y casetas del cuarto trimestre mientras dura la baja.</p><span class="src">Trading Economics · consultado el 5 oct 2026</span></li>
+        <li><div class="nh"><span class="lvl medio">Medio</span><span class="t">Tipo de cambio · equipo importado</span></div><a href="https://www.nmas.com.mx/economia/dolar/tipo-de-cambio-peso-dolar-estadounidense-mexico-viernes-2-octubre-2026/">El peso toca su nivel más débil desde noviembre de 2025</a><p><b>Por qué te importa:</b> con FIX de 18.37, todo lo que cotizas en dólares (Sonido, ANSUL, rociadores) cuesta más en pesos.</p><p><b>Qué haría:</b> fijar tipo de cambio en las órdenes de este mes.</p><span class="src">N+ · 2 oct 2026</span></li>
+        <li><div class="nh"><span class="lvl medio">Medio</span><span class="t">Logística · Sonido, ANSUL</span></div><a href="https://getcastores.mx/blog/importar-china-manzanillo-costos-tiempos-errores/">Shanghai–Manzanillo: 22 a 28 días de tránsito y temporada alta hasta noviembre</a><p><b>Por qué te importa:</b> no hay índice público semanal para Manzanillo y la tarifa puede duplicarse en temporada alta.</p><p><b>Qué haría:</b> cerrar contrato anual con la naviera para fijar tarifa.</p><span class="src">GetCastores · consultado el 5 oct 2026</span></li>
       </ul>
     </div>
   </section>
 
   <footer>
     <p>Actualizado el lunes 5 de octubre de 2026. Se actualiza solo cada lunes a las 7:00 am (hora del centro de México).</p>
-    <p>Categorías tomadas de tu CV (Gerente de Compras GNFR Construcciones). Datos de fuentes públicas (INEGI vía informes CMIC CEICO como fuente principal; Banxico para tipo de cambio; LME, PetroIntelligence y Drewry solo como referencia). Úsalo como referencia de mercado, no como cotización.</p>
+    <p>Categorías: Estructura Metálica, Sistema Contra Incendio, ANSUL, Pintura, Equipo Hidroneumático, PTARs y Sonido, solo México. Datos de fuentes públicas (INEGI vía informes CMIC CEICO como fuente principal; Banxico para tipo de cambio; LME, PetroIntelligence y Drewry solo como referencia). Úsalo como referencia de mercado, no como cotización.</p>
   </footer>
 </div>
 <div class="tip" id="tip" hidden></div>
@@ -415,11 +438,9 @@ const DATA = [
   {id:"cobre_inegi", cat:"Insumos · INEGI", name:"Tubos de cobre", short:"Tubo de cobre (INEGI)", yoyPct:22.27, asOf:"ago 26", recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"},
   {id:"cables_inegi", cat:"Insumos · INEGI", name:"Alambres y cables con aislamiento", short:"Cables (INEGI)", yoyPct:17.15, asOf:"ago 26", recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"},
   {id:"tubplast_inegi", cat:"Insumos · INEGI", name:"Tubería de plástico (PVC, PEAD)", short:"Tubería plástica (INEGI)", yoyPct:16.35, asOf:"ago 26", recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"},
-  {id:"aluminio_inegi", cat:"Insumos · INEGI", name:"Aluminio laminado (perfiles, lámina)", short:"Aluminio (INEGI)", yoyPct:11.62, asOf:"ago 26", recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"},
   {id:"diesel_inegi", cat:"Insumos · INEGI", name:"Diésel", short:"Diésel (INEGI)", yoyPct:17.04, asOf:"jul 26", recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/08_Agosto/CEICO_Informe_Agosto_2026_Variacion_precio_materiales.pdf"},
   {id:"concreto_inegi", cat:"Insumos · INEGI", name:"Concreto premezclado", short:"Concreto (INEGI)", yoyPct:6.83, asOf:"jun 26", recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/07_Julio/CEICO_Informe_Julio_2026_Variacion_precio_materiales.pdf"},
   {id:"construccion_inpp", cat:"Obra · INEGI", name:"Construcción (índice general de precios)", short:"Construcción (INEGI)", yoyPct:5.91, asOf:"ago 26", recent:null, src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"},
-  {id:"prodmet_inpp", cat:"Industria · INEGI", name:"Productos metálicos (puertas, tanques, herrajes, inoxidable)", short:"Productos metálicos (INEGI)", yoyPct:2.25, asOf:"ago 26", recent:null, src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"},
   {id:"minnomet_inpp", cat:"Industria · INEGI", name:"Minerales no metálicos (cerámica sanitaria, vidrio, cemento)", short:"Minerales no metálicos (INEGI)", yoyPct:5.26, asOf:"ago 26", recent:null, src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"},
   {id:"quimica_inpp", cat:"Industria · INEGI", name:"Industria química (pigmentos, resinas, agentes)", short:"Química (INEGI)", yoyPct:1.3, asOf:"ago 26", recent:null, src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"},
   {id:"derivpetro_inpp", cat:"Industria · INEGI", name:"Derivados del petróleo (solventes, asfaltos)", short:"Derivados del petróleo (INEGI)", yoyPct:8.62, asOf:"ago 26", recent:null, src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"},
@@ -428,42 +449,43 @@ const DATA = [
   {id:"electrico_inpp", cat:"Industria · INEGI", name:"Equipo eléctrico (motores, tableros, luminarias)", short:"Equipo eléctrico (INEGI)", yoyPct:1.77, asOf:"ago 26", recent:null, src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"},
   {id:"electronica_inpp", cat:"Industria · INEGI", name:"Equipo electrónico (audio, bocinas, amplificadores)", short:"Equipo electrónico (INEGI)", yoyPct:-4.47, asOf:"ago 26", recent:null, src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"},
   {id:"inpc", cat:"Macro · INEGI", name:"Inflación general (INPC)", short:"INPC (INEGI)", yoyPct:3.42, asOf:"1a q. sep 26", recent:null, src:"INEGI", url:"https://www.inegi.org.mx/temas/inpc/"},
-  {id:"cemento_inegi", cat:"Insumos · INEGI", name:"Cemento", short:"Cemento (INEGI)", yoyPct:5.55, asOf:"sep 25", stale:true, recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2025/10_Octubre/CEICO_Informe_Octubre_2025_Variacion_precio_materiales.pdf"},
   {id:"pinturas_inegi", cat:"Insumos · INEGI", name:"Pinturas", short:"Pinturas (INEGI)", yoyPct:3.9, asOf:"ago 25", stale:true, recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2025/09_Septiembre/CEICO_Informe_Septiembre_2025_Variacion_precio_materiales.pdf"},
-  {id:"imper_inegi", cat:"Insumos · INEGI", name:"Impermeabilizantes", short:"Impermeabilizantes (INEGI)", yoyPct:4.6, asOf:"sep 25", stale:true, recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2025/10_Octubre/CEICO_Informe_Octubre_2025_Variacion_precio_materiales.pdf"},
-  {id:"bano_inegi", cat:"Insumos · INEGI", name:"Muebles y accesorios para baño", short:"Muebles de baño (INEGI)", yoyPct:1.8, asOf:"ago 25", stale:true, recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2025/09_Septiembre/CEICO_Informe_Septiembre_2025_Variacion_precio_materiales.pdf"},
-  {id:"vidrio_inegi", cat:"Insumos · INEGI", name:"Vidrio plano", short:"Vidrio (INEGI)", yoyPct:-2.7, asOf:"ago 25", stale:true, recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2025/09_Septiembre/CEICO_Informe_Septiembre_2025_Variacion_precio_materiales.pdf"},
   {id:"bombas_inegi", cat:"Insumos · INEGI", name:"Bombas", short:"Bombas (INEGI)", yoyPct:11.0, asOf:"may 25", stale:true, recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2025/06_Junio/CEICO_Informe_Junio_2025_Variacion_precio_materiales.pdf"},
   {id:"cobre", ref:true, cat:"Metales (ref. internacional)", name:"Cobre LME", short:"Cobre", cur:"USD", unit:"t", now:14286, ya:10990, yaApprox:true, recent:-3, recentLbl:"semana", src:"LME vía Business Recorder", url:"https://brecorder.com/news/40442691/copper-ticks-up-as-fed-rate-hike-bets-cool"},
-  {id:"aluminio", ref:true, cat:"Metales (ref. internacional)", name:"Aluminio LME", short:"Aluminio", cur:"USD", unit:"t", now:3123.5, ya:2720, yaApprox:true, recent:-5.7, recentLbl:"mes", src:"Trading Economics", url:"https://tradingeconomics.com/commodity/aluminum"},
-  {id:"zinc", ref:true, cat:"Metales (ref. internacional)", name:"Zinc LME (galvanizado, latón)", short:"Zinc", cur:"USD", unit:"t", now:3708.7, ya:3007, yaApprox:true, recent:-6.7, recentLbl:"mes", src:"Trading Economics", url:"https://tradingeconomics.com/commodity/zinc"},
-  {id:"niquel", ref:true, cat:"Metales (ref. internacional)", name:"Níquel LME (acero inoxidable)", short:"Níquel", cur:"USD", unit:"t", now:15597, ya:15466, yaApprox:true, recent:-6.6, recentLbl:"mes", src:"Trading Economics", url:"https://tradingeconomics.com/commodity/nickel"},
   {id:"diesel", cat:"Combustibles", name:"Diésel promedio nacional", short:"Diésel", cur:"MXN", unit:"L", now:27.007, ya:26.213, recent:0, recentLbl:"semana", src:"PetroIntelligence / Excélsior", url:"https://lineadirectaportal.com/mexico/precios-de-las-gasolinas-asi-el-precio-promedio-en-el-primer-viernes-de-octubre-de-2026-2026-10-02__1712947"},
   {id:"brent", ref:true, cat:"Energía", name:"Petróleo Brent (solventes, resinas)", short:"Brent", cur:"USD", unit:"bbl", now:101.73, ya:64.5, yaApprox:true, recent:null, src:"Valor", url:"https://www.onevalor.com/oil-gas-prices/"},
   {id:"resinas", cat:"Químicos", name:"Resinas PVC / PEAD", short:"PVC / PEAD", qual:"PE estable; PVC a la baja en septiembre", src:"Plastics News", url:"https://www.plasticsnews.com/news/pvc-ps-prices-slide-september-polypropylene-and-pe-hold-steady/"},
   {id:"tio2", cat:"Químicos", name:"Dióxido de titanio (pigmento de pintura)", short:"TiO2", qual:"China, rutilo CNY 13,650/t a fin de agosto (entre +3% y +8% anual); sexta alza conjunta de 2026 en septiembre", src:"SMM, 2 sep 2026 · Blooming, 15 sep 2026", url:"https://news.metal.com/newscontent/104093991-chinas-tio2-production-rises-slightly-in-august-prices-decline-amid-market-weakness"},
-  {id:"contenedor", cat:"Logística", name:"Contenedor nuevo 40' HC (Norteamérica)", short:"Contenedor nuevo", cur:"USD", unit:"pza", now:3025, ya:null, recent:null, src:"Container Management", url:"https://www.containermgt.com/how-much-does-a-shipping-container-cost"},
   {id:"flete", cat:"Logística", name:"Flete Asia → Manzanillo (40')", short:"Flete a Manzanillo", qual:"Rango de mercado US$2,500–5,500 por contenedor de 40'", src:"GetCastores / CM Logistics", url:"https://getcastores.mx/blog/importar-china-manzanillo-costos-tiempos-errores/"}
+];
+// Materias primas generales (una línea por materia prima). main = dato principal (INEGI cuando existe), more = datos de apoyo, aff = [categoría, en qué parte pega].
+const MP = [
+  {name:"Acero", short:"Acero", main:"acero_inegi", more:["soldadura_inegi","perfiles_inegi"], aff:[["Estructura Metálica","perfiles, lámina y placa"],["Sistema Contra Incendio","tubería y soportes"],["Equipo Hidroneumático","tanques y bases"],["ANSUL","cilindros y campana"]]},
+  {name:"Cobre", short:"Cobre", main:"cobre_inegi", more:["cables_inegi","cobre"], aff:[["Equipo Hidroneumático","motores y cableado"],["Sistema Contra Incendio","cableado y válvulas de bronce"],["PTARs","motores y cableado"],["Sonido","cableado"]]},
+  {name:"Plásticos (PVC, CPVC, PEAD)", short:"Plásticos", main:"tubplast_inegi", more:["plastico_inpp","resinas"], aff:[["PTARs","tubería y tanques"],["Sistema Contra Incendio","tubería CPVC"],["Equipo Hidroneumático","tubería y conexiones"]]},
+  {name:"Químicos y pigmentos", short:"Químicos", main:"quimica_inpp", more:["tio2","pinturas_inegi"], aff:[["Pintura","resinas y dióxido de titanio"],["ANSUL","agente químico"],["PTARs","químicos de tratamiento"]]},
+  {name:"Solventes y petróleo", short:"Solventes", main:"derivpetro_inpp", more:["brent"], aff:[["Pintura","solventes"],["PTARs","tubería y energía"]]},
+  {name:"Concreto y minerales", short:"Concreto", main:"minnomet_inpp", more:["concreto_inegi"], aff:[["PTARs","obra civil y tanques"]]},
+  {name:"Motores y equipo eléctrico", short:"Equipo eléctrico", main:"electrico_inpp", more:[], aff:[["Equipo Hidroneumático","motores y tableros"],["Sistema Contra Incendio","bomba eléctrica y tablero"],["PTARs","sopladores y control"],["Sonido","amplificación"]]},
+  {name:"Bombas y maquinaria", short:"Bombas", main:"maquinaria_inpp", more:["bombas_inegi"], aff:[["Equipo Hidroneumático","bombas"],["Sistema Contra Incendio","bomba contra incendio"],["PTARs","sopladores y bombas"]]},
+  {name:"Electrónica", short:"Electrónica", main:"electronica_inpp", more:[], aff:[["Sonido","bocinas y amplificadores"]]},
+  {name:"Diésel y fletes", short:"Diésel", main:"diesel_inegi", more:["diesel","flete"], aff:[["Todas","flete a obra"],["Sonido","importación por Manzanillo"],["ANSUL","refacciones importadas"]]},
+  {name:"Dólar", short:"Dólar", main:"fx", more:[], aff:[["Sonido","equipo importado"],["ANSUL","equipo y agente en USD"],["Sistema Contra Incendio","rociadores y válvulas"]]},
+  {name:"Costo de obra (naves)", short:"Obra (naves)", main:"naves_inegi", more:["construccion_inpp"], aff:[["Estructura Metálica","precio por kg"],["PTARs","obra civil"]]}
 ];
 const NOTE_TARIFF = "Aranceles: EE.UU. 50% a acero y aluminio mexicano; México hasta 35–50% a importaciones de Asia sin tratado.";
 // Categorías del CV (Walmart GNFR Construcciones). drivers = ids de DATA; extra = riesgo sin precio que eleva el nivel
 // Canasta mensual INEGI por categoría: [índice, peso %]. Índices: subsectores del INPP (variación mensual), construcción, tipo de cambio y precio por kg de estructura.
 const CATS = [
-  {name:"Estructura Metálica", idx:[["em",100]], note:"Precio por kg de nave fabricada y montada, movido con INEGI de construcción y naves industriales."},
-  {name:"Anclaje", idx:[["metbas",85],["prodmet",15]], note:"Redondo, ancla roscada, tuercas y placa."},
-  {name:"Sistema Contra Incendio", idx:[["metbas",35],["maq",25],["electr",20],["plast",10],["fx",10]], note:"Tubería, bomba, tablero; rociadores y válvulas en parte importados."},
-  {name:"ANSUL", idx:[["prodmet",35],["fx",35],["quim",20],["constr",10]], extra:"medio", note:"Cilindros y campana de inoxidable, agente químico y equipo cotizado en USD."},
-  {name:"Pintura", idx:[["quim",55],["petro",45]], note:"Pigmentos y resinas (química) y solventes (petróleo)."},
-  {name:"Equipo Hidroneumático", idx:[["maq",45],["electr",30],["prodmet",15],["metbas",10]], note:"Bombas, motores, tanque precargado y cableado."},
+  {name:"Estructura Metálica", idx:[["em",100,"Acero, fabricación y montaje"]], note:"Precio por kg de nave fabricada y montada, movido con INEGI de construcción y naves industriales."},
+  {name:"Sistema Contra Incendio", idx:[["em",35],["maq",25],["electr",20],["plast",10],["fx",10]], note:"Tubería y soportes de acero, bomba, tablero y CPVC; rociadores y válvulas en parte importados."},
+  {name:"ANSUL", idx:[["em",35],["fx",35],["quim",20],["constr",10]], extra:"medio", note:"Cilindros y campana, agente químico y equipo cotizado en USD."},
+  {name:"Pintura", idx:[["quim",55],["petro",45]], note:"Resinas y dióxido de titanio (químicos) y solventes (petróleo)."},
+  {name:"Equipo Hidroneumático", idx:[["maq",45],["electr",30],["em",25]], note:"Bombas, motores y tablero, tanque y base de acero."},
   {name:"PTARs", idx:[["minnomet",30],["maq",25],["plast",20],["electr",15],["petro",10]], note:"Obra civil, sopladores y bombas, tubería plástica y control."},
-  {name:"Trampas de Grasa", idx:[["plast",65],["prodmet",35]], note:"Polietileno e inoxidable."},
-  {name:"Refacciones de Baños", idx:[["minnomet",40],["metbas",30],["plast",30]], note:"Cerámica sanitaria, grifería de latón y mecanismos plásticos."},
-  {name:"Puertas", idx:[["metbas",45],["prodmet",35],["minnomet",20]], note:"Aluminio y acero, fabricación y vidrio."},
-  {name:"Sonido", idx:[["electron",55],["fx",30],["electr",15]], extra:"medio", note:"Electrónica importada; aranceles a Asia sin tratado de hasta 35–50% van aparte."},
-  {name:"Contenedores Marítimos", idx:[["metbas",45],["fx",30],["prodmet",25]], extra:"medio", note:"Acero corten y caja importada en USD; flete a Manzanillo aparte."},
-  {name:"Casetas Móviles", idx:[["prodmet",40],["plast",20],["metbas",15],["electr",15],["constr",10]], note:"Estructura, paneles, aluminio e instalación eléctrica."}
+  {name:"Sonido", idx:[["electron",55],["fx",30],["electr",15]], extra:"medio", note:"Electrónica importada; aranceles a Asia sin tratado de hasta 35–50% van aparte."}
 ];
-const IDX_LBL = {em:"Estructura por kg", metbas:"Metálicas básicas", prodmet:"Productos metálicos", quim:"Química", plast:"Plástico y hule", minnomet:"Minerales no metálicos", maq:"Maquinaria y equipo", electron:"Equipo electrónico", electr:"Equipo eléctrico", petro:"Derivados del petróleo", constr:"Construcción", fx:"Dólar FIX"};
+const IDX_LBL = {em:"Acero", quim:"Químicos y pigmentos", petro:"Solventes (petróleo)", plast:"Plásticos", minnomet:"Concreto y minerales", maq:"Bombas y maquinaria", electr:"Motores y equipo eléctrico", electron:"Electrónica", fx:"Dólar", constr:"Mano de obra y obra", metbas:"Metálicas básicas", prodmet:"Productos metálicos"};
 // TCO: estructura típica del costo total en la vida útil (% del total, estimada con referencias de la industria, no de contratos).
 // Partes: adq compra · log flete y logística · ins instalación · ope operación (energía, agua, consumibles) · mto mantenimiento y refacciones · cum cumplimiento (normas, pruebas, seguros) · fin reposición y retiro.
 // Cada parte se mueve con una mezcla de índices [clave, peso]; "cat" es la canasta INEGI de la categoría. d sobrescribe la mezcla de TCO_DEF.
@@ -479,15 +501,12 @@ const TCO_DRV = {
 // Notas fijas del consultor para la lectura semanal (las actualiza la rutina).
 const TCO_NOTES = [
   "La jornada de 40 horas ya es ley: baja de 48 a 46 horas en enero de 2027 y llega a 40 en 2030, con registro electrónico de asistencia obligatorio desde 2027. Para una cuadrilla de 48 horas, el costo por hora sube entre 4% y 5% cada año solo por esto. En pólizas de mantenimiento e instalación que pasen de 2026, pide que el precio ya lo incluya para evitar reclamos de ajuste.",
-  "El salario mínimo subió 13% en 2026 ($315.04 diarios) y el siguiente aumento se anuncia en diciembre. Pega más en servicios con mucha mano de obra, como la limpieza de trampas de grasa y los ayudantes de instalación: deja en tu presupuesto 2027 un ajuste de mano de obra arriba de la inflación."
+  "El salario mínimo subió 13% en 2026 ($315.04 diarios) y el siguiente aumento se anuncia en diciembre. Pega más en servicios con mucha mano de obra, como las pólizas de mantenimiento de SCI y ANSUL y los ayudantes de instalación: deja en tu presupuesto 2027 un ajuste de mano de obra arriba de la inflación."
 ];
 const TCO = {
   "Estructura Metálica": {h:20, p:{adq:66, log:3, ins:13, mto:13, cum:3, fin:2}, d:{mto:[["mo",50],["quim",30],["serv",20]]},
     ask:["Precio por kg con acero, fabricación, flete y montaje por separado.","Sistema de pintura anticorrosiva especificado (micras y años de garantía): define cuánto repintas en 20 años.","Escalatoria atada a INEGI (construcción y naves) en lugar de ajustes abiertos."],
     risk:"El acero es casi todo el costo. El costo oculto está en el repintado y la revisión de tornillería durante la vida de la nave."},
-  "Anclaje": {h:20, p:{adq:52, log:4, ins:38, cum:6}, d:{ins:[["mo",60],["quim",20],["constr",20]]},
-    ask:["Precio instalado (perforación, epóxico y prueba de extracción), no solo por pieza.","Pruebas de tensión incluidas en el alcance."],
-    risk:"La instalación pesa casi lo mismo que la pieza. Un reproceso por mala colocación duplica el costo."},
   "Sistema Contra Incendio": {h:15, p:{adq:34, log:3, ins:22, ope:4, mto:20, cum:14, fin:3},
     ask:["Pruebas e inspección NFPA 25 cotizadas junto con el suministro.","Rociadores y válvulas listados UL/FM con refacciones disponibles en México.","Póliza de mantenimiento con precio fijo por 3 años."],
     risk:"Pruebas, inspecciones y dictámenes suman un tercio del costo. Un hallazgo de la aseguradora obliga a gastar fuera de presupuesto."},
@@ -503,42 +522,24 @@ const TCO = {
   "PTARs": {h:15, p:{adq:30, log:3, ins:12, ope:32, mto:13, cum:8, fin:2}, d:{ope:[["energia",45],["quim",30],["mo",25]]},
     ask:["Costo mensual de operación garantizado (energía, químicos, lodos y operador).","Cumplimiento NOM-001/002-SEMARNAT con análisis de laboratorio incluidos el primer año.","Penalización si el agua tratada no cumple."],
     risk:"Operar la planta cuesta más que comprarla, y un incumplimiento ambiental trae multas."},
-  "Trampas de Grasa": {h:10, p:{adq:18, log:3, ins:12, mto:57, cum:8, fin:2}, d:{mto:[["serv",55],["mo",25],["diesel",20]]},
-    ask:["Contrato de limpieza y disposición con manifiesto, con precio por servicio indexado.","Tamaño de trampa según frecuencia de limpieza: una más grande reduce visitas.","Disposición de residuos con empresa autorizada."],
-    risk:"La limpieza y la disposición son más de la mitad del costo; el precio de la trampa casi no cuenta."},
-  "Refacciones de Baños": {h:10, p:{adq:40, log:4, ins:16, ope:16, mto:19, fin:5},
-    ask:["Consumo de agua certificado (litros por descarga y por minuto).","Refacciones estándar del mercado mexicano (cartuchos, válvulas).","Garantía de grifería y fluxómetros."],
-    risk:"El agua y las refacciones pesan más que la diferencia de precio entre marcas."},
-  "Puertas": {h:10, p:{adq:44, log:4, ins:12, ope:4, mto:30, cum:2, fin:4},
-    ask:["Póliza de mantenimiento preventivo (motor, resortes, sensores) con precio fijo.","Tiempo de respuesta y costo del panel de reposición cuando un montacargas golpea la puerta.","Ciclos garantizados del motor."],
-    risk:"Golpes y desgaste hacen que el mantenimiento sea casi un tercio del costo."},
   "Sonido": {h:7, p:{adq:44, log:3, ins:20, ope:5, mto:13, cum:6, fin:9}, d:{cum:[["inpc",100]], fin:[["fx",50],["inpc",50]]},
     ask:["Precio con cableado e instalación, no solo equipo.","Soporte y refacciones en México por al menos 5 años.","País de origen (T-MEC o no), por el riesgo de aranceles."],
-    risk:"Equipo importado en dólares que se vuelve obsoleto antes que el resto de la tienda."},
-  "Contenedores Marítimos": {h:10, p:{adq:54, log:22, ins:5, mto:11, cum:2, fin:6}, d:{log:[["trans",50],["diesel",20],["fx",30]], mto:[["mo",50],["quim",30],["serv",20]]},
-    ask:["Precio puesto en sitio (Manzanillo a tienda, grúa y maniobras) separado del contenedor.","Grado del contenedor (nuevo, cargo-worthy, as-is) y estado del piso.","Valor de recompra al terminar su uso."],
-    risk:"El flete y las maniobras son la quinta parte del costo y se mueven con el diésel y el dólar."},
-  "Casetas Móviles": {h:10, p:{adq:45, log:8, ins:8, ope:18, mto:15, cum:1, fin:5},
-    ask:["Aislamiento térmico y aire acondicionado con consumo especificado.","Precio de traslado entre sitios.","Garantía de estructura y paneles."],
-    risk:"El aire acondicionado y los traslados entre obras pesan más de lo que parece al comprar."}
+    risk:"Equipo importado en dólares que se vuelve obsoleto antes que el resto de la tienda."}
 };
 // Íconos de línea (24×24) por categoría
 const ICON_PATHS = {
   "Estructura Metálica":'<path d="M4 4h16M4 20h16M12 4v16"/>',
-  "Anclaje":'<path d="M12 3v14M8 7h8M9 11h6M9 15h6M12 17l-4 4M12 17l4 4"/>',
   "Sistema Contra Incendio":'<path d="M4 6h16M12 6v5"/><path d="M8 11h8l-1 3H9z"/><path d="M8 18l-1 2M12 18v2M16 18l1 2"/>',
   "ANSUL":'<path d="M3 9h18l-3-5H6z"/><path d="M7 9v3M12 9v3M17 9v3"/><path d="M9 15c0 3 6 3 6 0s-3-3-3-3-3 0-3 3z"/>',
   "Pintura":'<rect x="4" y="3" width="13" height="6" rx="1.5"/><path d="M17 6h3v5h-8v3"/><rect x="10" y="14" width="4" height="7" rx="1"/>',
   "Equipo Hidroneumático":'<circle cx="10" cy="13" r="6"/><path d="M10 13l3-3M16 13h5M10 7V3M7 3h6"/>',
   "PTARs":'<path d="M12 3c3 4 5 6.5 5 9a5 5 0 0 1-10 0c0-2.5 2-5 5-9z"/><path d="M3 20c2-1.3 4-1.3 6 0s4 1.3 6 0 4-1.3 6 0"/>',
-  "Trampas de Grasa":'<rect x="5" y="7" width="14" height="13" rx="2"/><path d="M3 11h2M19 11h2M5 13h14M9 4h6v3H9z"/>',
-  "Refacciones de Baños":'<path d="M5 10h9a3 3 0 0 1 3 3v1M5 10V7h4M17 14v2"/><path d="M16 19l.5 2M18 19l.5 2"/><path d="M3 10h4"/>',
-  "Puertas":'<rect x="6" y="3" width="12" height="18" rx="1"/><path d="M3 21h18"/><circle cx="15" cy="12" r="1"/>',
-  "Sonido":'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/>',
-  "Contenedores Marítimos":'<rect x="3" y="6" width="18" height="12" rx="1"/><path d="M7 9v6M11 9v6M15 9v6M19 9v6"/>',
-  "Casetas Móviles":'<path d="M3 20h18M5 20V9h14v11M3 9l9-5 9 5"/><rect x="8" y="12" width="4" height="8"/><rect x="14" y="12" width="3" height="3"/>'
+  "Sonido":'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/>'
 };
-const icon = n => `<span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICON_PATHS[n]||""}</svg></span>`;
+const ICON_ALL = '<rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/>';
+const icon = n => `<span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICON_PATHS[n]||ICON_ALL}</svg></span>`;
+const BY = Object.fromEntries(DATA.map(d=>[d.id,d]));
+const escT = s => String(s??"").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 let cur = "MXN";
 try{ const s = localStorage.getItem("pc-cur"); if(s==="USD"||s==="MXN") cur = s; }catch(e){}
 
@@ -566,22 +567,24 @@ function render(){
   document.getElementById("btnMXN").setAttribute("aria-pressed", cur==="MXN");
   document.getElementById("btnUSD").setAttribute("aria-pressed", cur==="USD");
   renderCats();
-  document.getElementById("rows").innerHTML = DATA.map(d => {
-    if (d.yoyPct!=null) return `<tr><td><div class="cat">${d.cat}</div><div class="item">${d.name}</div></td><td class="num" colspan="2"><span class="src">índice INEGI, ${d.asOf}</span></td><td class="num">${pill(d.yoyPct)}</td><td class="num"><span class="muted">s/d</span></td><td class="src"><a href="${d.url}" target="_blank" rel="noopener">${d.src}</a></td></tr>`;
-    if (d.qual) return `<tr><td><div class="cat">${d.cat}</div><div class="item">${d.name}</div></td><td colspan="4" class="src" style="text-align:right">${d.qual}</td><td class="src"><a href="${d.url}" target="_blank" rel="noopener">${d.src}</a></td></tr>`;
-    const y = yoy(d);
-    return `<tr>
-      <td><div class="cat">${d.cat}</div><div class="item">${d.name}</div></td>
-      <td class="num">${fmt(conv(d,d.now,false))}${unitLbl(d)}</td>
-      <td class="num">${d.ya==null ? '<span class="muted">s/d</span>' : (d.yaApprox?'<span class="approx">≈</span> ':"") + fmt(conv(d,d.ya,true))}</td>
-      <td class="num">${pill(y)}</td>
-      <td class="num">${d.recent==null ? '<span class="muted">s/d</span>' : pill(d.recent) + `<div class="src">${d.recentLbl}</div>`}</td>
-      <td class="src"><a href="${d.url}" target="_blank" rel="noopener">${d.src}</a></td></tr>`;
+  const affTxt = m => { if (m.aff.some(a=>a[0]==="Todas")) return "todas tus categorías"; const n = m.aff.map(a=>a[0]); return n.length<2 ? n[0] : n.slice(0,-1).join(", ") + " y " + n.at(-1); };
+  document.getElementById("rows").innerHTML = MP.map(m => {
+    const d = BY[m.main], y = yoy(d);
+    const when = d.yoyPct!=null ? `INEGI, ${d.asOf}${d.stale?", último dato":""}` : d.fx ? "Banxico" : d.src;
+    const val = d.yoyPct==null && d.now!=null ? `<div class="src">${d.fx?"$"+fmt(d.now)+" por USD":fmt(conv(d,d.now,false))+" "+cur+"/"+d.unit}</div>` : "";
+    const more = m.more.map(id => { const x = BY[id]; if (!x) return "";
+      const v = x.qual ? escT(x.qual) : (()=>{ const yy = yoy(x); return x.yoyPct!=null ? `${pct(yy)} <span class="muted">(${x.asOf}${x.stale?", último dato":""})</span>` : x.now!=null ? `${fmt(conv(x,x.now,false))} ${x.fx?"":cur+"/"+x.unit}${yy!=null?` · ${pct(yy)} anual`:""}${x.ref?' <span class="muted">(referencia)</span>':""}` : ""; })();
+      return `<li><a href="${x.url}" target="_blank" rel="noopener">${escT(x.short||x.name)}</a>: ${v}</li>`; }).join("");
+    return `<tr><td><div class="item">${m.name}</div><div class="cat"><a href="${d.url}" target="_blank" rel="noopener">${when}</a></div></td>
+      <td class="num">${pill(y)}${val}</td>
+      <td class="mp-more">${more?`<ul>${more}</ul>`:'<span class="muted">–</span>'}</td>
+      <td><div class="aff">${m.aff.map(([c,r])=>`<span>${icon(c==="Todas"?"":c)}<b>${c==="Todas"?"Todas":c}</b><small>${r}</small></span>`).join("")}</div></td></tr>`;
   }).join("");
 
   const al = [];
-  DATA.filter(d=>!d.qual && !d.ref && !d.stale).forEach(d => { const y = yoy(d); if (y!=null && y>5) al.push({lvl:y>25?"":"warn", txt:`<b>${d.name}</b> está ${pct(y)} contra hace un año${d.yoyPct!=null?" ("+d.asOf+")":` (en ${d.fx?"MXN":cur})`}.`}); });
-  DATA.filter(d=>!d.qual && !d.ref).forEach(d => { if (d.recent!=null && d.recent>5) al.push({lvl:"warn", txt:`<b>${d.name}</b> subió ${pct(d.recent)} en la última ${d.recentLbl}.`}); });
+  MP.forEach(m => { const d = BY[m.main]; if (d.stale || d.ref || d.qual) return; const y = yoy(d);
+    if (y!=null && y>5) al.push({lvl:y>25?"":"warn", txt:`<b>${m.name}</b> sube ${y.toFixed(1)}% contra hace un año (${d.yoyPct!=null?"INEGI, "+d.asOf:"en "+(d.fx?"MXN":cur)}). Afecta: ${affTxt(m)}.`}); });
+  MP.forEach(m => [m.main, ...m.more].forEach(id => { const d = BY[id]; if (d && !d.qual && !d.ref && d.recent!=null && d.recent>5) al.push({lvl:"warn", txt:`<b>${d.name}</b> subió ${pct(d.recent)} en la última ${d.recentLbl}. Afecta: ${affTxt(m)}.`}); }));
   al.sort((a,b)=>a.lvl.localeCompare(b.lvl));
   document.getElementById("alerts").innerHTML = al.length ? al.map(a=>`<div class="alert ${a.lvl}"><span class="tag">${a.lvl?"Arriba de 5%":"Arriba de 25%"}</span><div>${a.txt}</div></div>`).join("")
     : '<p class="muted">Nada sube más de 5% esta semana.</p>';
@@ -589,12 +592,13 @@ function render(){
 }
 
 function drawChart(){
-  const rows = DATA.filter(d=>!d.qual && !d.ref && !d.stale && (d.ya!=null || d.yoyPct!=null)).map(d=>({name:d.short||d.name.replace(" promedio nacional","").replace(" (MXN por USD)",""), v:yoy(d)})).sort((a,b)=>b.v-a.v);
-  const W=520, lw=150, rh=28, top=8, H=top+rows.length*rh+26;
-  const MAX=80, MIN=-10, x0=lw, x1=W-62;
+  const rows = MP.map(m=>({m, d:BY[m.main]})).filter(({d})=>!d.qual && !d.ref).map(({m,d})=>({name:m.short, v:yoy(d), stale:d.stale})).filter(r=>r.v!=null).sort((a,b)=>b.v-a.v);
+  const W=520, lw=130, rh=28, top=8, H=top+rows.length*rh+26;
+  const MAX=Math.max(10, Math.ceil(Math.max(...rows.map(r=>r.v))/10)*10), MIN=Math.min(-10, Math.floor(Math.min(...rows.map(r=>r.v))/10)*10), x0=lw, x1=W-62;
   const sx = v => x0 + (Math.max(MIN,Math.min(MAX,v))-MIN)/(MAX-MIN)*(x1-x0);
-  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Variación anual por commodity">`;
-  [0,20,40,60,80].forEach(t=>{ s+=`<line class="axis" x1="${sx(t)}" x2="${sx(t)}" y1="${top}" y2="${H-22}"/><text x="${sx(t)}" y="${H-6}" text-anchor="middle">${t}%</text>`; });
+  const ticks = []; for (let t=MIN; t<=MAX; t+=10) ticks.push(t);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Variación anual por materia prima">`;
+  ticks.forEach(t=>{ s+=`<line class="axis" x1="${sx(t)}" x2="${sx(t)}" y1="${top}" y2="${H-22}"/><text x="${sx(t)}" y="${H-6}" text-anchor="middle">${t}%</text>`; });
   s += `<line class="thr" x1="${sx(5)}" x2="${sx(5)}" y1="${top}" y2="${H-22}"/>`;
   rows.forEach((r,i)=>{
     const y = top+i*rh, bh=14, by=y+(rh-bh)/2, z=sx(0), xv=sx(r.v);
@@ -614,7 +618,6 @@ function drawChart(){
     g.addEventListener("mouseleave",()=>tip.hidden=true);
   });
 }
-const BY = Object.fromEntries(DATA.map(d=>[d.id,d]));
 const RANK = {bajo:0, medio:1, alto:2};
 function renderCats(){ if (window.renderCatsSeries) return window.renderCatsSeries(); document.getElementById("cats").innerHTML = '<p class="muted">Cargando índices INEGI…</p>'; }
 function setCur(c){ cur=c; try{localStorage.setItem("pc-cur",c);}catch(e){} render(); window.renderSeries && window.renderSeries(); }
@@ -749,10 +752,10 @@ function renderCalc(){
 
 // ---------- Explorador ----------
 function seriesChips(){
-  const groups = [["acero","Acero y estructura"],["insumos","Otros insumos"],["logistica","Logística"],["macro","Macro"],["inegi","INEGI · variación anual"],["propios","Tus precios"]];
+  const groups = [["acero","Acero y estructura"],["insumos","Otras materias primas"],["logistica","Logística"],["macro","Macro"],["inegi","INEGI · variación anual"],["propios","Tus precios"]];
   const el = document.getElementById("seriesChips");
   el.innerHTML = groups.map(([g,lbl]) => {
-    const ids = Object.entries(SERIES).filter(([id,s])=>s.kind!=="mom" && !s.own && (s.own?"propios":s.kind==="yoy"?"inegi":s.group)===g).sort((a,b)=>(a[1].order||0)-(b[1].order||0));
+    const ids = Object.entries(SERIES).filter(([id,s])=>s.kind!=="mom" && !s.own && !s.hide && (s.own?"propios":s.kind==="yoy"?"inegi":s.group)===g).sort((a,b)=>(a[1].order||0)-(b[1].order||0));
     if (!ids.length) return "";
     return `<div class="chipgrp"><span class="lbl">${lbl}</span>${ids.map(([id,s])=>{
       const i = st.sel.indexOf(id), n = pointsOf(id).length;
@@ -884,8 +887,7 @@ window.renderCatsSeries = function(){
     const st = catStats(c);
     let lvl = !st || st.y12==null ? "bajo" : st.y12>25 ? "alto" : st.y12>5 ? "medio" : "bajo";
     if (c.extra && RANK[c.extra]>RANK[lvl]) lvl = c.extra;
-    const chips = c.idx.map(([k,w]) => { const s1 = catStats({idx:[[k,100]]}); const v = s1&&s1.y12!=null ? ` <b class="${s1.y12>0.5?"u":s1.y12<-0.5?"d":""}">${pct(s1.y12)}</b>` : "";
-      return `<span>${IDX_LBL[k]}${c.idx.length>1?` <small>${w}%</small>`:""}${v}</span>`; }).join("");
+    const chips = c.idx.map(([k,w,l]) => `<span>${l||IDX_LBL[k]}${c.idx.length>1?` <small>${w}%</small>`:""}</span>`).join("");
     return `<div class="catc"><div class="hd"><div class="nm">${icon(c.name)}<h3>${c.name}</h3></div><span class="lvl ${lvl}">${lvl}</span></div>
       <div class="est">12 meses <b>${st&&st.y12!=null?pct(st.y12):"s/d"}</b> · en ${st?st.last.slice(0,4):""} <b>${st&&st.ytd!=null?pct(st.ytd):"s/d"}</b> · desde 2024 <b>${st&&st.acc!=null?pct(st.acc):"s/d"}</b></div>
       <div class="drv">${chips}</div><p>${c.note}${st?` <span class="muted">Dato a ${mLabel(st.last)}.</span>`:""}</p></div>`;
@@ -899,7 +901,7 @@ window.renderCatTrend = function(){
   const out = document.getElementById("trOut"), note = document.getElementById("trNote"), chipsEl = document.getElementById("trChips");
   if (!all.length){ out.innerHTML = '<p class="muted empty">Cargando índices INEGI…</p>'; chipsEl.innerHTML=""; return; }
   if (!tr.sel || !tr.sel.length) tr.sel = ["Estructura Metálica", ...all.filter(x=>x.c.name!=="Estructura Metálica").sort((a,b)=>b.st.acc-a.st.acc).slice(0,3).map(x=>x.c.name)];
-  note.textContent = "Fuente: INEGI, Índice Nacional de Precios Productor (variación mensual por subsector y construcción) y Banxico (FIX). Cada categoría pondera sus elementos como se indica en su tarjeta. Es una referencia de mercado para comparar contra lo que piden tus proveedores.";
+  note.textContent = "Fuente: INEGI, Índice Nacional de Precios Productor (variación mensual por subsector y construcción) y Banxico (FIX). Cada categoría pondera sus materias primas como se indica en su tarjeta. El acero se mide en todas con el mismo índice de estructura por kg (INEGI construcción y naves), para usar una sola medida de acero en toda la página. Es una referencia de mercado para comparar contra lo que piden tus proveedores.";
   if (tr.view==="table"){
     chipsEl.innerHTML = "";
     const L = all[0].st.last, y = L.slice(0,4);
@@ -997,7 +999,13 @@ window.renderTco = function(){
 };
 
 function renderSeries(){ addVirtual(); window.renderCatsSeries(); renderTiles(); renderEm(); renderCalc(); renderExplorer(); window.renderCatTrend && window.renderCatTrend(); window.renderTco && window.renderTco(); }
-function addVirtual(){ const ser = emSeries(); if (ser.length) SERIES.em_kg = {name:"Estructura Metálica, precio estimado por kg", short:"Estructura $/kg", group:"acero", kind:"price", cur:"MXN", unit:"kg", order:0, src:"INEGI (construcción y naves) + precio de mercado", points:ser, virtual:true}; }
+const EX_HIDE = ["inpp_soldadura_yoy","inpp_alambron_yoy","inpp_fundidas_yoy","inpp_perfiles_yoy","inpp_bano_yoy","inpp_vidrio_yoy","inpp_cemento_yoy","inpp_imper_yoy","inpp_comercial_yoy","inpp_aluminio_yoy","inpp_concreto_yoy","inpp_cables_yoy","aluminio_lme"];
+const EX_LBL = {inpp_varilla_yoy:"Acero (INEGI)", inpp_cobre_yoy:"Cobre (INEGI)", inpp_tubplastico_yoy:"Plásticos (INEGI)", inpp_pinturas_yoy:"Pinturas (INEGI)", inpp_bombas_yoy:"Bombas (INEGI)", inpp_diesel_yoy:"Diésel (INEGI)"};
+function addVirtual(){
+  EX_HIDE.forEach(id=>{ if (SERIES[id]) SERIES[id].hide = true; });
+  Object.entries(EX_LBL).forEach(([id,n])=>{ if (SERIES[id]) SERIES[id].short = n; });
+  st.sel = st.sel.filter(id=>!SERIES[id] || !SERIES[id].hide);
+  const ser = emSeries(); if (ser.length) SERIES.em_kg = {name:"Estructura Metálica, precio estimado por kg", short:"Estructura $/kg", group:"acero", kind:"price", cur:"MXN", unit:"kg", order:0, src:"INEGI (construcción y naves) + precio de mercado", points:ser, virtual:true}; }
 window.renderSeries = renderSeries;
 
 ["vView","vMode","vRange"].forEach(g => document.getElementById(g).addEventListener("click", e => {
@@ -1017,11 +1025,12 @@ renderSeries();
   dbRef = db;
   db.collection("series").onSnapshot(snap => {
     SERIES = {}; snap.docs.forEach(d => { SERIES[d.id] = d.data(); }); addVirtual();
-    if (!st.sel.length || st.sel.some(id=>!SERIES[id])) { st.sel = st.sel.filter(id=>SERIES[id]); if (!st.sel.length) st.sel = ["inpp_naves_yoy","inpp_varilla_yoy","inpp_soldadura_yoy"].filter(id=>SERIES[id]); }
+    if (!st.sel.length || st.sel.some(id=>!SERIES[id] || SERIES[id].hide)) { st.sel = st.sel.filter(id=>SERIES[id] && !SERIES[id].hide); if (!st.sel.length) st.sel = ["inpp_naves_yoy","inpp_varilla_yoy","inpp_cobre_yoy"].filter(id=>SERIES[id]); }
     renderSeries();
   }, () => { document.getElementById("emTiles").innerHTML = '<p class="muted">No se pudieron leer las series. Recarga la página.</p>'; });
   db.collection("quotes").onSnapshot(snap => { QUOTES = snap.docs.map(d => d.data()); renderSeries(); }, () => {});
 })();
 </script>
+
 </body>
 </html>
