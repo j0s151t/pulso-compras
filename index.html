@@ -15,7 +15,8 @@
   --accent:#0b5d6b; --accent-soft:#e1eff1;
   --up:#b4361f; --up-soft:#fbe9e5; --down:#1f6f4a; --down-soft:#e3f2ea; --warn:#9a6400; --warn-soft:#fbf1dc;
   --bar-up:#c8553d; --bar-down:#3a8a68;
-  --s1:#0b7285; --s2:#d9480f; --s3:#6741d9; --s4:#5c940d;
+  --s1:#0b7285; --s2:#d9480f; --s3:#6741d9; --s4:#5c940d; --s5:#c2255c; --s6:#b07800; --s7:#6b7884; --on-s:#ffffff;
+  --hero:#10303a; --hero-2:#174552; --hero-ink:#eef6f7; --hero-dim:#a9c6cc; --hero-accent:#f2a541;
   --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
   --f-body:"Source Sans 3","Segoe UI",Roboto,Arial,sans-serif;
   --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
@@ -25,12 +26,12 @@
   --bg:#0f161c; --surface:#16212a; --ink:#e6edf2; --ink-2:#a9b7c3; --ink-3:#7d8b97; --line:#26343f;
   --accent:#5cc0cf; --accent-soft:#163740;
   --up:#ff8c73; --up-soft:#3a1e18; --down:#6fd3a2; --down-soft:#15302a; --warn:#f0bd5a; --warn-soft:#352a12;
-  --bar-up:#e7735a; --bar-down:#55b58b; --s1:#3bc9db; --s2:#ff8a4c; --s3:#a48bff; --s4:#94d82d; color-scheme:dark}}
+  --bar-up:#e7735a; --bar-down:#55b58b; --s1:#3bc9db; --s2:#ff8a4c; --s3:#a48bff; --s4:#94d82d; --s5:#f06595; --s6:#fcc419; --s7:#9aa8b4; --on-s:#0f161c; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0f161c; --surface:#16212a; --ink:#e6edf2; --ink-2:#a9b7c3; --ink-3:#7d8b97; --line:#26343f;
   --accent:#5cc0cf; --accent-soft:#163740;
   --up:#ff8c73; --up-soft:#3a1e18; --down:#6fd3a2; --down-soft:#15302a; --warn:#f0bd5a; --warn-soft:#352a12;
-  --bar-up:#e7735a; --bar-down:#55b58b; --s1:#3bc9db; --s2:#ff8a4c; --s3:#a48bff; --s4:#94d82d; color-scheme:dark}
+  --bar-up:#e7735a; --bar-down:#55b58b; --s1:#3bc9db; --s2:#ff8a4c; --s3:#a48bff; --s4:#94d82d; --s5:#f06595; --s6:#fcc419; --s7:#9aa8b4; --on-s:#0f161c; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5;padding:24px 16px 48px}
 .wrap{max-width:1080px;margin:0 auto;display:grid;gap:28px;grid-template-columns:minmax(0,1fr)}
@@ -41,7 +42,22 @@ h2{font-size:19px;font-weight:700;margin-bottom:12px}
 h3{font-size:15px;font-weight:700}
 .eyebrow{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
 .muted{color:var(--ink-3)}
-header{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between;border-bottom:2px solid var(--ink);padding-bottom:16px}
+header.hero{position:relative;overflow:hidden;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;justify-content:space-between;background:linear-gradient(135deg,var(--hero),var(--hero-2));color:var(--hero-ink);border-radius:16px;padding:26px 24px}
+header.hero .truss{position:absolute;right:-30px;bottom:-6px;width:min(560px,85%);height:auto;color:var(--hero-ink);opacity:.13;pointer-events:none}
+header.hero .meta,header.hero .toggle{position:relative}
+.brand{display:flex;gap:12px;align-items:center}
+.brand .logo{width:46px;height:46px;flex:none;border-radius:12px;background:var(--hero-accent);color:var(--hero);display:grid;place-items:center}
+.brand .logo svg{width:28px;height:28px}
+header.hero .eyebrow{color:var(--hero-accent)}
+header.hero p{color:var(--hero-dim);max-width:62ch}
+header.hero .toggle{background:transparent;border-color:color-mix(in srgb,var(--hero-ink) 30%,transparent)}
+header.hero .toggle button{color:var(--hero-dim)}
+header.hero .toggle button[aria-pressed="true"]{background:var(--hero-ink);color:var(--hero)}
+.ico{width:34px;height:34px;flex:none;border-radius:9px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
+.ico svg{width:20px;height:20px}
+.catc .hd .nm{display:flex;gap:10px;align-items:center;min-width:0}
+h2.wi{display:flex;gap:10px;align-items:center}
+h2.wi .ico{width:30px;height:30px}h2.wi .ico svg{width:18px;height:18px}
 header .meta{display:grid;gap:4px}
 header p{margin:0;color:var(--ink-2)}
 .toggle{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
@@ -89,9 +105,31 @@ tr:last-child td{border-bottom:0}
 .catc p{margin:0;color:var(--ink-2);font-size:13.5px}
 .drv{display:flex;flex-wrap:wrap;gap:6px}
 .linkbtn{background:none;border:0;padding:0;color:var(--accent);text-decoration:underline;cursor:pointer;font:inherit}
+.calc-rows .tot{border-top:2px solid var(--ink);padding-top:8px;margin-top:2px}
 .catc .est{font-size:13px;color:var(--ink-2)} .catc .est b{font:600 15px var(--f-mono);color:var(--ink)}
 .drv span{font:12px var(--f-mono);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:2px 6px;color:var(--ink-2)}
 .drv b{font-weight:600}
+table.mp-t{min-width:760px}
+.mp-t td{vertical-align:top}
+.mp-t .cat a{color:inherit}
+.mp-t .mp-more ul{margin:0;padding:0;list-style:none;display:grid;gap:3px;font-size:12.5px;color:var(--ink-2)}
+.mp-t .mp-more a{color:var(--ink-2)}
+.mp-t .aff{display:flex;flex-wrap:wrap;gap:6px}
+.mp-t .aff>span{display:inline-grid;grid-template-columns:auto minmax(0,1fr);min-width:0;column-gap:6px;align-items:center;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:4px 8px 4px 6px;font-size:12.5px;line-height:1.25}
+.mp-t .aff .ico{grid-row:span 2;width:20px;height:20px}
+.mp-t .aff .ico svg{width:16px;height:16px}
+.mp-t .aff b{font-weight:600;color:var(--ink)}
+.mp-t .aff small{color:var(--ink-3);font-size:11.5px}
+@media (max-width:560px){
+  table.mp-t{min-width:0}
+  .mp-t thead,.mp-t td:nth-child(3){display:none}
+  .mp-t tbody{display:block}
+  .mp-t tr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 10px;padding:12px;border-bottom:1px solid var(--line)}
+  .mp-t tr:last-child{border-bottom:0}
+  .mp-t td{display:block;padding:0;border:0}
+  .mp-t td:nth-child(4){grid-column:1 / -1}
+  .mp-t .aff>span{max-width:100%;grid-template-columns:auto minmax(0,1fr)}
+}
 .drv .u{color:var(--up)} .drv .d{color:var(--down)}
 .sec-hd{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:8px 24px;margin-bottom:12px}
 .sec-hd h2{margin:2px 0 0}.sec-hd .src{margin:0;max-width:60ch}
@@ -135,6 +173,41 @@ table.nave{min-width:640px} table.nave td{font-size:14px} table.nave td.src div{
 .sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:middle}
 .empty{padding:40px 0;text-align:center}
 table.xt{min-width:0}
+#tco{display:grid;gap:14px}
+#tco .sec-hd{margin-bottom:0}
+.tco-brief{background:linear-gradient(135deg,var(--hero),var(--hero-2));color:var(--hero-ink);border-radius:12px;padding:18px 20px;display:grid;gap:10px}
+.tco-brief .tag{font:600 11.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--hero-accent)}
+.tco-brief ol{margin:0;padding-left:22px;display:grid;gap:8px;color:var(--hero-dim);font-size:14.5px;max-width:95ch}
+.tco-brief li::marker{color:var(--hero-accent);font-family:var(--f-mono);font-weight:600}
+.tco-brief b{color:var(--hero-ink)}
+.tbar{display:flex;gap:2px;height:30px;border-radius:7px;overflow:hidden}
+.tbar span{background:var(--c);min-width:3px;display:grid;place-items:center;font:600 11.5px var(--f-mono);color:var(--on-s);overflow:hidden;white-space:nowrap}
+.tbar.sm{height:10px;border-radius:4px;gap:1px;min-width:120px}
+table.tco-t{min-width:680px}
+table.tco-t tr.on td{background:var(--accent-soft)}
+table.tco-t td{vertical-align:middle}
+.tco-t .nmb{display:flex;gap:8px;align-items:center;background:none;border:0;padding:0;font:600 14px var(--f-body);color:var(--ink);cursor:pointer;text-align:left}
+.tco-t .nmb .ico{width:28px;height:28px}.tco-t .nmb .ico svg{width:16px;height:16px}
+.tco-t .nmb:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tco-t td.why{font-size:13px;color:var(--ink-2)}
+.tco-det{display:grid;gap:14px}
+.tco-det h3{display:flex;gap:10px;align-items:center;font-size:17px}
+.tco-det h4{font:600 11.5px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin:0 0 8px}
+.tco-det ul{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);font-size:14px}
+.tco-det .box{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px;min-width:0}
+.tco-det .box p{margin:0;color:var(--ink-2);font-size:14px}
+.tco-det .box p+p{margin-top:8px}
+table.tco-c{min-width:620px} table.tco-c td{vertical-align:middle;font-size:14px} table.tco-c td small{color:var(--ink-3);font-size:11.5px}
+.tco-c .drvm{display:none;font-size:12px;color:var(--ink-3);margin-top:2px}
+@media (max-width:560px){
+  table.tco-t,table.tco-c{min-width:0}
+  table.tco-t th:nth-child(2),table.tco-t td:nth-child(2),table.tco-t th:nth-child(4),table.tco-t td:nth-child(4),table.tco-t th:nth-child(6),table.tco-t td:nth-child(6){display:none}
+  table.tco-c th:nth-child(3),table.tco-c td:nth-child(3),table.tco-c th:nth-child(5),table.tco-c td:nth-child(5){display:none}
+  table.tco-t th,table.tco-c th{white-space:normal}
+  .tco-c .drvm{display:block}
+  table.tco-t th,table.tco-t td,table.tco-c th,table.tco-c td{padding:9px 8px}
+}
+table.tco-c tfoot td{font-weight:600;border-bottom:0;border-top:2px solid var(--ink)}
 #explorer svg{width:100%;height:auto;display:block}
 @media (max-width:560px){.calc{grid-template-columns:1fr}.chipgrp .lbl{min-width:0;width:100%}}
 .risks{display:grid;gap:10px}
@@ -143,6 +216,14 @@ table.xt{min-width:0}
 .lvl{font:600 11.5px var(--f-mono);text-transform:uppercase;letter-spacing:.05em;padding:3px 8px;border-radius:6px;height:fit-content;text-align:center}
 .lvl.alto{background:var(--up-soft);color:var(--up)} .lvl.medio{background:var(--warn-soft);color:var(--warn)} .lvl.bajo{background:var(--down-soft);color:var(--down)}
 .risk p{margin:2px 0 0;color:var(--ink-2);font-size:14px}
+.risk p.aff{font:600 12.5px var(--f-body);color:var(--accent);margin-top:2px}
+.risk p.do,.news p b{color:var(--ink)}
+.risk p.do b{font-weight:600}
+.risk .src,.news .src{display:block;margin-top:4px;font-size:12px;color:var(--ink-3)}
+.news li{padding-bottom:12px;border-bottom:1px solid var(--line)}
+.news li:last-child{border-bottom:0;padding-bottom:0}
+.news .nh{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center}
+.news .nh .lvl{font-size:10.5px;padding:2px 6px}
 .news{display:grid;gap:14px;margin:0;padding:0;list-style:none}
 .news li{display:grid;gap:2px}
 .news .t{font:600 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
@@ -151,27 +232,130 @@ table.xt{min-width:0}
 .qual{display:grid;gap:12px}
 .qual div{display:grid;gap:2px}
 .qual p{margin:0;color:var(--ink-2);font-size:14px}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none;margin-bottom:-12px}
+.tabs button{font:700 15px var(--f-display);border:0;background:none;color:var(--ink-3);padding:10px 14px;border-bottom:3px solid transparent;margin-bottom:-1px;cursor:pointer;white-space:nowrap}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.tabpane{display:grid;gap:28px;grid-template-columns:minmax(0,1fr)}
+.tabpane>*{min-width:0}
+.stock{display:grid;gap:14px}
+.st-px{display:flex;align-items:baseline;gap:8px;font:700 clamp(32px,6vw,42px) var(--f-display);font-variant-numeric:tabular-nums;line-height:1.1;margin-top:4px}
+.st-px small{font:600 15px var(--f-mono);color:var(--ink-3)}
+.st-chg{font:600 15px var(--f-mono);font-variant-numeric:tabular-nums}
+.st-chg.gain{color:var(--down)} .st-chg.loss{color:var(--up)}
+.st-chg span{font:400 14px var(--f-body);color:var(--ink-2)}
+.st-chg .pill{display:inline-block;padding:1px 8px;margin-right:6px;border-radius:6px;background:color-mix(in srgb,currentColor 13%,transparent)}
+.st-asof{font-size:13px;color:var(--ink-3)}
+.stockc{position:relative}
+.stockc svg{touch-action:pan-y}
+.stockc .gain{color:var(--down)} .stockc .loss{color:var(--up)}
+.stockc .base{stroke:var(--ink-3);stroke-dasharray:2 4}
+.stockc .yl{fill:var(--ink-3)}
+.st-tip{position:absolute;top:0;transform:translateX(-50%);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:3px 8px;font:12.5px var(--f-body);color:var(--ink-2);white-space:nowrap;pointer-events:none;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.st-tip b{font:600 13px var(--f-mono);color:var(--ink)}
+.st-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:0 28px;border-top:1px solid var(--line);padding-top:6px}
+.st-stats div{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid var(--line);font-size:14px}
+.st-stats span{color:var(--ink-3)} .st-stats b{font:600 14px var(--f-mono);font-variant-numeric:tabular-nums;text-align:right}
+table.wq{min-width:820px}
+table.wq td:first-child b{font-family:var(--f-display)}
+.wnote{font-size:12.5px;color:var(--ink-3);margin:8px 0 0}
 footer{font-size:13px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:14px;display:grid;gap:6px}
 footer p{margin:0;max-width:80ch}
 @media (max-width:560px){.risk{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+/* Onepager: hoja de una página con lo importante de la semana */
+header.hero .hero-act{position:relative;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.opbtn{display:inline-flex;align-items:center;gap:8px;font:700 14px var(--f-display);border:0;border-radius:8px;padding:9px 14px;background:var(--hero-accent);color:var(--hero);cursor:pointer}
+.opbtn svg{width:18px;height:18px}
+.opbtn:focus-visible{outline:2px solid var(--hero-ink);outline-offset:2px}
+body.op-open{overflow:hidden}
+.op-back{position:fixed;inset:0;z-index:50;background:rgba(8,16,21,.8);overflow-y:auto;padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(24px + env(safe-area-inset-bottom,0px))}
+.op-dlg{max-width:860px;margin:0 auto;display:grid;gap:10px}
+.op-bar{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;background:var(--surface);border-radius:12px;padding:10px 12px 10px 16px}
+.op-bar .op-msg{flex:1 1 200px;font-size:13px;color:var(--ink-2)}
+.op-acts{display:flex;gap:8px;flex-wrap:wrap}
+.opb{font:600 14px var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:7px 14px;cursor:pointer}
+.opb.pri{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.opb:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.op-sheet{background:var(--surface);color:var(--ink);border-radius:12px;padding:28px 30px 22px;display:grid;gap:18px;font-size:13.5px;line-height:1.45}
+.op-hd{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:6px 16px;border-bottom:3px solid var(--ink);padding-bottom:10px}
+.op-hd h2{font-size:24px;font-weight:800;margin:0;letter-spacing:-.01em}
+.op-hd .wk{font:600 12px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2)}
+.op-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.op-kpis div{border-left:3px solid var(--accent);padding:2px 0 2px 10px;display:grid;gap:1px;min-width:0}
+.op-kpis .k{font:600 11px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3)}
+.op-kpis .v{font:700 21px var(--f-display);font-variant-numeric:tabular-nums}
+.op-kpis .v small{font:600 12px var(--f-mono);color:var(--ink-3)}
+.op-kpis .n{font-size:12.5px;color:var(--ink-2)}
+.op-sec{display:grid;gap:8px;min-width:0;align-content:start}
+.op-sec h3{font:600 11.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0}
+.op-sec ol,.op-sec ul{margin:0;padding-left:20px;display:grid;gap:6px}
+.op-2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px 24px}
+.op-risk{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 10px;align-items:start}
+.op-risk .lvl{font-size:10.5px;padding:2px 6px}
+.op-risk p{margin:0}
+.op-risk .t{font-weight:600}
+.op-risk .s{font-size:12px;color:var(--ink-3)}
+.op-risks{display:grid;gap:10px;align-content:start}
+table.op-t{width:100%;min-width:0;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+table.op-t th{font:600 11px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);text-align:left;border-bottom:1px solid var(--line);padding:4px 6px}
+table.op-t td{border-bottom:1px solid var(--line);padding:5px 6px}
+table.op-t .num{text-align:right;white-space:nowrap}
+table.op-t .lvl{font-size:10px;padding:1px 5px}
+.op-ev{list-style:none;padding:0!important}
+.op-ev li{display:grid;grid-template-columns:7.5em minmax(0,1fr);gap:8px}
+.op-ev b{font:600 12.5px var(--f-mono)}
+.op-ev small{display:block;color:var(--ink-3);font-size:12px}
+.op-ft{font-size:12px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:8px;display:grid;gap:3px}
+.op-ft p{margin:0}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:640px){
+  .op-sheet{padding:20px 16px 16px}
+  .op-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .op-2{grid-template-columns:minmax(0,1fr)}
+  table.op-t .c-ytd{display:none}
+  table.op-t th,table.op-t td{padding:5px 4px}
+}
+@media print{
+  :root:not(#x),:root[data-theme]{--bg:#fff;--surface:#fff;--ink:#15212b;--ink-2:#4a5866;--ink-3:#6b7884;--line:#d5dce2;--accent:#0b5d6b;--accent-soft:#e1eff1;--up:#b4361f;--up-soft:#fbe9e5;--down:#1f6f4a;--down-soft:#e3f2ea;--warn:#9a6400;--warn-soft:#fbf1dc;color-scheme:light}
+  @page{size:letter;margin:11mm}
+  body{background:#fff;padding:0;font-size:12px}
+  body.op-open .wrap,body.op-open .tip{display:none!important}
+  body.op-open .op-back{position:static;background:none;padding:0;overflow:visible}
+  .op-bar{display:none!important}
+  .op-sheet{border-radius:0;padding:0;gap:10px;font-size:11.5px;line-height:1.38}
+  .op-kpis .v{font-size:18px}
+  .op-sec ol,.op-sec ul,.op-risks{gap:5px}
+  table.op-t td{padding:3px 6px}
+  .op-ft{font-size:10.5px;padding-top:6px;break-inside:avoid}
+}
 </style>
 </head>
 <body>
 
 <div class="wrap">
-  <header>
+  <header class="hero">
+    <svg class="truss" viewBox="0 0 560 200" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 196V92L280 14 540 92v104"/><path d="M20 92h520M60 92v104M500 92v104"/><path d="M20 92 85 72v20M85 72l65 20 65-39v39l65-78 65 78v-39l65 39 65-20v20"/><path d="M150 92 215 53M345 53l65 39"/><path d="M20 196h520"/><path d="M200 196v-60h160v60M240 196v-40h80v40"/></svg>
     <div class="meta">
-      <span class="eyebrow" id="week">Semana del 5 de octubre de 2026</span>
+      <div class="brand"><span class="logo" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 23h22M5 23V12L14 5l9 7v11"/><path d="M5 12h18M9 17h2.5l1.5-3 2.5 6 1.5-3H19"/></svg></span><span class="eyebrow" id="week">Semana del 5 de octubre de 2026</span></div>
       <h1>Pulso de Compras México</h1>
-      <p>Mercado mexicano para tus categorías GNFR de construcción, con foco en estructura metálica: precios mes a mes, riesgos y noticias.</p>
+      <p>Mercado mexicano para tus 8 categorías GNFR de construcción que más mueven la aguja, con foco en estructura metálica: materias primas mes a mes, riesgos y noticias.</p>
     </div>
-    <div class="toggle" role="group" aria-label="Moneda">
-      <button id="btnMXN" aria-pressed="true">MXN</button>
-      <button id="btnUSD" aria-pressed="false">USD</button>
+    <div class="hero-act">
+      <button class="opbtn" id="btnOP" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 12h7M9 15.5h7M9 19h4"/></svg>Onepager</button>
+      <div class="toggle" role="group" aria-label="Moneda">
+        <button id="btnMXN" aria-pressed="true">MXN</button>
+        <button id="btnUSD" aria-pressed="false">USD</button>
+      </div>
     </div>
   </header>
 
+  <nav class="tabs" role="tablist" aria-label="Secciones del tablero">
+    <button role="tab" id="t-mercado" aria-controls="tab-mercado" aria-selected="true">Mercado y categorías</button>
+    <button role="tab" id="t-walmex" aria-controls="tab-walmex" aria-selected="false" tabindex="-1">Walmart · WALMEX</button>
+  </nav>
+
+  <div class="tabpane" id="tab-mercado" role="tabpanel" aria-labelledby="t-mercado">
   <section class="macro" aria-label="Indicadores macro">
     <div><span class="k">Dólar FIX Banxico</span><span class="v">$18.37</span><span class="n">Peso en su nivel más débil en ~11 meses</span></div>
     <div><span class="k">Inflación INPC (1a quinc. sep)</span><span class="v">3.42%</span><span class="n">Subyacente 3.79% · INEGI</span></div>
@@ -203,28 +387,10 @@ footer p{margin:0;max-width:80ch}
       <div id="emChart" class="chart"></div>
       <p class="src" id="emNote"></p>
     </div>
-    <div class="grid2">
-      <div class="panel">
-        <h3>Tu precio de referencia</h3>
-        <p class="src">La curva parte de un precio de mercado estimado para agosto 2026: $63/kg sin IVA (rango $56–71) por suministro, fabricación, flete y montaje. Cuando tengas un precio real, ponlo aquí o regístralo abajo y la curva se recalcula.</p>
-        <form class="calc" id="calcForm">
-          <label for="cBase">Precio por kg (MXN, fabricado y montado)</label><input id="cBase" type="number" step="0.01" min="1">
-          <label for="cMes">Mes de ese precio</label><select id="cMes"></select>
-        </form>
-        <div class="calc-out" id="calcOut"></div>
-      </div>
-      <div class="panel">
-        <h3>Registra un precio que pagaste</h3>
-        <p class="src">Tus precios reales de RFPs y subastas aparecen como puntos sobre la curva y se vuelven tu histórico.</p>
-        <form class="calc" id="quoteForm">
-          <label for="qSerie">Concepto</label><select id="qSerie"></select>
-          <label for="qMes">Mes</label><input id="qMes" type="month" required>
-          <label for="qVal">Precio</label><input id="qVal" type="number" step="0.01" required>
-          <label for="qNota">Nota (proveedor, proyecto, alcance)</label><input id="qNota" type="text" maxlength="160">
-          <button type="submit" class="btn" id="qBtn">Guardar precio</button>
-        </form>
-        <p class="src" id="qMsg" role="status"></p>
-      </div>
+    <div class="panel">
+      <h3>Cómo se arma el precio por kg</h3>
+      <p class="src">Precio de mercado estimado a agosto 2026 para estructura de nave fabricada y montada, sin IVA. Desde ahí, la curva se mueve cada mes con INEGI.</p>
+      <div class="calc-out" id="calcOut"></div>
     </div>
   </section>
 
@@ -253,32 +419,67 @@ footer p{margin:0;max-width:80ch}
 
   <section>
     <h2>Tus categorías</h2>
-    <p class="src" style="margin:-6px 0 12px">Cada categoría se mide con una canasta de sus elementos más representativos, cada uno con su índice INEGI y su peso. Nivel: ámbar si la canasta sube más de 5% al año, rojo si sube más de 25%, o más alto si hay riesgos sin índice como aranceles.</p>
+    <p class="src" style="margin:-6px 0 12px">Las 8 categorías que más mueven tu gasto. Cada una se mide con las materias primas que la componen y su peso (Proyectista, con los honorarios de servicios profesionales), con índices INEGI mes a mes. Nivel: ámbar si sube más de 5% en 12 meses, rojo si sube más de 25%, o más alto si hay riesgos sin índice como aranceles.</p>
     <div class="cats" id="cats"></div>
   </section>
 
-  <section>
-    <h2>Precios clave</h2>
+  <section id="tendencia" aria-labelledby="h-tr">
+    <div class="sec-hd">
+      <div><span class="eyebrow">Base para tus concursos</span><h2 id="h-tr">Cómo se han movido tus categorías desde 2024</h2></div>
+      <p class="src">Variación acumulada desde diciembre de 2023, mes a mes. Cada lunes se agrega el mes nuevo que publique INEGI.</p>
+    </div>
+    <div class="panel">
+      <div class="ctrls">
+        <div class="seg" role="group" aria-label="Tipo de vista" id="trView">
+          <button data-v="line" aria-pressed="true">Gráfica</button><button data-v="table" aria-pressed="false">Tabla para concursos</button>
+        </div>
+      </div>
+      <div class="chips" id="trChips"></div>
+      <div id="trOut" class="chart"></div>
+      <p class="src" id="trNote"></p>
+    </div>
+  </section>
+
+  <section id="tco" aria-labelledby="h-tco">
+    <div class="sec-hd">
+      <div><span class="eyebrow">Costo total de propiedad</span><h2 id="h-tco">TCO por categoría</h2></div>
+      <p class="src">Lo que cuesta cada categoría en toda su vida útil, no solo al comprarla: compra, flete, instalación, operación, mantenimiento, cumplimiento y reposición. Cada parte se mueve con su propio índice.</p>
+    </div>
+    <div class="tco-brief" id="tcoBrief"><span class="tag">Lectura de la semana</span><p class="muted">Cargando índices…</p></div>
+    <div class="panel">
+      <h3>Todas tus categorías</h3>
+      <p class="src" style="margin:4px 0 12px">Ordenadas por cuánto subió su costo total en 12 meses. Toca una para ver su detalle abajo.</p>
+      <div id="tcoTable"></div>
+    </div>
+    <div class="panel tco-det" id="tcoDet"></div>
+    <p class="src" id="tcoNote"></p>
+  </section>
+
+  <section id="mp" aria-labelledby="h-mp">
+    <div class="sec-hd">
+      <div><span class="eyebrow">Qué mueve tus precios</span><h2 id="h-mp">Materias primas y a qué categoría afectan</h2></div>
+      <p class="src">Una línea por materia prima, con su dato INEGI y las categorías donde pega. El acero va en una sola línea: varilla, perfiles, lámina y soldadura se mueven juntos.</p>
+    </div>
     <div class="tbl-wrap">
-      <table aria-label="Precios clave">
-        <thead><tr><th>Commodity</th><th class="num">Precio actual</th><th class="num">Hace 1 año</th><th class="num">Var. anual</th><th class="num">Var. reciente</th><th>Fuente</th></tr></thead>
+      <table class="mp-t" aria-label="Materias primas">
+        <thead><tr><th>Materia prima</th><th class="num">Var. anual</th><th>Datos de apoyo</th><th>Afecta a</th></tr></thead>
         <tbody id="rows"></tbody>
       </table>
     </div>
-    <p class="src" style="margin-top:8px">Las variaciones se recalculan en la moneda elegida, así que incluyen el efecto del tipo de cambio. <span class="approx">≈</span> indica un dato de hace un año aproximado o derivado de la variación publicada.</p>
+    <p class="src" style="margin-top:8px">Var. anual: dato INEGI más reciente (mes entre paréntesis). Diésel y dólar se recalculan en la moneda elegida. Los datos de apoyo internacionales (LME, Brent, TiO2 en China) son solo referencia.</p>
   </section>
 
   <section class="grid2">
     <div class="panel chart">
-      <h2>Variación anual por commodity</h2>
+      <h2>Variación anual por materia prima</h2>
       <p class="src" style="margin:-6px 0 10px">Línea punteada: tu umbral de alerta de +5%. Rojo = más caro que hace un año.</p>
       <div id="chart"></div>
     </div>
     <div class="panel qual">
       <h2>Lo que dice INEGI</h2>
       <div><h3>Naves industriales: +5.1% anual</h3><p>Costo total de obra de naves y plantas industriales, agosto 2025 a agosto 2026. Subió cada mes desde abril (3.2% → 5.1%). Es tu mejor referencia general para revisar precios de nave.</p></div>
-      <div><h3>Acero y soldadura</h3><p>Varilla corrugada +7.8% (julio) y soldaduras +8.5% (agosto). La construcción en general sube 5.9% anual y aceleró desde enero (0.4% a 1.3% por mes).</p></div>
-      <div><h3>Lo que más sube</h3><p>Tubos de cobre +22.3%, cables +17.2%, tubería plástica +16.4%, diésel +17.0% y aluminio laminado +11.6%. Pega en SCI, hidroneumáticos, PTARs, baños y puertas.</p><p class="src"><a href="https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf">CMIC CEICO con datos INEGI, septiembre 2026</a></p></div>
+      <div><h3>Acero: +7.8% anual</h3><p>El acero en México sube 7.8% contra hace un año (INEGI, julio). Soldaduras (+8.5%) y perfiles (+6.0% en enero, último dato) van en la misma dirección. En agosto, lingote y plancha bajaron 6.0% en el mes, una señal de que podría moderarse (lectura nuestra). La construcción en general sube 5.9% anual.</p></div>
+      <div><h3>Lo que más sube</h3><p>Cobre +22.3% (tubo) y +17.2% (cables), plásticos +16.4% y diésel +17.0%. Pega en SCI, hidroneumáticos y PTARs.</p><p class="src"><a href="https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf">CMIC CEICO con datos INEGI, septiembre 2026</a></p></div>
     </div>
   </section>
 
@@ -286,31 +487,101 @@ footer p{margin:0;max-width:80ch}
     <div class="panel">
       <h2>Mapa de riesgos</h2>
       <div class="risks">
-        <div class="risk"><span class="lvl alto">Precio</span><div><h3>Energía y metales muy arriba de 2025</h3><p>Brent +58% y cobre +30% contra hace un año. El acero en México sube +7.8% (INEGI); el +39% de EE.UU. es por su arancel y solo es referencia. Revisa escalatorias en contratos de estructura metálica y los adicionales que piden contratistas.</p></div></div>
-        <div class="risk"><span class="lvl alto">Aranceles</span><div><h3>Revisión del T-MEC en curso</h3><p>EE.UU. cobra 50% al acero y aluminio mexicano y 25% a autos. La cuarta ronda se aplazó a octubre; hay un posible acuerdo para bajar autos a 15%. México aplica hasta 50% a importaciones de Asia sin tratado.</p></div></div>
-        <div class="risk"><span class="lvl alto">Logística</span><div><h3>Fletes Asia → Manzanillo en temporada alta</h3><p>De septiembre a noviembre las tarifas a Manzanillo pueden duplicarse (rango de mercado US$2,500–5,500 por 40'). El transpacífico sigue caro y las navieras cancelan salidas; la Semana Dorada en China puede retrasar embarques.</p></div></div>
-        <div class="risk"><span class="lvl medio">Escasez</span><div><h3>Cobre y zinc con oferta apretada</h3><p>Escondida (Chile) detenida tras un accidente y con huelga aprobada. La producción de zinc de Perú cayó 12% y los inventarios LME están bajos. Afecta grifería, motores y galvanizado.</p></div></div>
-        <div class="risk"><span class="lvl medio">Tipo de cambio</span><div><h3>Peso presionado por dólar fuerte</h3><p>La Fed sube tasas y los bonos de EE.UU. rinden ~5.3%. Un peso más débil encarece todo lo que compras en dólares.</p></div></div>
-        <div class="risk"><span class="lvl bajo">Clima</span><div><h3>Temporada de huracanes hasta el 30 de noviembre</h3><p>Riesgo para puertos del Golfo y Pacífico (Manzanillo, Altamira, Veracruz) y refinación en la costa de EE.UU. Sin alerta activa relevante esta semana.</p></div></div>
+        <div class="risk"><span class="lvl alto">Alto</span><div><h3>Energía y metales muy arriba de 2025</h3><p class="aff">Precio · Estructura Metálica, Equipo Hidroneumático, Sistema Contra Incendio, Pintura</p><p>Brent +58% y cobre +30% contra hace un año. El acero en México sube +7.8% (INEGI, varilla). El +39% de EE.UU. se debe a su arancel y solo sirve de referencia.</p><p class="do"><b>Qué haría:</b> revisar las escalatorias abiertas de estructura y pedir al equipo de validación que compare cada adicional contra INEGI naves (+5.1%) antes de aprobarlo.</p><span class="src">INEGI vía CMIC CEICO, jul 2026 · LME y Brent, consultados el 5 oct 2026</span></div></div>
+        <div class="risk"><span class="lvl alto">Alto</span><div><h3>Revisión del T-MEC en curso</h3><p class="aff">Aranceles · Estructura Metálica, Sistema Contra Incendio, Sonido</p><p>EE.UU. cobra 50% al acero y aluminio mexicano y 25% a autos. La cuarta ronda se aplazó a octubre y hay un posible acuerdo para bajar autos a 15%. México cobra hasta 50% a importaciones de Asia sin tratado.</p><p class="do"><b>Qué haría:</b> pedir precio firme de 60 a 90 días en acero mientras se define la ronda, y exigir país de origen en equipo importado (Sonido, ANSUL) para saber si paga arancel.</p><span class="src">El Financiero, 1 oct 2026</span></div></div>
+        <div class="risk"><span class="lvl alto">Alto</span><div><h3>Lámina más cara por antidumping y aranceles</h3><p class="aff">Aranceles · Estructura Metálica, Sistema Contra Incendio (tubería y soportes)</p><p>Desde el 4 de septiembre la lámina rolada en caliente de China paga USD 0.31 por kg y la de Vietnam USD 0.29, además del arancel de 35% vigente desde enero. La resolución sobre lámina rolada en frío (cubiertas) debe salir a más tardar el 5 de diciembre.</p><p class="do"><b>Qué haría:</b> pedir a cada fabricante de estructura el origen de su lámina y placa. Si es nacional, no aceptar el antidumping como motivo de aumento; si es importada, pedir el pedimento. Cerrar ya los volúmenes de cubierta antes de diciembre.</p><span class="src">DOF vía CJ Aduanero, 3 sep 2026 · trade.gov, 17 feb 2026</span></div></div>
+        <div class="risk"><span class="lvl medio">Medio</span><div><h3>Mano de obra más cara desde 2027</h3><p class="aff">Mano de obra · PTARs, instalación y pólizas de SCI y ANSUL, honorarios de Proyectista</p><p>El salario promedio IMSS sube 6.7% anual y el mínimo subió 13% en 2026. La jornada baja de 48 a 46 horas en enero de 2027 y a 40 en 2030, lo que sube entre 4% y 5% al año el costo por hora de una cuadrilla.</p><p class="do"><b>Qué haría:</b> en contratos de instalación, mantenimiento y proyecto que pasen de 2026, pedir que el precio ya incluya la jornada nueva para evitar reclamos de ajuste.</p><span class="src">IMSS, ago 2026 · DOF, 3 mar 2026</span></div></div>
+        <div class="risk"><span class="lvl medio">Medio</span><div><h3>Fletes Asia → Manzanillo en temporada alta</h3><p class="aff">Logística · Sonido, refacciones de ANSUL, rociadores de SCI</p><p>De septiembre a noviembre las tarifas a Manzanillo pueden duplicarse (rango de mercado US$2,500–5,500 por contenedor de 40'). Las navieras cancelan salidas y la Semana Dorada en China puede retrasar embarques.</p><p class="do"><b>Qué haría:</b> mover a diciembre los embarques que no sean urgentes y cerrar tarifa anual con la naviera para 2027.</p><span class="src">GetCastores y CM Logistics, consultados el 5 oct 2026</span></div></div>
+        <div class="risk"><span class="lvl medio">Medio</span><div><h3>Cobre y zinc con oferta apretada</h3><p class="aff">Escasez · Equipo Hidroneumático, Sistema Contra Incendio, PTARs</p><p>Escondida (Chile) está detenida tras un accidente y con huelga aprobada. La producción de zinc de Perú cayó 12% y los inventarios LME están bajos.</p><p class="do"><b>Qué haría:</b> pedir vigencias cortas en cableado, motores y válvulas de bronce, y adelantar las compras del primer trimestre si ya tienen proyecto.</p><span class="src">LME vía Business Recorder y Trading Economics, consultados el 5 oct 2026</span></div></div>
+        <div class="risk"><span class="lvl medio">Medio</span><div><h3>Peso presionado por dólar fuerte</h3><p class="aff">Tipo de cambio · Sonido, ANSUL, rociadores de SCI</p><p>El FIX llegó a 18.37, su nivel más débil desde noviembre de 2025. La Fed sube tasas y los bonos de EE.UU. rinden cerca de 5.3%.</p><p class="do"><b>Qué haría:</b> fijar el tipo de cambio en la orden de compra o pedir precio en pesos con vigencia.</p><span class="src">Banxico vía N+, 2 oct 2026</span></div></div>
+        <div class="risk"><span class="lvl bajo">Bajo</span><div><h3>Temporada de huracanes hasta el 30 de noviembre</h3><p class="aff">Clima · todo lo importado que entra por Manzanillo, Altamira o Veracruz (Sonido, ANSUL)</p><p>Sin alerta activa relevante esta semana.</p><p class="do"><b>Qué haría:</b> nada por ahora; si hay alerta, mover fechas de entrega antes de que el proveedor lo pida.</p><span class="src">Revisión semanal, 5 oct 2026</span></div></div>
       </div>
     </div>
     <div class="panel">
       <h2>Noticias que mueven precios</h2>
       <ul class="news">
-        <li><span class="t">Geopolítica · T-MEC</span><a href="https://www.elfinanciero.com.mx/economia/2026/10/01/revision-del-t-mec-mexico-esta-cerca-de-acuerdo-con-eu-para-bajar-aranceles-a-autos-y-acero/">México está cerca de un acuerdo con EE.UU. para bajar aranceles a autos y acero</a><p>Ebrard busca mejores condiciones que las de Canadá. Si baja el 50% al acero, se libera presión sobre precios en Norteamérica.</p></li>
-        <li><span class="t">Geopolítica · Energía</span><a href="https://www.onevalor.com/oil-gas-prices/">Brent cerca de US$102 con el estrecho de Ormuz bajo tensión</a><p>El G7 libera inventarios y Medio Oriente reanuda exportaciones, lo que bajó el crudo esta semana, pero sigue ~58% arriba de hace un año.</p></li>
-        <li><span class="t">Finanzas</span><a href="https://www.nmas.com.mx/economia/dolar/tipo-de-cambio-peso-dolar-estadounidense-mexico-viernes-2-octubre-2026/">El peso toca su nivel más débil desde noviembre de 2025</a><p>FIX de 18.37 el viernes. Datos de empleo débiles en EE.UU. bajaron a 18% la probabilidad de otra alza de la Fed en octubre.</p></li>
-        <li><span class="t">Sector · Metales</span><a href="https://copper.com.au/news/mining/copper-weekly-brief-week-ending-2-october-2026/">Cobre cae 3% en la semana pero sigue 30% arriba en el año</a><p>Se desvanece la prima por aranceles en EE.UU.; Chile y China mantienen el mercado físico apretado.</p></li>
-        <li><span class="t">Sector · Metales</span><a href="https://tradingeconomics.com/commodity/aluminum">Aluminio en mínimos desde julio</a><p>Reinicio de fundidoras y exportaciones chinas +17% bajan el precio; ventana para cubrir volumen del cuarto trimestre.</p></li>
-        <li><span class="t">Logística</span><a href="https://getcastores.mx/blog/importar-china-manzanillo-costos-tiempos-errores/">Shanghai–Manzanillo: 22 a 28 días de tránsito y temporada alta hasta noviembre</a><p>Conviene cerrar contratos anuales con la naviera para fijar tarifa. No hay índice público semanal para Manzanillo; tus cotizaciones registradas en el tablero serán la referencia.</p></li>
+        <li><div class="nh"><span class="lvl alto">Alto</span><span class="t">Aranceles · Estructura Metálica, SCI</span></div><a href="https://blog.cjaduanero.com/resolucion-final-antidumping-sobre-aceros-laminados-en-caliente-de-china-y-vietnam-cuotas-compensatorias-definitivas-desde-septiembre-de-2026/">Antidumping definitivo a la lámina rolada en caliente de China y Vietnam</a><p><b>Por qué te importa:</b> USD 0.31/kg a China y 0.29/kg a Vietnam desde el 4 de septiembre, encima del arancel de 35%. La lámina en caliente es la base de placa, polines y largueros; sin competencia asiática, las acereras nacionales tienen margen para subir precio.</p><p><b>Qué haría:</b> que el equipo de validación pida el origen de la lámina en cada aumento de estructura; solo aplica a material importado.</p><span class="src">DOF vía CJ Aduanero · 3 sep 2026</span></li>
+        <li><div class="nh"><span class="lvl medio">Medio</span><span class="t">Materias primas · Pintura</span></div><a href="https://www.bloominglobal.com/media/detail/titanium-dioxide-price-increase-chinas-2026-tio2-rally">Dióxido de titanio: sexta alza conjunta de 2026 en China</a><p><b>Por qué te importa:</b> el rutilo en China cerró agosto en CNY 13,650/t, entre 3% y 8% arriba de hace un año, y en septiembre los productores anunciaron +RMB 700/t. Kronos, en cambio, reporta precios de venta 3% abajo anual.</p><p><b>Qué haría:</b> si un proveedor de pintura pide aumento por pigmento, aceptar como máximo ese rango sobre la parte de pigmento, no sobre el litro completo.</p><span class="src">SMM · 2 sep 2026 · Blooming · 15 sep 2026 · Kronos · 5 ago 2026</span></li>
+        <li><div class="nh"><span class="lvl alto">Alto</span><span class="t">Aranceles · Estructura Metálica</span></div><a href="https://www.elfinanciero.com.mx/economia/2026/10/01/revision-del-t-mec-mexico-esta-cerca-de-acuerdo-con-eu-para-bajar-aranceles-a-autos-y-acero/">México está cerca de un acuerdo con EE.UU. para bajar aranceles a autos y acero</a><p><b>Por qué te importa:</b> si EE.UU. baja el 50% al acero mexicano, las acereras vuelven a exportar y el precio local puede subir; sin acuerdo, el acero se queda en México y presiona a la baja.</p><p><b>Qué haría:</b> no firmar escalatorias abiertas de acero hasta conocer el resultado de octubre.</p><span class="src">El Financiero · 1 oct 2026</span></li>
+        <li><div class="nh"><span class="lvl alto">Alto</span><span class="t">Metales · Equipo Hidroneumático, SCI, PTARs</span></div><a href="https://copper.com.au/news/mining/copper-weekly-brief-week-ending-2-october-2026/">Cobre cae 3% en la semana pero sigue 30% arriba en el año</a><p><b>Por qué te importa:</b> el cobre está en motores, cableado y válvulas de bronce; Chile y China mantienen el mercado físico apretado.</p><p><b>Qué haría:</b> aprovechar la baja de la semana para cotizar con vigencia corta los proyectos del primer trimestre.</p><span class="src">Copper.com.au · semana al 2 oct 2026</span></li>
+        <li><div class="nh"><span class="lvl medio">Medio</span><span class="t">Energía · Pintura, PTARs, fletes</span></div><a href="https://www.onevalor.com/oil-gas-prices/">Brent cerca de US$102 con el estrecho de Ormuz bajo tensión</a><p><b>Por qué te importa:</b> solventes y resinas de pintura y el diésel de los fletes siguen al crudo con uno a tres meses de rezago; sigue cerca de 58% arriba de hace un año.</p><p><b>Qué haría:</b> pedir listas de precios de pintura con vigencia de 90 días y revisar recargos por combustible en fletes.</p><span class="src">Valor · consultado el 5 oct 2026</span></li>
+        <li><div class="nh"><span class="lvl medio">Medio</span><span class="t">Tipo de cambio · equipo importado</span></div><a href="https://www.nmas.com.mx/economia/dolar/tipo-de-cambio-peso-dolar-estadounidense-mexico-viernes-2-octubre-2026/">El peso toca su nivel más débil desde noviembre de 2025</a><p><b>Por qué te importa:</b> con FIX de 18.37, todo lo que cotizas en dólares (Sonido, ANSUL, rociadores) cuesta más en pesos.</p><p><b>Qué haría:</b> fijar tipo de cambio en las órdenes de este mes.</p><span class="src">N+ · 2 oct 2026</span></li>
+        <li><div class="nh"><span class="lvl medio">Medio</span><span class="t">Logística · Sonido, ANSUL</span></div><a href="https://getcastores.mx/blog/importar-china-manzanillo-costos-tiempos-errores/">Shanghai–Manzanillo: 22 a 28 días de tránsito y temporada alta hasta noviembre</a><p><b>Por qué te importa:</b> no hay índice público semanal para Manzanillo y la tarifa puede duplicarse en temporada alta.</p><p><b>Qué haría:</b> cerrar contrato anual con la naviera para fijar tarifa.</p><span class="src">GetCastores · consultado el 5 oct 2026</span></li>
       </ul>
     </div>
   </section>
 
+  </div>
+
+  <div class="tabpane" id="tab-walmex" role="tabpanel" aria-labelledby="t-walmex" hidden>
+    <section aria-labelledby="h-wmx">
+      <div class="panel stock">
+        <div>
+          <span class="eyebrow" id="h-wmx">BMV: WALMEX · Walmart de México y Centroamérica</span>
+          <div class="st-px"><span id="wPx">–</span><small>MXN</small></div>
+          <div class="st-chg" id="wChg"></div>
+          <div class="st-asof" id="wAsOf">Cargando cierres…</div>
+        </div>
+        <div class="ctrls">
+          <div class="seg" role="group" aria-label="Periodo" id="wRange">
+            <button data-v="5d" aria-pressed="false">5 D</button><button data-v="1m" aria-pressed="false">1 M</button><button data-v="6m" aria-pressed="false">6 M</button><button data-v="ytd" aria-pressed="false">En el año</button><button data-v="1y" aria-pressed="true">1 A</button><button data-v="5y" aria-pressed="false">5 A</button>
+          </div>
+        </div>
+        <div id="wChart" class="chart stockc"></div>
+        <div class="st-stats" id="wStats"></div>
+        <p class="src" id="wSrc"></p>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-wq">
+      <div class="sec-hd">
+        <div><span class="eyebrow">Reportes públicos a la BMV</span><h2 id="h-wq">Resultados trimestrales</h2></div>
+        <p class="src">Cifras consolidadas en millones de pesos. VMT = ventas a mismas tiendas. Próximo reporte: tercer trimestre de 2026, fecha estimada 27 de octubre.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table class="wq" aria-label="Resultados trimestrales de Walmex">
+          <thead><tr><th>Trimestre</th><th class="num">Ingresos</th><th class="num">Crec. anual</th><th class="num">VMT México</th><th class="num">VMT Centroam.</th><th class="num">Margen EBITDA</th><th class="num">Utilidad neta</th><th class="num">Crec. anual</th><th class="num">Tiendas abiertas</th></tr></thead>
+          <tbody>
+            <tr><td><b>2T26</b><div class="cat">22 jul 2026</div></td><td class="num">250,948</td><td class="num">+1.9%</td><td class="num">+1.8%</td><td class="num">+2.4%</td><td class="num">9.4% <span class="muted">(−10 pb)</span></td><td class="num">11,152</td><td class="num">−0.7%</td><td class="num">23</td></tr>
+            <tr><td><b>1T26</b><div class="cat">28 abr 2026</div></td><td class="num">245,018</td><td class="num">+1.7%</td><td class="num">+3.1%</td><td class="num">+0.9%</td><td class="num">10.2%</td><td class="num">12,500</td><td class="num">+1.5%</td><td class="num">17</td></tr>
+            <tr><td><b>4T25</b><div class="cat">18 feb 2026</div></td><td class="num">282,849</td><td class="num">+3.0%</td><td class="num">+3.3%</td><td class="num">+0.6%</td><td class="num">10.5%</td><td class="num">14,600</td><td class="num">−3.9%</td><td class="num">115</td></tr>
+            <tr><td><b>3T25</b><div class="cat">28 oct 2025</div></td><td class="num">241,520</td><td class="num">+4.9%</td><td class="num">+3.9%</td><td class="num">+0.6%</td><td class="num">10.5% <span class="muted">(−10 pb)</span></td><td class="num">11,747</td><td class="num">−9.2%</td><td class="num"><span class="muted">s/d</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="wnote">Año 2025 completo: ingresos de 1,011,598 millones (+5.6%), utilidad neta de 49,891 millones (−7.3%) y 186 tiendas nuevas. Fuentes: <a href="https://files.walmex.mx/upload/files/2026/ES/Trimestral/2T26/WALMEX%202T26%20BMV.pdf">reporte 2T26 a la BMV</a>, <a href="https://files.walmex.mx/upload/files/2025/ES/Trimestral/4T25/Walmex_Webcast_4T25.pdf">presentación 4T25</a> y resúmenes trimestrales de <a href="https://estrategia.vepormas.com/wp-content/uploads/2026/07/Trimestral-WALMEX-2T26.pdf">Vector Análisis</a>.</p>
+    </section>
+
+    <section aria-labelledby="h-wimp">
+      <div class="panel">
+        <h2 id="h-wimp">Lo que significa para tus compras</h2>
+        <div class="risks">
+          <div class="risk"><span class="lvl alto">Alto</span><div><h3>Walmex invertirá 43,000 millones de pesos en 2026 (+10%)</h3><p class="aff">Demanda · Estructura Metálica, Sistema Contra Incendio, Pintura, Sonido, PTARs</p><p>El 42% va a remodelaciones y mantenimiento, 26% a tiendas y clubes nuevos, 24% a cadena de suministro y 8% a tecnología. Hay dos centros de distribución automatizados en Guanajuato y Tlaxcala para 2027. En 2025 invirtió 39,000 de los 41,800 millones planeados por retrasos en tiendas y tecnología.</p><p class="do"><b>Qué haría:</b> pedir al área de construcción el calendario de remodelaciones y de los dos CEDIS, y usarlo para consolidar volumen de estructura y SCI en acuerdos anuales. En un CEDIS el precio por kg de estructura pesa más que en una tienda.</p><span class="src">Expansión y Bloomberg Línea, 25 mar 2026 (Walmex Day)</span></div></div>
+          <div class="risk"><span class="lvl medio">Medio</span><div><h3>Las aperturas se juntan al final del año</h3><p class="aff">Capacidad de proveedores · Estructura Metálica, SCI, Equipo Hidroneumático</p><p>De las 186 tiendas que abrió en 2025, 115 fueron en el cuarto trimestre. En el primer semestre de 2026 lleva 40 (17 y 23), así que el cierre de 2026 viene cargado.</p><p class="do"><b>Qué haría:</b> confirmar ya con los fabricantes de estructura y SCI su capacidad para noviembre y diciembre, y para 2027 reservarla desde el segundo trimestre.</p><span class="src">Presentación 4T25, 18 feb 2026 · reportes 1T26 y 2T26</span></div></div>
+          <div class="risk"><span class="lvl medio">Medio</span><div><h3>Márgenes apretados: espera presión por ahorros</h3><p class="aff">Presupuesto · todas tus categorías</p><p>En el 2T26 los ingresos crecieron 1.9%, la utilidad neta bajó 0.7% y el margen EBITDA cayó a 9.4% por el salario mínimo y un consumo débil. La acción baja cerca de 18% en 12 meses.</p><p class="do"><b>Qué haría:</b> tener listas propuestas de ahorro con evidencia INEGI (escalatorias atadas a índice y consolidación de volumen) y prever que algunos proyectos se difieran, como pasó en 2025.</p><span class="src">Walmex 2T26, 22 jul 2026 · Vector Análisis</span></div></div>
+        </div>
+      </div>
+    </section>
+    <p class="src">Solo información pública; no es recomendación de inversión. Si operas la acción, revisa antes los periodos de restricción de la política interna para colaboradores.</p>
+  </div>
+
   <footer>
     <p>Actualizado el lunes 5 de octubre de 2026. Se actualiza solo cada lunes a las 7:00 am (hora del centro de México).</p>
-    <p>Categorías tomadas de tu CV (Gerente de Compras GNFR Construcciones). Datos de fuentes públicas (INEGI vía informes CMIC CEICO como fuente principal; Banxico para tipo de cambio; LME, PetroIntelligence y Drewry solo como referencia). Úsalo como referencia de mercado, no como cotización.</p>
+    <p>Categorías: Estructura Metálica, Sistema Contra Incendio, ANSUL, Pintura, Equipo Hidroneumático, PTARs y Sonido, solo México. Datos de fuentes públicas (INEGI vía informes CMIC CEICO como fuente principal; Banxico para tipo de cambio; LME, PetroIntelligence y Drewry solo como referencia). Úsalo como referencia de mercado, no como cotización.</p>
   </footer>
+</div>
+<div class="op-back" id="op" hidden>
+  <div class="op-dlg" role="dialog" aria-modal="true" aria-labelledby="op-title">
+    <div class="op-bar">
+      <span class="op-msg" id="opMsg" role="status">Resumen de una página con lo importante de la semana.</span>
+      <div class="op-acts">
+        <button class="opb pri" id="opCopy">Copiar para correo</button>
+        <button class="opb" id="opPrint" hidden>Imprimir o guardar PDF</button>
+        <button class="opb" id="opClose">Cerrar</button>
+      </div>
+    </div>
+    <article class="op-sheet" id="opSheet"></article>
+  </div>
 </div>
 <div class="tip" id="tip" hidden></div>
 
@@ -331,15 +602,14 @@ const DATA = [
   {id:"fx", cat:"Tipo de cambio", name:"Dólar FIX (MXN por USD)", short:"Dólar FIX", fx:true, now:18.3688, ya:18.40, yaApprox:true, recent:null, src:"Banxico / N+", url:"https://www.nmas.com.mx/economia/dolar/tipo-de-cambio-peso-dolar-estadounidense-mexico-viernes-2-octubre-2026/"},
   {id:"acero_inegi", cat:"Acero · INEGI", name:"INEGI acero: varilla corrugada", short:"Acero México (INEGI)", yoyPct:7.77, asOf:"jul 26", recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/08_Agosto/CEICO_Informe_Agosto_2026_Variacion_precio_materiales.pdf"},
   {id:"soldadura_inegi", cat:"Acero · INEGI", name:"INEGI soldaduras", short:"Soldaduras (INEGI)", yoyPct:8.53, asOf:"ago 26", recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"},
+  {id:"perfiles_inegi", cat:"Acero · INEGI", name:"INEGI acero: perfiles de hierro y acero", short:"Perfiles (INEGI)", yoyPct:5.96, asOf:"ene 26", stale:true, recent:null, src:"INEGI vía CMIC CEICO (solo se publica cuando entra al top 10 del mes)", url:"https://www.cmic.org.mx/ceico/registros/carrusel/portadas/CEICO_Informe_Febrero_2026_Variacion_precio_materiales2.pdf"},
   {id:"naves_inegi", cat:"Obra · INEGI", name:"Naves y plantas industriales (costo total de obra)", short:"Naves industriales (INEGI)", yoyPct:5.1, asOf:"ago 26", recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"},
   {id:"cobre_inegi", cat:"Insumos · INEGI", name:"Tubos de cobre", short:"Tubo de cobre (INEGI)", yoyPct:22.27, asOf:"ago 26", recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"},
   {id:"cables_inegi", cat:"Insumos · INEGI", name:"Alambres y cables con aislamiento", short:"Cables (INEGI)", yoyPct:17.15, asOf:"ago 26", recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"},
   {id:"tubplast_inegi", cat:"Insumos · INEGI", name:"Tubería de plástico (PVC, PEAD)", short:"Tubería plástica (INEGI)", yoyPct:16.35, asOf:"ago 26", recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"},
-  {id:"aluminio_inegi", cat:"Insumos · INEGI", name:"Aluminio laminado (perfiles, lámina)", short:"Aluminio (INEGI)", yoyPct:11.62, asOf:"ago 26", recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"},
   {id:"diesel_inegi", cat:"Insumos · INEGI", name:"Diésel", short:"Diésel (INEGI)", yoyPct:17.04, asOf:"jul 26", recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/08_Agosto/CEICO_Informe_Agosto_2026_Variacion_precio_materiales.pdf"},
   {id:"concreto_inegi", cat:"Insumos · INEGI", name:"Concreto premezclado", short:"Concreto (INEGI)", yoyPct:6.83, asOf:"jun 26", recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/07_Julio/CEICO_Informe_Julio_2026_Variacion_precio_materiales.pdf"},
   {id:"construccion_inpp", cat:"Obra · INEGI", name:"Construcción (índice general de precios)", short:"Construcción (INEGI)", yoyPct:5.91, asOf:"ago 26", recent:null, src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"},
-  {id:"prodmet_inpp", cat:"Industria · INEGI", name:"Productos metálicos (puertas, tanques, herrajes, inoxidable)", short:"Productos metálicos (INEGI)", yoyPct:2.25, asOf:"ago 26", recent:null, src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"},
   {id:"minnomet_inpp", cat:"Industria · INEGI", name:"Minerales no metálicos (cerámica sanitaria, vidrio, cemento)", short:"Minerales no metálicos (INEGI)", yoyPct:5.26, asOf:"ago 26", recent:null, src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"},
   {id:"quimica_inpp", cat:"Industria · INEGI", name:"Industria química (pigmentos, resinas, agentes)", short:"Química (INEGI)", yoyPct:1.3, asOf:"ago 26", recent:null, src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"},
   {id:"derivpetro_inpp", cat:"Industria · INEGI", name:"Derivados del petróleo (solventes, asfaltos)", short:"Derivados del petróleo (INEGI)", yoyPct:8.62, asOf:"ago 26", recent:null, src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"},
@@ -347,42 +617,108 @@ const DATA = [
   {id:"maquinaria_inpp", cat:"Industria · INEGI", name:"Maquinaria y equipo (bombas, compresores, sopladores)", short:"Maquinaria y equipo (INEGI)", yoyPct:0.19, asOf:"ago 26", recent:null, src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"},
   {id:"electrico_inpp", cat:"Industria · INEGI", name:"Equipo eléctrico (motores, tableros, luminarias)", short:"Equipo eléctrico (INEGI)", yoyPct:1.77, asOf:"ago 26", recent:null, src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"},
   {id:"electronica_inpp", cat:"Industria · INEGI", name:"Equipo electrónico (audio, bocinas, amplificadores)", short:"Equipo electrónico (INEGI)", yoyPct:-4.47, asOf:"ago 26", recent:null, src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"},
+  {id:"profesionales_inpp", cat:"Servicios · INEGI", name:"Servicios profesionales, científicos y técnicos (sector 54, incluye arquitectura e ingeniería 5413)", short:"Servicios profesionales (INEGI)", yoyPct:3.90, asOf:"ago 26", recent:null, src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"},
   {id:"inpc", cat:"Macro · INEGI", name:"Inflación general (INPC)", short:"INPC (INEGI)", yoyPct:3.42, asOf:"1a q. sep 26", recent:null, src:"INEGI", url:"https://www.inegi.org.mx/temas/inpc/"},
-  {id:"cemento_inegi", cat:"Insumos · INEGI", name:"Cemento", short:"Cemento (INEGI)", yoyPct:5.55, asOf:"sep 25", stale:true, recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2025/10_Octubre/CEICO_Informe_Octubre_2025_Variacion_precio_materiales.pdf"},
   {id:"pinturas_inegi", cat:"Insumos · INEGI", name:"Pinturas", short:"Pinturas (INEGI)", yoyPct:3.9, asOf:"ago 25", stale:true, recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2025/09_Septiembre/CEICO_Informe_Septiembre_2025_Variacion_precio_materiales.pdf"},
-  {id:"imper_inegi", cat:"Insumos · INEGI", name:"Impermeabilizantes", short:"Impermeabilizantes (INEGI)", yoyPct:4.6, asOf:"sep 25", stale:true, recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2025/10_Octubre/CEICO_Informe_Octubre_2025_Variacion_precio_materiales.pdf"},
-  {id:"bano_inegi", cat:"Insumos · INEGI", name:"Muebles y accesorios para baño", short:"Muebles de baño (INEGI)", yoyPct:1.8, asOf:"ago 25", stale:true, recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2025/09_Septiembre/CEICO_Informe_Septiembre_2025_Variacion_precio_materiales.pdf"},
-  {id:"vidrio_inegi", cat:"Insumos · INEGI", name:"Vidrio plano", short:"Vidrio (INEGI)", yoyPct:-2.7, asOf:"ago 25", stale:true, recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2025/09_Septiembre/CEICO_Informe_Septiembre_2025_Variacion_precio_materiales.pdf"},
   {id:"bombas_inegi", cat:"Insumos · INEGI", name:"Bombas", short:"Bombas (INEGI)", yoyPct:11.0, asOf:"may 25", stale:true, recent:null, src:"INEGI vía CMIC CEICO", url:"https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2025/06_Junio/CEICO_Informe_Junio_2025_Variacion_precio_materiales.pdf"},
   {id:"cobre", ref:true, cat:"Metales (ref. internacional)", name:"Cobre LME", short:"Cobre", cur:"USD", unit:"t", now:14286, ya:10990, yaApprox:true, recent:-3, recentLbl:"semana", src:"LME vía Business Recorder", url:"https://brecorder.com/news/40442691/copper-ticks-up-as-fed-rate-hike-bets-cool"},
-  {id:"aluminio", ref:true, cat:"Metales (ref. internacional)", name:"Aluminio LME", short:"Aluminio", cur:"USD", unit:"t", now:3123.5, ya:2720, yaApprox:true, recent:-5.7, recentLbl:"mes", src:"Trading Economics", url:"https://tradingeconomics.com/commodity/aluminum"},
-  {id:"zinc", ref:true, cat:"Metales (ref. internacional)", name:"Zinc LME (galvanizado, latón)", short:"Zinc", cur:"USD", unit:"t", now:3708.7, ya:3007, yaApprox:true, recent:-6.7, recentLbl:"mes", src:"Trading Economics", url:"https://tradingeconomics.com/commodity/zinc"},
-  {id:"niquel", ref:true, cat:"Metales (ref. internacional)", name:"Níquel LME (acero inoxidable)", short:"Níquel", cur:"USD", unit:"t", now:15597, ya:15466, yaApprox:true, recent:-6.6, recentLbl:"mes", src:"Trading Economics", url:"https://tradingeconomics.com/commodity/nickel"},
   {id:"diesel", cat:"Combustibles", name:"Diésel promedio nacional", short:"Diésel", cur:"MXN", unit:"L", now:27.007, ya:26.213, recent:0, recentLbl:"semana", src:"PetroIntelligence / Excélsior", url:"https://lineadirectaportal.com/mexico/precios-de-las-gasolinas-asi-el-precio-promedio-en-el-primer-viernes-de-octubre-de-2026-2026-10-02__1712947"},
   {id:"brent", ref:true, cat:"Energía", name:"Petróleo Brent (solventes, resinas)", short:"Brent", cur:"USD", unit:"bbl", now:101.73, ya:64.5, yaApprox:true, recent:null, src:"Valor", url:"https://www.onevalor.com/oil-gas-prices/"},
   {id:"resinas", cat:"Químicos", name:"Resinas PVC / PEAD", short:"PVC / PEAD", qual:"PE estable; PVC a la baja en septiembre", src:"Plastics News", url:"https://www.plasticsnews.com/news/pvc-ps-prices-slide-september-polypropylene-and-pe-hold-steady/"},
-  {id:"tio2", cat:"Químicos", name:"Dióxido de titanio (pigmento de pintura)", short:"TiO2", qual:"Productores sostienen alzas pese a demanda débil", src:"Tronox / prensa", url:"https://markets.financialcontent.com/stocks/article/marketminute-2026-2-20-supply-side-discipline-tronox-defies-tepid-demand-to-push-titanium-dioxide-pricing-higher"},
-  {id:"contenedor", cat:"Logística", name:"Contenedor nuevo 40' HC (Norteamérica)", short:"Contenedor nuevo", cur:"USD", unit:"pza", now:3025, ya:null, recent:null, src:"Container Management", url:"https://www.containermgt.com/how-much-does-a-shipping-container-cost"},
-  {id:"flete", cat:"Logística", name:"Flete Asia → Manzanillo (40')", short:"Flete a Manzanillo", qual:"Rango de mercado US$2,500–5,500; registra tus cotizaciones para ver la tendencia real", src:"GetCastores / CM Logistics", url:"https://getcastores.mx/blog/importar-china-manzanillo-costos-tiempos-errores/"}
+  {id:"tio2", cat:"Químicos", name:"Dióxido de titanio (pigmento de pintura)", short:"TiO2", qual:"China, rutilo CNY 13,650/t a fin de agosto (entre +3% y +8% anual); sexta alza conjunta de 2026 en septiembre", src:"SMM, 2 sep 2026 · Blooming, 15 sep 2026", url:"https://news.metal.com/newscontent/104093991-chinas-tio2-production-rises-slightly-in-august-prices-decline-amid-market-weakness"},
+  {id:"flete", cat:"Logística", name:"Flete Asia → Manzanillo (40')", short:"Flete a Manzanillo", qual:"Rango de mercado US$2,500–5,500 por contenedor de 40'", src:"GetCastores / CM Logistics", url:"https://getcastores.mx/blog/importar-china-manzanillo-costos-tiempos-errores/"}
+];
+// Materias primas generales (una línea por materia prima). main = dato principal (INEGI cuando existe), more = datos de apoyo, aff = [categoría, en qué parte pega].
+const MP = [
+  {name:"Acero", short:"Acero", main:"acero_inegi", more:["soldadura_inegi","perfiles_inegi"], aff:[["Estructura Metálica","perfiles, lámina y placa"],["Sistema Contra Incendio","tubería y soportes"],["Equipo Hidroneumático","tanques y bases"],["ANSUL","cilindros y campana"]]},
+  {name:"Cobre", short:"Cobre", main:"cobre_inegi", more:["cables_inegi","cobre"], aff:[["Equipo Hidroneumático","motores y cableado"],["Sistema Contra Incendio","cableado y válvulas de bronce"],["PTARs","motores y cableado"],["Sonido","cableado"]]},
+  {name:"Plásticos (PVC, CPVC, PEAD)", short:"Plásticos", main:"tubplast_inegi", more:["plastico_inpp","resinas"], aff:[["PTARs","tubería y tanques"],["Sistema Contra Incendio","tubería CPVC"],["Equipo Hidroneumático","tubería y conexiones"]]},
+  {name:"Químicos y pigmentos", short:"Químicos", main:"quimica_inpp", more:["tio2","pinturas_inegi"], aff:[["Pintura","resinas y dióxido de titanio"],["ANSUL","agente químico"],["PTARs","químicos de tratamiento"]]},
+  {name:"Solventes y petróleo", short:"Solventes", main:"derivpetro_inpp", more:["brent"], aff:[["Pintura","solventes"],["PTARs","tubería y energía"]]},
+  {name:"Concreto y minerales", short:"Concreto", main:"minnomet_inpp", more:["concreto_inegi"], aff:[["PTARs","obra civil y tanques"]]},
+  {name:"Motores y equipo eléctrico", short:"Equipo eléctrico", main:"electrico_inpp", more:[], aff:[["Equipo Hidroneumático","motores y tableros"],["Sistema Contra Incendio","bomba eléctrica y tablero"],["PTARs","sopladores y control"],["Sonido","amplificación"]]},
+  {name:"Bombas y maquinaria", short:"Bombas", main:"maquinaria_inpp", more:["bombas_inegi"], aff:[["Equipo Hidroneumático","bombas"],["Sistema Contra Incendio","bomba contra incendio"],["PTARs","sopladores y bombas"]]},
+  {name:"Electrónica", short:"Electrónica", main:"electronica_inpp", more:[], aff:[["Sonido","bocinas y amplificadores"]]},
+  {name:"Diésel y fletes", short:"Diésel", main:"diesel_inegi", more:["diesel","flete"], but:["Proyectista"], aff:[["Todas","flete a obra"],["Sonido","importación por Manzanillo"],["ANSUL","refacciones importadas"]]},
+  {name:"Dólar", short:"Dólar", main:"fx", more:[], aff:[["Sonido","equipo importado"],["ANSUL","equipo y agente en USD"],["Sistema Contra Incendio","rociadores y válvulas"]]},
+  {name:"Costo de obra (naves)", short:"Obra (naves)", main:"naves_inegi", more:["construccion_inpp"], aff:[["Estructura Metálica","precio por kg"],["PTARs","obra civil"]]},
+  {name:"Honorarios de arquitectura e ingeniería", short:"Honorarios", main:"profesionales_inpp", more:[], aff:[["Proyectista","proyecto ejecutivo e ingenierías"]]}
 ];
 const NOTE_TARIFF = "Aranceles: EE.UU. 50% a acero y aluminio mexicano; México hasta 35–50% a importaciones de Asia sin tratado.";
 // Categorías del CV (Walmart GNFR Construcciones). drivers = ids de DATA; extra = riesgo sin precio que eleva el nivel
-// Canasta de elementos representativos por categoría: [id del índice, peso %, elemento]
+// Canasta mensual INEGI por categoría: [índice, peso %]. Índices: subsectores del INPP (variación mensual), construcción, tipo de cambio y precio por kg de estructura.
 const CATS = [
-  {name:"Estructura Metálica", basket:[["naves_inegi",100,"Nave fabricada y montada (todo el paquete)"]], also:["acero_inegi","soldadura_inegi"], note:"Una sola partida en MXN por kg. Se mueve con el índice INEGI de naves industriales; acero y soldadura como contexto."},
-  {name:"Anclaje", basket:[["acero_inegi",85,"Redondo y ancla roscada"],["prodmet_inpp",15,"Tuercas, rondanas y placa"]], note:"Barras y anclas siguen al acero mexicano (INEGI)."},
-  {name:"Sistema Contra Incendio", basket:[["acero_inegi",30,"Tubería de acero cédula 40"],["cobre_inegi",10,"Tubo de cobre"],["tubplast_inegi",10,"Tubería CPVC"],["maquinaria_inpp",25,"Bomba contra incendio"],["electrico_inpp",15,"Tablero y motor"],["fx",10,"Rociadores y válvulas importados"]], note:"Tubería, bomba y tablero; rociadores y válvulas en buena parte importados."},
-  {name:"ANSUL", basket:[["prodmet_inpp",35,"Cilindros, tubería y campana de inoxidable"],["quimica_inpp",20,"Agente químico húmedo"],["fx",35,"Equipo importado cotizado en USD"],["inpc",10,"Instalación y servicio"]], extra:"medio", note:"Sin índice INEGI propio: se arma con sus elementos. El tipo de cambio pesa más."},
-  {name:"Pintura", basket:[["quimica_inpp",55,"Pigmentos, resinas y aditivos"],["derivpetro_inpp",30,"Solventes"],["prodmet_inpp",5,"Envase metálico"],["diesel_inegi",10,"Flete"]], note:"El índice INEGI de pinturas dejó de salir en los informes; se usan sus insumos."},
-  {name:"Equipo Hidroneumático", basket:[["maquinaria_inpp",45,"Bombas"],["electrico_inpp",20,"Motores y tablero"],["prodmet_inpp",15,"Tanque precargado"],["cables_inegi",10,"Cableado"],["cobre_inegi",10,"Tubo de cobre"]], note:"Bombas y motores casi estables; cable y cobre suben fuerte."},
-  {name:"PTARs", basket:[["concreto_inegi",30,"Obra civil"],["tubplast_inegi",20,"Tubería y tanques plásticos"],["maquinaria_inpp",25,"Sopladores y bombas"],["electrico_inpp",15,"Tableros y control"],["diesel_inegi",10,"Fletes y maniobras"]], note:"Obra civil, tubería plástica y equipo electromecánico."},
-  {name:"Trampas de Grasa", basket:[["plastico_inpp",55,"Cuerpo de polietileno"],["prodmet_inpp",30,"Modelos de acero inoxidable"],["tubplast_inegi",15,"Conexiones"]], note:"Polietileno e inoxidable."},
-  {name:"Refacciones de Baños", basket:[["minnomet_inpp",40,"WC y lavabos cerámicos"],["cobre_inegi",30,"Grifería de latón"],["plastico_inpp",20,"Mecanismos y asientos"],["tubplast_inegi",10,"Conexiones"]], note:"Cerámica y grifería; el latón sigue al cobre."},
-  {name:"Puertas", basket:[["aluminio_inegi",35,"Perfil de aluminio"],["prodmet_inpp",30,"Puertas y marcos metálicos"],["minnomet_inpp",20,"Vidrio"],["acero_inegi",15,"Lámina y refuerzos"]], note:"Aluminio +11.6% es lo que más empuja."},
-  {name:"Sonido", basket:[["electronica_inpp",55,"Bocinas y amplificadores"],["cables_inegi",15,"Cableado"],["fx",30,"Equipo importado en USD"]], extra:"medio", note:"La electrónica baja de precio en México, pero importar de Asia sin tratado paga hasta 35–50% de arancel."},
-  {name:"Contenedores Marítimos", basket:[["acero_inegi",45,"Acero corten"],["prodmet_inpp",25,"Fabricación y herrajes"],["fx",30,"Caja importada en USD"]], extra:"medio", note:"Cajas nuevas fabricadas en China; aranceles y flete a Manzanillo pesan aparte."},
-  {name:"Casetas Móviles", basket:[["prodmet_inpp",40,"Estructura y lámina"],["aluminio_inegi",15,"Ventanas y perfiles"],["plastico_inpp",20,"Paneles y aislante"],["electrico_inpp",15,"Instalación eléctrica"],["inpc",10,"Mano de obra"]], note:"Estructura de acero, paneles y aluminio."}
+  {name:"Estructura Metálica", idx:[["em",100,"Acero, fabricación y montaje"]], note:"Precio por kg de nave fabricada y montada, movido con INEGI de construcción y naves industriales."},
+  {name:"Sistema Contra Incendio", idx:[["em",35],["maq",25],["electr",20],["plast",10],["fx",10]], note:"Tubería y soportes de acero, bomba, tablero y CPVC; rociadores y válvulas en parte importados."},
+  {name:"ANSUL", idx:[["em",35],["fx",35],["quim",20],["constr",10]], extra:"medio", note:"Cilindros y campana, agente químico y equipo cotizado en USD."},
+  {name:"Pintura", idx:[["quim",55],["petro",45]], note:"Solo suministro. Resinas y dióxido de titanio (químicos) y solventes (petróleo)."},
+  {name:"Equipo Hidroneumático", idx:[["maq",45],["electr",30],["em",25]], note:"Bombas, motores y tablero, tanque y base de acero."},
+  {name:"PTARs", idx:[["minnomet",30],["maq",25],["plast",20],["electr",15],["petro",10]], note:"Obra civil, sopladores y bombas, tubería plástica y control."},
+  {name:"Sonido", idx:[["electron",55],["fx",30],["electr",15]], extra:"medio", note:"Electrónica importada; aranceles a Asia sin tratado de hasta 35–50% van aparte."},
+  // Proyectista (Andres, 7 oct 2026): pidió INEGI rama 5413. El boletín mensual publica el sector 54, que la incluye; la rama sola no se puede leer desde aquí.
+  {name:"Proyectista", idx:[["prof",100,"Honorarios profesionales"]], note:"Proyecto arquitectónico, ejecutivo e ingenierías. Se mide con INEGI servicios profesionales, científicos y técnicos (sector 54, que incluye la rama 5413 de arquitectura e ingeniería)."}
 ];
+const IDX_LBL = {em:"Acero", quim:"Químicos y pigmentos", petro:"Solventes (petróleo)", plast:"Plásticos", minnomet:"Concreto y minerales", maq:"Bombas y maquinaria", electr:"Motores y equipo eléctrico", electron:"Electrónica", prof:"Servicios profesionales", fx:"Dólar", constr:"Mano de obra y obra", metbas:"Metálicas básicas", prodmet:"Productos metálicos"};
+// TCO: estructura típica del costo total en la vida útil (% del total, estimada con referencias de la industria, no de contratos).
+// Partes: adq compra · log flete y logística · ins instalación · ope operación (energía, agua, consumibles) · mto mantenimiento y refacciones · cum cumplimiento (normas, pruebas, seguros) · fin reposición y retiro.
+// Cada parte se mueve con una mezcla de índices [clave, peso]; "cat" es la canasta INEGI de la categoría. d sobrescribe la mezcla de TCO_DEF.
+const TCO_COMP = {adq:"Compra", log:"Flete y logística", ins:"Instalación", ope:"Operación", mto:"Mantenimiento", cum:"Cumplimiento", fin:"Reposición y retiro"};
+const TCO_DEF = {adq:[["cat",100]], log:[["trans",70],["diesel",30]], ins:[["mo",60],["constr",40]], ope:[["energia",100]], mto:[["mo",45],["serv",35],["cat",20]], cum:[["serv",50],["inpc",50]], fin:[["inpc",100]]};
+// Índices que no salen de la colección "series"; la rutina semanal los actualiza.
+const TCO_DRV = {
+  mo:      {lbl:"Mano de obra (salario promedio IMSS)", y12:6.7, asOf:"ago 26", src:"IMSS, salario base de cotización promedio, $673.1 diarios", url:"https://www.imss.gob.mx/sites/all/statics/i2f_news/2026-8-31%20Boletin%20Afiliacion%20IMSS.pdf"},
+  energia: {lbl:"Energía eléctrica, agua y gas (INPP)", y12:-6.57, asOf:"ago 26", src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"},
+  trans:   {lbl:"Transporte y almacenamiento (INPP)", y12:4.90, asOf:"ago 26", src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"},
+  serv:    {lbl:"Otros servicios, incluye reparación (INPP)", y12:5.56, asOf:"ago 26", src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"}
+};
+// Notas fijas del consultor para la lectura semanal (las actualiza la rutina).
+const TCO_NOTES = [
+  "La jornada de 40 horas ya es ley: baja de 48 a 46 horas en enero de 2027 y llega a 40 en 2030, con registro electrónico de asistencia obligatorio desde 2027. Para una cuadrilla de 48 horas, el costo por hora sube entre 4% y 5% cada año solo por esto. En pólizas de mantenimiento e instalación que pasen de 2026, pide que el precio ya lo incluya para evitar reclamos de ajuste.",
+  "El salario mínimo subió 13% en 2026 ($315.04 diarios) y el siguiente aumento se anuncia en diciembre. Pega más en servicios con mucha mano de obra, como las pólizas de mantenimiento de SCI y ANSUL y los ayudantes de instalación: deja en tu presupuesto 2027 un ajuste de mano de obra arriba de la inflación."
+];
+const TCO = {
+  "Estructura Metálica": {h:20, p:{adq:66, log:3, ins:13, mto:13, cum:3, fin:2}, d:{mto:[["mo",50],["quim",30],["serv",20]]},
+    ask:["Precio por kg con acero, fabricación, flete y montaje por separado.","Sistema de pintura anticorrosiva especificado (micras y años de garantía): define cuánto repintas en 20 años.","Escalatoria atada a INEGI (construcción y naves) en lugar de ajustes abiertos."],
+    risk:"El acero es casi todo el costo. El costo oculto está en el repintado y la revisión de tornillería durante la vida de la nave."},
+  "Sistema Contra Incendio": {h:15, p:{adq:34, log:3, ins:22, ope:4, mto:20, cum:14, fin:3},
+    ask:["Pruebas e inspección NFPA 25 cotizadas junto con el suministro.","Rociadores y válvulas listados UL/FM con refacciones disponibles en México.","Póliza de mantenimiento con precio fijo por 3 años."],
+    risk:"Pruebas, inspecciones y dictámenes suman un tercio del costo. Un hallazgo de la aseguradora obliga a gastar fuera de presupuesto."},
+  "ANSUL": {h:12, p:{adq:34, log:3, ins:10, mto:30, cum:15, fin:8}, d:{mto:[["mo",35],["serv",25],["quim",20],["fx",20]]},
+    ask:["Inspección semestral, fusibles y recarga de agente con precio fijo por 2 a 3 años.","Lista de refacciones en USD con tipo de cambio pactado.","Prueba hidrostática de cilindros (cada 12 años) dentro de la propuesta."],
+    risk:"El mantenimiento y la certificación pesan más que el equipo, y el agente y las refacciones se cotizan en dólares."},
+  // Pintura: Andres solo suministra el material (6 oct 2026); la aplicación no es suya, así que no lleva instalación ni mantenimiento.
+  "Pintura": {h:5, p:{adq:84, log:10, cum:3, fin:3},
+    ask:["Precio por litro con rendimiento teórico (m² por litro al espesor especificado) y % de sólidos en volumen: compara costo por m² cubierto, no por litro.","Lista de precios con vigencia de 90 días y ajuste atado a INEGI (química y derivados del petróleo), no aumentos abiertos por pigmento o solvente.","Flete a obra incluido, entregas parciales y caducidad mínima del lote al entregar, para no pagar merma."],
+    risk:"Solo suministras el material, así que tu costo total es casi todo el precio de la pintura y se mueve con resinas, pigmento (dióxido de titanio) y solventes. El riesgo es comparar por litro: una pintura con menos sólidos rinde menos m² y sale más cara por superficie cubierta."},
+  "Equipo Hidroneumático": {h:10, p:{adq:24, log:2, ins:8, ope:46, mto:15, cum:1, fin:4},
+    ask:["Curva de la bomba y consumo en kWh por año en el punto de operación.","Variador de frecuencia incluido o cotizado aparte.","Comparar ofertas a 10 años: precio, energía y mantenimiento."],
+    risk:"Casi la mitad del costo es electricidad. Una bomba 5% menos eficiente se come el ahorro de la compra."},
+  "PTARs": {h:15, p:{adq:30, log:3, ins:12, ope:32, mto:13, cum:8, fin:2}, d:{ope:[["energia",45],["quim",30],["mo",25]]},
+    ask:["Costo mensual de operación garantizado (energía, químicos, lodos y operador).","Cumplimiento NOM-001/002-SEMARNAT con análisis de laboratorio incluidos el primer año.","Penalización si el agua tratada no cumple."],
+    risk:"Operar la planta cuesta más que comprarla, y un incumplimiento ambiental trae multas."},
+  "Sonido": {h:7, p:{adq:44, log:3, ins:20, ope:5, mto:13, cum:6, fin:9}, d:{cum:[["inpc",100]], fin:[["fx",50],["inpc",50]]},
+    ask:["Precio con cableado e instalación, no solo equipo.","Soporte y refacciones en México por al menos 5 años.","País de origen (T-MEC o no), por el riesgo de aranceles."],
+    risk:"Equipo importado en dólares que se vuelve obsoleto antes que el resto de la tienda."},
+  // Proyectista: servicio. Compra = honorarios; flete = viáticos y visitas a obra; cumplimiento = DRO y corresponsables, permisos y seguro de responsabilidad profesional.
+  "Proyectista": {h:2, p:{adq:83, log:5, cum:12}, d:{log:[["trans",50],["inpc",50]]},
+    ask:["Honorarios por m² construido o por entregable (anteproyecto, ejecutivo, ingenierías), con el número de revisiones incluidas, no por hora abierta.","Seguro de responsabilidad civil profesional y compromiso de corregir sin costo los errores u omisiones que salgan en obra.","Ajuste anual atado a INEGI servicios profesionales, y visitas o asistencia técnica en obra con precio unitario por visita."],
+    risk:"Los honorarios son casi todo su costo y siguen al salario de los despachos; la jornada de 40 horas también encarece su hora. El costo grande no está aquí: un error u omisión del proyecto se paga en obra con adicionales y retrabajos de las demás categorías, y eso este índice no lo mide."}
+};
+// Íconos de línea (24×24) por categoría
+const ICON_PATHS = {
+  "Estructura Metálica":'<path d="M4 4h16M4 20h16M12 4v16"/>',
+  "Sistema Contra Incendio":'<path d="M4 6h16M12 6v5"/><path d="M8 11h8l-1 3H9z"/><path d="M8 18l-1 2M12 18v2M16 18l1 2"/>',
+  "ANSUL":'<path d="M3 9h18l-3-5H6z"/><path d="M7 9v3M12 9v3M17 9v3"/><path d="M9 15c0 3 6 3 6 0s-3-3-3-3-3 0-3 3z"/>',
+  "Pintura":'<rect x="4" y="3" width="13" height="6" rx="1.5"/><path d="M17 6h3v5h-8v3"/><rect x="10" y="14" width="4" height="7" rx="1"/>',
+  "Equipo Hidroneumático":'<circle cx="10" cy="13" r="6"/><path d="M10 13l3-3M16 13h5M10 7V3M7 3h6"/>',
+  "PTARs":'<path d="M12 3c3 4 5 6.5 5 9a5 5 0 0 1-10 0c0-2.5 2-5 5-9z"/><path d="M3 20c2-1.3 4-1.3 6 0s4 1.3 6 0 4-1.3 6 0"/>',
+  "Sonido":'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/>',
+  "Proyectista":'<path d="M4 20V5l15 15z"/><path d="M8 16v-3.4l3.4 3.4z"/><path d="M15 4l5 5M14 9l3-3"/>'
+};
+const ICON_ALL = '<rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/>';
+const icon = n => `<span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICON_PATHS[n]||ICON_ALL}</svg></span>`;
+const BY = Object.fromEntries(DATA.map(d=>[d.id,d]));
+const escT = s => String(s??"").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 let cur = "MXN";
 try{ const s = localStorage.getItem("pc-cur"); if(s==="USD"||s==="MXN") cur = s; }catch(e){}
 
@@ -410,22 +746,24 @@ function render(){
   document.getElementById("btnMXN").setAttribute("aria-pressed", cur==="MXN");
   document.getElementById("btnUSD").setAttribute("aria-pressed", cur==="USD");
   renderCats();
-  document.getElementById("rows").innerHTML = DATA.map(d => {
-    if (d.yoyPct!=null) return `<tr><td><div class="cat">${d.cat}</div><div class="item">${d.name}</div></td><td class="num" colspan="2"><span class="src">índice INEGI, ${d.asOf}</span></td><td class="num">${pill(d.yoyPct)}</td><td class="num"><span class="muted">s/d</span></td><td class="src"><a href="${d.url}" target="_blank" rel="noopener">${d.src}</a></td></tr>`;
-    if (d.qual) return `<tr><td><div class="cat">${d.cat}</div><div class="item">${d.name}</div></td><td colspan="4" class="src" style="text-align:right">${d.qual}</td><td class="src"><a href="${d.url}" target="_blank" rel="noopener">${d.src}</a></td></tr>`;
-    const y = yoy(d);
-    return `<tr>
-      <td><div class="cat">${d.cat}</div><div class="item">${d.name}</div></td>
-      <td class="num">${fmt(conv(d,d.now,false))}${unitLbl(d)}</td>
-      <td class="num">${d.ya==null ? '<span class="muted">s/d</span>' : (d.yaApprox?'<span class="approx">≈</span> ':"") + fmt(conv(d,d.ya,true))}</td>
-      <td class="num">${pill(y)}</td>
-      <td class="num">${d.recent==null ? '<span class="muted">s/d</span>' : pill(d.recent) + `<div class="src">${d.recentLbl}</div>`}</td>
-      <td class="src"><a href="${d.url}" target="_blank" rel="noopener">${d.src}</a></td></tr>`;
+  const affTxt = m => { if (m.aff.some(a=>a[0]==="Todas")) return "todas tus categorías" + (m.but ? " menos " + m.but.join(" y ") : ""); const n = m.aff.map(a=>a[0]); return n.length<2 ? n[0] : n.slice(0,-1).join(", ") + " y " + n.at(-1); };
+  document.getElementById("rows").innerHTML = MP.map(m => {
+    const d = BY[m.main], y = yoy(d);
+    const when = d.yoyPct!=null ? `INEGI, ${d.asOf}${d.stale?", último dato":""}` : d.fx ? "Banxico" : d.src;
+    const val = d.yoyPct==null && d.now!=null ? `<div class="src">${d.fx?"$"+fmt(d.now)+" por USD":fmt(conv(d,d.now,false))+" "+cur+"/"+d.unit}</div>` : "";
+    const more = m.more.map(id => { const x = BY[id]; if (!x) return "";
+      const v = x.qual ? escT(x.qual) : (()=>{ const yy = yoy(x); return x.yoyPct!=null ? `${pct(yy)} <span class="muted">(${x.asOf}${x.stale?", último dato":""})</span>` : x.now!=null ? `${fmt(conv(x,x.now,false))} ${x.fx?"":cur+"/"+x.unit}${yy!=null?` · ${pct(yy)} anual`:""}${x.ref?' <span class="muted">(referencia)</span>':""}` : ""; })();
+      return `<li><a href="${x.url}" target="_blank" rel="noopener">${escT(x.short||x.name)}</a>: ${v}</li>`; }).join("");
+    return `<tr><td><div class="item">${m.name}</div><div class="cat"><a href="${d.url}" target="_blank" rel="noopener">${when}</a></div></td>
+      <td class="num">${pill(y)}${val}</td>
+      <td class="mp-more">${more?`<ul>${more}</ul>`:'<span class="muted">–</span>'}</td>
+      <td><div class="aff">${m.aff.map(([c,r])=>`<span>${icon(c==="Todas"?"":c)}<b>${c==="Todas"?"Todas"+(m.but?" menos "+m.but.join(", "):""):c}</b><small>${r}</small></span>`).join("")}</div></td></tr>`;
   }).join("");
 
   const al = [];
-  DATA.filter(d=>!d.qual && !d.ref && !d.stale).forEach(d => { const y = yoy(d); if (y!=null && y>5) al.push({lvl:y>25?"":"warn", txt:`<b>${d.name}</b> está ${pct(y)} contra hace un año${d.yoyPct!=null?" ("+d.asOf+")":` (en ${d.fx?"MXN":cur})`}.`}); });
-  DATA.filter(d=>!d.qual && !d.ref).forEach(d => { if (d.recent!=null && d.recent>5) al.push({lvl:"warn", txt:`<b>${d.name}</b> subió ${pct(d.recent)} en la última ${d.recentLbl}.`}); });
+  MP.forEach(m => { const d = BY[m.main]; if (d.stale || d.ref || d.qual) return; const y = yoy(d);
+    if (y!=null && y>5) al.push({lvl:y>25?"":"warn", txt:`<b>${m.name}</b> sube ${y.toFixed(1)}% contra hace un año (${d.yoyPct!=null?"INEGI, "+d.asOf:"en "+(d.fx?"MXN":cur)}). Afecta: ${affTxt(m)}.`}); });
+  MP.forEach(m => [m.main, ...m.more].forEach(id => { const d = BY[id]; if (d && !d.qual && !d.ref && d.recent!=null && d.recent>5) al.push({lvl:"warn", txt:`<b>${d.name}</b> subió ${pct(d.recent)} en la última ${d.recentLbl}. Afecta: ${affTxt(m)}.`}); }));
   al.sort((a,b)=>a.lvl.localeCompare(b.lvl));
   document.getElementById("alerts").innerHTML = al.length ? al.map(a=>`<div class="alert ${a.lvl}"><span class="tag">${a.lvl?"Arriba de 5%":"Arriba de 25%"}</span><div>${a.txt}</div></div>`).join("")
     : '<p class="muted">Nada sube más de 5% esta semana.</p>';
@@ -433,12 +771,13 @@ function render(){
 }
 
 function drawChart(){
-  const rows = DATA.filter(d=>!d.qual && !d.ref && !d.stale && (d.ya!=null || d.yoyPct!=null)).map(d=>({name:d.short||d.name.replace(" promedio nacional","").replace(" (MXN por USD)",""), v:yoy(d)})).sort((a,b)=>b.v-a.v);
-  const W=520, lw=150, rh=28, top=8, H=top+rows.length*rh+26;
-  const MAX=80, MIN=-10, x0=lw, x1=W-62;
+  const rows = MP.map(m=>({m, d:BY[m.main]})).filter(({d})=>!d.qual && !d.ref).map(({m,d})=>({name:m.short, v:yoy(d), stale:d.stale})).filter(r=>r.v!=null).sort((a,b)=>b.v-a.v);
+  const W=520, lw=130, rh=28, top=8, H=top+rows.length*rh+26;
+  const MAX=Math.max(10, Math.ceil(Math.max(...rows.map(r=>r.v))/10)*10), MIN=Math.min(-10, Math.floor(Math.min(...rows.map(r=>r.v))/10)*10), x0=lw, x1=W-62;
   const sx = v => x0 + (Math.max(MIN,Math.min(MAX,v))-MIN)/(MAX-MIN)*(x1-x0);
-  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Variación anual por commodity">`;
-  [0,20,40,60,80].forEach(t=>{ s+=`<line class="axis" x1="${sx(t)}" x2="${sx(t)}" y1="${top}" y2="${H-22}"/><text x="${sx(t)}" y="${H-6}" text-anchor="middle">${t}%</text>`; });
+  const ticks = []; for (let t=MIN; t<=MAX; t+=10) ticks.push(t);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Variación anual por materia prima">`;
+  ticks.forEach(t=>{ s+=`<line class="axis" x1="${sx(t)}" x2="${sx(t)}" y1="${top}" y2="${H-22}"/><text x="${sx(t)}" y="${H-6}" text-anchor="middle">${t}%</text>`; });
   s += `<line class="thr" x1="${sx(5)}" x2="${sx(5)}" y1="${top}" y2="${H-22}"/>`;
   rows.forEach((r,i)=>{
     const y = top+i*rh, bh=14, by=y+(rh-bh)/2, z=sx(0), xv=sx(r.v);
@@ -458,25 +797,8 @@ function drawChart(){
     g.addEventListener("mouseleave",()=>tip.hidden=true);
   });
 }
-const BY = Object.fromEntries(DATA.map(d=>[d.id,d]));
 const RANK = {bajo:0, medio:1, alto:2};
-function basketYoY(c){
-  let t=0, w=0;
-  c.basket.forEach(([id,wt]) => { const d = BY[id]; const y = d && !d.qual && !d.stale ? yoy(d) : null; if (y!=null){ t += wt*y; w += wt; } });
-  return w ? t/w : null;
-}
-function renderCats(){
-  document.getElementById("cats").innerHTML = CATS.map(c => {
-    const est = basketYoY(c);
-    let lvl = est==null ? "bajo" : est>25 ? "alto" : est>5 ? "medio" : "bajo";
-    if (c.extra && RANK[c.extra]>RANK[lvl]) lvl = c.extra;
-    const chip = (id, el, wt) => { const d = BY[id]; const y = d.qual ? null : yoy(d);
-      const v = y==null ? "" : ` <b class="${y>0.5?"u":y<-0.5?"d":""}">${pct(y)}</b>`;
-      return `<span>${el ? el + (wt?` <small>${wt}%</small>`:"") + `<small> · ${d.short||d.name}</small>` : d.short||d.name}${v}</span>`; };
-    const chips = c.basket.map(([id,wt,el]) => chip(id, el, c.basket.length>1?wt:0)).join("") + (c.also||[]).map(id=>chip(id)).join("");
-    return `<div class="catc"><div class="hd"><h3>${c.name}</h3><span class="lvl ${lvl}">${lvl}</span></div><div class="est">Variación anual estimada <b>${est==null?"s/d":pct(est)}</b></div><div class="drv">${chips}</div><p>${c.note}</p></div>`;
-  }).join("");
-}
+function renderCats(){ if (window.renderCatsSeries) return window.renderCatsSeries(); document.getElementById("cats").innerHTML = '<p class="muted">Cargando índices INEGI…</p>'; }
 function setCur(c){ cur=c; try{localStorage.setItem("pc-cur",c);}catch(e){} render(); window.renderSeries && window.renderSeries(); }
 document.getElementById("btnMXN").onclick=()=>setCur("MXN");
 document.getElementById("btnUSD").onclick=()=>setCur("USD");
@@ -510,7 +832,7 @@ function inCur(s, p){
   if (!isPrice(s) || s.cur===cur || s.cur==="pct") return p.v;
   return cur==="MXN" ? p.v*fxAt(p.m) : p.v/fxAt(p.m);
 }
-const unitOf = s => s.kind==="yoy" ? "% anual" : (isPrice(s) && s.cur!=="pct" ? `${cur}/${s.unit}` : s.unit);
+const unitOf = s => s.ulab ? s.ulab : s.kind==="yoy" ? "% anual" : (isPrice(s) && s.cur!=="pct" ? `${cur}/${s.unit}` : s.unit);
 const valAt = (id,m) => { const p = pointsOf(id); let best=null; p.forEach(q=>{ if (q.m<=m) best=q; }); return best; };
 
 // ---------- Estructura Metálica: precio por kg ----------
@@ -534,7 +856,6 @@ function emIndex(){
   if (k>=12){ const nv = valAt("inpp_naves_yoy", mom[k].m).v; const f = Math.pow((1+nv/100)/(out[k].v/out[k-12].v), 1/12); out = build(f, k-12, k); }
   return out;
 }
-const EMB_KEY = "pc-emb";
 // Precio de mercado estimado por kg (sin IVA), nave industrial típica, agosto 2026. Material: CYPE México (A572 Gr. 50 laminado); resto: rangos típicos de taller y montaje.
 const EM_MKT = { m:"2026-08", total:63, lo:56, hi:71, parts:[
   ["Suministro de acero (IPR, placa, polín, ángulo)", 29, "27–32"],
@@ -543,8 +864,6 @@ const EM_MKT = { m:"2026-08", total:63, lo:56, hi:71, parts:[
   ["Montaje (grúa, cuadrilla, tornillería)", 8, "6–10"],
   ["Indirectos y utilidad (≈17%)", 9, "8–11"] ] };
 function emAnchor(){
-  let a = null; try { a = JSON.parse(localStorage.getItem(EMB_KEY)||"null"); } catch(e){}
-  if (a && a.v && a.m) return {...a, from:"tú"};
   const q = QUOTES.filter(q=>q.series==="estructura_pagada").sort((x,y)=>x.m<y.m?-1:1).at(-1);
   if (q) return {v:+q.v, m:q.m, from:"precio registrado"};
   const idx = emIndex(); return {v:EM_MKT.total, m:EM_MKT.m, from:"mercado"};
@@ -579,7 +898,7 @@ function renderEm(){
   const s = {short:"Estructura Metálica", name:"Estructura Metálica (estimado)", kind:"price", cur, unit:"kg"};
   const quotes = pointsOf("estructura_pagada").map(p=>toCur({m:p.m, v:+p.v}));
   const a = emAnchor();
-  note.textContent = `Precio estimado = tu precio de referencia ($${fmt(a.v)}/kg en ${mLabel(a.m)}, ${a.from==="mercado"?"precio de mercado estimado":a.from}) movido mes a mes con INEGI: variación mensual del índice de construcción, ajustada al ritmo anual del índice de naves y plantas industriales. Sirve para ver la tendencia; tu precio real depende del proyecto.` + (cur==="USD"?" En USD se convierte con el FIX de cada mes.":"");
+  note.textContent = `Precio estimado: parte de $${fmt(a.v)}/kg en ${mLabel(a.m)} (${a.from==="mercado"?"precio de mercado estimado":"tu precio registrado"}) movido mes a mes con INEGI: variación mensual del índice de construcción, ajustada al ritmo anual del índice de naves y plantas industriales. Sirve para ver la tendencia; tu precio real depende del proyecto.` + (cur==="USD"?" En USD se convierte con el FIX de cada mes.":"");
   if (em.view==="years"){
     const yrs = [...new Set(ser.map(p=>p.m.slice(0,4)))].filter(y=>ser.filter(p=>p.m.startsWith(y)).length>1).slice(-4);
     const MM = Array.from({length:12},(_,i)=>String(i+1).padStart(2,"0"));
@@ -601,39 +920,245 @@ function renderEm(){
   drawChart2(el, d, em.view);
 }
 
-// ---------- Precio de referencia ----------
-function months(){ const ms = emIndex().map(p=>p.m); if (!ms.length) return ms; const now = new Date().toISOString().slice(0,7); let m = ms.at(-1); while (m < now){ m = addM(m,1); ms.push(m); } return ms; }
-function fillCalcSelects(){
-  const ms = months(), cm = document.getElementById("cMes"), a = emAnchor();
-  cm.innerHTML = ms.map(m=>`<option value="${m}">${mLabel(m)}</option>`).join("");
-  if (document.activeElement!==cm) cm.value = ms.includes(a.m) ? a.m : (ms.at(-1)||"");
-  const cb = document.getElementById("cBase"); if (document.activeElement!==cb) cb.value = a.v;
-}
+// ---------- Cómo se arma el precio ----------
 function renderCalc(){
   const out = document.getElementById("calcOut"), ser = emSeries();
   if (!ser.length){ out.innerHTML = ""; return; }
-  const a = emAnchor(), p0 = anchorPt(ser, a.m), last = ser.at(-1);
-  out.innerHTML = `${a.m>last.m?`<p class="src">INEGI publica hasta ${mLabel(last.m)}; tu precio de ${mLabel(a.m)} se toma como el nivel actual y la curva hacia atrás sale de INEGI.</p>`:""}<div class="calc-big"><span>Ese precio, llevado a ${mLabel(last.m)} con INEGI</span><b>$${fmt(last.v)} /kg</b><span class="pill ${last.v>p0.v*1.005?"up":last.v<p0.v*0.995?"down":"flat"}">${pct((last.v/p0.v-1)*100)}</span></div>
-    ${a.from==="mercado"?`<div class="calc-rows">${EM_MKT.parts.map(([k,v,r])=>`<div><span>${k} <small class="muted">(rango ${r})</small></span><b>$${v}</b></div>`).join("")}<div><span><b>Total suministro, flete y montaje</b> <small class="muted">(rango ${EM_MKT.lo}–${EM_MKT.hi}, sin IVA)</small></span><b>$${EM_MKT.total} /kg</b></div></div>`:""}
-    <p class="src">Si un contratista pide más que esto como ajuste, pide el desglose. ${a.from==="tú"?'<button type="button" class="linkbtn" id="cReset">Volver al precio automático</button>':""}</p>`;
-  const r = document.getElementById("cReset"); if (r) r.onclick = () => { try { localStorage.removeItem(EMB_KEY); } catch(e){} renderSeries(); };
+  const last = ser.at(-1);
+  out.innerHTML = `<div class="calc-rows">${EM_MKT.parts.map(([k,v,r])=>`<div><span>${k} <small class="muted">(rango ${r})</small></span><b>$${v}</b></div>`).join("")}<div class="tot"><span>Total suministro, fabricación, flete y montaje <small class="muted">(rango ${EM_MKT.lo}–${EM_MKT.hi})</small></span><b>$${EM_MKT.total} /kg</b></div></div>
+    <p class="src">Con INEGI, ese precio queda en <b>$${fmt(last.v)}/kg</b> a ${mLabel(last.m)}. Si un contratista pide un ajuste mayor que la variación del índice, pide el desglose.</p>`;
 }
 
-// ---------- Registrar precio ----------
-function fillQuoteSelect(){
-  const qs = document.getElementById("qSerie"), keep = qs.value;
-  const opts = Object.entries(SERIES).filter(([id,s])=>s.own).sort((a,b)=>(b[1].own?1:0)-(a[1].own?1:0) || (a[1].order||0)-(b[1].order||0));
-  qs.innerHTML = opts.map(([id,s])=>`<option value="${id}">${esc(s.name)} (${s.cur}/${esc(s.unit)})</option>`).join("");
-  if (opts.some(([id])=>id===keep)) qs.value = keep; else if (SERIES.estructura_pagada) qs.value = "estructura_pagada";
-  const qm = document.getElementById("qMes"); if (!qm.value) qm.value = new Date().toISOString().slice(0,7);
+// ---------- Walmart (WALMEX) ----------
+// Datos de mercado que no salen de los cierres; la rutina del lunes los revisa.
+const WMX_FACTS = {asOf:"24 sep 2026", src:"Stock Analysis", url:"https://stockanalysis.com/quote/bmv/WALMEX/",
+  pe:15.87, div:1.16, divY:2.52, target:58.04, cons:"Mantener", nAn:18, next:"27 oct 2026 (estimada)"};
+// Periodos y textos como en Google Finance; meses hacia atrás desde el último cierre
+const WMX_R = [["5d","en los últimos 5 días"],["1m","en el último mes",1],["6m","en los últimos 6 meses",6],["ytd","en lo que va del año"],["1y","en el último año",12],["5y","en los últimos 5 años",60]];
+const wmx = { range:"1y" };
+try { Object.assign(wmx, JSON.parse(localStorage.getItem("pc-wmx")||"{}")); } catch(e){}
+if (!WMX_R.some(x=>x[0]===wmx.range)) wmx.range = "1y";
+const DIAS = ["dom","lun","mar","mié","jue","vie","sáb"], DIAS_L = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+const MESES_L = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+const addD = (d,k) => { const t = new Date(d+"T12:00:00Z"); t.setUTCDate(t.getUTCDate()+k); return t.toISOString().slice(0,10); };
+const wday = d => new Date(d+"T12:00:00Z").getUTCDay();
+const dLabel = (d, yr=true) => { const [y,m,dd] = d.split("-"); return `${+dd} ${MESES[+m-1]}${yr?" "+y:""}`; };
+const fx2 = v => v.toLocaleString("es-MX",{minimumFractionDigits:2,maximumFractionDigits:2});
+const monthsAgo = (d, k) => { const [y,m,dd] = d.split("-").map(Number), t = new Date(Date.UTC(y, m-1-k, 1));
+  const end = new Date(Date.UTC(t.getUTCFullYear(), t.getUTCMonth()+1, 0)).getUTCDate();
+  return `${t.getUTCFullYear()}-${String(t.getUTCMonth()+1).padStart(2,"0")}-${String(Math.min(dd,end)).padStart(2,"0")}`; };
+// Cierres diarios (walmex_d) para 5 D a 1 A; cierres semanales (walmex_wk, d = lunes) más el último cierre diario para 5 A
+function wmxData(){
+  const srt = a => (a||[]).filter(p=>p.d && p.v!=null).sort((x,y)=>x.d<y.d?-1:1);
+  const wk = srt(SERIES.walmex_wk?.points).map(p=>({d:addD(p.d,4), v:p.v, wk:true})), day = srt(SERIES.walmex_d?.points);
+  if (!day.length) return {day:wk, wk};
+  const last = day.at(-1), mon = addD(last.d, -((wday(last.d)+6)%7));
+  return {day, wk: wk.filter(p => addD(p.d,-4) < mon).concat([last])};
 }
+// Base del cambio como en Google: primer cierre dentro del periodo; en el año, el último cierre del año anterior
+function wmxRange(D, r){
+  const all = r==="5y" ? D.wk : D.day, lastD = all.at(-1).d;
+  if (r==="5d") return all.slice(-6);
+  if (r==="ytd"){ const i = all.findIndex(p=>p.d>=lastD.slice(0,4)+"-01-01"); return all.slice(Math.max(0,i-1)); }
+  const start = monthsAgo(lastD, (WMX_R.find(x=>x[0]===r)||WMX_R[4])[2]);
+  return all.slice(Math.max(0, all.findIndex(p=>p.d>=start)));
+}
+function drawStock(el, pts, r){
+  const narrow = (el.clientWidth||760) < 560, W=narrow?340:900, H=narrow?220:290, L=6, R=narrow?40:52, T=14, B=26;
+  const vs = pts.map(p=>p.v); let lo=Math.min(...vs), hi=Math.max(...vs); const pad=(hi-lo)*0.1||1; lo-=pad; hi+=pad;
+  const nice = x=>{ const e=Math.pow(10,Math.floor(Math.log10(x))); const f=x/e; return (f<1.5?1:f<3?2:f<7?5:10)*e; };
+  const step = nice((hi-lo)/4), ticks=[]; for (let t=Math.ceil(lo/step)*step; t<=hi; t+=step) ticks.push(+t.toFixed(6));
+  const n = pts.length, sx = i => L + (n<2?0:i/(n-1))*(W-L-R), sy = v => T + (hi-v)/(hi-lo)*(H-T-B);
+  const cls = pts.at(-1).v>=pts[0].v ? "gain" : "loss", weekly = r==="5y";
+  let s = `<svg viewBox="0 0 ${W} ${H}" class="${cls}" role="img" aria-label="WALMEX, cierre ${weekly?"semanal":"diario"}: de ${fx2(pts[0].v)} a ${fx2(pts.at(-1).v)} pesos">`;
+  ticks.forEach(t=>{ s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${sy(t)}" y2="${sy(t)}"/><text class="yl" x="${W-R+6}" y="${sy(t)+4}">${t.toFixed(step<1?1:0)}</text>`; });
+  s += `<line class="base" x1="${L}" x2="${W-R}" y1="${sy(pts[0].v)}" y2="${sy(pts[0].v)}"/>`;
+  const xy = pts.map((p,i)=>[sx(i),sy(p.v)]), line = xy.map(a=>a.map(v=>v.toFixed(1)).join(",")).join(" ");
+  s += `<polygon points="${xy[0][0].toFixed(1)},${H-B} ${line} ${xy.at(-1)[0].toFixed(1)},${H-B}" fill="currentColor" fill-opacity=".1" stroke="none"/>`;
+  s += `<polyline points="${line}" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>`;
+  // Eje x: años (5 A), meses (6 M, en el año, 1 A), semanas (1 M) o días (5 D), sin encimarse ni pegarse a las orillas
+  const ds = pts.map(p=>p.d), k = narrow?4:6;
+  const brk = r==="5y" ? i => ds[i].slice(0,4)!==ds[i-1].slice(0,4)
+            : r==="1m" ? i => wday(ds[i]) < wday(ds[i-1]) || addD(ds[i-1],7) <= ds[i]
+            : i => ds[i].slice(0,7)!==ds[i-1].slice(0,7);
+  const lab = d => { const [y,m,dd] = d.split("-");
+    return r==="5y" ? y : (r==="1m"||r==="5d") ? `${+dd} ${MESES[+m-1]}` : (m==="01" && r!=="ytd" ? y : MESES[+m-1]); };
+  let marks = ds.map((_,i)=>i).filter(i => r==="5d" || (i>0 && brk(i)));
+  const stride = Math.max(1, Math.ceil(marks.length/k)); marks = marks.filter((_,j)=>j%stride===0);
+  const gap = (W-L-R)/(k+1)*0.6; if (r!=="5d") marks = marks.filter(i => sx(i)-L > gap*0.5 && W-R-sx(i) > gap*0.45);
+  marks.forEach(i => { const an = i===0 && r==="5d" ? "start" : i===n-1 && r==="5d" ? "end" : "middle";
+    s += `<line class="grid" x1="${sx(i)}" x2="${sx(i)}" y1="${H-B}" y2="${H-B+4}"/><text x="${sx(i)}" y="${H-8}" text-anchor="${an}">${lab(ds[i])}</text>`; });
+  s += `<line class="cross" x1="0" x2="0" y1="${T}" y2="${H-B}" visibility="hidden"/><circle class="dot" r="4.5" fill="currentColor" stroke="var(--surface)" stroke-width="2" visibility="hidden"/>`;
+  s += `<rect class="hit" x="${L}" y="0" width="${W-L}" height="${H}"/></svg><div class="st-tip" hidden></div>`;
+  el.innerHTML = s;
+  const yr = ds[0].slice(0,4)!==ds.at(-1).slice(0,4);
+  const svg = el.querySelector("svg"), hit = el.querySelector("rect.hit"), xh = el.querySelector(".cross"), dot = el.querySelector(".dot"), tip = el.querySelector(".st-tip");
+  const show = e => { const rc = svg.getBoundingClientRect(), x = (e.clientX - rc.left) * W / rc.width;
+    const i = Math.max(0, Math.min(n-1, Math.round((x-L)/(W-L-R)*(n-1)))), [cx,cy] = xy[i], p = pts[i];
+    xh.setAttribute("x1",cx); xh.setAttribute("x2",cx); dot.setAttribute("cx",cx); dot.setAttribute("cy",cy);
+    xh.setAttribute("visibility","visible"); dot.setAttribute("visibility","visible");
+    tip.innerHTML = `<b>${fx2(p.v)} MXN</b> · ${p.wk ? "semana al "+dLabel(p.d) : DIAS[wday(p.d)]+" "+dLabel(p.d, yr)}`; tip.hidden = false;
+    const px = cx * rc.width / W, half = tip.offsetWidth/2; tip.style.left = Math.max(half, Math.min(rc.width-half, px)) + "px"; };
+  const hide = () => { tip.hidden = true; xh.setAttribute("visibility","hidden"); dot.setAttribute("visibility","hidden"); };
+  hit.addEventListener("pointermove", show); hit.addEventListener("pointerdown", show); hit.addEventListener("pointerleave", hide);
+}
+function renderWalmex(){
+  document.querySelectorAll("#wRange button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.v===wmx.range)));
+  const D = wmxData(), el = document.getElementById("wChart");
+  if (D.day.length<7){ el.innerHTML = '<p class="muted empty">Los cierres se ven al abrir el tablero desde claude.ai con tu sesión iniciada.</p>'; return; }
+  const last = D.day.at(-1), pts = wmxRange(D, wmx.range), first = pts[0], d = last.v-first.v, pc = d/first.v*100, up = d>=0;
+  document.getElementById("wPx").textContent = fx2(last.v);
+  const chg = document.getElementById("wChg"); chg.className = "st-chg " + (up?"gain":"loss");
+  chg.innerHTML = `<b class="pill">${up?"↑":"↓"} ${Math.abs(pc).toFixed(2)}%</b>${up?"+":"−"}${fx2(Math.abs(d))} <span>${(WMX_R.find(x=>x[0]===wmx.range)||WMX_R[4])[1]}</span>`;
+  const [y,m,dd] = last.d.split("-");
+  document.getElementById("wAsOf").textContent = `Cierre del ${DIAS_L[wday(last.d)]} ${+dd} de ${MESES_L[+m-1]} de ${y}. Se actualiza cada lunes.`;
+  drawStock(el, pts, wmx.range);
+  const y52 = D.day.filter(p=>p.d>=monthsAgo(last.d,12)).map(p=>p.v), prev = D.day.at(-2);
+  const chgTxt = (a,b) => { const v=(b/a-1)*100; return (v>=0?"+":"−")+Math.abs(v).toFixed(1)+"%"; };
+  const F = WMX_FACTS, daily = SERIES.walmex_d || SERIES.walmex_wk || {};
+  document.getElementById("wStats").innerHTML = [
+    ["Cierre anterior", fx2(prev.v)], ["Rango 52 semanas", `${fx2(Math.min(...y52))} – ${fx2(Math.max(...y52))}`],
+    ["Cambio en el año", chgTxt(wmxRange(D,"ytd")[0].v,last.v)], ["Cambio 12 meses", chgTxt(wmxRange(D,"1y")[0].v,last.v)],
+    ["P/U", F.pe.toFixed(1)], ["Dividendo anual", `${fx2(F.div)} (${F.divY.toFixed(1)}%)`],
+    ["Consenso de analistas", `${F.cons} (${F.nAn})`], ["Precio objetivo promedio", fx2(F.target)],
+    ["Próximo reporte", F.next]
+  ].map(([k,v])=>`<div><span>${k}</span><b>${v}</b></div>`).join("");
+  document.getElementById("wSrc").innerHTML = `Cierres diarios de la BMV vía <a href="${daily.url||"https://finance.yahoo.com/quote/WALMEX.MX/history/"}" target="_blank" rel="noopener">Yahoo Finanzas</a>: son los mismos cierres que muestra Google Finance, sin ajustar por dividendos. La vista de 5 años usa el cierre de cada semana. Rango de 52 semanas con cierres diarios. P/U, dividendo, consenso y fecha del próximo reporte: <a href="${F.url}" target="_blank" rel="noopener">${F.src}</a>, ${F.asOf}.`;
+}
+document.getElementById("wRange").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; wmx.range = b.dataset.v; try{localStorage.setItem("pc-wmx",JSON.stringify(wmx));}catch(err){} renderWalmex(); });
+// Pestañas
+function showTab(id, focus){
+  ["mercado","walmex"].forEach(t => { const on = t===id, b = document.getElementById("t-"+t);
+    b.setAttribute("aria-selected", String(on)); b.tabIndex = on ? 0 : -1; document.getElementById("tab-"+t).hidden = !on; });
+  document.querySelector("header.hero .toggle").style.visibility = id==="walmex" ? "hidden" : "";
+  if (focus) document.getElementById("t-"+id).focus();
+  try { localStorage.setItem("pc-tab", id); } catch(e){}
+  if (id==="walmex") renderWalmex(); else window.renderSeries && window.renderSeries();
+}
+document.querySelector(".tabs").addEventListener("click", e => { const b = e.target.closest("[role=tab]"); if (b) showTab(b.id.slice(2)); });
+document.querySelector(".tabs").addEventListener("keydown", e => { if (e.key!=="ArrowRight" && e.key!=="ArrowLeft") return; const cur = document.querySelector('.tabs [aria-selected="true"]').id.slice(2); showTab(cur==="mercado"?"walmex":"mercado", true); });
+
+
+// ---------- Onepager ----------
+// Fechas que mueven precios en las próximas semanas (la rutina del lunes las revisa). d = fecha para ordenar y vencer; dl = cómo se muestra.
+const EVENTS = [
+  {d:"2026-10-27", dl:"27 oct", t:"Walmex reporta el tercer trimestre (fecha estimada)", cats:"Presupuesto de todas tus categorías", lvl:"medio"},
+  {d:"2026-10-31", dl:"oct", t:"Posible acuerdo con EE.UU. para bajar aranceles al acero (revisión del T-MEC)", cats:"Estructura Metálica", lvl:"alto"},
+  {d:"2026-12-05", dl:"5 dic, a más tardar", t:"Resolución final del antidumping a lámina rolada en frío de EE.UU., China y Malasia", cats:"Estructura Metálica y Sistema Contra Incendio", lvl:"alto"},
+  {d:"2026-12-10", dl:"dic", t:"Anuncio del salario mínimo 2027", cats:"Instalación y mantenimiento, todas menos Pintura y Proyectista", lvl:"alto"},
+  {d:"2027-01-01", dl:"1 ene 2027", t:"La jornada laboral baja de 48 a 46 horas", cats:"Instalación, mantenimiento y honorarios de Proyectista", lvl:"medio"}
+];
+const DASH_URL = window.__STATIC__ ? "https://j0s151t.github.io/pulso-compras/" : "https://claude.ai/artifact/RNbnGAatVz42BP1jsWmjkF";
+const txt = el => el ? el.textContent.replace(/\s+/g," ").trim() : "";
+const catLvl = (c, st) => { let l = !st || st.y12==null ? "bajo" : st.y12>25 ? "alto" : st.y12>5 ? "medio" : "bajo"; if (c.extra && RANK[c.extra]>RANK[l]) l = c.extra; return l; };
+// Junta los datos del onepager; html, text y mail salen de aquí para que el botón y el correo digan lo mismo.
+function opModel(){
+  const ser = emSeries(); if (!ser.length) return null;
+  const today = new Date().toISOString().slice(0,10);
+  const last = ser.at(-1), ya = ser.find(p=>p.m===addM(last.m,-12)), dec = ser.find(p=>p.m===(+last.m.slice(0,4)-1)+"-12");
+  const cats = CATS.map(c=>{ const st = catStats(c), t = tcoOf(c); return {n:c.name, st, lvl:catLvl(c,st), tco:t && t.y12, top:t && t.top}; }).filter(x=>x.st && x.st.y12!=null).sort((a,b)=>b.st.y12-a.st.y12);
+  const mp = MP.map(m=>({m, d:BY[m.main]})).filter(({d})=>d && !d.stale && !d.ref && !d.qual).map(({m,d})=>({n:m.short||m.name, y:yoy(d), aff:m.aff.some(a=>a[0]==="Todas") ? "todas tus categorías" + (m.but ? " menos " + listY(m.but) : "") : listY(m.aff.map(a=>a[0]))})).filter(x=>x.y!=null && x.y>5).sort((a,b)=>b.y-a.y);
+  const risks = [...document.querySelectorAll("#tab-mercado .risk")].map(r=>{ const l = r.querySelector(".lvl"); return {lvl:["alto","medio","bajo"].find(k=>l.classList.contains(k))||"bajo",
+    t:txt(r.querySelector("h3")), aff:txt(r.querySelector(".aff")), doIt:txt(r.querySelector(".do")).replace(/^Qué haría:\s*/,""), src:txt(r.querySelector(".src"))}; })
+    .sort((a,b)=>RANK[b.lvl]-RANK[a.lvl]).slice(0,3);
+  const D = wmxData(), wl = D.day.length ? D.day.at(-1) : null, wy = wl ? wmxRange(D,"ytd")[0] : null;
+  const tc = cats.filter(x=>x.tco!=null).sort((a,b)=>b.tco-a.tco)[0];
+  const up = cats[0], dn = cats.at(-1);
+  const know = [];
+  know.push(`Tus categorías que más suben en 12 meses: ${listY(cats.slice(0,2).map(x=>`${x.n} (${pct(x.st.y12)})`))}${dn && dn.st.y12<0 ? `; la que más baja es ${dn.n} (${pct(dn.st.y12)})` : ""}. Dato INEGI a ${mLabel(up.st.last)}.`);
+  if (mp.length) know.push(`Materias primas arriba de 5% en 12 meses: ${listY(mp.slice(0,3).map(x=>`${x.n} ${pct(x.y)} (pega en ${x.aff})`))}. Si te piden aumentos en esas categorías, compáralos contra el índice antes de aprobarlos.`);
+  if (tc && tc.top) know.push(`${tc.n} es la categoría cuyo costo total más sube: ${pct(tc.tco)} en 12 meses, sobre todo por ${lc(TCO_COMP[tc.top.k])} (${pct(tc.top.y12)}).`);
+  return { week: txt(document.getElementById("week")), today,
+    kpis: [
+      {k:"Estructura Metálica", v:`$${fmt(last.v)}`, u:"MXN/kg", n:`${ya?pct((last.v/ya.v-1)*100)+" en 12 meses":""}${dec?" · "+pct((last.v/dec.v-1)*100)+" en el año":""}`},
+      {k:"Dólar FIX", v:`$${FX_NOW.toFixed(2)}`, u:"MXN", n:txt(document.querySelector(".macro > div .n"))},
+      {k:"Materias primas >5%", v:String(mp.length), u:"de "+MP.length, n:mp.length ? mp.slice(0,3).map(x=>x.n).join(", ") + (mp.length>3 ? ` y ${mp.length-3} más` : "") : "Ninguna sube más de 5%"},
+      wl ? {k:"WALMEX", v:fx2(wl.v), u:"MXN", n:`${pct((wl.v/wy.v-1)*100)} en el año · cierre ${dLabel(wl.d,false)}`} : null
+    ].filter(Boolean),
+    know, risks, cats, mpCount: mp.length,
+    events: EVENTS.filter(e=>e.d>=today).slice(0,5),
+    asOf: mLabel(up.st.last), emAsOf: mLabel(last.m), url: DASH_URL };
+}
+const opEsc = s => esc(s);
+const p1 = v => Math.abs(v)<0.05 ? "0.0%" : pct(v);
+function opHtml(o){
+  return `<header class="op-hd"><div><span class="wk">${opEsc(o.week)}</span><h2 id="op-title">Pulso de Compras México</h2></div><span class="wk">GNFR Construcciones · México</span></header>
+  <div class="op-kpis">${o.kpis.map(k=>`<div><span class="k">${k.k}</span><span class="v">${k.v} <small>${k.u}</small></span><span class="n">${opEsc(k.n)}</span></div>`).join("")}</div>
+  <section class="op-sec"><h3>Lo que tienes que saber</h3><ol>${o.know.map(x=>`<li>${opEsc(x)}</li>`).join("")}</ol></section>
+  <div class="op-2">
+    <section class="op-sec"><h3>Riesgos y qué haría</h3><div class="op-risks">${o.risks.map(r=>`<div class="op-risk"><span class="lvl ${r.lvl}">${r.lvl}</span><div><p class="t">${opEsc(r.t)}</p><p><b>Qué haría:</b> ${opEsc(r.doIt)}</p><p class="s">${opEsc(r.aff)} · ${opEsc(r.src)}</p></div></div>`).join("")}</div></section>
+    <div class="op-sec" style="align-content:start;gap:16px">
+      <section class="op-sec"><h3>Tus ${CATS.length} categorías</h3><div style="overflow-x:auto"><table class="op-t"><thead><tr><th>Categoría</th><th class="num">12 m</th><th class="num c-ytd">En el año</th><th class="num" title="Costo total de propiedad">TCO</th><th><span class="vh">Nivel</span></th></tr></thead><tbody>${
+        o.cats.map(x=>`<tr><td>${opEsc(x.n)}</td><td class="num">${pct(x.st.y12)}</td><td class="num c-ytd">${x.st.ytd!=null?p1(x.st.ytd):"–"}</td><td class="num">${x.tco!=null?pct(x.tco):"–"}</td><td><span class="lvl ${x.lvl}">${x.lvl}</span></td></tr>`).join("")}</tbody></table></div></section>
+      <section class="op-sec"><h3>Próximas fechas</h3><ul class="op-ev">${o.events.map(e=>`<li><b>${opEsc(e.dl)}</b><span>${opEsc(e.t)}<small>${opEsc(e.cats)}</small></span></li>`).join("")}</ul></section>
+    </div>
+  </div>
+  <footer class="op-ft"><p>Índices de categoría: INEGI, INPP a ${o.asOf}; costo total con salario IMSS e INPP de servicios. Estructura por kg estimada a ${o.emAsOf}. Dólar: Banxico FIX. WALMEX: cierre de la BMV. Riesgos con su fuente en el tablero.</p><p>Tablero completo: <a href="${o.url}" target="_blank" rel="noopener">${o.url.replace("https://","")}</a></p></footer>`;
+}
+function opText(o){
+  const L = [`PULSO DE COMPRAS MÉXICO · ${o.week}`, ""];
+  o.kpis.forEach(k=>L.push(`• ${k.k}: ${k.v} ${k.u} (${k.n})`));
+  L.push("", "LO QUE TIENES QUE SABER"); o.know.forEach((x,i)=>L.push(`${i+1}. ${x}`));
+  L.push("", "RIESGOS Y QUÉ HARÍA"); o.risks.forEach(r=>L.push(`[${r.lvl.toUpperCase()}] ${r.t}. Qué haría: ${r.doIt} (${r.aff} · ${r.src})`));
+  L.push("", `TUS ${CATS.length} CATEGORÍAS (12 meses · en el año · costo total de propiedad)`); o.cats.forEach(x=>L.push(`${x.n}: ${pct(x.st.y12)} · ${x.st.ytd!=null?p1(x.st.ytd):"s/d"} · ${x.tco!=null?pct(x.tco):"s/d"} · nivel ${x.lvl}`));
+  L.push("", "PRÓXIMAS FECHAS"); o.events.forEach(e=>L.push(`${e.dl}: ${e.t} (${e.cats})`));
+  L.push("", `Fuentes: INEGI (INPP a ${o.asOf}), Banxico FIX, BMV. Tablero completo: ${o.url}`);
+  return L.join("\n");
+}
+// Versión para correo: tablas y estilos en línea, porque los clientes de correo ignoran las hojas de estilo.
+function opMail(o){
+  const C = {ink:"#15212b", ink2:"#4a5866", ink3:"#6b7884", line:"#dde3e8", acc:"#0b5d6b", alto:["#fbe9e5","#b4361f"], medio:["#fbf1dc","#9a6400"], bajo:["#e3f2ea","#1f6f4a"]};
+  const tag = l => `<span style="display:inline-block;font:600 10px Menlo,Consolas,monospace;text-transform:uppercase;letter-spacing:.05em;padding:2px 6px;border-radius:5px;background:${C[l][0]};color:${C[l][1]}">${l}</span>`;
+  const h3 = t => `<h3 style="font:600 11px Menlo,Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;color:${C.acc};margin:20px 0 8px">${t}</h3>`;
+  const td = (s, x="") => `<td style="padding:5px 6px;border-bottom:1px solid ${C.line};${x}">${s}</td>`;
+  return `<div style="max-width:680px;margin:0 auto;font:14px/1.45 'Segoe UI',Roboto,Arial,sans-serif;color:${C.ink}">
+  <p style="font:600 11px Menlo,Consolas,monospace;letter-spacing:.05em;text-transform:uppercase;color:${C.ink2};margin:0">${opEsc(o.week)}</p>
+  <h2 style="font:800 24px Arial,sans-serif;margin:2px 0 10px;padding-bottom:8px;border-bottom:3px solid ${C.ink}">Pulso de Compras México</h2>
+  <table role="presentation" style="width:100%;border-collapse:collapse"><tr>${o.kpis.map(k=>`<td style="vertical-align:top;padding:4px 8px 4px 10px;border-left:3px solid ${C.acc};width:25%"><div style="font:600 10px Menlo,Consolas,monospace;text-transform:uppercase;color:${C.ink3}">${k.k}</div><div style="font:700 19px Arial,sans-serif">${k.v} <span style="font:600 11px Menlo,monospace;color:${C.ink3}">${k.u}</span></div><div style="font-size:12px;color:${C.ink2}">${opEsc(k.n)}</div></td>`).join("")}</tr></table>
+  ${h3("Lo que tienes que saber")}<ol style="margin:0;padding-left:20px">${o.know.map(x=>`<li style="margin:0 0 6px">${opEsc(x)}</li>`).join("")}</ol>
+  ${h3("Riesgos y qué haría")}${o.risks.map(r=>`<p style="margin:0 0 10px">${tag(r.lvl)} <b>${opEsc(r.t)}</b><br><b>Qué haría:</b> ${opEsc(r.doIt)}<br><span style="font-size:12px;color:${C.ink3}">${opEsc(r.aff)} · ${opEsc(r.src)}</span></p>`).join("")}
+  ${h3(`Tus ${CATS.length} categorías`)}<table style="width:100%;border-collapse:collapse;font-size:13px"><tr>${["Categoría","12 m","En el año","TCO",""].map((t,i)=>`<th style="font:600 10px Menlo,monospace;text-transform:uppercase;color:${C.ink3};text-align:${i&&i<4?"right":"left"};padding:4px 6px;border-bottom:1px solid ${C.line}">${t}</th>`).join("")}</tr>${
+    o.cats.map(x=>`<tr>${td(opEsc(x.n))}${td(pct(x.st.y12),"text-align:right")}${td(x.st.ytd!=null?p1(x.st.ytd):"–","text-align:right")}${td(x.tco!=null?pct(x.tco):"–","text-align:right")}${td(tag(x.lvl))}</tr>`).join("")}</table>
+  ${h3("Próximas fechas")}<table role="presentation" style="width:100%;border-collapse:collapse;font-size:13px">${o.events.map(e=>`<tr><td style="vertical-align:top;padding:3px 10px 3px 0;white-space:nowrap;font:600 12px Menlo,monospace">${opEsc(e.dl)}</td><td style="padding:3px 0">${opEsc(e.t)}<br><span style="font-size:12px;color:${C.ink3}">${opEsc(e.cats)}</span></td></tr>`).join("")}</table>
+  <p style="font-size:12px;color:${C.ink3};border-top:1px solid ${C.line};padding-top:8px;margin-top:18px">Índices de categoría: INEGI, INPP a ${o.asOf}. Estructura por kg estimada a ${o.emAsOf}. Dólar: Banxico FIX. WALMEX: cierre de la BMV.<br><a href="${o.url}" style="color:${C.acc}">Abrir el tablero completo</a></p></div>`;
+}
+window.onePager = () => { const o = opModel(); if (!o) return null;
+  return {subject:`Pulso de Compras · ${o.week.replace(/^Semana del /,"semana del ")}: estructura ${o.kpis[0].v}/kg`, text:opText(o), html:opHtml(o), mail:opMail(o)}; };
+const opEl = document.getElementById("op"), opSheet = document.getElementById("opSheet"), opMsg = document.getElementById("opMsg");
+let opRet = null;
+function renderOP(){ const o = opModel(); opSheet.innerHTML = o ? opHtml(o) : '<h2 id="op-title" class="muted" style="font-size:16px">Cargando datos del tablero…</h2>'; document.getElementById("opCopy").disabled = !o; }
+function openOP(){ opRet = document.activeElement; renderOP(); opMsg.textContent = "Resumen de una página con lo importante de la semana."; opEl.hidden = false; document.body.classList.add("op-open"); opEl.scrollTop = 0; document.getElementById("opClose").focus(); }
+function closeOP(){ opEl.hidden = true; document.body.classList.remove("op-open"); if (opRet && opRet.focus) opRet.focus(); }
+document.getElementById("btnOP").addEventListener("click", openOP);
+document.getElementById("opClose").addEventListener("click", closeOP);
+opEl.addEventListener("click", e => { if (e.target===opEl) closeOP(); });
+opEl.addEventListener("keydown", e => {
+  if (e.key==="Escape"){ e.preventDefault(); closeOP(); return; }
+  if (e.key!=="Tab") return;
+  const f = [...opEl.querySelectorAll("button:not([hidden]):not(:disabled),a[href]")]; if (!f.length) return;
+  if (e.shiftKey && document.activeElement===f[0]){ e.preventDefault(); f.at(-1).focus(); }
+  else if (!e.shiftKey && document.activeElement===f.at(-1)){ e.preventDefault(); f[0].focus(); }
+});
+document.getElementById("opCopy").addEventListener("click", () => {
+  const r = window.onePager(); if (!r) return;
+  const ok = m => { opMsg.textContent = m; };
+  const pick = () => { const s = getSelection(), rg = document.createRange(); rg.selectNodeContents(opSheet); s.removeAllRanges(); s.addRange(rg);
+    ok("Tu navegador no dejó copiar directo. Ya seleccioné el resumen: cópialo con Ctrl+C (o Copiar en el celular)."); };
+  try {
+    const p = window.ClipboardItem && navigator.clipboard && navigator.clipboard.write
+      ? navigator.clipboard.write([new ClipboardItem({"text/html":new Blob([r.mail],{type:"text/html"}), "text/plain":new Blob([r.text],{type:"text/plain"})})])
+      : navigator.clipboard.writeText(r.text);
+    p.then(() => ok("Copiado. Pégalo en un correo nuevo."), () => navigator.clipboard.writeText(r.text).then(() => ok("Copiado como texto. Pégalo en un correo nuevo."), pick));
+  } catch(e){ pick(); }
+});
+if (window.__STATIC__){ const pb = document.getElementById("opPrint"); pb.hidden = false; pb.addEventListener("click", () => window.print()); }
 
 // ---------- Explorador ----------
 function seriesChips(){
-  const groups = [["acero","Acero y estructura"],["insumos","Otros insumos"],["logistica","Logística"],["macro","Macro"],["inegi","INEGI · variación anual"],["propios","Tus precios"]];
+  const groups = [["acero","Acero y estructura"],["insumos","Otras materias primas"],["logistica","Logística"],["macro","Macro"],["inegi","INEGI · variación anual"],["propios","Tus precios"]];
   const el = document.getElementById("seriesChips");
   el.innerHTML = groups.map(([g,lbl]) => {
-    const ids = Object.entries(SERIES).filter(([id,s])=>s.kind!=="mom" && (s.own?"propios":s.kind==="yoy"?"inegi":s.group)===g).sort((a,b)=>(a[1].order||0)-(b[1].order||0));
+    const ids = Object.entries(SERIES).filter(([id,s])=>s.kind!=="mom" && !s.own && !s.hide && (s.own?"propios":s.kind==="yoy"?"inegi":s.group)===g).sort((a,b)=>(a[1].order||0)-(b[1].order||0));
     if (!ids.length) return "";
     return `<div class="chipgrp"><span class="lbl">${lbl}</span>${ids.map(([id,s])=>{
       const i = st.sel.indexOf(id), n = pointsOf(id).length;
@@ -710,7 +1235,7 @@ function drawChart2(el,d,view=st.view){
   ticks.forEach(t=>{ s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${sy(t)}" y2="${sy(t)}"/><text x="${L-8}" y="${sy(t)+4}" text-anchor="end">${fmtV(t,d.mode==="abs"&&!d.rows.some(r=>r.s.kind==="yoy")?"abs2":d.mode,d.rows[0].s)}</text>`; });
   if (lo<0&&hi>0) s+=`<line class="zero" x1="${L}" x2="${W-R}" y1="${sy(0)}" y2="${sy(0)}"/>`;
   const every = Math.ceil(n/(narrow?4:8));
-  ms.forEach((m,i)=>{ if (i%every===0 || i===n-1) s+=`<text x="${sx(i)}" y="${H-10}" text-anchor="middle">${lab(m)}</text>`; });
+  ms.forEach((m,i)=>{ const end = i===n-1; if (end || (i%every===0 && n-1-i >= every*0.6)) s+=`<text x="${sx(i)}" y="${H-10}" text-anchor="${end&&n>1?"end":"middle"}">${lab(m)}</text>`; });
   if (view==="bar"){
     const k=d.rows.length, gw=bw*0.72, w=Math.max(3,gw/k-2);
     d.rows.forEach((r,j)=>r.pts.forEach(p=>{ const i=ms.indexOf(p.m), x=sx(i)-gw/2+j*(gw/k)+1, y0=sy(Math.max(0,lo)), yv=sy(p.v);
@@ -735,47 +1260,177 @@ function drawChart2(el,d,view=st.view){
   });
 }
 
-function renderSeries(){ addVirtual(); renderTiles(); renderEm(); fillCalcSelects(); renderCalc(); fillQuoteSelect(); renderExplorer(); }
-function addVirtual(){ const ser = emSeries(); if (ser.length) SERIES.em_kg = {name:"Estructura Metálica, precio estimado por kg", short:"Estructura $/kg", group:"acero", kind:"price", cur:"MXN", unit:"kg", order:0, src:"INEGI (construcción y naves) + tu precio de referencia", points:ser, virtual:true}; }
+// ---------- Categorías: índice mensual por canasta ----------
+const SUB_KEYS = ["quim","plast","minnomet","metbas","prodmet","maq","electron","electr","petro","prof"];
+function momOf(key){
+  if (key==="em"){ const L = emIndex(); return Object.fromEntries(L.slice(1).map((p,i)=>[p.m,(p.v/L[i].v-1)*100])); }
+  if (key==="constr") return Object.fromEntries(pointsOf("inpp_construccion_mom").map(p=>[p.m,p.v]));
+  if (key==="fx"){ const f = pointsOf("fx"), o = {}; f.forEach((p,i)=>{ if (i && mDiff(f[i-1].m,p.m)===1) o[p.m] = (p.v/f[i-1].v-1)*100; }); return o; }
+  return Object.fromEntries(pointsOf("sub_"+key+"_mom").map(p=>[p.m,p.v]));
+}
+function catIndex(c){
+  const moms = c.idx.map(([k,w])=>[momOf(k),w]);
+  const base = "2023-12"; let last = null;
+  moms.forEach(([mo])=>{ const ks = Object.keys(mo).sort(); const l = ks.at(-1); if (l && (!last || l<last)) last = l; });
+  if (!last) return [];
+  const out = [{m:base, v:100}]; let L = 100, m = base;
+  while (m < last){ m = addM(m,1); let t=0, w=0; moms.forEach(([mo,wt])=>{ if (mo[m]!=null){ t+=wt*mo[m]; w+=wt; } }); L *= 1 + (w? t/w : 0)/100; out.push({m, v:L}); }
+  return out;
+}
+const chg = (ser, from, to) => { const a = ser.find(p=>p.m===from), b = ser.find(p=>p.m===to); return a&&b ? (b.v/a.v-1)*100 : null; };
+function catStats(c){
+  const ser = catIndex(c); if (ser.length<2) return null;
+  const last = ser.at(-1).m, y = last.slice(0,4);
+  return { ser, last, y12: chg(ser, addM(last,-12), last), ytd: chg(ser, (y-1)+"-12", last), acc: chg(ser, "2023-12", last),
+    y2024: chg(ser,"2023-12","2024-12"), y2025: chg(ser,"2024-12","2025-12") };
+}
+window.renderCatsSeries = function(){
+  const el = document.getElementById("cats");
+  el.innerHTML = CATS.map(c => {
+    const st = catStats(c);
+    let lvl = !st || st.y12==null ? "bajo" : st.y12>25 ? "alto" : st.y12>5 ? "medio" : "bajo";
+    if (c.extra && RANK[c.extra]>RANK[lvl]) lvl = c.extra;
+    const chips = c.idx.map(([k,w,l]) => `<span>${l||IDX_LBL[k]}${c.idx.length>1?` <small>${w}%</small>`:""}</span>`).join("");
+    return `<div class="catc"><div class="hd"><div class="nm">${icon(c.name)}<h3>${c.name}</h3></div><span class="lvl ${lvl}">${lvl}</span></div>
+      <div class="est">12 meses <b>${st&&st.y12!=null?pct(st.y12):"s/d"}</b> · en ${st?st.last.slice(0,4):""} <b>${st&&st.ytd!=null?pct(st.ytd):"s/d"}</b> · desde 2024 <b>${st&&st.acc!=null?pct(st.acc):"s/d"}</b></div>
+      <div class="drv">${chips}</div><p>${c.note}${st?` <span class="muted">Dato a ${mLabel(st.last)}.</span>`:""}</p></div>`;
+  }).join("");
+};
+const tr = { view:"line", sel:null };
+try { Object.assign(tr, JSON.parse(localStorage.getItem("pc-tr")||"{}")); } catch(e){}
+window.renderCatTrend = function(){
+  document.querySelectorAll("#trView button").forEach(b=>b.setAttribute("aria-pressed", String(tr.view===b.dataset.v)));
+  const all = CATS.map(c=>({c, st:catStats(c)})).filter(x=>x.st);
+  const out = document.getElementById("trOut"), note = document.getElementById("trNote"), chipsEl = document.getElementById("trChips");
+  if (!all.length){ out.innerHTML = '<p class="muted empty">Cargando índices INEGI…</p>'; chipsEl.innerHTML=""; return; }
+  if (!tr.sel || !tr.sel.length) tr.sel = ["Estructura Metálica", ...all.filter(x=>x.c.name!=="Estructura Metálica").sort((a,b)=>b.st.acc-a.st.acc).slice(0,3).map(x=>x.c.name)];
+  note.textContent = "Fuente: INEGI, Índice Nacional de Precios Productor (variación mensual por subsector, construcción y servicios profesionales) y Banxico (FIX). Cada categoría pondera sus materias primas como se indica en su tarjeta. El acero se mide en todas con el mismo índice de estructura por kg (INEGI construcción y naves), para usar una sola medida de acero en toda la página. Es una referencia de mercado para comparar contra lo que piden tus proveedores.";
+  if (tr.view==="table"){
+    chipsEl.innerHTML = "";
+    const L = all[0].st.last, y = L.slice(0,4);
+    out.innerHTML = `<div class="tbl-wrap"><table class="xt"><thead><tr><th>Categoría</th><th class="num">2024</th><th class="num">2025</th><th class="num">${y} (a ${mLabel(L)})</th><th class="num">Últimos 12 m</th><th class="num">Acumulado desde dic 23</th></tr></thead><tbody>${
+      all.map(({c,st})=>`<tr><td class="item">${c.name}</td><td class="num">${st.y2024!=null?pct(st.y2024):"–"}</td><td class="num">${st.y2025!=null?pct(st.y2025):"–"}</td><td class="num">${st.ytd!=null?pct(st.ytd):"–"}</td><td class="num">${pill(st.y12)}</td><td class="num"><b>${st.acc!=null?pct(st.acc):"–"}</b></td></tr>`).join("")
+    }</tbody></table></div>`;
+    return;
+  }
+  chipsEl.innerHTML = `<div class="chipgrp"><span class="lbl">Elige hasta 4</span>${all.map(({c})=>{ const i = tr.sel.indexOf(c.name);
+    return `<button class="chip" data-n="${esc(c.name)}" aria-pressed="${i>=0}" ${i>=0?`style="--c:${COLORS[i]}"`:""}>${i>=0?'<i></i>':""}${esc(c.name)}</button>`; }).join("")}</div>`;
+  chipsEl.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{ const n=b.dataset.n, i=tr.sel.indexOf(n); if (i>=0) tr.sel.splice(i,1); else { if (tr.sel.length>=4) tr.sel.shift(); tr.sel.push(n); } try{localStorage.setItem("pc-tr",JSON.stringify(tr));}catch(e){} window.renderCatTrend(); });
+  const rows = tr.sel.map((n,k)=>{ const x = all.find(a=>a.c.name===n); if (!x) return null;
+    return {s:{short:n, name:n, kind:"yoy", ulab:"% desde dic 23"}, color:COLORS[k], pts:x.st.ser.map(p=>({m:p.m, v:p.v-100}))}; }).filter(Boolean);
+  const ms = all[0].st.ser.map(p=>p.m);
+  drawChart2(out, {rows, ms, mode:"abs", unit:"% acumulado"}, "line");
+};
+document.getElementById("trView").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; tr.view = b.dataset.v; try{localStorage.setItem("pc-tr",JSON.stringify(tr));}catch(err){} window.renderCatTrend(); });
+
+const TCO_C = {adq:"var(--s1)", log:"var(--s2)", ins:"var(--s3)", ope:"var(--s4)", mto:"var(--s5)", cum:"var(--s6)", fin:"var(--s7)"};
+function tcoDrv(k, c){
+  if (k==="cat"){ const s = catStats(c); return s ? s.y12 : null; }
+  if (TCO_DRV[k]) return TCO_DRV[k].y12;
+  if (k==="inpc"){ const d = DATA.find(x=>x.id==="inpc"); return d ? d.yoyPct : null; }
+  if (k==="diesel"){ const d = DATA.find(x=>x.id==="diesel"); return d && d.ya ? (d.now/d.ya-1)*100 : null; }
+  const s = catStats({idx:[[k,100]]}); return s ? s.y12 : null;
+}
+const tcoLbl = k => k==="cat" ? "Precio de la categoría (INEGI)" : TCO_DRV[k] ? TCO_DRV[k].lbl : ({inpc:"Inflación (INPC)", diesel:"Diésel (precio promedio)"}[k] || IDX_LBL[k] || k);
+function tcoOf(c){
+  const t = TCO[c.name]; if (!t) return null;
+  const tot = Object.values(t.p).reduce((a,b)=>a+b,0);
+  const parts = Object.keys(TCO_COMP).filter(k=>t.p[k]).map(k => {
+    const mix = (t.d && t.d[k]) || TCO_DEF[k]; let s = 0, w = 0;
+    const ds = mix.map(([dk,wt]) => { const v = tcoDrv(dk,c); if (v!=null){ s += wt*v; w += wt; } return {k:dk, w:wt, v}; });
+    const share = t.p[k]/tot*100, y12 = w ? s/w : null;
+    return {k, share, ds, y12, contrib: y12==null ? 0 : share*y12/100};
+  });
+  const kw = parts.filter(p=>p.y12!=null).reduce((a,p)=>a+p.share,0);
+  const adq = parts.find(p=>p.k==="adq");
+  return { t, parts, y12: kw ? parts.reduce((a,p)=>a+p.contrib,0)*100/kw : null, adqShare: adq ? adq.share : 0, adqY12: adq ? adq.y12 : null,
+    top: [...parts].sort((a,b)=>b.contrib-a.contrib)[0],
+    expo: dk => parts.reduce((a,p)=>{ const tw = p.ds.reduce((x,d)=>x+d.w,0), dw = p.ds.filter(d=>d.k===dk).reduce((x,d)=>x+d.w,0); return a + p.share*dw/tw; }, 0) };
+}
+const tcoBar = (r, cls="") => `<div class="tbar ${cls}" role="img" aria-label="${r.parts.map(p=>`${TCO_COMP[p.k]} ${p.share.toFixed(0)}%`).join(", ")}">${r.parts.map(p=>`<span style="--c:${TCO_C[p.k]};flex:${p.share}" title="${TCO_COMP[p.k]} ${p.share.toFixed(0)}%">${cls?"":p.share>=8?p.share.toFixed(0)+"%":""}</span>`).join("")}</div>`;
+const lc = s => s.charAt(0).toLowerCase() + s.slice(1);
+const mv = v => v>=0.05 ? `sube ${v.toFixed(1)}%` : v<=-0.05 ? `baja ${Math.abs(v).toFixed(1)}%` : "se mantiene";
+const listY = arr => arr.length<2 ? arr.join("") : arr.slice(0,-1).join(", ") + " y " + arr.at(-1);
+const tco = { sel:null };
+try { Object.assign(tco, JSON.parse(localStorage.getItem("pc-tco")||"{}")); } catch(e){}
+window.renderTco = function(){
+  const brief = document.getElementById("tcoBrief"), tbl = document.getElementById("tcoTable"), det = document.getElementById("tcoDet");
+  const all = CATS.map(c=>({c, r:tcoOf(c)})).filter(x=>x.r && x.r.y12!=null && x.r.adqY12!=null).sort((a,b)=>b.r.y12-a.r.y12);
+  if (!all.length){ tbl.innerHTML = '<p class="muted empty">Cargando índices INEGI…</p>'; det.innerHTML = ""; return; }
+  // Lectura de la semana
+  const b = [], t1 = all[0];
+  b.push(`<b>${t1.c.name}</b> es la categoría cuyo costo total más sube: <b>${pct(t1.r.y12)}</b> en 12 meses. Lo empuja sobre todo ${lc(TCO_COMP[t1.r.top.k])} (${pct(t1.r.top.y12)}).`);
+  const gaps = all.filter(x=>x.r.adqY12!=null).map(x=>({...x, g:x.r.y12-x.r.adqY12})).sort((a,b)=>b.g-a.g);
+  const hi = gaps[0], lo = gaps.at(-1);
+  if (hi && hi.g>1){ const p = hi.r.parts.filter(p=>p.k!=="adq").sort((a,b)=>b.contrib-a.contrib)[0];
+    b.push(`Costo oculto en <b>${hi.c.name}</b>: la cotización ${mv(hi.r.adqY12)}, pero el costo total ${hi.r.y12<0?"solo ":""}<b>${mv(hi.r.y12)}</b>. La presión está en ${lc(TCO_COMP[p.k])} (${pct(p.y12)}), que no aparece en el precio.`); }
+  if (lo && lo.g<-1) b.push(`En <b>${lo.c.name}</b> pasa lo contrario: el precio de compra ${mv(lo.r.adqY12)}, pero el costo total ${lo.r.y12>0?"solo ":""}${mv(lo.r.y12)}, porque la compra es ${lo.r.adqShare.toFixed(0)}% del total. Ahí conviene negociar servicio y operación, no solo precio.`);
+  const mo = TCO_DRV.mo.y12;
+  if (mo!=null){ const ex = all.map(x=>({n:x.c.name, e:x.r.expo("mo")})).sort((a,b)=>b.e-a.e).slice(0,3);
+    b.push(`La mano de obra <b>${mv(mo)}</b> en 12 meses (salario promedio IMSS) y es ${listY(ex.map((x,i)=>`${x.e.toFixed(0)}% ${i?"del de":"del costo total de"} ${x.n}`))}. Pide tarifas de mano de obra fijas por 12 meses o indexadas al salario IMSS.`); }
+  const en = TCO_DRV.energia.y12;
+  if (en!=null){ const ex = all.map(x=>({n:x.c.name, e:x.r.expo("energia")})).sort((a,b)=>b.e-a.e).filter(x=>x.e>=10).slice(0,2);
+    if (ex.length) b.push(`La energía ${mv(en)} en 12 meses (INPP) y pesa ${listY(ex.map(x=>`${x.e.toFixed(0)}% en ${x.n}`))}. Evalúa esas ofertas por consumo en kWh a lo largo de su vida, no solo por precio.`); }
+  TCO_NOTES.forEach(n=>b.push(n));
+  brief.innerHTML = `<span class="tag">Lectura de la semana</span><ol>${b.slice(0,7).map(x=>`<li>${x}</li>`).join("")}</ol>`;
+  // Tabla general
+  const sel = tco.sel && all.some(x=>x.c.name===tco.sel) ? tco.sel : all[0].c.name;
+  tbl.innerHTML = `<div class="tbl-wrap"><table class="tco-t"><thead><tr><th>Categoría</th><th>Composición</th><th class="num">Compra en el TCO</th><th class="num">Precio de compra 12 m</th><th class="num">TCO 12 m</th><th>Lo que más empuja</th></tr></thead><tbody>${
+    all.map(({c,r})=>`<tr${c.name===sel?' class="on"':""}><td><button class="nmb" data-n="${esc(c.name)}" aria-pressed="${c.name===sel}">${icon(c.name)}${esc(c.name)}</button></td><td>${tcoBar(r,"sm")}</td><td class="num">${r.adqShare.toFixed(0)}%</td><td class="num">${r.adqY12!=null?pct(r.adqY12):"–"}</td><td class="num">${pill(r.y12)}</td><td class="why">${TCO_COMP[r.top.k]} <span class="muted">${pct(r.top.y12)}</span></td></tr>`).join("")
+  }</tbody></table></div>
+  <div class="legend" style="margin-top:10px">${Object.keys(TCO_COMP).map(k=>`<span><i class="sw" style="background:${TCO_C[k]}"></i>${TCO_COMP[k]}</span>`).join("")}</div>`;
+  tbl.querySelectorAll(".nmb").forEach(btn=>btn.onclick=()=>{ tco.sel = btn.dataset.n; try{localStorage.setItem("pc-tco",JSON.stringify(tco));}catch(e){} window.renderTco(); document.getElementById("tcoDet").scrollIntoView({behavior:"smooth", block:"nearest"}); });
+  // Detalle
+  const {c, r} = all.find(x=>x.c.name===sel), t = r.t;
+  const per100 = r.adqShare ? Math.round(100*100/r.adqShare) : null;
+  det.innerHTML = `<h3>${icon(c.name)}${esc(c.name)} <span class="muted" style="font:400 13px var(--f-body)">horizonte ${t.h} años</span></h3>
+    <div class="tiles">
+      <div class="tile"><span class="k">La compra es</span><span class="v">${r.adqShare.toFixed(0)}%</span><span class="n">del costo total en ${t.h} años</span></div>
+      <div class="tile"><span class="k">Por cada $100 de compra</span><span class="v">$${per100}</span><span class="n">pagas en total en ${t.h} años</span></div>
+      <div class="tile"><span class="k">Costo total, 12 meses</span><span class="v">${pct(r.y12)}</span><span class="n">precio de compra ${r.adqY12!=null?pct(r.adqY12):"s/d"}</span></div>
+    </div>
+    ${tcoBar(r)}
+    <div class="tbl-wrap"><table class="tco-c"><thead><tr><th>Parte del costo</th><th class="num">Peso</th><th>Qué la mueve</th><th class="num">12 meses</th><th class="num">Aporta al TCO</th></tr></thead><tbody>${
+      r.parts.map(p=>`<tr><td><i class="sw" style="background:${TCO_C[p.k]}"></i>${TCO_COMP[p.k]}<div class="drvm">${p.ds.map(d=>tcoLbl(d.k)).join(" · ")}</div></td><td class="num">${p.share.toFixed(0)}%</td><td>${p.ds.map(d=>`${tcoLbl(d.k)}${p.ds.length>1?` <small>${d.w}%</small>`:""}${d.v==null?' <small>(s/d)</small>':""}`).join("<br>")}</td><td class="num">${pill(p.y12)}</td><td class="num">${p.y12==null?"–":(p.contrib>=0?"+":"")+p.contrib.toFixed(2)+" pts"}</td></tr>`).join("")
+    }</tbody><tfoot><tr><td>Costo total</td><td class="num">100%</td><td></td><td class="num">${pill(r.y12)}</td><td class="num">${(r.y12>=0?"+":"")+r.y12.toFixed(2)} pts</td></tr></tfoot></table></div>
+    <div class="grid2" style="gap:12px">
+      <div class="box"><h4>Qué pedir en tu próximo concurso</h4><ul>${t.ask.map(a=>`<li>${a}</li>`).join("")}</ul></div>
+      <div class="box"><h4>Riesgo a vigilar</h4><p>${t.risk}</p><p>Esta semana lo que más empuja es <b>${lc(TCO_COMP[r.top.k])}</b> (${pct(r.top.y12)}), que aporta ${r.top.contrib.toFixed(1)} de los ${r.y12.toFixed(1)} puntos.</p></div>
+    </div>`;
+  const srcs = Object.values(TCO_DRV).filter(d=>d.src).map(d=>d.url?`<a href="${d.url}" target="_blank" rel="noopener">${esc(d.lbl)}</a>: ${esc(d.src)}${d.asOf?`, ${esc(d.asOf)}`:""}`:`${esc(d.lbl)}: ${esc(d.src)}`);
+  document.getElementById("tcoNote").innerHTML = `Los pesos de cada parte son una estimación típica por categoría con referencias de la industria, no salen de tus contratos; si tus números son distintos, pídeme ajustarlos. La variación de 12 meses de cada parte combina: canasta INEGI de la categoría (compra), transporte y diésel (flete), salario y construcción (instalación), energía (operación), servicios, salario y refacciones (mantenimiento) e INPC (cumplimiento y reposición).${srcs.length?" Fuentes: "+srcs.join("; ")+".":""}`;
+};
+
+function renderSeries(){ addVirtual(); window.renderCatsSeries(); renderTiles(); renderEm(); renderCalc(); renderExplorer(); window.renderCatTrend && window.renderCatTrend(); window.renderTco && window.renderTco(); if (!document.getElementById("tab-walmex").hidden) renderWalmex(); if (!opEl.hidden) renderOP(); }
+const EX_HIDE = ["inpp_soldadura_yoy","inpp_alambron_yoy","inpp_fundidas_yoy","inpp_perfiles_yoy","inpp_bano_yoy","inpp_vidrio_yoy","inpp_cemento_yoy","inpp_imper_yoy","inpp_comercial_yoy","inpp_aluminio_yoy","inpp_concreto_yoy","inpp_cables_yoy","aluminio_lme"];
+const EX_LBL = {inpp_varilla_yoy:"Acero (INEGI)", inpp_cobre_yoy:"Cobre (INEGI)", inpp_tubplastico_yoy:"Plásticos (INEGI)", inpp_pinturas_yoy:"Pinturas (INEGI)", inpp_bombas_yoy:"Bombas (INEGI)", inpp_diesel_yoy:"Diésel (INEGI)"};
+function addVirtual(){
+  EX_HIDE.forEach(id=>{ if (SERIES[id]) SERIES[id].hide = true; });
+  Object.entries(EX_LBL).forEach(([id,n])=>{ if (SERIES[id]) SERIES[id].short = n; });
+  st.sel = st.sel.filter(id=>!SERIES[id] || !SERIES[id].hide);
+  const ser = emSeries(); if (ser.length) SERIES.em_kg = {name:"Estructura Metálica, precio estimado por kg", short:"Estructura $/kg", group:"acero", kind:"price", cur:"MXN", unit:"kg", order:0, src:"INEGI (construcción y naves) + precio de mercado", points:ser, virtual:true}; }
 window.renderSeries = renderSeries;
 
 ["vView","vMode","vRange"].forEach(g => document.getElementById(g).addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b) return;
   const key = g==="vView"?"view":g==="vMode"?"mode":"range"; st[key] = key==="range" ? +b.dataset.v : b.dataset.v; saveSt(); renderExplorer();
 }));
-document.getElementById("calcForm").addEventListener("change", () => {
-  const v = +document.getElementById("cBase").value, m = document.getElementById("cMes").value;
-  if (v>0 && m){ try { localStorage.setItem(EMB_KEY, JSON.stringify({v, m})); } catch(e){} renderSeries(); }
-});
 ["emView","emRange"].forEach(g => document.getElementById(g).addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b) return;
   if (g==="emView") em.view = b.dataset.v; else em.range = +b.dataset.v;
   try { localStorage.setItem("pc-em", JSON.stringify(em)); } catch(err){} renderEm();
 }));
-document.getElementById("quoteForm").addEventListener("submit", async e => {
-  e.preventDefault();
-  const msg = document.getElementById("qMsg");
-  if (window.__STATIC__){ msg.textContent = "En la versión pública no se guardan precios. Regístralos en tu versión privada de claude.ai."; return; }
-  if (!dbRef){ msg.textContent = "No se puede guardar en esta vista. Ábrelo desde claude.ai con tu sesión iniciada."; return; }
-  const v = +document.getElementById("qVal").value, m = document.getElementById("qMes").value, series = document.getElementById("qSerie").value;
-  if (!m || !v || !series){ msg.textContent = "Completa concepto, mes y precio."; return; }
-  document.getElementById("qBtn").disabled = true;
-  try {
-    await dbRef.collection("quotes").add({ series, m, v, note: document.getElementById("qNota").value.slice(0,160), at: new Date().toISOString() });
-    msg.textContent = `Guardado: ${SERIES[series]?.short||series}, ${mLabel(m)}.`;
-    document.getElementById("qVal").value = ""; document.getElementById("qNota").value = "";
-  } catch(err){ msg.textContent = err && err.code==="permission_denied" ? "Tu acceso a este tablero es de solo lectura." : "No se guardó. Intenta de nuevo en un momento."; }
-  document.getElementById("qBtn").disabled = false;
-});
 
+{ let t0 = "mercado"; try { t0 = localStorage.getItem("pc-tab") || t0; } catch(e){} if (location.hash==="#walmex") t0 = "walmex"; if (t0==="walmex") showTab("walmex"); }
 renderSeries();
+if (location.hash==="#onepager") openOP();
 (async () => {
   const db = await window.claude?.use?.("db");
   if (!db){ document.getElementById("emTiles").innerHTML = '<p class="muted">Las series mensuales se ven al abrir el tablero desde claude.ai con tu sesión iniciada.</p>'; document.getElementById("explorer").innerHTML = '<p class="muted empty">Sin acceso a las series en esta vista.</p>'; return; }
   dbRef = db;
   db.collection("series").onSnapshot(snap => {
     SERIES = {}; snap.docs.forEach(d => { SERIES[d.id] = d.data(); }); addVirtual();
-    if (!st.sel.length || st.sel.some(id=>!SERIES[id])) { st.sel = st.sel.filter(id=>SERIES[id]); if (!st.sel.length) st.sel = ["inpp_naves_yoy","inpp_varilla_yoy","inpp_soldadura_yoy"].filter(id=>SERIES[id]); }
+    if (!st.sel.length || st.sel.some(id=>!SERIES[id] || SERIES[id].hide)) { st.sel = st.sel.filter(id=>SERIES[id] && !SERIES[id].hide); if (!st.sel.length) st.sel = ["inpp_naves_yoy","inpp_varilla_yoy","inpp_cobre_yoy"].filter(id=>SERIES[id]); }
     renderSeries();
   }, () => { document.getElementById("emTiles").innerHTML = '<p class="muted">No se pudieron leer las series. Recarga la página.</p>'; });
   db.collection("quotes").onSnapshot(snap => { QUOTES = snap.docs.map(d => d.data()); renderSeries(); }, () => {});
