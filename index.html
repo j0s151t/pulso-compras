@@ -320,6 +320,7 @@ body.op-open{overflow:hidden}
 .op-kpis .v{font:700 21px var(--f-display);font-variant-numeric:tabular-nums}
 .op-kpis .v small{font:600 12px var(--f-mono);color:var(--ink-3)}
 .op-kpis .n{font-size:12.5px;color:var(--ink-2)}
+.op-comp{margin:0;font-size:13px;color:var(--ink-2)} .op-comp b{color:var(--ink)}
 .op-sec{display:grid;gap:8px;min-width:0;align-content:start}
 .op-sec h3{font:600 11.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0}
 .op-sec ol,.op-sec ul{margin:0;padding-left:20px;display:grid;gap:6px}
@@ -1322,6 +1323,10 @@ function opModel(){
   const D = wmxData(), wl = D.day.length ? D.day.at(-1) : null, wy = wl ? wmxRange(D,"ytd")[0] : null;
   const tc = cats.filter(x=>x.tco!=null).sort((a,b)=>b.tco-a.tco)[0];
   const up = cats[0], dn = cats.at(-1);
+  // Una línea de la competencia junto a WALMEX (Andres, 8 oct 2026): cambio de la acción en el año, 3B ya en pesos
+  const cr = compRows(), cd = cr.length > 1 ? compRange(cr, "ytd") : null;
+  const cmpY = cd ? cd.rows.filter(x=>x.id!=="walmex" && x.chg!=null).sort((a,b)=>b.chg-a.chg) : [];
+  const comp = cmpY.length ? {lbl:"Competencia en el año", txt:`${listY(cmpY.map(x=>`${x.name} ${pct(x.chg)}`))} (acción, cierre ${dLabel(cd.asOf,false)}; Tiendas 3B en pesos).`} : null;
   const know = [];
   know.push(`Tus categorías que más suben en 12 meses: ${listY(cats.slice(0,2).map(x=>`${x.n} (${pct(x.st.y12)})`))}${dn && dn.st.y12<0 ? `; la que más baja es ${dn.n} (${pct(dn.st.y12)})` : ""}. Dato INEGI a ${mLabel(up.st.last)}.`);
   if (mp.length) know.push(`Materias primas arriba de 5% en 12 meses: ${listY(mp.slice(0,3).map(x=>`${x.n} ${pct(x.y)} (pega en ${x.aff})`))}. Si te piden aumentos en esas categorías, compáralos contra el índice antes de aprobarlos.`);
@@ -1333,7 +1338,7 @@ function opModel(){
       {k:"Materias primas >5%", v:String(mp.length), u:"de "+MP.length, n:mp.length ? mp.slice(0,3).map(x=>x.n).join(", ") + (mp.length>3 ? ` y ${mp.length-3} más` : "") : "Ninguna sube más de 5%"},
       wl ? {k:"WALMEX", v:fx2(wl.v), u:"MXN", n:`${pct((wl.v/wy.v-1)*100)} en el año · cierre ${dLabel(wl.d,false)}`} : null
     ].filter(Boolean),
-    know, risks, cats, mpCount: mp.length,
+    comp, know, risks, cats, mpCount: mp.length,
     events: EVENTS.filter(e=>e.d>=today).slice(0,5),
     asOf: mLabel(up.st.last), emAsOf: mLabel(last.m), url: DASH_URL };
 }
@@ -1342,6 +1347,7 @@ const p1 = v => Math.abs(v)<0.05 ? "0.0%" : pct(v);
 function opHtml(o){
   return `<header class="op-hd"><div><span class="wk">${opEsc(o.week)}</span><h2 id="op-title">Pulso de Compras México</h2></div><span class="wk">GNFR Construcciones · México</span></header>
   <div class="op-kpis">${o.kpis.map(k=>`<div><span class="k">${k.k}</span><span class="v">${k.v} <small>${k.u}</small></span><span class="n">${opEsc(k.n)}</span></div>`).join("")}</div>
+  ${o.comp ? `<p class="op-comp"><b>${o.comp.lbl}:</b> ${opEsc(o.comp.txt)}</p>` : ""}
   <section class="op-sec"><h3>Lo que tienes que saber</h3><ol>${o.know.map(x=>`<li>${opEsc(x)}</li>`).join("")}</ol></section>
   <div class="op-2">
     <section class="op-sec"><h3>Riesgos y qué haría</h3><div class="op-risks">${o.risks.map(r=>`<div class="op-risk"><span class="lvl ${r.lvl}">${r.lvl}</span><div><p class="t">${opEsc(r.t)}</p><p><b>Qué haría:</b> ${opEsc(r.doIt)}</p><p class="s">${opEsc(r.aff)} · ${opEsc(r.src)}</p></div></div>`).join("")}</div></section>
@@ -1351,11 +1357,12 @@ function opHtml(o){
       <section class="op-sec"><h3>Próximas fechas</h3><ul class="op-ev">${o.events.map(e=>`<li><b>${opEsc(e.dl)}</b><span>${opEsc(e.t)}<small>${opEsc(e.cats)}</small></span></li>`).join("")}</ul></section>
     </div>
   </div>
-  <footer class="op-ft"><p>Índices de categoría: INEGI, INPP a ${o.asOf}; costo total con salario IMSS e INPP de servicios. Estructura por kg estimada a ${o.emAsOf}. Dólar: Banxico FIX. WALMEX: cierre de la BMV. Riesgos con su fuente en el tablero.</p><p>Tablero completo: <a href="${o.url}" target="_blank" rel="noopener">${o.url.replace("https://","")}</a></p></footer>`;
+  <footer class="op-ft"><p>Índices de categoría: INEGI, INPP a ${o.asOf}; costo total con salario IMSS e INPP de servicios. Estructura por kg estimada a ${o.emAsOf}. Dólar: Banxico FIX. WALMEX: cierre de la BMV; competencia: Yahoo Finance (3B de NYSE, a pesos). Riesgos con su fuente en el tablero.</p><p>Tablero completo: <a href="${o.url}" target="_blank" rel="noopener">${o.url.replace("https://","")}</a></p></footer>`;
 }
 function opText(o){
   const L = [`PULSO DE COMPRAS MÉXICO · ${o.week}`, ""];
   o.kpis.forEach(k=>L.push(`• ${k.k}: ${k.v} ${k.u} (${k.n})`));
+  if (o.comp) L.push(`• ${o.comp.lbl}: ${o.comp.txt}`);
   L.push("", "LO QUE TIENES QUE SABER"); o.know.forEach((x,i)=>L.push(`${i+1}. ${x}`));
   L.push("", "RIESGOS Y QUÉ HARÍA"); o.risks.forEach(r=>L.push(`[${r.lvl.toUpperCase()}] ${r.t}. Qué haría: ${r.doIt} (${r.aff} · ${r.src})`));
   L.push("", `TUS ${CATS.length} CATEGORÍAS (12 meses · en el año · costo total de propiedad)`); o.cats.forEach(x=>L.push(`${x.n}: ${pct(x.st.y12)} · ${x.st.ytd!=null?p1(x.st.ytd):"s/d"} · ${x.tco!=null?pct(x.tco):"s/d"} · nivel ${x.lvl}`));
@@ -1373,12 +1380,13 @@ function opMail(o){
   <p style="font:600 11px Menlo,Consolas,monospace;letter-spacing:.05em;text-transform:uppercase;color:${C.ink2};margin:0">${opEsc(o.week)}</p>
   <h2 style="font:800 24px Arial,sans-serif;margin:2px 0 10px;padding-bottom:8px;border-bottom:3px solid ${C.ink}">Pulso de Compras México</h2>
   <table role="presentation" style="width:100%;border-collapse:collapse"><tr>${o.kpis.map(k=>`<td style="vertical-align:top;padding:4px 8px 4px 10px;border-left:3px solid ${C.acc};width:25%"><div style="font:600 10px Menlo,Consolas,monospace;text-transform:uppercase;color:${C.ink3}">${k.k}</div><div style="font:700 19px Arial,sans-serif">${k.v} <span style="font:600 11px Menlo,monospace;color:${C.ink3}">${k.u}</span></div><div style="font-size:12px;color:${C.ink2}">${opEsc(k.n)}</div></td>`).join("")}</tr></table>
+  ${o.comp ? `<p style="margin:10px 0 0;font-size:13px;color:${C.ink2}"><b style="color:${C.ink}">${o.comp.lbl}:</b> ${opEsc(o.comp.txt)}</p>` : ""}
   ${h3("Lo que tienes que saber")}<ol style="margin:0;padding-left:20px">${o.know.map(x=>`<li style="margin:0 0 6px">${opEsc(x)}</li>`).join("")}</ol>
   ${h3("Riesgos y qué haría")}${o.risks.map(r=>`<p style="margin:0 0 10px">${tag(r.lvl)} <b>${opEsc(r.t)}</b><br><b>Qué haría:</b> ${opEsc(r.doIt)}<br><span style="font-size:12px;color:${C.ink3}">${opEsc(r.aff)} · ${opEsc(r.src)}</span></p>`).join("")}
   ${h3(`Tus ${CATS.length} categorías`)}<table style="width:100%;border-collapse:collapse;font-size:13px"><tr>${["Categoría","12 m","En el año","TCO",""].map((t,i)=>`<th style="font:600 10px Menlo,monospace;text-transform:uppercase;color:${C.ink3};text-align:${i&&i<4?"right":"left"};padding:4px 6px;border-bottom:1px solid ${C.line}">${t}</th>`).join("")}</tr>${
     o.cats.map(x=>`<tr>${td(opEsc(x.n))}${td(pct(x.st.y12),"text-align:right")}${td(x.st.ytd!=null?p1(x.st.ytd):"–","text-align:right")}${td(x.tco!=null?pct(x.tco):"–","text-align:right")}${td(tag(x.lvl))}</tr>`).join("")}</table>
   ${h3("Próximas fechas")}<table role="presentation" style="width:100%;border-collapse:collapse;font-size:13px">${o.events.map(e=>`<tr><td style="vertical-align:top;padding:3px 10px 3px 0;white-space:nowrap;font:600 12px Menlo,monospace">${opEsc(e.dl)}</td><td style="padding:3px 0">${opEsc(e.t)}<br><span style="font-size:12px;color:${C.ink3}">${opEsc(e.cats)}</span></td></tr>`).join("")}</table>
-  <p style="font-size:12px;color:${C.ink3};border-top:1px solid ${C.line};padding-top:8px;margin-top:18px">Índices de categoría: INEGI, INPP a ${o.asOf}. Estructura por kg estimada a ${o.emAsOf}. Dólar: Banxico FIX. WALMEX: cierre de la BMV.<br><a href="${o.url}" style="color:${C.acc}">Abrir el tablero completo</a></p></div>`;
+  <p style="font-size:12px;color:${C.ink3};border-top:1px solid ${C.line};padding-top:8px;margin-top:18px">Índices de categoría: INEGI, INPP a ${o.asOf}. Estructura por kg estimada a ${o.emAsOf}. Dólar: Banxico FIX. WALMEX: cierre de la BMV; competencia: Yahoo Finance (3B de NYSE, a pesos).<br><a href="${o.url}" style="color:${C.acc}">Abrir el tablero completo</a></p></div>`;
 }
 window.onePager = () => { const o = opModel(); if (!o) return null;
   return {subject:`Pulso de Compras · ${o.week.replace(/^Semana del /,"semana del ")}: estructura ${o.kpis[0].v}/kg`, text:opText(o), html:opHtml(o), mail:opMail(o)}; };
