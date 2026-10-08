@@ -261,6 +261,25 @@ table.tco-c tfoot td{font-weight:600;border-bottom:0;border-top:2px solid var(--
 table.wq{min-width:820px}
 table.wq td:first-child b{font-family:var(--f-display)}
 .wnote{font-size:12.5px;color:var(--ink-3);margin:8px 0 0}
+/* Competencia: chips que prenden y apagan cada empresa, con su cambio en el periodo */
+.cleg{display:flex;flex-wrap:wrap;gap:6px}
+.cleg .chip b{font:600 12.5px var(--f-mono);font-variant-numeric:tabular-nums}
+.cleg .chip b.gain{color:var(--down)} .cleg .chip b.loss{color:var(--up)}
+.cleg .chip small{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.ctip{display:grid;gap:1px;text-align:left;z-index:2}
+.ctip>span{font-size:12px;color:var(--ink-3)}
+.ctip div{display:flex;justify-content:space-between;gap:14px;align-items:center}
+.ctip div b{font:600 12.5px var(--f-mono);font-variant-numeric:tabular-nums}
+.ctip .sw{width:8px;height:8px;border-radius:50%}
+table.cq{min-width:940px}
+table.cq tr.ref td{background:var(--accent-soft)}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:16px 24px;margin:0;padding:0;list-style:none}
+.plans li{display:grid;gap:4px;align-content:start;padding-top:10px;border-top:3px solid var(--c)}
+.plans h3{font-size:15px}
+.plans p{margin:0;font-size:14px;color:var(--ink-2)}
+.plans .src{font-size:12px;color:var(--ink-3)}
+.comp{display:grid;gap:18px}
+.sub-h{font-size:16px;margin:0 0 10px}
 footer{font-size:13px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:14px;display:grid;gap:6px}
 footer p{margin:0;max-width:80ch}
 @media (max-width:560px){.risk{grid-template-columns:1fr}}
@@ -554,6 +573,38 @@ table.op-t .lvl{font-size:10px;padding:1px 5px}
       <p class="wnote">Año 2025 completo: ingresos de 1,011,598 millones (+5.6%), utilidad neta de 49,891 millones (−7.3%) y 186 tiendas nuevas. Fuentes: <a href="https://files.walmex.mx/upload/files/2026/ES/Trimestral/2T26/WALMEX%202T26%20BMV.pdf">reporte 2T26 a la BMV</a>, <a href="https://files.walmex.mx/upload/files/2025/ES/Trimestral/4T25/Walmex_Webcast_4T25.pdf">presentación 4T25</a> y resúmenes trimestrales de <a href="https://estrategia.vepormas.com/wp-content/uploads/2026/07/Trimestral-WALMEX-2T26.pdf">Vector Análisis</a>.</p>
     </section>
 
+    <section aria-labelledby="h-wcomp" class="comp">
+      <div class="sec-hd">
+        <div><span class="eyebrow">Autoservicios que cotizan en bolsa</span><h2 id="h-wcomp">La competencia</h2></div>
+        <p class="src">Cambio de la acción en el periodo, para comparar empresas de distinto precio en la misma escala. La Comer, Chedraui y Soriana cotizan en la BMV en pesos; Tiendas 3B cotiza en la Bolsa de Nueva York en dólares, así que su cambio incluye el del tipo de cambio.</p>
+      </div>
+      <div class="panel stock">
+        <div class="ctrls">
+          <div class="seg" role="group" aria-label="Periodo" id="cRange">
+            <button data-v="6m" aria-pressed="false">6 M</button><button data-v="ytd" aria-pressed="false">En el año</button><button data-v="1y" aria-pressed="true">1 A</button><button data-v="2024" aria-pressed="false">Desde 2024</button>
+          </div>
+        </div>
+        <div class="cleg" id="cLeg" role="group" aria-label="Empresas en la gráfica: toca una para quitarla o ponerla"></div>
+        <div id="cChart" class="chart stockc"></div>
+        <p class="st-asof" id="cAsOf"></p>
+        <p class="src">Cierres semanales de <a href="https://finance.yahoo.com/" target="_blank" rel="noopener">Yahoo Finanzas</a> (último día hábil de cada semana, sin ajustar por dividendos). La semana en curso usa el último cierre disponible.</p>
+      </div>
+      <div>
+        <h3 class="sub-h">Último trimestre reportado</h3>
+        <div class="tbl-wrap">
+          <table class="wq cq" aria-label="Último trimestre reportado de Walmex y su competencia">
+            <thead><tr><th>Empresa</th><th>Trimestre</th><th class="num">Ingresos</th><th class="num">Crec. anual</th><th class="num">VMT México</th><th class="num">Margen EBITDA</th><th class="num">Utilidad neta</th><th class="num">Crec. anual</th><th class="num">Tiendas</th><th class="num">Abiertas en el trim.</th></tr></thead>
+            <tbody id="cTbl"></tbody>
+          </table>
+        </div>
+        <p class="wnote" id="cNote"></p>
+      </div>
+      <div>
+        <h3 class="sub-h">Planes de expansión 2026</h3>
+        <ul class="plans" id="cPlans"></ul>
+      </div>
+    </section>
+
     <section aria-labelledby="h-wimp">
       <div class="panel">
         <h2 id="h-wimp">Lo que significa para tus compras</h2>
@@ -561,7 +612,23 @@ table.op-t .lvl{font-size:10px;padding:1px 5px}
           <div class="risk"><span class="lvl alto">Alto</span><div><h3>Walmex invertirá 43,000 millones de pesos en 2026 (+10%)</h3><p class="aff">Demanda · Estructura Metálica, Sistema Contra Incendio, Pintura, Sonido, PTARs</p><p>El 42% va a remodelaciones y mantenimiento, 26% a tiendas y clubes nuevos, 24% a cadena de suministro y 8% a tecnología. Hay dos centros de distribución automatizados en Guanajuato y Tlaxcala para 2027. En 2025 invirtió 39,000 de los 41,800 millones planeados por retrasos en tiendas y tecnología.</p><p class="do"><b>Qué haría:</b> pedir al área de construcción el calendario de remodelaciones y de los dos CEDIS, y usarlo para consolidar volumen de estructura y SCI en acuerdos anuales. En un CEDIS el precio por kg de estructura pesa más que en una tienda.</p><span class="src">Expansión y Bloomberg Línea, 25 mar 2026 (Walmex Day)</span></div></div>
           <div class="risk"><span class="lvl medio">Medio</span><div><h3>Las aperturas se juntan al final del año</h3><p class="aff">Capacidad de proveedores · Estructura Metálica, SCI, Equipo Hidroneumático</p><p>De las 186 tiendas que abrió en 2025, 115 fueron en el cuarto trimestre. En el primer semestre de 2026 lleva 40 (17 y 23), así que el cierre de 2026 viene cargado.</p><p class="do"><b>Qué haría:</b> confirmar ya con los fabricantes de estructura y SCI su capacidad para noviembre y diciembre, y para 2027 reservarla desde el segundo trimestre.</p><span class="src">Presentación 4T25, 18 feb 2026 · reportes 1T26 y 2T26</span></div></div>
           <div class="risk"><span class="lvl medio">Medio</span><div><h3>Márgenes apretados: espera presión por ahorros</h3><p class="aff">Presupuesto · todas tus categorías</p><p>En el 2T26 los ingresos crecieron 1.9%, la utilidad neta bajó 0.7% y el margen EBITDA cayó a 9.4% por el salario mínimo y un consumo débil. La acción baja cerca de 18% en 12 meses.</p><p class="do"><b>Qué haría:</b> tener listas propuestas de ahorro con evidencia INEGI (escalatorias atadas a índice y consolidación de volumen) y prever que algunos proyectos se difieran, como pasó en 2025.</p><span class="src">Walmex 2T26, 22 jul 2026 · Vector Análisis</span></div></div>
+          <div class="risk"><span class="lvl medio">Medio</span><div><h3>La competencia también construye en el segundo semestre</h3><p class="aff">Capacidad de contratistas · Sistema Contra Incendio, Pintura, Equipo Hidroneumático, Estructura Metálica</p><p>A 3B le faltan entre 312 y 352 tiendas para su meta de 2026 y a Chedraui unas 100 de sus 147 en México. SORIANA_RISK La Comer abre tiendas grandes, de 6,500 a 8,200 m², con estructura parecida a la tuya. Las de 3B y los Supercito de Chedraui son chicas y usan poca estructura, pero sí cuadrillas de instalaciones, pintura y contra incendio de la misma región (esto último es mi lectura).</p><p class="do"><b>Qué haría:</b> preguntar a tus contratistas de SCI e instalaciones qué carga tienen con otras cadenas en noviembre y diciembre, y amarrar ya fechas y cuadrillas para tus aperturas de fin de año.</p><span class="src">Reportes 2T26 de 3B (12 ago 2026), Chedraui y La Comer (22 jul 2026)SORIANA_RISK_SRC</span></div></div>
         </div>
+      </div>
+    </section>
+    <section aria-labelledby="h-wnews">
+      <div class="panel">
+        <h2 id="h-wnews">Noticias que mueven a Walmart</h2>
+        <ul class="news">
+          <li><div class="nh"><span class="lvl alto">Alto</span><span class="t">Consumo · ventas de Walmex</span></div><a href="https://vanguardia.com.mx/dinero/crecen-17-en-agosto-ventas-en-tiendas-antad-OC23561807" target="_blank" rel="noopener">El autoservicio vende 0.7% menos a tiendas iguales en agosto</a><p>Las cadenas de la ANTAD vendieron 1.7% más a tiendas iguales, pero el autoservicio, donde compite Walmex, bajó 0.7%. De enero a agosto el avance es de 1.5% nominal, debajo de la inflación.</p><p><b>Por qué te importa:</b> con ventas que crecen menos que los precios, Finanzas suele recortar o diferir inversión, como pasó en 2025.</p><p><b>Qué haría:</b> tener lista una priorización que proteja lo crítico (contra incendio, ANSUL, estructura) frente a trabajos de imagen.</p><span class="src">Vanguardia con datos de ANTAD · 17 sep 2026</span></li>
+          <li><div class="nh"><span class="lvl alto">Alto</span><span class="t">Competencia · Bodega Aurrerá</span></div><a href="https://www.xataka.com.mx/empresas-y-economia/tiendas-3b-esta-llenando-mexico-tiendas-supera-3-600-sucursales" target="_blank" rel="noopener">Tiendas 3B abre 155 tiendas en un trimestre y vende 20% más a tiendas iguales</a><p>Llegó a 3,624 tiendas en junio, con 593 aperturas netas en 12 meses, y sus ingresos crecieron 38.7%.</p><p><b>Por qué te importa:</b> 3B pelea el mismo cliente que Bodega Aurrerá, y en el mismo trimestre Walmex tuvo 1.1% menos transacciones en México.</p><p><b>Qué haría:</b> estar atento a si Walmex responde con más Bodega Aurrerá Express o conversiones; serían muchas obras chicas y repetidas, buenas para paquetes estandarizados por región.</p><span class="src">Xataka México · 1 sep 2026 · reporte 2T26 de Walmex</span></li>
+          <li><div class="nh"><span class="lvl alto">Alto</span><span class="t">Regulación · costo laboral</span></div><a href="https://expansion.mx/carrera/2026/10/07/jornada-40-horas-registro-electronico-empresas" target="_blank" rel="noopener">Jornada de 46 horas y registro electrónico de asistencia desde enero de 2027</a><p>La jornada máxima baja de 48 a 46 horas el 1 de enero y dos horas más cada año hasta 40 en 2030. El registro de entradas y salidas será electrónico, con multas de hasta 586,550 pesos.</p><p><b>Por qué te importa:</b> Walmex es de los mayores empleadores privados del país; su costo de personal en tiendas, clubes y CEDIS sube cada año hasta 2030 y aprieta el resto del presupuesto.</p><p><b>Qué haría:</b> pedir que las cotizaciones de mantenimiento e instalación de 2027 ya traigan la jornada de 46 horas, para que no lleguen reclamos de ajuste a medio contrato.</p><span class="src">Expansión · 7 oct 2026</span></li>
+          <li><div class="nh"><span class="lvl medio">Medio</span><span class="t">Consumo · temporada alta</span></div><a href="https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/enco/icc2026_10.pdf" target="_blank" rel="noopener">La confianza del consumidor baja a 45.1 puntos en septiembre</a><p>Cayó 1.2 puntos en el mes y quedó 1.0 abajo de hace un año. La posibilidad de comprar muebles y electrodomésticos bajó a 32.0 puntos.</p><p><b>Por qué te importa:</b> un consumidor cauto antes del Buen Fin y diciembre limita la mercancía general de Walmart y Sam's en su mejor temporada.</p><p><b>Qué haría:</b> cerrar antes de noviembre los trabajos en piso de venta para no chocar con la temporada, y no contar con presupuesto extra en el cuarto trimestre.</p><span class="src">INEGI · 6 oct 2026</span></li>
+          SORIANA_NEWS
+          <li><div class="nh"><span class="lvl medio">Medio</span><span class="t">Walmex · remodelaciones</span></div><a href="https://www.informabtl.com/sams-club-nueva-imagen-mexico-members-mark/" target="_blank" rel="noopener">Sam's Club estrena nueva imagen en dos clubes prototipo</a><p>Por sus 35 años en México, Walmex renovó Lomas Verdes (Estado de México) y San Jerónimo (CDMX) con espacios nuevos, herramientas digitales y más Member's Mark.</p><p><b>Por qué te importa:</b> la nota no da calendario ni inversión, pero si los prototipos funcionan lo normal es que la imagen pase al programa de remodelaciones (es una inferencia).</p><p><b>Qué haría:</b> pedir a Proyectos las especificaciones de los dos clubes (pintura, señalética, sonido, iluminación) para tener catálogo y precios unitarios antes de un despliegue en 2027.</p><span class="src">InformaBTL · 2 oct 2026</span></li>
+          <li><div class="nh"><span class="lvl medio">Medio</span><span class="t">Macro · Bodega Aurrerá</span></div><a href="https://www.razon.com.mx/negocios/2026/10/01/ingresos-por-remesas-caen-36-anual-en-agosto/" target="_blank" rel="noopener">Las remesas caen 3.6% anual en agosto</a><p>Llegaron 5,452 millones de dólares, con 905 mil envíos menos que hace un año. De enero a agosto suman 41,802 millones, 2.2% más.</p><p><b>Por qué te importa:</b> las remesas sostienen el gasto de muchos clientes de Bodega Aurrerá en el interior del país, el formato más grande de Walmex.</p><p><b>Qué haría:</b> seguir las tiendas en estados que dependen más de remesas; ahí es donde primero se pueden posponer aperturas o remodelaciones.</p><span class="src">La Razón con datos de Banxico · 1 oct 2026</span></li>
+          <li><div class="nh"><span class="lvl bajo">Bajo</span><span class="t">Tasas y tipo de cambio</span></div><a href="https://www.elfinanciero.com.mx/economia/2026/09/24/tasa-del-banxico-hoy-24-de-septiembre-2026-en-cuanto-quedo/" target="_blank" rel="noopener">Banxico deja la tasa en 6.50% y el peso pierde terreno</a><p>La decisión del 24 de septiembre fue unánime, con inflación de 3.42% en la primera quincena del mes. El FIX pasó de 17.50 ese día a 18.37 el 2 de octubre y estaba en 17.97 el 7 de octubre.</p><p><b>Por qué te importa:</b> tasas sin recortes no ayudan al crédito ni al consumo, y un peso más débil encarece la mercancía importada de Walmex y tu equipo en dólares (ANSUL, sonido, bombas).</p><p><b>Qué haría:</b> fijar el tipo de cambio en las órdenes de compra de octubre.</p><span class="src">El Financiero · 24 sep 2026 · FIX del DOF vía dolardof.com · 7 oct 2026</span></li>
+        </ul>
       </div>
     </section>
     <p class="src">Solo información pública; no es recomendación de inversión. Si operas la acción, revisa antes los periodos de restricción de la política interna para colaboradores.</p>
@@ -569,7 +636,7 @@ table.op-t .lvl{font-size:10px;padding:1px 5px}
 
   <footer>
     <p>Actualizado el lunes 5 de octubre de 2026. Se actualiza solo cada lunes a las 7:00 am (hora del centro de México).</p>
-    <p>Categorías: Estructura Metálica, Sistema Contra Incendio, ANSUL, Pintura, Equipo Hidroneumático, PTARs y Sonido, solo México. Datos de fuentes públicas (INEGI vía informes CMIC CEICO como fuente principal; Banxico para tipo de cambio; LME, PetroIntelligence y Drewry solo como referencia). Úsalo como referencia de mercado, no como cotización.</p>
+    <p>Categorías: Estructura Metálica, Sistema Contra Incendio, ANSUL, Pintura, Equipo Hidroneumático, PTARs, Sonido y Proyectista, solo México. Datos de fuentes públicas (INEGI vía informes CMIC CEICO como fuente principal; Banxico para tipo de cambio; LME, PetroIntelligence y Drewry solo como referencia). Úsalo como referencia de mercado, no como cotización.</p>
   </footer>
 </div>
 <div class="op-back" id="op" hidden>
@@ -1005,6 +1072,7 @@ function drawStock(el, pts, r){
   hit.addEventListener("pointermove", show); hit.addEventListener("pointerdown", show); hit.addEventListener("pointerleave", hide);
 }
 function renderWalmex(){
+  renderComp();
   document.querySelectorAll("#wRange button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.v===wmx.range)));
   const D = wmxData(), el = document.getElementById("wChart");
   if (D.day.length<7){ el.innerHTML = '<p class="muted empty">Los cierres se ven al abrir el tablero desde claude.ai con tu sesión iniciada.</p>'; return; }
@@ -1028,6 +1096,116 @@ function renderWalmex(){
   document.getElementById("wSrc").innerHTML = `Cierres diarios de la BMV vía <a href="${daily.url||"https://finance.yahoo.com/quote/WALMEX.MX/history/"}" target="_blank" rel="noopener">Yahoo Finanzas</a>: son los mismos cierres que muestra Google Finance, sin ajustar por dividendos. La vista de 5 años usa el cierre de cada semana. Rango de 52 semanas con cierres diarios. P/U, dividendo, consenso y fecha del próximo reporte: <a href="${F.url}" target="_blank" rel="noopener">${F.src}</a>, ${F.asOf}.`;
 }
 document.getElementById("wRange").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; wmx.range = b.dataset.v; try{localStorage.setItem("pc-wmx",JSON.stringify(wmx));}catch(err){} renderWalmex(); });
+// Último trimestre reportado de cada empresa (millones de pesos) y sus planes 2026. La rutina del lunes lo actualiza cuando sale un reporte.
+// c = color de la serie; q.sss = VMT México; q.ni negativo = pérdida; q.stores y q.opened aceptan texto cuando hace falta aclarar.
+const COMP = [
+  {id:"walmex", name:"Walmex", tk:"WALMEX", mkt:"BMV", cur:"MXN", c:"--s1",
+    q:{q:"2T26", date:"22 jul 2026", rev:250948, revG:1.9, sss:1.8, ebitdaM:9.4, ebitdaBp:-10, ni:11152, niG:-0.7, stores:4305, opened:23}},
+  {id:"tresb", name:"Tiendas 3B", tk:"TBBB", mkt:"NYSE", cur:"USD", c:"--s2",
+    q:{q:"2T26", date:"12 ago 2026", rev:26037, revG:38.7, sss:20.0, ebitdaM:3.7, ebitdaBp:-81, ni:-386, niG:null, stores:3624, opened:155},
+    plan:{h:"590 a 630 tiendas nuevas en 2026", p:"Lleva 278 en el primer semestre (123 y 155), así que le faltan entre 312 y 352 para diciembre. Planea 4 centros de distribución nuevos y una inversión cercana a 5,250 millones; cada tienda cuesta en promedio 5.5 millones.", src:"Reporte 4T25 (11 mar 2026) y 2T26 (12 ago 2026); inversión según El CEO, 7 abr 2026", url:"https://www.sec.gov/Archives/edgar/data/1978954/000119312526102363/tbbb_4q25_earnings_relea.htm", next:"3T26 sin fecha; el año pasado fue el 19 de noviembre"}},
+  {id:"chedraui", name:"Chedraui", tk:"CHDRAUI B", mkt:"BMV", cur:"MXN", c:"--s3",
+    q:{q:"2T26", date:"22 jul 2026", rev:71035, revG:-3.9, sss:1.3, ebitdaM:9.0, ebitdaBp:15, ni:1825, niG:-11.5, stores:"728 + 384 EE.UU.", opened:"28 + 1 EE.UU."},
+    plan:{h:"147 aperturas en México y 5 en EE.UU.", p:"130 Supercito, 9 Tienda Chedraui, 7 Super Chedraui y 1 Arteli. Lleva 47 en el primer semestre, así que le quedan unas 100. Invertirá cerca de 3.3% de sus ventas (4,699 millones de enero a junio, 31.5% más) y crecerá 5.7% su piso de venta en México.", src:"Guía 2026 a la BMV, 12 ene 2026; reiterada en julio", url:"https://bmv.com.mx/docs-pub/eventemi/eventemi_1522661_1.pdf", next:"3T26 el 27 de octubre"}},
+  {id:"soriana", name:"Soriana", tk:"SORIANA B", mkt:"BMV", cur:"MXN", c:"--s4",
+    q:null, plan:null},
+  {id:"lacomer", name:"La Comer", tk:"LACOMER UBC", mkt:"BMV", cur:"MXN", c:"--s5",
+    q:{q:"2T26", date:"22 jul 2026", rev:12933, revG:5.7, sss:2.9, ebitdaM:10.3, ebitdaBp:-140, ni:671, niG:-16.4, stores:94, opened:1},
+    plan:{h:"Programa mayor que el de 2025, sin cifra", p:"No publica meta de aperturas ni de inversión. Lleva 4 en el año (Fresko Mérida, Sumesa Coyoacán, La Comer Cuernavaca y Fresko Valle Cumbres en Monterrey) y llega a 96 tiendas. Son tiendas grandes, de 6,500 a 8,200 m². Invirtió 2,277 millones en activo fijo de enero a junio, contra 4,280 en todo 2025.", src:"Reportes 1T26 y 2T26 y avisos a la BMV", url:"https://lacomerfinanzas.com.mx/wp-content/uploads/Press_Release_2T2026.pdf", next:"3T26 el 21 de octubre"}}
+];
+const COMP_NOTE = `Walmex en la primera fila como referencia. 3B reporta en pesos aunque su acción cotice en dólares; su margen EBITDA es el reportado (6.1% sin pagos en acciones) y su resultado fue pérdida. La utilidad de La Comer se compara contra un 2T25 que traía unos 162 millones por la venta de un terreno. Chedraui consolida sus 384 tiendas en EE.UU.; sus ingresos bajan porque el peso se apreció 9.7% frente al 2T25, mientras en México crecieron 5.1%. Fuentes: <a href="https://files.walmex.mx/upload/files/2026/ES/Trimestral/2T26/WALMEX%202T26%20BMV.pdf" target="_blank" rel="noopener">Walmex</a>, <a href="https://www.sec.gov/Archives/edgar/data/0001978954/000119312526346965/6k_tbbb_2q26_earnings_re.htm" target="_blank" rel="noopener">Tiendas 3B</a>, <a href="https://expansion.mx/empresas/2026/07/22/chedraui-politica-migratoria-resultados-segundo-trimestre" target="_blank" rel="noopener">Chedraui (Expansión)</a> y <a href="https://estrategia.vepormas.com/wp-content/uploads/2026/07/Trimestral-CHDRAUI-2T26.pdf" target="_blank" rel="noopener">Ve por Más</a>, SORIANA_SRC y <a href="https://lacomerfinanzas.com.mx/wp-content/uploads/Press_Release_2T2026.pdf" target="_blank" rel="noopener">La Comer</a>.`;
+// ---------- Competencia: Walmex contra autoservicios que cotizan en bolsa ----------
+// Cierres semanales de Yahoo Finanzas (d = lunes, v = cierre del último día hábil, sin ajustar por dividendos).
+// Walmex sale de walmex_wk más walmex_d agrupado por semana; los demás de comp_<id>_wk.
+const COMP_R = [["6m","en los últimos 6 meses",6],["ytd","en lo que va del año"],["1y","en el último año",12],["2024","desde el inicio de 2024"]];
+const cmp = { range:"1y", off:[] };
+try { Object.assign(cmp, JSON.parse(localStorage.getItem("pc-cmp")||"{}")); } catch(e){}
+if (!COMP_R.some(x=>x[0]===cmp.range)) cmp.range = "1y";
+if (!Array.isArray(cmp.off)) cmp.off = [];
+const monOf = d => addD(d, -((wday(d)+6)%7));
+const sgnPct = (v, k=1) => (v>=0?"+":"−") + Math.abs(v).toFixed(k) + "%";
+function compRows(){
+  return COMP.map(c => {
+    const wk = {};
+    if (c.id==="walmex"){
+      (SERIES.walmex_wk?.points||[]).forEach(p=>{ if (p.v!=null) wk[p.d] = p.v; });
+      (SERIES.walmex_d?.points||[]).slice().sort((a,b)=>a.d<b.d?-1:1).forEach(p=>{ if (p.v!=null) wk[monOf(p.d)] = p.v; });
+    } else (SERIES["comp_"+c.id+"_wk"]?.points||[]).forEach(p=>{ if (p.v!=null) wk[monOf(p.d)] = p.v; });
+    return {...c, wk};
+  }).filter(r => Object.keys(r.wk).length > 8);
+}
+function compRange(rows, r){
+  const all = [...new Set(rows.flatMap(x=>Object.keys(x.wk)))].sort(), lastW = all.at(-1);
+  let i0;
+  if (r==="2024") i0 = all.findIndex(w=>w>="2024-01-01");
+  else if (r==="ytd"){ const y = lastW.slice(0,4)+"-01-01"; i0 = Math.max(0, all.findIndex(w=>addD(w,4)>=y)-1); }
+  else { const s = monthsAgo(lastW, (COMP_R.find(x=>x[0]===r)||COMP_R[2])[2]); i0 = all.findIndex(w=>w>=s); }
+  const ws = all.slice(Math.max(0,i0));
+  return { ws, rows: rows.map(x => { const vs = ws.map(w=>x.wk[w] ?? null), b = vs.find(v=>v!=null);
+    const pc = vs.map(v => v==null ? null : (v/b-1)*100), lastI = pc.findLastIndex(v=>v!=null);
+    return {...x, pc, chg: lastI<0 ? null : pc[lastI], from: ws[vs.findIndex(v=>v!=null)], last: x.wk[ws[lastI]], lastW: ws[lastI]}; }) };
+}
+function drawComp(el, D, r){
+  const on = D.rows.filter(x=>!cmp.off.includes(x.id));
+  if (!on.length){ el.innerHTML = '<p class="muted empty">Elige al menos una empresa.</p>'; return; }
+  const narrow = (el.clientWidth||760) < 560, W=narrow?340:900, H=narrow?230:300, L=6, R=narrow?44:56, T=14, B=26;
+  const vs = on.flatMap(x=>x.pc.filter(v=>v!=null)); let lo=Math.min(0,...vs), hi=Math.max(0,...vs); const pad=(hi-lo)*0.08||1; lo-=pad; hi+=pad;
+  const nice = x=>{ const e=Math.pow(10,Math.floor(Math.log10(x))); const f=x/e; return (f<1.5?1:f<3?2:f<7?5:10)*e; };
+  const step = nice((hi-lo)/4), ticks=[]; for (let t=Math.ceil(lo/step)*step; t<=hi; t+=step) ticks.push(+t.toFixed(6));
+  const ws = D.ws, n = ws.length, sx = i => L + (n<2?0:i/(n-1))*(W-L-R), sy = v => T + (hi-v)/(hi-lo)*(H-T-B);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Cambio de la acción ${COMP_R.find(x=>x[0]===r)[1]}: ${on.map(x=>`${x.name} ${x.chg==null?"sin dato":sgnPct(x.chg)}`).join(", ")}">`;
+  ticks.forEach(t=>{ s+=`<line class="${Math.abs(t)<1e-9?"zero":"grid"}" x1="${L}" x2="${W-R}" y1="${sy(t)}" y2="${sy(t)}"/><text class="yl" x="${W-R+6}" y="${sy(t)+4}">${t>0?"+":t<0?"−":""}${Math.abs(t).toFixed(step<1?1:0)}%</text>`; });
+  const lab = d => { const [y,m] = d.split("-"); return r==="2024" ? (m==="01"?y:MESES[+m-1]) : (m==="01" && r!=="ytd" ? y : MESES[+m-1]); };
+  const fri = ws.map(w=>addD(w,4));
+  let marks = fri.map((_,i)=>i).filter(i => i>0 && fri[i].slice(0,7)!==fri[i-1].slice(0,7) && (r!=="2024" || ["01","07"].includes(fri[i].slice(5,7))));
+  const k = narrow?4:7, stride = Math.max(1, Math.ceil(marks.length/k)); marks = marks.filter((_,j)=>j%stride===0);
+  const gap = (W-L-R)/(k+1)*0.6; marks = marks.filter(i => sx(i)-L > gap*0.5 && W-R-sx(i) > gap*0.45);
+  marks.forEach(i => { s += `<line class="grid" x1="${sx(i)}" x2="${sx(i)}" y1="${H-B}" y2="${H-B+4}"/><text x="${sx(i)}" y="${H-8}" text-anchor="middle">${lab(fri[i])}</text>`; });
+  // Walmex al final para que quede encima
+  const order = on.slice().sort((a,b)=>(a.id==="walmex")-(b.id==="walmex"));
+  order.forEach(x => { let seg = [], segs = [];
+    x.pc.forEach((v,i)=>{ if (v==null){ if (seg.length) segs.push(seg); seg=[]; } else seg.push(`${sx(i).toFixed(1)},${sy(v).toFixed(1)}`); }); if (seg.length) segs.push(seg);
+    segs.forEach(sg => { s += `<polyline points="${sg.join(" ")}" fill="none" stroke="var(${x.c})" stroke-width="${x.id==="walmex"?2.75:1.75}" stroke-linejoin="round" stroke-linecap="round"/>`; }); });
+  s += `<line class="cross" x1="0" x2="0" y1="${T}" y2="${H-B}" visibility="hidden"/>`;
+  order.forEach(x => { s += `<circle class="dot" data-id="${x.id}" r="4" fill="var(${x.c})" stroke="var(--surface)" stroke-width="2" visibility="hidden"/>`; });
+  s += `<rect class="hit" x="${L}" y="0" width="${W-L}" height="${H}"/></svg><div class="st-tip ctip" hidden></div>`;
+  el.innerHTML = s;
+  const svg = el.querySelector("svg"), hit = el.querySelector("rect.hit"), xh = el.querySelector(".cross"), tip = el.querySelector(".ctip");
+  const show = e => { const rc = svg.getBoundingClientRect(), x = (e.clientX - rc.left) * W / rc.width;
+    const i = Math.max(0, Math.min(n-1, Math.round((x-L)/(W-L-R)*(n-1)))), cx = sx(i);
+    xh.setAttribute("x1",cx); xh.setAttribute("x2",cx); xh.setAttribute("visibility","visible");
+    order.forEach(o => { const dt = el.querySelector(`.dot[data-id="${o.id}"]`), v = o.pc[i];
+      if (v==null) dt.setAttribute("visibility","hidden"); else { dt.setAttribute("cx",cx); dt.setAttribute("cy",sy(v)); dt.setAttribute("visibility","visible"); } });
+    tip.innerHTML = `<span>Semana al ${dLabel(fri[i])}</span>` + on.slice().sort((a,b)=>(b.pc[i]??-1e9)-(a.pc[i]??-1e9)).map(o =>
+      `<div><span><i class="sw" style="background:var(${o.c})"></i>${o.name}</span><b>${o.pc[i]==null?"–":sgnPct(o.pc[i])}</b></div>`).join("");
+    tip.hidden = false; const px = cx * rc.width / W, half = tip.offsetWidth/2; tip.style.left = Math.max(half, Math.min(rc.width-half, px)) + "px"; };
+  const hide = () => { tip.hidden = true; xh.setAttribute("visibility","hidden"); el.querySelectorAll(".dot").forEach(d=>d.setAttribute("visibility","hidden")); };
+  hit.addEventListener("pointermove", show); hit.addEventListener("pointerdown", show); hit.addEventListener("pointerleave", hide);
+}
+function renderComp(){
+  document.querySelectorAll("#cRange button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.v===cmp.range)));
+  const rows = compRows(), el = document.getElementById("cChart"), leg = document.getElementById("cLeg");
+  if (rows.length < 2){ leg.innerHTML = ""; el.innerHTML = '<p class="muted empty">Los cierres se ven al abrir el tablero desde claude.ai con tu sesión iniciada.</p>'; }
+  else {
+    const D = compRange(rows, cmp.range);
+    leg.innerHTML = D.rows.map(x => `<button class="chip" style="--c:var(${x.c})" data-id="${x.id}" aria-pressed="${!cmp.off.includes(x.id)}"><i></i>${x.name}<b class="${x.chg==null?"":x.chg>=0?"gain":"loss"}">${x.chg==null?"–":sgnPct(x.chg)}</b><small>${x.last==null?"":fx2(x.last)+" "+x.cur}</small></button>`).join("");
+    drawComp(el, D, cmp.range);
+    const lw = D.rows.map(x=>x.lastW).filter(Boolean).sort().at(-1), late = D.rows.filter(x=>x.from && x.from > D.ws[0]);
+    document.getElementById("cAsOf").textContent = `Cambio de la acción ${COMP_R.find(x=>x[0]===cmp.range)[1]}, con cierres semanales hasta la semana al ${dLabel(addD(lw,4))}.` + (late.length ? ` ${late.map(x=>x.name).join(" y ")} desde ${late.map(x=>dLabel(addD(x.from,4))).join(" y ")}, su primer cierre en el periodo.` : "");
+  }
+  const sd = '<span class="muted">s/d</span>', num = v => v==null ? sd : typeof v==="string" ? v : v.toLocaleString("es-MX");
+  document.getElementById("cTbl").innerHTML = COMP.filter(c=>c.q).map(c => { const q = c.q;
+    return `<tr${c.id==="walmex"?' class="ref"':""}><td><b>${c.name}</b><div class="cat">${c.tk} · ${c.mkt}</div></td><td><b>${q.q}</b><div class="cat">${q.date}</div></td>`
+      + `<td class="num">${num(q.rev)}</td><td class="num">${q.revG==null?sd:sgnPct(q.revG)}</td><td class="num">${q.sss==null?sd:sgnPct(q.sss)}</td>`
+      + `<td class="num">${q.ebitdaM==null?sd:q.ebitdaM.toFixed(1)+"%"}${q.ebitdaBp==null?"":` <span class="muted">(${q.ebitdaBp>=0?"+":"−"}${Math.abs(q.ebitdaBp)} pb)</span>`}</td>`
+      + `<td class="num">${q.ni==null?sd:q.ni<0?`−${Math.abs(q.ni).toLocaleString("es-MX")} <span class="muted">(pérdida)</span>`:num(q.ni)}</td><td class="num">${q.niG==null?sd:sgnPct(q.niG)}</td>`
+      + `<td class="num">${num(q.stores)}</td><td class="num">${num(q.opened)}</td></tr>`; }).join("");
+  document.getElementById("cNote").innerHTML = COMP_NOTE;
+  document.getElementById("cPlans").innerHTML = COMP.filter(c=>c.plan).map(c => `<li style="--c:var(${c.c})"><span class="eyebrow">${c.name}</span><h3>${c.plan.h}</h3><p>${c.plan.p}</p><p class="src"><a href="${c.plan.url}" target="_blank" rel="noopener">${c.plan.src}</a> · Próximo reporte: ${c.plan.next}.</p></li>`).join("");
+}
+document.getElementById("cRange").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; cmp.range = b.dataset.v; try{localStorage.setItem("pc-cmp",JSON.stringify(cmp));}catch(err){} renderComp(); });
+document.getElementById("cLeg").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; const id = b.dataset.id;
+  cmp.off = cmp.off.includes(id) ? cmp.off.filter(x=>x!==id) : cmp.off.concat(id); try{localStorage.setItem("pc-cmp",JSON.stringify(cmp));}catch(err){} renderComp(); });
 // Pestañas
 function showTab(id, focus){
   ["mercado","walmex"].forEach(t => { const on = t===id, b = document.getElementById("t-"+t);
