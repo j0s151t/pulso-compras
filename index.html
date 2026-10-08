@@ -281,6 +281,15 @@ table.cq td:first-child,table.cq td:nth-child(2){white-space:nowrap}
 .plans p{margin:0;font-size:14px;color:var(--ink-2)}
 .plans .src{font-size:12px;color:var(--ink-3)}
 .comp{display:grid;gap:18px}
+.cmini{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:12px}
+.cmini>div{border:1px solid var(--line);border-top:3px solid var(--c);border-radius:8px;padding:10px 12px 6px;display:grid;gap:2px;min-width:0}
+.cmini .hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.cmini .hd b{font:700 15px var(--f-display)}
+.cmini .hd span{font:11px var(--f-mono);color:var(--ink-3);white-space:nowrap}
+.cmini .px{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;font:700 24px var(--f-display);font-variant-numeric:tabular-nums}
+.cmini .px small{font:600 12px var(--f-mono);color:var(--ink-3)}
+.cmini .px .st-chg{font-size:13px}
+.cmini .rng{font-size:12px;color:var(--ink-3)}
 .comp>*{min-width:0}
 .sub-h{font-size:16px;margin:0 0 10px}
 footer{font-size:13px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:14px;display:grid;gap:6px}
@@ -579,10 +588,13 @@ table.op-t .lvl{font-size:10px;padding:1px 5px}
     <section aria-labelledby="h-wcomp" class="comp">
       <div class="sec-hd">
         <div><span class="eyebrow">Autoservicios que cotizan en bolsa</span><h2 id="h-wcomp">La competencia</h2></div>
-        <p class="src">Cambio de la acción en el periodo, para comparar empresas de distinto precio en la misma escala. La Comer, Chedraui y Soriana cotizan en la BMV en pesos; Tiendas 3B cotiza en la Bolsa de Nueva York en dólares, así que su cambio incluye el del tipo de cambio.</p>
+        <p class="src">Dos vistas: el cambio en % para comparar empresas de distinto precio en la misma escala, o el precio de cada acción. La Comer, Chedraui y Soriana cotizan en la BMV en pesos; Tiendas 3B cotiza en la Bolsa de Nueva York en dólares, así que su cambio incluye el del tipo de cambio.</p>
       </div>
       <div class="panel stock">
         <div class="ctrls">
+          <div class="seg" role="group" aria-label="Tipo de vista" id="cView">
+            <button data-v="pct" aria-pressed="true">Cambio %</button><button data-v="px" aria-pressed="false">Precio</button>
+          </div>
           <div class="seg" role="group" aria-label="Periodo" id="cRange">
             <button data-v="6m" aria-pressed="false">6 M</button><button data-v="ytd" aria-pressed="false">En el año</button><button data-v="1y" aria-pressed="true">1 A</button><button data-v="2024" aria-pressed="false">Desde 2024</button>
           </div>
@@ -1122,10 +1134,11 @@ const COMP_NOTE = `Walmex en la primera fila como referencia; sus tiendas incluy
 // Cierres semanales de Yahoo Finanzas (d = lunes, v = cierre del último día hábil, sin ajustar por dividendos).
 // Walmex sale de walmex_wk más walmex_d agrupado por semana; los demás de comp_<id>_wk.
 const COMP_R = [["6m","en los últimos 6 meses",6],["ytd","en lo que va del año"],["1y","en el último año",12],["2024","desde el inicio de 2024"]];
-const cmp = { range:"1y", off:[] };
+const cmp = { range:"1y", off:[], view:"pct" };
 try { Object.assign(cmp, JSON.parse(localStorage.getItem("pc-cmp")||"{}")); } catch(e){}
 if (!COMP_R.some(x=>x[0]===cmp.range)) cmp.range = "1y";
 if (!Array.isArray(cmp.off)) cmp.off = [];
+if (!["pct","px"].includes(cmp.view)) cmp.view = "pct";
 const monOf = d => addD(d, -((wday(d)+6)%7));
 const sgnPct = (v, k=1) => (v>=0?"+":"−") + Math.abs(v).toFixed(k) + "%";
 function compRows(){
@@ -1149,7 +1162,7 @@ function compRange(rows, r){
   const asOf = rows.map(x=>x.asOf).filter(Boolean).sort().at(-1);
   return { ws, asOf, rows: rows.map(x => { const vs = ws.map(w=>x.wk[w] ?? null), b = vs.find(v=>v!=null);
     const pc = vs.map(v => v==null ? null : (v/b-1)*100), lastI = pc.findLastIndex(v=>v!=null);
-    return {...x, pc, chg: lastI<0 ? null : pc[lastI], from: ws[vs.findIndex(v=>v!=null)], last: x.wk[ws[lastI]], lastW: ws[lastI]}; }) };
+    return {...x, vs, pc, chg: lastI<0 ? null : pc[lastI], from: ws[vs.findIndex(v=>v!=null)], last: x.wk[ws[lastI]], lastW: ws[lastI]}; }) };
 }
 function drawComp(el, D, r){
   const on = D.rows.filter(x=>!cmp.off.includes(x.id));
@@ -1183,21 +1196,61 @@ function drawComp(el, D, r){
     order.forEach(o => { const dt = el.querySelector(`.dot[data-id="${o.id}"]`), v = o.pc[i];
       if (v==null) dt.setAttribute("visibility","hidden"); else { dt.setAttribute("cx",cx); dt.setAttribute("cy",sy(v)); dt.setAttribute("visibility","visible"); } });
     tip.innerHTML = `<span>${i===n-1 && D.asOf && D.asOf<fri[i] ? "Al "+dLabel(D.asOf) : "Semana al "+dLabel(fri[i])}</span>` + on.slice().sort((a,b)=>(b.pc[i]??-1e9)-(a.pc[i]??-1e9)).map(o =>
-      `<div><span><i class="sw" style="background:var(${o.c})"></i>${o.name}</span><b>${o.pc[i]==null?"–":sgnPct(o.pc[i])}</b></div>`).join("");
+      `<div><span><i class="sw" style="background:var(${o.c})"></i>${o.name}</span><b>${o.pc[i]==null?"–":sgnPct(o.pc[i])+` <small class="muted">${fx2(o.vs[i])}</small>`}</b></div>`).join("");
     tip.hidden = false; const px = cx * rc.width / W, half = tip.offsetWidth/2; tip.style.left = Math.max(half, Math.min(rc.width-half, px)) + "px"; };
   const hide = () => { tip.hidden = true; xh.setAttribute("visibility","hidden"); el.querySelectorAll(".dot").forEach(d=>d.setAttribute("visibility","hidden")); };
   hit.addEventListener("pointermove", show); hit.addEventListener("pointerdown", show); hit.addEventListener("pointerleave", hide);
 }
+// Vista "Precio": una gráfica chica por empresa, cada una en su moneda y con su propia escala
+function drawMini(el, x, ws, r){
+  const W=320, H=150, L=4, R=46, T=10, B=22, n = ws.length, fri = ws.map(w=>addD(w,4));
+  const pts = x.vs.map((v,i)=>v==null?null:[i,v]).filter(Boolean); if (pts.length<2){ el.innerHTML = '<p class="muted">Sin cierres en el periodo.</p>'; return; }
+  let lo = Math.min(...pts.map(p=>p[1])), hi = Math.max(...pts.map(p=>p[1])); const pad = (hi-lo)*0.08||1; lo-=pad; hi+=pad;
+  const nice = v=>{ const e=Math.pow(10,Math.floor(Math.log10(v))); const f=v/e; return (f<1.5?1:f<3?2:f<7?5:10)*e; };
+  const step = nice((hi-lo)/3), ticks=[]; for (let t=Math.ceil(lo/step)*step; t<=hi; t+=step) ticks.push(+t.toFixed(6));
+  const sx = i => L + (n<2?0:i/(n-1))*(W-L-R), sy = v => T + (hi-v)/(hi-lo)*(H-T-B);
+  const first = pts[0], lastP = pts.at(-1), cls = lastP[1]>=first[1] ? "gain" : "loss";
+  let s = `<svg viewBox="0 0 ${W} ${H}" class="${cls}" role="img" aria-label="${x.name}, precio semanal: de ${fx2(first[1])} a ${fx2(lastP[1])} ${x.cur}">`;
+  ticks.forEach(t=>{ s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${sy(t)}" y2="${sy(t)}"/><text class="yl" x="${W-R+5}" y="${sy(t)+4}">${t.toFixed(step<1?1:0)}</text>`; });
+  s += `<line class="base" x1="${L}" x2="${W-R}" y1="${sy(first[1])}" y2="${sy(first[1])}"/>`;
+  const line = pts.map(p=>`${sx(p[0]).toFixed(1)},${sy(p[1]).toFixed(1)}`).join(" ");
+  s += `<polygon points="${sx(first[0]).toFixed(1)},${H-B} ${line} ${sx(lastP[0]).toFixed(1)},${H-B}" fill="var(${x.c})" fill-opacity=".12" stroke="none"/>`;
+  s += `<polyline points="${line}" fill="none" stroke="var(${x.c})" stroke-width="2" stroke-linejoin="round"/>`;
+  const lab = d => { const [y,m] = d.split("-"); return `${MESES[+m-1]} ${y.slice(2)}`; };
+  s += `<text x="${sx(first[0])}" y="${H-6}" text-anchor="start">${lab(fri[first[0]])}</text><text x="${W-R}" y="${H-6}" text-anchor="end">${lab(fri[lastP[0]])}</text>`;
+  s += `<line class="cross" x1="0" x2="0" y1="${T}" y2="${H-B}" visibility="hidden"/><circle class="dot" r="4" fill="var(${x.c})" stroke="var(--surface)" stroke-width="2" visibility="hidden"/>`;
+  s += `<rect class="hit" x="${L}" y="0" width="${W-L}" height="${H}"/></svg><div class="st-tip" hidden></div>`;
+  el.innerHTML = s;
+  const svg = el.querySelector("svg"), hit = el.querySelector("rect.hit"), xh = el.querySelector(".cross"), dot = el.querySelector(".dot"), tip = el.querySelector(".st-tip");
+  const show = e => { const rc = svg.getBoundingClientRect(), px = (e.clientX - rc.left) * W / rc.width;
+    let i = Math.max(first[0], Math.min(lastP[0], Math.round((px-L)/(W-L-R)*(n-1)))); while (x.vs[i]==null && i<lastP[0]) i++;
+    const cx = sx(i), cy = sy(x.vs[i]); xh.setAttribute("x1",cx); xh.setAttribute("x2",cx); dot.setAttribute("cx",cx); dot.setAttribute("cy",cy);
+    xh.setAttribute("visibility","visible"); dot.setAttribute("visibility","visible");
+    tip.innerHTML = `<b>${fx2(x.vs[i])} ${x.cur}</b> · ${i===n-1 && x.asOf && x.asOf<fri[i] ? dLabel(x.asOf) : "semana al "+dLabel(fri[i])}`; tip.hidden = false;
+    const ppx = cx * rc.width / W, half = tip.offsetWidth/2; tip.style.left = Math.max(half, Math.min(rc.width-half, ppx)) + "px"; };
+  const hide = () => { tip.hidden = true; xh.setAttribute("visibility","hidden"); dot.setAttribute("visibility","hidden"); };
+  hit.addEventListener("pointermove", show); hit.addEventListener("pointerdown", show); hit.addEventListener("pointerleave", hide);
+}
+function drawPrices(el, D){
+  const on = D.rows.filter(x=>!cmp.off.includes(x.id));
+  if (!on.length){ el.innerHTML = '<p class="muted empty">Elige al menos una empresa.</p>'; return; }
+  el.innerHTML = `<div class="cmini">${on.map(x => { const v = x.vs.filter(v=>v!=null), up = (x.chg??0) >= 0;
+    return `<div style="--c:var(${x.c})"><div class="hd"><b>${x.name}</b><span>${x.tk} · ${x.mkt}</span></div>`
+      + `<div class="px">${x.last==null?"–":fx2(x.last)}<small>${x.cur}</small>${x.chg==null?"":`<span class="st-chg ${up?"gain":"loss"}"><b class="pill">${up?"↑":"↓"} ${Math.abs(x.chg).toFixed(1)}%</b></span>`}</div>`
+      + `<div class="rng">Mín. ${fx2(Math.min(...v))} · Máx. ${fx2(Math.max(...v))} en el periodo</div><div class="chart stockc" data-id="${x.id}"></div></div>`; }).join("")}</div>`;
+  on.forEach(x => drawMini(el.querySelector(`.stockc[data-id="${x.id}"]`), x, D.ws, cmp.range));
+}
 function renderComp(){
   document.querySelectorAll("#cRange button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.v===cmp.range)));
+  document.querySelectorAll("#cView button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.v===cmp.view)));
   const rows = compRows(), el = document.getElementById("cChart"), leg = document.getElementById("cLeg");
   if (rows.length < 2){ leg.innerHTML = ""; el.innerHTML = '<p class="muted empty">Los cierres se ven al abrir el tablero desde claude.ai con tu sesión iniciada.</p>'; }
   else {
     const D = compRange(rows, cmp.range);
     leg.innerHTML = D.rows.map(x => `<button class="chip" style="--c:var(${x.c})" data-id="${x.id}" aria-pressed="${!cmp.off.includes(x.id)}"><i></i>${x.name}<b class="${x.chg==null?"":x.chg>=0?"gain":"loss"}">${x.chg==null?"–":sgnPct(x.chg)}</b><small>${x.from && x.from > D.ws[0] ? "desde "+dLabel(addD(x.from,4)) : x.last==null ? "" : fx2(x.last)+" "+x.cur}</small></button>`).join("");
-    drawComp(el, D, cmp.range);
+    if (cmp.view==="px") drawPrices(el, D); else drawComp(el, D, cmp.range);
     const late = D.rows.filter(x=>x.from && x.from > D.ws[0]);
-    document.getElementById("cAsOf").textContent = `Cambio de la acción ${COMP_R.find(x=>x[0]===cmp.range)[1]}, con cierres semanales. Último cierre: ${dLabel(D.asOf)}.` + late.map(x=>` ${x.name} empieza el ${dLabel(addD(x.from,4))}${x.since?` (${x.since})`:""}.`).join("");
+    document.getElementById("cAsOf").textContent = (cmp.view==="px" ? `Precio de cierre semanal de cada acción ${COMP_R.find(x=>x[0]===cmp.range)[1]}, en su moneda y con su propia escala (3B en dólares); la línea punteada es el precio al inicio del periodo.` : `Cambio de la acción ${COMP_R.find(x=>x[0]===cmp.range)[1]}, con cierres semanales.`) + ` Último cierre: ${dLabel(D.asOf)}.` + late.map(x=>` ${x.name} empieza el ${dLabel(addD(x.from,4))}${x.since?` (${x.since})`:""}.`).join("");
   }
   const sd = '<span class="muted">s/d</span>', num = v => v==null ? sd : typeof v==="string" ? v : v.toLocaleString("es-MX");
   document.getElementById("cTbl").innerHTML = COMP.filter(c=>c.q).map(c => { const q = c.q;
@@ -1209,6 +1262,7 @@ function renderComp(){
   document.getElementById("cNote").innerHTML = COMP_NOTE;
   document.getElementById("cPlans").innerHTML = COMP.filter(c=>c.plan).map(c => `<li style="--c:var(${c.c})"><span class="eyebrow">${c.name}</span><h3>${c.plan.h}</h3><p>${c.plan.p}</p><p class="src"><a href="${c.plan.url}" target="_blank" rel="noopener">${c.plan.src}</a> · Próximo reporte: ${c.plan.next}.</p></li>`).join("");
 }
+document.getElementById("cView").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; cmp.view = b.dataset.v; try{localStorage.setItem("pc-cmp",JSON.stringify(cmp));}catch(err){} renderComp(); });
 document.getElementById("cRange").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; cmp.range = b.dataset.v; try{localStorage.setItem("pc-cmp",JSON.stringify(cmp));}catch(err){} renderComp(); });
 document.getElementById("cLeg").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; const id = b.dataset.id;
   cmp.off = cmp.off.includes(id) ? cmp.off.filter(x=>x!==id) : cmp.off.concat(id); try{localStorage.setItem("pc-cmp",JSON.stringify(cmp));}catch(err){} renderComp(); });
