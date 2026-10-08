@@ -15,7 +15,7 @@
   --accent:#0b5d6b; --accent-soft:#e1eff1;
   --up:#b4361f; --up-soft:#fbe9e5; --down:#1f6f4a; --down-soft:#e3f2ea; --warn:#9a6400; --warn-soft:#fbf1dc;
   --bar-up:#c8553d; --bar-down:#3a8a68;
-  --s1:#0b7285; --s2:#d9480f; --s3:#6741d9; --s4:#5c940d; --s5:#c2255c; --s6:#b07800; --s7:#6b7884; --on-s:#ffffff;
+  --s1:#0b7285; --s2:#d9480f; --s3:#6741d9; --s4:#5c940d; --s5:#c2255c; --s6:#b07800; --s7:#6b7884; --s8:#1864ab; --on-s:#ffffff;
   --hero:#10303a; --hero-2:#174552; --hero-ink:#eef6f7; --hero-dim:#a9c6cc; --hero-accent:#f2a541;
   --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
   --f-body:"Source Sans 3","Segoe UI",Roboto,Arial,sans-serif;
@@ -26,12 +26,12 @@
   --bg:#0f161c; --surface:#16212a; --ink:#e6edf2; --ink-2:#a9b7c3; --ink-3:#7d8b97; --line:#26343f;
   --accent:#5cc0cf; --accent-soft:#163740;
   --up:#ff8c73; --up-soft:#3a1e18; --down:#6fd3a2; --down-soft:#15302a; --warn:#f0bd5a; --warn-soft:#352a12;
-  --bar-up:#e7735a; --bar-down:#55b58b; --s1:#3bc9db; --s2:#ff8a4c; --s3:#a48bff; --s4:#94d82d; --s5:#f06595; --s6:#fcc419; --s7:#9aa8b4; --on-s:#0f161c; color-scheme:dark}}
+  --bar-up:#e7735a; --bar-down:#55b58b; --s1:#3bc9db; --s2:#ff8a4c; --s3:#a48bff; --s4:#94d82d; --s5:#f06595; --s6:#fcc419; --s7:#9aa8b4; --s8:#74c0fc; --on-s:#0f161c; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0f161c; --surface:#16212a; --ink:#e6edf2; --ink-2:#a9b7c3; --ink-3:#7d8b97; --line:#26343f;
   --accent:#5cc0cf; --accent-soft:#163740;
   --up:#ff8c73; --up-soft:#3a1e18; --down:#6fd3a2; --down-soft:#15302a; --warn:#f0bd5a; --warn-soft:#352a12;
-  --bar-up:#e7735a; --bar-down:#55b58b; --s1:#3bc9db; --s2:#ff8a4c; --s3:#a48bff; --s4:#94d82d; --s5:#f06595; --s6:#fcc419; --s7:#9aa8b4; --on-s:#0f161c; color-scheme:dark}
+  --bar-up:#e7735a; --bar-down:#55b58b; --s1:#3bc9db; --s2:#ff8a4c; --s3:#a48bff; --s4:#94d82d; --s5:#f06595; --s6:#fcc419; --s7:#9aa8b4; --s8:#74c0fc; --on-s:#0f161c; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5;padding:24px 16px 48px}
 .wrap{max-width:1080px;margin:0 auto;display:grid;gap:28px;grid-template-columns:minmax(0,1fr)}
@@ -261,6 +261,37 @@ table.tco-c tfoot td{font-weight:600;border-bottom:0;border-top:2px solid var(--
 table.wq{min-width:820px}
 table.wq td:first-child b{font-family:var(--f-display)}
 .wnote{font-size:12.5px;color:var(--ink-3);margin:8px 0 0}
+/* Competencia: chips que prenden y apagan cada empresa, con su cambio en el periodo */
+.cleg{display:flex;flex-wrap:wrap;gap:6px}
+.cleg .chip b{font:600 12.5px var(--f-mono);font-variant-numeric:tabular-nums}
+.cleg .chip b.gain{color:var(--down)} .cleg .chip b.loss{color:var(--up)}
+.cleg .chip small{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.ctip{display:grid;gap:1px;text-align:left;z-index:2}
+.ctip>span{font-size:12px;color:var(--ink-3)}
+.ctip div{display:flex;justify-content:space-between;gap:14px;align-items:center}
+.ctip div b{font:600 12.5px var(--f-mono);font-variant-numeric:tabular-nums}
+.ctip .sw{width:8px;height:8px;border-radius:50%}
+table.cq{min-width:940px}
+table.cq tr.ref td{background:var(--accent-soft)}
+table.cq td:first-child,table.cq td:nth-child(2){white-space:nowrap}
+.comp .stock p{margin:0}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:16px 24px;margin:0;padding:0;list-style:none}
+.plans li{display:grid;gap:4px;align-content:start;padding-top:10px;border-top:3px solid var(--c)}
+.plans h3{font-size:15px}
+.plans p{margin:0;font-size:14px;color:var(--ink-2)}
+.plans .src{font-size:12px;color:var(--ink-3)}
+.comp{display:grid;gap:18px}
+.cmini{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:12px}
+.cmini>div{border:1px solid var(--line);border-top:3px solid var(--c);border-radius:8px;padding:10px 12px 6px;display:grid;gap:2px;min-width:0}
+.cmini .hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.cmini .hd b{font:700 15px var(--f-display)}
+.cmini .hd span{font:11px var(--f-mono);color:var(--ink-3);white-space:nowrap}
+.cmini .px{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;font:700 24px var(--f-display);font-variant-numeric:tabular-nums}
+.cmini .px small{font:600 12px var(--f-mono);color:var(--ink-3)}
+.cmini .px .st-chg{font-size:13px}
+.cmini .rng{font-size:12px;color:var(--ink-3)}
+.comp>*{min-width:0}
+.sub-h{font-size:16px;margin:0 0 10px}
 footer{font-size:13px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:14px;display:grid;gap:6px}
 footer p{margin:0;max-width:80ch}
 @media (max-width:560px){.risk{grid-template-columns:1fr}}
@@ -289,6 +320,7 @@ body.op-open{overflow:hidden}
 .op-kpis .v{font:700 21px var(--f-display);font-variant-numeric:tabular-nums}
 .op-kpis .v small{font:600 12px var(--f-mono);color:var(--ink-3)}
 .op-kpis .n{font-size:12.5px;color:var(--ink-2)}
+.op-comp{margin:0;font-size:13px;color:var(--ink-2)} .op-comp b{color:var(--ink)}
 .op-sec{display:grid;gap:8px;min-width:0;align-content:start}
 .op-sec h3{font:600 11.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0}
 .op-sec ol,.op-sec ul{margin:0;padding-left:20px;display:grid;gap:6px}
@@ -554,6 +586,41 @@ table.op-t .lvl{font-size:10px;padding:1px 5px}
       <p class="wnote">Año 2025 completo: ingresos de 1,011,598 millones (+5.6%), utilidad neta de 49,891 millones (−7.3%) y 186 tiendas nuevas. Fuentes: <a href="https://files.walmex.mx/upload/files/2026/ES/Trimestral/2T26/WALMEX%202T26%20BMV.pdf">reporte 2T26 a la BMV</a>, <a href="https://files.walmex.mx/upload/files/2025/ES/Trimestral/4T25/Walmex_Webcast_4T25.pdf">presentación 4T25</a> y resúmenes trimestrales de <a href="https://estrategia.vepormas.com/wp-content/uploads/2026/07/Trimestral-WALMEX-2T26.pdf">Vector Análisis</a>.</p>
     </section>
 
+    <section aria-labelledby="h-wcomp" class="comp">
+      <div class="sec-hd">
+        <div><span class="eyebrow">Autoservicios que cotizan en bolsa</span><h2 id="h-wcomp">La competencia</h2></div>
+        <p class="src">Dos vistas: el cambio en % para comparar empresas de distinto precio en la misma escala, o el precio de cada acción. La Comer, Chedraui y Soriana cotizan en la BMV en pesos; Tiendas 3B cotiza en la Bolsa de Nueva York en dólares; aquí la ves en pesos con el tipo de cambio de cada semana, así que su cambio también refleja el del peso.</p>
+      </div>
+      <div class="panel stock">
+        <div class="ctrls">
+          <div class="seg" role="group" aria-label="Tipo de vista" id="cView">
+            <button data-v="pct" aria-pressed="true">Cambio %</button><button data-v="px" aria-pressed="false">Precio</button>
+          </div>
+          <div class="seg" role="group" aria-label="Periodo" id="cRange">
+            <button data-v="6m" aria-pressed="false">6 M</button><button data-v="ytd" aria-pressed="false">En el año</button><button data-v="1y" aria-pressed="true">1 A</button><button data-v="2024" aria-pressed="false">Desde 2024</button>
+          </div>
+        </div>
+        <div class="cleg" id="cLeg" role="group" aria-label="Empresas en la gráfica: toca una para quitarla o ponerla"></div>
+        <div id="cChart" class="chart stockc"></div>
+        <p class="st-asof" id="cAsOf"></p>
+        <p class="src">Cierres semanales de <a href="https://finance.yahoo.com/" target="_blank" rel="noopener">Yahoo Finanzas</a> (último día hábil de cada semana, sin ajustar por dividendos). La semana en curso usa el último cierre disponible. El tipo de cambio para Tiendas 3B es el cierre semanal del dólar en la misma fuente (<a href="https://finance.yahoo.com/quote/MXN%3DX/history/" target="_blank" rel="noopener">MXN=X</a>).</p>
+      </div>
+      <div>
+        <h3 class="sub-h">Último trimestre reportado</h3>
+        <div class="tbl-wrap">
+          <table class="wq cq" aria-label="Último trimestre reportado de Walmex y su competencia">
+            <thead><tr><th>Empresa</th><th>Trimestre</th><th class="num">Ingresos</th><th class="num">Crec. anual</th><th class="num">VMT México</th><th class="num">Margen EBITDA</th><th class="num">Utilidad neta</th><th class="num">Crec. anual</th><th class="num">Tiendas</th><th class="num">Abiertas en el trim.</th></tr></thead>
+            <tbody id="cTbl"></tbody>
+          </table>
+        </div>
+        <p class="wnote" id="cNote"></p>
+      </div>
+      <div>
+        <h3 class="sub-h">Planes de expansión 2026</h3>
+        <ul class="plans" id="cPlans"></ul>
+      </div>
+    </section>
+
     <section aria-labelledby="h-wimp">
       <div class="panel">
         <h2 id="h-wimp">Lo que significa para tus compras</h2>
@@ -561,7 +628,23 @@ table.op-t .lvl{font-size:10px;padding:1px 5px}
           <div class="risk"><span class="lvl alto">Alto</span><div><h3>Walmex invertirá 43,000 millones de pesos en 2026 (+10%)</h3><p class="aff">Demanda · Estructura Metálica, Sistema Contra Incendio, Pintura, Sonido, PTARs</p><p>El 42% va a remodelaciones y mantenimiento, 26% a tiendas y clubes nuevos, 24% a cadena de suministro y 8% a tecnología. Hay dos centros de distribución automatizados en Guanajuato y Tlaxcala para 2027. En 2025 invirtió 39,000 de los 41,800 millones planeados por retrasos en tiendas y tecnología.</p><p class="do"><b>Qué haría:</b> pedir al área de construcción el calendario de remodelaciones y de los dos CEDIS, y usarlo para consolidar volumen de estructura y SCI en acuerdos anuales. En un CEDIS el precio por kg de estructura pesa más que en una tienda.</p><span class="src">Expansión y Bloomberg Línea, 25 mar 2026 (Walmex Day)</span></div></div>
           <div class="risk"><span class="lvl medio">Medio</span><div><h3>Las aperturas se juntan al final del año</h3><p class="aff">Capacidad de proveedores · Estructura Metálica, SCI, Equipo Hidroneumático</p><p>De las 186 tiendas que abrió en 2025, 115 fueron en el cuarto trimestre. En el primer semestre de 2026 lleva 40 (17 y 23), así que el cierre de 2026 viene cargado.</p><p class="do"><b>Qué haría:</b> confirmar ya con los fabricantes de estructura y SCI su capacidad para noviembre y diciembre, y para 2027 reservarla desde el segundo trimestre.</p><span class="src">Presentación 4T25, 18 feb 2026 · reportes 1T26 y 2T26</span></div></div>
           <div class="risk"><span class="lvl medio">Medio</span><div><h3>Márgenes apretados: espera presión por ahorros</h3><p class="aff">Presupuesto · todas tus categorías</p><p>En el 2T26 los ingresos crecieron 1.9%, la utilidad neta bajó 0.7% y el margen EBITDA cayó a 9.4% por el salario mínimo y un consumo débil. La acción baja cerca de 18% en 12 meses.</p><p class="do"><b>Qué haría:</b> tener listas propuestas de ahorro con evidencia INEGI (escalatorias atadas a índice y consolidación de volumen) y prever que algunos proyectos se difieran, como pasó en 2025.</p><span class="src">Walmex 2T26, 22 jul 2026 · Vector Análisis</span></div></div>
+          <div class="risk"><span class="lvl medio">Medio</span><div><h3>La competencia también construye en el segundo semestre</h3><p class="aff">Capacidad de contratistas y proveedores · Sistema Contra Incendio, Pintura, Equipo Hidroneumático, Estructura Metálica</p><p>A 3B le faltan entre 312 y 352 tiendas para su meta de 2026 y a Chedraui unas 100 de sus 147 en México. Soriana remodela 21 Híper y Súper en CDMX, Estado de México, Coahuila y Nuevo León (cerca de 162,000 m²). La Comer abre tiendas grandes, de 6,500 a 8,200 m², con estructura parecida a la tuya. Las de 3B y los Supercito de Chedraui son chicas y usan poca estructura, pero sí cuadrillas de instalaciones y contra incendio, y pintura de los mismos proveedores de la región (esto último es mi lectura).</p><p class="do"><b>Qué haría:</b> preguntar a tus contratistas de SCI e instalaciones qué carga tienen con otras cadenas en noviembre y diciembre, y amarrar ya fechas y cuadrillas para tus aperturas de fin de año.</p><span class="src">Reportes 2T26 de 3B (12 ago 2026), Chedraui y La Comer (22 jul 2026); Soriana vía Xataka, 26 sep 2026</span></div></div>
         </div>
+      </div>
+    </section>
+    <section aria-labelledby="h-wnews">
+      <div class="panel">
+        <h2 id="h-wnews">Noticias que mueven a Walmart</h2>
+        <ul class="news">
+          <li><div class="nh"><span class="lvl alto">Alto</span><span class="t">Consumo · ventas de Walmex</span></div><a href="https://vanguardia.com.mx/dinero/crecen-17-en-agosto-ventas-en-tiendas-antad-OC23561807" target="_blank" rel="noopener">El autoservicio vende 0.7% menos a tiendas iguales en agosto</a><p>Las cadenas de la ANTAD vendieron 1.7% más a tiendas iguales, pero el autoservicio, donde compite Walmex, bajó 0.7%. De enero a agosto el avance es de 1.5% nominal, debajo de la inflación.</p><p><b>Por qué te importa:</b> con ventas que crecen menos que los precios, Finanzas suele recortar o diferir inversión, como pasó en 2025.</p><p><b>Qué haría:</b> tener lista una priorización que proteja lo crítico (contra incendio, ANSUL, estructura) frente a trabajos de imagen.</p><span class="src">Vanguardia con datos de ANTAD · 17 sep 2026</span></li>
+          <li><div class="nh"><span class="lvl alto">Alto</span><span class="t">Competencia · Bodega Aurrerá</span></div><a href="https://www.xataka.com.mx/empresas-y-economia/tiendas-3b-esta-llenando-mexico-tiendas-supera-3-600-sucursales" target="_blank" rel="noopener">Tiendas 3B abre 155 tiendas en un trimestre y vende 20% más a tiendas iguales</a><p>Llegó a 3,624 tiendas en junio, con 593 aperturas netas en 12 meses, y sus ingresos crecieron 38.7%.</p><p><b>Por qué te importa:</b> 3B pelea el mismo cliente que Bodega Aurrerá, y en el mismo trimestre Walmex tuvo 1.1% menos transacciones en México.</p><p><b>Qué haría:</b> estar atento a si Walmex responde con más Bodega Aurrerá Express o conversiones; serían muchas obras chicas y repetidas, buenas para paquetes estandarizados por región.</p><span class="src">Xataka México · 1 sep 2026 · reporte 2T26 de Walmex</span></li>
+          <li><div class="nh"><span class="lvl alto">Alto</span><span class="t">Regulación · costo laboral</span></div><a href="https://expansion.mx/carrera/2026/10/07/jornada-40-horas-registro-electronico-empresas" target="_blank" rel="noopener">Jornada de 46 horas y registro electrónico de asistencia desde enero de 2027</a><p>La jornada máxima baja de 48 a 46 horas el 1 de enero y dos horas más cada año hasta 40 en 2030. El registro de entradas y salidas será electrónico, con multas de hasta 586,550 pesos.</p><p><b>Por qué te importa:</b> Walmex es de los mayores empleadores privados del país; su costo de personal en tiendas, clubes y CEDIS sube cada año hasta 2030 y aprieta el resto del presupuesto.</p><p><b>Qué haría:</b> pedir que las cotizaciones de mantenimiento e instalación de 2027 ya traigan la jornada de 46 horas, para que no lleguen reclamos de ajuste a medio contrato.</p><span class="src">Expansión · 7 oct 2026</span></li>
+          <li><div class="nh"><span class="lvl medio">Medio</span><span class="t">Consumo · temporada alta</span></div><a href="https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/enco/icc2026_10.pdf" target="_blank" rel="noopener">La confianza del consumidor baja a 45.1 puntos en septiembre</a><p>Cayó 1.2 puntos en el mes y quedó 1.0 abajo de hace un año. La posibilidad de comprar muebles y electrodomésticos bajó a 32.0 puntos.</p><p><b>Por qué te importa:</b> un consumidor cauto antes del Buen Fin y diciembre limita la mercancía general de Walmart y Sam's en su mejor temporada.</p><p><b>Qué haría:</b> cerrar antes de noviembre los trabajos en piso de venta para no chocar con la temporada, y no contar con presupuesto extra en el cuarto trimestre.</p><span class="src">INEGI · 6 oct 2026</span></li>
+          <li><div class="nh"><span class="lvl medio">Medio</span><span class="t">Competencia · Bodega Aurrerá y Walmart</span></div><a href="https://www.xataka.com.mx/empresas-y-economia/soriana-apuesta-expansion-invertira-961-millones-pesos-abrir-remodelar-tiendas" target="_blank" rel="noopener">Soriana invierte 961 millones en 3 aperturas y 23 remodelaciones</a><p>Es para el segundo semestre de 2026. Quedan 21 remodelaciones de Híper y Súper en CDMX, Estado de México, Coahuila y Nuevo León, con cerca de 162,000 m².</p><p><b>Por qué te importa:</b> Soriana vendió 4.5% menos a tiendas iguales en el segundo trimestre y busca frenar la caída renovando tiendas en plazas donde compite con Walmart y Bodega Aurrerá.</p><p><b>Qué haría:</b> confirmar que tus contratistas de SCI e instalaciones y tus proveedores de pintura en esos estados tengan capacidad, porque esas obras compiten por los mismos equipos al cierre del año.</p><span class="src">Xataka México · 26 sep 2026 · reporte 2T26 de Soriana</span></li>
+          <li><div class="nh"><span class="lvl medio">Medio</span><span class="t">Walmex · remodelaciones</span></div><a href="https://www.informabtl.com/sams-club-nueva-imagen-mexico-members-mark/" target="_blank" rel="noopener">Sam's Club estrena nueva imagen en dos clubes prototipo</a><p>Por sus 35 años en México, Walmex renovó Lomas Verdes (Estado de México) y San Jerónimo (CDMX) con espacios nuevos, herramientas digitales y más Member's Mark.</p><p><b>Por qué te importa:</b> la nota no da calendario ni inversión, pero si los prototipos funcionan lo normal es que la imagen pase al programa de remodelaciones (es una inferencia).</p><p><b>Qué haría:</b> pedir a Proyectos las especificaciones de los dos clubes (pintura, señalética, sonido, iluminación) para tener catálogo y precios unitarios antes de un despliegue en 2027.</p><span class="src">InformaBTL · 2 oct 2026</span></li>
+          <li><div class="nh"><span class="lvl medio">Medio</span><span class="t">Macro · Bodega Aurrerá</span></div><a href="https://www.razon.com.mx/negocios/2026/10/01/ingresos-por-remesas-caen-36-anual-en-agosto/" target="_blank" rel="noopener">Las remesas caen 3.6% anual en agosto</a><p>Llegaron 5,452 millones de dólares, con 905 mil envíos menos que hace un año. De enero a agosto suman 41,802 millones, 2.2% más.</p><p><b>Por qué te importa:</b> las remesas sostienen el gasto de muchos clientes de Bodega Aurrerá en el interior del país, el formato más grande de Walmex.</p><p><b>Qué haría:</b> seguir las tiendas en estados que dependen más de remesas; ahí es donde primero se pueden posponer aperturas o remodelaciones.</p><span class="src">La Razón con datos de Banxico · 1 oct 2026</span></li>
+          <li><div class="nh"><span class="lvl bajo">Bajo</span><span class="t">Tasas y tipo de cambio</span></div><a href="https://www.elfinanciero.com.mx/economia/2026/09/24/tasa-del-banxico-hoy-24-de-septiembre-2026-en-cuanto-quedo/" target="_blank" rel="noopener">Banxico deja la tasa en 6.50% y el peso pierde terreno</a><p>La decisión del 24 de septiembre fue unánime, con inflación de 3.42% en la primera quincena del mes. El FIX pasó de 17.50 ese día a 18.37 el 2 de octubre y estaba en 17.97 el 7 de octubre.</p><p><b>Por qué te importa:</b> tasas sin recortes no ayudan al crédito ni al consumo, y un peso más débil encarece la mercancía importada de Walmex y tu equipo en dólares (ANSUL, sonido, bombas).</p><p><b>Qué haría:</b> fijar el tipo de cambio en las órdenes de compra de octubre.</p><span class="src">El Financiero · 24 sep 2026 · FIX del DOF vía dolardof.com · 7 oct 2026</span></li>
+        </ul>
       </div>
     </section>
     <p class="src">Solo información pública; no es recomendación de inversión. Si operas la acción, revisa antes los periodos de restricción de la política interna para colaboradores.</p>
@@ -569,7 +652,7 @@ table.op-t .lvl{font-size:10px;padding:1px 5px}
 
   <footer>
     <p>Actualizado el lunes 5 de octubre de 2026. Se actualiza solo cada lunes a las 7:00 am (hora del centro de México).</p>
-    <p>Categorías: Estructura Metálica, Sistema Contra Incendio, ANSUL, Pintura, Equipo Hidroneumático, PTARs y Sonido, solo México. Datos de fuentes públicas (INEGI vía informes CMIC CEICO como fuente principal; Banxico para tipo de cambio; LME, PetroIntelligence y Drewry solo como referencia). Úsalo como referencia de mercado, no como cotización.</p>
+    <p>Categorías: Estructura Metálica, Sistema Contra Incendio, ANSUL, Pintura, Equipo Hidroneumático, PTARs, Sonido y Proyectista, solo México. Datos de fuentes públicas (INEGI vía informes CMIC CEICO como fuente principal; Banxico para tipo de cambio; LME, PetroIntelligence y Drewry solo como referencia). Úsalo como referencia de mercado, no como cotización.</p>
   </footer>
 </div>
 <div class="op-back" id="op" hidden>
@@ -655,26 +738,31 @@ const CATS = [
   {name:"ANSUL", idx:[["em",35],["fx",35],["quim",20],["constr",10]], extra:"medio", note:"Cilindros y campana, agente químico y equipo cotizado en USD."},
   {name:"Pintura", idx:[["quim",55],["petro",45]], note:"Solo suministro. Resinas y dióxido de titanio (químicos) y solventes (petróleo)."},
   {name:"Equipo Hidroneumático", idx:[["maq",45],["electr",30],["em",25]], note:"Bombas, motores y tablero, tanque y base de acero."},
-  {name:"PTARs", idx:[["minnomet",30],["maq",25],["plast",20],["electr",15],["petro",10]], note:"Obra civil, sopladores y bombas, tubería plástica y control."},
+  {name:"PTARs", idx:[["minnomet",30],["maq",25],["plast",20],["electr",15],["petro",10]], note:"Obra civil, sopladores y bombas, tubería plástica y control. Son arrendadas a 5 años: esto mueve el precio de un contrato nuevo o una renovación, no tus rentas vigentes."},
   {name:"Sonido", idx:[["electron",55],["fx",30],["electr",15]], extra:"medio", note:"Electrónica importada; aranceles a Asia sin tratado de hasta 35–50% van aparte."},
   // Proyectista (Andres, 7 oct 2026): pidió INEGI rama 5413. El boletín mensual publica el sector 54, que la incluye; la rama sola no se puede leer desde aquí.
   {name:"Proyectista", idx:[["prof",100,"Honorarios profesionales"]], note:"Proyecto arquitectónico, ejecutivo e ingenierías. Se mide con INEGI servicios profesionales, científicos y técnicos (sector 54, que incluye la rama 5413 de arquitectura e ingeniería)."}
 ];
 const IDX_LBL = {em:"Acero", quim:"Químicos y pigmentos", petro:"Solventes (petróleo)", plast:"Plásticos", minnomet:"Concreto y minerales", maq:"Bombas y maquinaria", electr:"Motores y equipo eléctrico", electron:"Electrónica", prof:"Servicios profesionales", fx:"Dólar", constr:"Mano de obra y obra", metbas:"Metálicas básicas", prodmet:"Productos metálicos"};
 // TCO: estructura típica del costo total en la vida útil (% del total, estimada con referencias de la industria, no de contratos).
-// Partes: adq compra · log flete y logística · ins instalación · ope operación (energía, agua, consumibles) · mto mantenimiento y refacciones · cum cumplimiento (normas, pruebas, seguros) · fin reposición y retiro.
+// Partes: adq compra · fnz financiamiento (solo en lo arrendado) · log flete y logística · ins instalación · ope operación (energía, agua, consumibles) · mto mantenimiento y refacciones · cum cumplimiento (normas, pruebas, seguros) · fin reposición y retiro.
+// Una categoría arrendada lleva lease:true y lbl para renombrar sus partes (p. ej. adq = renta del equipo).
 // Cada parte se mueve con una mezcla de índices [clave, peso]; "cat" es la canasta INEGI de la categoría. d sobrescribe la mezcla de TCO_DEF.
-const TCO_COMP = {adq:"Compra", log:"Flete y logística", ins:"Instalación", ope:"Operación", mto:"Mantenimiento", cum:"Cumplimiento", fin:"Reposición y retiro"};
-const TCO_DEF = {adq:[["cat",100]], log:[["trans",70],["diesel",30]], ins:[["mo",60],["constr",40]], ope:[["energia",100]], mto:[["mo",45],["serv",35],["cat",20]], cum:[["serv",50],["inpc",50]], fin:[["inpc",100]]};
+const TCO_COMP = {adq:"Compra", fnz:"Financiamiento", log:"Flete y logística", ins:"Instalación", ope:"Operación", mto:"Mantenimiento", cum:"Cumplimiento", fin:"Reposición y retiro"};
+const TCO_DEF = {adq:[["cat",100]], fnz:[["tasa",100]], log:[["trans",70],["diesel",30]], ins:[["mo",60],["constr",40]], ope:[["energia",100]], mto:[["mo",45],["serv",35],["cat",20]], cum:[["serv",50],["inpc",50]], fin:[["inpc",100]]};
 // Índices que no salen de la colección "series"; la rutina semanal los actualiza.
 const TCO_DRV = {
   mo:      {lbl:"Mano de obra (salario promedio IMSS)", y12:6.7, asOf:"ago 26", src:"IMSS, salario base de cotización promedio, $673.1 diarios", url:"https://www.imss.gob.mx/sites/all/statics/i2f_news/2026-8-31%20Boletin%20Afiliacion%20IMSS.pdf"},
   energia: {lbl:"Energía eléctrica, agua y gas (INPP)", y12:-6.57, asOf:"ago 26", src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"},
   trans:   {lbl:"Transporte y almacenamiento (INPP)", y12:4.90, asOf:"ago 26", src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"},
-  serv:    {lbl:"Otros servicios, incluye reparación (INPP)", y12:5.56, asOf:"ago 26", src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"}
+  serv:    {lbl:"Otros servicios, incluye reparación (INPP)", y12:5.56, asOf:"ago 26", src:"INEGI, boletín INPP", url:"https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"},
+  // Costo del dinero de un arrendador: tasa objetivo de Banxico hoy (now) y hace 12 meses (ya) más un margen estimado (mg); y12 se calcula abajo.
+  tasa:    {lbl:"Tasa de financiamiento (Banxico más margen del arrendador)", now:6.50, ya:7.50, mg:4, y12:null, asOf:"sep 26", src:"Banxico, tasa objetivo 6.50% desde el 8 may 2026 (sin cambio el 24 sep) contra 7.50% hace un año; margen del arrendador estimado en 4 puntos", url:"https://www.elfinanciero.com.mx/economia/2026/09/24/tasa-del-banxico-hoy-24-de-septiembre-2026-en-cuanto-quedo/"}
 };
+{ const t = TCO_DRV.tasa; t.y12 = +(((t.now+t.mg)/(t.ya+t.mg)-1)*100).toFixed(2); }
 // Notas fijas del consultor para la lectura semanal (las actualiza la rutina).
 const TCO_NOTES = [
+  "Tus PTARs se rentan a 5 años en pesos con operación y mantenimiento incluidos, así que la tasa no mueve tus rentas vigentes: pega al firmar o renovar. Banxico bajó de 7.50% a 6.50% en 12 meses y su guía es dejarla ahí, por lo que un contrato nuevo hoy debería salir más barato que uno de hace un año y es buen momento para fijar renta. Revisa qué contratos vencen en 2027 y 2028 y negocia desde 6 a 12 meses antes: al año 5 el arrendador ya recuperó casi todo el equipo.",
   "La jornada de 40 horas ya es ley: baja de 48 a 46 horas en enero de 2027 y llega a 40 en 2030, con registro electrónico de asistencia obligatorio desde 2027. Para una cuadrilla de 48 horas, el costo por hora sube entre 4% y 5% cada año solo por esto. En pólizas de mantenimiento e instalación que pasen de 2026, pide que el precio ya lo incluya para evitar reclamos de ajuste.",
   "El salario mínimo subió 13% en 2026 ($315.04 diarios) y el siguiente aumento se anuncia en diciembre. Pega más en servicios con mucha mano de obra, como las pólizas de mantenimiento de SCI y ANSUL y los ayudantes de instalación: deja en tu presupuesto 2027 un ajuste de mano de obra arriba de la inflación."
 ];
@@ -695,9 +783,11 @@ const TCO = {
   "Equipo Hidroneumático": {h:10, p:{adq:24, log:2, ins:8, ope:46, mto:15, cum:1, fin:4},
     ask:["Curva de la bomba y consumo en kWh por año en el punto de operación.","Variador de frecuencia incluido o cotizado aparte.","Comparar ofertas a 10 años: precio, energía y mantenimiento."],
     risk:"Casi la mitad del costo es electricidad. Una bomba 5% menos eficiente se come el ahorro de la compra."},
-  "PTARs": {h:15, p:{adq:30, log:3, ins:12, ope:32, mto:13, cum:8, fin:2}, d:{ope:[["energia",45],["quim",30],["mo",25]]},
-    ask:["Costo mensual de operación garantizado (energía, químicos, lodos y operador).","Cumplimiento NOM-001/002-SEMARNAT con análisis de laboratorio incluidos el primer año.","Penalización si el agua tratada no cumple."],
-    risk:"Operar la planta cuesta más que comprarla, y un incumplimiento ambiental trae multas."},
+  // PTARs: Andres las renta a 5 años en pesos con operación y mantenimiento incluidos (8 oct 2026). Lo que paga en 5 años: equipo instalado (adq),
+  // costo financiero que el arrendador mete en la renta (fnz, ~28% de la parte de equipo con tasa implícita de 14%), y el servicio de operación, mantenimiento y análisis.
+  "PTARs": {h:5, lease:true, lbl:{adq:"Renta del equipo"}, p:{adq:50, fnz:20, ope:18, mto:8, cum:4}, d:{adq:[["cat",80],["constr",20]], ope:[["energia",45],["quim",30],["mo",25]]},
+    ask:["Renta separada en equipo y servicio (operación, mantenimiento y análisis), con la tasa implícita por escrito o el precio del equipo, el valor residual y el plazo para calcularla.","Al año 5: renovación solo con renta de servicio más el valor residual, u opción de compra a precio fijo pactada desde hoy.","Ajuste anual solo en la parte de servicio, atado a INPC o salario IMSS con tope; quién paga la luz de la planta y con qué consumo en kWh; cumplimiento NOM-001-SEMARNAT con penalización si el agua no cumple."],
+    risk:"Tus rentas vigentes son fijas en pesos, así que el riesgo no es la tasa sino renovar al mismo precio un equipo que el arrendador ya recuperó casi completo, y aceptar ajustes anuales abiertos en la parte de servicio."},
   "Sonido": {h:7, p:{adq:44, log:3, ins:20, ope:5, mto:13, cum:6, fin:9}, d:{cum:[["inpc",100]], fin:[["fx",50],["inpc",50]]},
     ask:["Precio con cableado e instalación, no solo equipo.","Soporte y refacciones en México por al menos 5 años.","País de origen (T-MEC o no), por el riesgo de aranceles."],
     risk:"Equipo importado en dólares que se vuelve obsoleto antes que el resto de la tienda."},
@@ -1005,6 +1095,7 @@ function drawStock(el, pts, r){
   hit.addEventListener("pointermove", show); hit.addEventListener("pointerdown", show); hit.addEventListener("pointerleave", hide);
 }
 function renderWalmex(){
+  renderComp();
   document.querySelectorAll("#wRange button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.v===wmx.range)));
   const D = wmxData(), el = document.getElementById("wChart");
   if (D.day.length<7){ el.innerHTML = '<p class="muted empty">Los cierres se ven al abrir el tablero desde claude.ai con tu sesión iniciada.</p>'; return; }
@@ -1028,6 +1119,172 @@ function renderWalmex(){
   document.getElementById("wSrc").innerHTML = `Cierres diarios de la BMV vía <a href="${daily.url||"https://finance.yahoo.com/quote/WALMEX.MX/history/"}" target="_blank" rel="noopener">Yahoo Finanzas</a>: son los mismos cierres que muestra Google Finance, sin ajustar por dividendos. La vista de 5 años usa el cierre de cada semana. Rango de 52 semanas con cierres diarios. P/U, dividendo, consenso y fecha del próximo reporte: <a href="${F.url}" target="_blank" rel="noopener">${F.src}</a>, ${F.asOf}.`;
 }
 document.getElementById("wRange").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; wmx.range = b.dataset.v; try{localStorage.setItem("pc-wmx",JSON.stringify(wmx));}catch(err){} renderWalmex(); });
+// Último trimestre reportado de cada empresa (millones de pesos) y sus planes 2026. La rutina del lunes lo actualiza cuando sale un reporte.
+// c = color de la serie; q.sss = VMT México; q.ni negativo = pérdida; q.stores y q.opened aceptan texto cuando hace falta aclarar.
+const COMP = [
+  {id:"walmex", name:"Walmex", tk:"WALMEX", mkt:"BMV", cur:"MXN", c:"--s1",
+    q:{q:"2T26", date:"22 jul 2026", rev:250948, revG:1.9, sss:1.8, ebitdaM:9.4, ebitdaBp:-10, ni:11152, niG:-0.7, stores:4305, opened:23}},
+  {id:"tresb", name:"Tiendas 3B", tk:"TBBB", mkt:"NYSE", cur:"USD", c:"--s2", since:"su salida a bolsa",
+    q:{q:"2T26", date:"12 ago 2026", rev:26037, revG:38.7, sss:20.0, ebitdaM:3.7, ebitdaBp:-81, ni:-386, niG:null, stores:3624, opened:155},
+    plan:{h:"590 a 630 tiendas nuevas en 2026", p:"Lleva 278 en el primer semestre (123 y 155), así que le faltan entre 312 y 352 para diciembre. Planea 4 centros de distribución nuevos y una inversión cercana a 5,250 millones; cada tienda cuesta en promedio 5.5 millones.", src:"Reporte 4T25 (11 mar 2026) y 2T26 (12 ago 2026); inversión según El CEO, 7 abr 2026", url:"https://www.sec.gov/Archives/edgar/data/1978954/000119312526102363/tbbb_4q25_earnings_relea.htm", next:"3T26 sin fecha; el año pasado fue el 19 de noviembre"}},
+  {id:"chedraui", name:"Chedraui", tk:"CHDRAUI B", mkt:"BMV", cur:"MXN", c:"--s3",
+    q:{q:"2T26", date:"22 jul 2026", rev:71035, revG:-3.9, sss:1.3, ebitdaM:9.0, ebitdaBp:15, ni:1825, niG:-11.5, stores:728, opened:28},
+    plan:{h:"147 aperturas en México y 5 en EE.UU.", p:"130 Supercito, 9 Tienda Chedraui, 7 Super Chedraui y 1 Arteli. Lleva 47 en el primer semestre, así que le quedan unas 100. Invertirá cerca de 3.3% de sus ventas (4,699 millones de enero a junio, 31.5% más) y crecerá 5.7% su piso de venta en México.", src:"Guía 2026 a la BMV, 12 ene 2026; reiterada en julio", url:"https://bmv.com.mx/docs-pub/eventemi/eventemi_1522661_1.pdf", next:"3T26 el 27 de octubre"}},
+  {id:"soriana", name:"Soriana", tk:"SORIANA B", mkt:"BMV", cur:"MXN", c:"--s4", since:"aún no tengo su histórico anterior",
+    q:{q:"2T26", date:"31 jul 2026", rev:43559, revG:-4.9, sss:-4.5, ebitdaM:6.6, ebitdaBp:0, ni:1090, niG:46.8, stores:812, opened:null},
+    plan:{h:"961 millones en 26 tiendas en el segundo semestre", p:"3 aperturas o reaperturas en Veracruz y Nuevo León (más de 18,000 m²) y 23 remodelaciones de Híper y Súper; quedan 21 en CDMX, Estado de México, Coahuila y Nuevo León, cerca de 162,000 m². Al mismo tiempo achica su red: cerró 8 tiendas en el primer trimestre y planea reducir el tamaño de unos 60 hipermercados.", src:"Xataka México con datos de Soriana, 26 sep 2026; El CEO, jun 2026", url:"https://www.xataka.com.mx/empresas-y-economia/soriana-apuesta-expansion-invertira-961-millones-pesos-abrir-remodelar-tiendas", next:"3T26 sin fecha; el año pasado fue el 24 de octubre"}},
+  {id:"lacomer", name:"La Comer", tk:"LACOMER UBC", mkt:"BMV", cur:"MXN", c:"--s5",
+    q:{q:"2T26", date:"22 jul 2026", rev:12933, revG:5.7, sss:2.9, ebitdaM:10.3, ebitdaBp:-140, ni:671, niG:-16.4, stores:94, opened:1},
+    plan:{h:"Programa mayor que el de 2025, sin cifra", p:"No publica meta de aperturas ni de inversión. Lleva 4 en el año (Fresko Mérida, Sumesa Coyoacán, La Comer Cuernavaca y Fresko Valle Cumbres en Monterrey) y llega a 96 tiendas. Son tiendas grandes, de 6,500 a 8,200 m². Invirtió 2,277 millones en activo fijo de enero a junio, contra 4,280 en todo 2025.", src:"Reportes 1T26 y 2T26 y avisos a la BMV", url:"https://lacomerfinanzas.com.mx/wp-content/uploads/Press_Release_2T2026.pdf", next:"3T26 el 21 de octubre"}}
+];
+const COMP_NOTE = `Walmex en la primera fila como referencia; sus tiendas incluyen Centroamérica, y las de Chedraui son solo México. 3B reporta en pesos aunque su acción cotice en dólares; su margen EBITDA es el reportado (6.1% sin pagos en acciones) y su resultado fue pérdida. La utilidad de La Comer se compara contra un 2T25 que traía unos 162 millones por la venta de un terreno. Chedraui consolida sus 384 tiendas en EE.UU. (abrió 1 en el trimestre); sus ingresos bajan porque el peso se apreció 9.7% frente al 2T25, mientras en México crecieron 5.1%. Soriana tiene 812 tiendas contra 820 hace un año (más 15 Sodimac) y no reporta aperturas; su utilidad sube aunque vende menos. Su acción subió 31% entre el 11 de septiembre y el 2 de octubre (de 26.00 a 34.00) y no encontré una noticia que lo explique; hay un aviso a la BMV del 15 de septiembre que no pude leer. Fuentes: <a href="https://files.walmex.mx/upload/files/2026/ES/Trimestral/2T26/WALMEX%202T26%20BMV.pdf" target="_blank" rel="noopener">Walmex</a>, <a href="https://www.sec.gov/Archives/edgar/data/0001978954/000119312526346965/6k_tbbb_2q26_earnings_re.htm" target="_blank" rel="noopener">Tiendas 3B</a>, <a href="https://expansion.mx/empresas/2026/07/22/chedraui-politica-migratoria-resultados-segundo-trimestre" target="_blank" rel="noopener">Chedraui (Expansión)</a> y <a href="https://estrategia.vepormas.com/wp-content/uploads/2026/07/Trimestral-CHDRAUI-2T26.pdf" target="_blank" rel="noopener">Ve por Más</a>, <a href="https://www.bmv.com.mx/docs-pub/eventemi/eventemi_1578826_1.pdf" target="_blank" rel="noopener">Soriana</a> y <a href="https://lacomerfinanzas.com.mx/wp-content/uploads/Press_Release_2T2026.pdf" target="_blank" rel="noopener">La Comer</a>.`;
+// ---------- Competencia: Walmex contra autoservicios que cotizan en bolsa ----------
+// Cierres semanales de Yahoo Finanzas (d = lunes, v = cierre del último día hábil, sin ajustar por dividendos).
+// Walmex sale de walmex_wk más walmex_d agrupado por semana; los demás de comp_<id>_wk.
+const COMP_R = [["6m","en los últimos 6 meses",6],["ytd","en lo que va del año"],["1y","en el último año",12],["2024","desde el inicio de 2024"]];
+const cmp = { range:"1y", off:[], view:"pct" };
+try { Object.assign(cmp, JSON.parse(localStorage.getItem("pc-cmp")||"{}")); } catch(e){}
+if (!COMP_R.some(x=>x[0]===cmp.range)) cmp.range = "1y";
+if (!Array.isArray(cmp.off)) cmp.off = [];
+if (!["pct","px"].includes(cmp.view)) cmp.view = "pct";
+const monOf = d => addD(d, -((wday(d)+6)%7));
+const sgnPct = (v, k=1) => (v>=0?"+":"−") + Math.abs(v).toFixed(k) + "%";
+// Tipo de cambio semanal (fx_wk) para pasar a pesos las acciones que cotizan en dólares; si falta una semana usa la anterior
+function fxWeek(){
+  const f = {}; (SERIES.fx_wk?.points||[]).forEach(p=>{ if (p.v!=null) f[monOf(p.d)] = p.v; });
+  const ks = Object.keys(f).sort();
+  return ks.length ? w => { if (f[w]!=null) return f[w]; let k=null; for (const x of ks){ if (x<=w) k=x; else break; } return k ? f[k] : null; } : null;
+}
+function compRows(){
+  const fxw = fxWeek();
+  return COMP.map(c => {
+    const wk = {};
+    if (c.id==="walmex"){
+      (SERIES.walmex_wk?.points||[]).forEach(p=>{ if (p.v!=null) wk[p.d] = p.v; });
+      (SERIES.walmex_d?.points||[]).slice().sort((a,b)=>a.d<b.d?-1:1).forEach(p=>{ if (p.v!=null) wk[monOf(p.d)] = p.v; });
+    } else (SERIES["comp_"+c.id+"_wk"]?.points||[]).forEach(p=>{ if (p.v!=null) wk[monOf(p.d)] = p.v; });
+    if (c.cur==="USD" && fxw){ const usd = {...wk}; Object.keys(wk).forEach(w=>{ const f = fxw(w); wk[w] = f ? wk[w]*f : null; if (wk[w]==null) delete wk[w]; });
+      const ws = Object.keys(wk).sort(), asOf = SERIES["comp_"+c.id+"_wk"]?.asOf;
+      return {...c, cur:"MXN", usd, fxLast: fxw(ws.at(-1)), wk, asOf: asOf || (ws.length ? addD(ws.at(-1),4) : null)}; }
+    const ws = Object.keys(wk).sort(), asOf = c.id==="walmex" ? (SERIES.walmex_d?.points||[]).map(p=>p.d).sort().at(-1) : SERIES["comp_"+c.id+"_wk"]?.asOf;
+    return {...c, wk, asOf: asOf || (ws.length ? addD(ws.at(-1),4) : null)};
+  }).filter(r => Object.keys(r.wk).length > 8);
+}
+function compRange(rows, r){
+  const all = [...new Set(rows.flatMap(x=>Object.keys(x.wk)))].sort(), lastW = all.at(-1);
+  let i0;
+  if (r==="2024") i0 = all.findIndex(w=>w>="2024-01-01");
+  else if (r==="ytd"){ const y = lastW.slice(0,4)+"-01-01"; i0 = Math.max(0, all.findIndex(w=>addD(w,4)>=y)-1); }
+  else { const s = monthsAgo(lastW, (COMP_R.find(x=>x[0]===r)||COMP_R[2])[2]); i0 = all.findIndex(w=>w>=s); }
+  const ws = all.slice(Math.max(0,i0));
+  const asOf = rows.map(x=>x.asOf).filter(Boolean).sort().at(-1);
+  return { ws, asOf, rows: rows.map(x => { const vs = ws.map(w=>x.wk[w] ?? null), b = vs.find(v=>v!=null);
+    const pc = vs.map(v => v==null ? null : (v/b-1)*100), lastI = pc.findLastIndex(v=>v!=null);
+    return {...x, vs, pc, chg: lastI<0 ? null : pc[lastI], from: ws[vs.findIndex(v=>v!=null)], last: x.wk[ws[lastI]], lastW: ws[lastI],
+      uv: x.usd ? ws.map(w=>x.usd[w] ?? null) : null, lastUsd: x.usd?.[ws[lastI]] ?? null}; }) };
+}
+function drawComp(el, D, r){
+  const on = D.rows.filter(x=>!cmp.off.includes(x.id));
+  if (!on.length){ el.innerHTML = '<p class="muted empty">Elige al menos una empresa.</p>'; return; }
+  const narrow = (el.clientWidth||760) < 560, W=narrow?340:900, H=narrow?230:300, L=6, R=narrow?44:56, T=14, B=26;
+  const vs = on.flatMap(x=>x.pc.filter(v=>v!=null)); let lo=Math.min(0,...vs), hi=Math.max(0,...vs); const pad=(hi-lo)*0.08||1; lo-=pad; hi+=pad;
+  const nice = x=>{ const e=Math.pow(10,Math.floor(Math.log10(x))); const f=x/e; return (f<1.5?1:f<3?2:f<7?5:10)*e; };
+  const step = nice((hi-lo)/4), ticks=[]; for (let t=Math.ceil(lo/step)*step; t<=hi; t+=step) ticks.push(+t.toFixed(6));
+  const ws = D.ws, n = ws.length, sx = i => L + (n<2?0:i/(n-1))*(W-L-R), sy = v => T + (hi-v)/(hi-lo)*(H-T-B);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Cambio de la acción ${COMP_R.find(x=>x[0]===r)[1]}: ${on.map(x=>`${x.name} ${x.chg==null?"sin dato":sgnPct(x.chg)}`).join(", ")}">`;
+  ticks.forEach(t=>{ s+=`<line class="${Math.abs(t)<1e-9?"zero":"grid"}" x1="${L}" x2="${W-R}" y1="${sy(t)}" y2="${sy(t)}"/><text class="yl" x="${W-R+6}" y="${sy(t)+4}">${t>0?"+":t<0?"−":""}${Math.abs(t).toFixed(step<1?1:0)}%</text>`; });
+  const lab = d => { const [y,m] = d.split("-"); return r==="2024" ? (m==="01"?y:MESES[+m-1]) : (m==="01" && r!=="ytd" ? y : MESES[+m-1]); };
+  const fri = ws.map(w=>addD(w,4));
+  let marks = fri.map((_,i)=>i).filter(i => i>0 && fri[i].slice(0,7)!==fri[i-1].slice(0,7) && (r!=="2024" || ["01","07"].includes(fri[i].slice(5,7))));
+  const k = narrow?4:7, stride = Math.max(1, Math.ceil(marks.length/k)); marks = marks.filter((_,j)=>j%stride===0);
+  const gap = (W-L-R)/(k+1)*0.6; marks = marks.filter(i => sx(i)-L > gap*0.5 && W-R-sx(i) > gap*0.45);
+  marks.forEach(i => { s += `<line class="grid" x1="${sx(i)}" x2="${sx(i)}" y1="${H-B}" y2="${H-B+4}"/><text x="${sx(i)}" y="${H-8}" text-anchor="middle">${lab(fri[i])}</text>`; });
+  // Walmex al final para que quede encima
+  const order = on.slice().sort((a,b)=>(a.id==="walmex")-(b.id==="walmex"));
+  order.forEach(x => { let seg = [], segs = [];
+    x.pc.forEach((v,i)=>{ if (v==null){ if (seg.length) segs.push(seg); seg=[]; } else seg.push(`${sx(i).toFixed(1)},${sy(v).toFixed(1)}`); }); if (seg.length) segs.push(seg);
+    segs.forEach(sg => { s += `<polyline points="${sg.join(" ")}" fill="none" stroke="var(${x.c})" stroke-width="${x.id==="walmex"?2.75:1.75}" stroke-linejoin="round" stroke-linecap="round"/>`; }); });
+  s += `<line class="cross" x1="0" x2="0" y1="${T}" y2="${H-B}" visibility="hidden"/>`;
+  order.forEach(x => { s += `<circle class="dot" data-id="${x.id}" r="4" fill="var(${x.c})" stroke="var(--surface)" stroke-width="2" visibility="hidden"/>`; });
+  s += `<rect class="hit" x="${L}" y="0" width="${W-L}" height="${H}"/></svg><div class="st-tip ctip" hidden></div>`;
+  el.innerHTML = s;
+  const svg = el.querySelector("svg"), hit = el.querySelector("rect.hit"), xh = el.querySelector(".cross"), tip = el.querySelector(".ctip");
+  const show = e => { const rc = svg.getBoundingClientRect(), x = (e.clientX - rc.left) * W / rc.width;
+    const i = Math.max(0, Math.min(n-1, Math.round((x-L)/(W-L-R)*(n-1)))), cx = sx(i);
+    xh.setAttribute("x1",cx); xh.setAttribute("x2",cx); xh.setAttribute("visibility","visible");
+    order.forEach(o => { const dt = el.querySelector(`.dot[data-id="${o.id}"]`), v = o.pc[i];
+      if (v==null) dt.setAttribute("visibility","hidden"); else { dt.setAttribute("cx",cx); dt.setAttribute("cy",sy(v)); dt.setAttribute("visibility","visible"); } });
+    tip.innerHTML = `<span>${i===n-1 && D.asOf && D.asOf<fri[i] ? "Al "+dLabel(D.asOf) : "Semana al "+dLabel(fri[i])}</span>` + on.slice().sort((a,b)=>(b.pc[i]??-1e9)-(a.pc[i]??-1e9)).map(o =>
+      `<div><span><i class="sw" style="background:var(${o.c})"></i>${o.name}</span><b>${o.pc[i]==null?"–":sgnPct(o.pc[i])+` <small class="muted">${fx2(o.vs[i])}</small>`}</b></div>`).join("");
+    tip.hidden = false; const px = cx * rc.width / W, half = tip.offsetWidth/2; tip.style.left = Math.max(half, Math.min(rc.width-half, px)) + "px"; };
+  const hide = () => { tip.hidden = true; xh.setAttribute("visibility","hidden"); el.querySelectorAll(".dot").forEach(d=>d.setAttribute("visibility","hidden")); };
+  hit.addEventListener("pointermove", show); hit.addEventListener("pointerdown", show); hit.addEventListener("pointerleave", hide);
+}
+// Vista "Precio": una gráfica chica por empresa, cada una en su moneda y con su propia escala
+function drawMini(el, x, ws, r){
+  const W=320, H=150, L=4, R=46, T=10, B=22, n = ws.length, fri = ws.map(w=>addD(w,4));
+  const pts = x.vs.map((v,i)=>v==null?null:[i,v]).filter(Boolean); if (pts.length<2){ el.innerHTML = '<p class="muted">Sin cierres en el periodo.</p>'; return; }
+  let lo = Math.min(...pts.map(p=>p[1])), hi = Math.max(...pts.map(p=>p[1])); const pad = (hi-lo)*0.08||1; lo-=pad; hi+=pad;
+  const nice = v=>{ const e=Math.pow(10,Math.floor(Math.log10(v))); const f=v/e; return (f<1.5?1:f<3?2:f<7?5:10)*e; };
+  const step = nice((hi-lo)/3), ticks=[]; for (let t=Math.ceil(lo/step)*step; t<=hi; t+=step) ticks.push(+t.toFixed(6));
+  const sx = i => L + (n<2?0:i/(n-1))*(W-L-R), sy = v => T + (hi-v)/(hi-lo)*(H-T-B);
+  const first = pts[0], lastP = pts.at(-1), cls = lastP[1]>=first[1] ? "gain" : "loss";
+  let s = `<svg viewBox="0 0 ${W} ${H}" class="${cls}" role="img" aria-label="${x.name}, precio semanal: de ${fx2(first[1])} a ${fx2(lastP[1])} ${x.cur}">`;
+  ticks.forEach(t=>{ s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${sy(t)}" y2="${sy(t)}"/><text class="yl" x="${W-R+5}" y="${sy(t)+4}">${t.toFixed(step<1?1:0)}</text>`; });
+  s += `<line class="base" x1="${L}" x2="${W-R}" y1="${sy(first[1])}" y2="${sy(first[1])}"/>`;
+  const line = pts.map(p=>`${sx(p[0]).toFixed(1)},${sy(p[1]).toFixed(1)}`).join(" ");
+  s += `<polygon points="${sx(first[0]).toFixed(1)},${H-B} ${line} ${sx(lastP[0]).toFixed(1)},${H-B}" fill="var(${x.c})" fill-opacity=".12" stroke="none"/>`;
+  s += `<polyline points="${line}" fill="none" stroke="var(${x.c})" stroke-width="2" stroke-linejoin="round"/>`;
+  const lab = d => { const [y,m] = d.split("-"); return `${MESES[+m-1]} ${y.slice(2)}`; };
+  s += `<text x="${sx(first[0])}" y="${H-6}" text-anchor="start">${lab(fri[first[0]])}</text><text x="${W-R}" y="${H-6}" text-anchor="end">${lab(fri[lastP[0]])}</text>`;
+  s += `<line class="cross" x1="0" x2="0" y1="${T}" y2="${H-B}" visibility="hidden"/><circle class="dot" r="4" fill="var(${x.c})" stroke="var(--surface)" stroke-width="2" visibility="hidden"/>`;
+  s += `<rect class="hit" x="${L}" y="0" width="${W-L}" height="${H}"/></svg><div class="st-tip" hidden></div>`;
+  el.innerHTML = s;
+  const svg = el.querySelector("svg"), hit = el.querySelector("rect.hit"), xh = el.querySelector(".cross"), dot = el.querySelector(".dot"), tip = el.querySelector(".st-tip");
+  const show = e => { const rc = svg.getBoundingClientRect(), px = (e.clientX - rc.left) * W / rc.width;
+    let i = Math.max(first[0], Math.min(lastP[0], Math.round((px-L)/(W-L-R)*(n-1)))); while (x.vs[i]==null && i<lastP[0]) i++;
+    const cx = sx(i), cy = sy(x.vs[i]); xh.setAttribute("x1",cx); xh.setAttribute("x2",cx); dot.setAttribute("cx",cx); dot.setAttribute("cy",cy);
+    xh.setAttribute("visibility","visible"); dot.setAttribute("visibility","visible");
+    tip.innerHTML = `<b>${fx2(x.vs[i])} ${x.cur}</b>${x.uv?.[i]!=null ? ` <span class="muted">(${fx2(x.uv[i])} USD)</span>` : ""} · ${i===n-1 && x.asOf && x.asOf<fri[i] ? dLabel(x.asOf) : "semana al "+dLabel(fri[i])}`; tip.hidden = false;
+    const ppx = cx * rc.width / W, half = tip.offsetWidth/2; tip.style.left = Math.max(half, Math.min(rc.width-half, ppx)) + "px"; };
+  const hide = () => { tip.hidden = true; xh.setAttribute("visibility","hidden"); dot.setAttribute("visibility","hidden"); };
+  hit.addEventListener("pointermove", show); hit.addEventListener("pointerdown", show); hit.addEventListener("pointerleave", hide);
+}
+function drawPrices(el, D){
+  const on = D.rows.filter(x=>!cmp.off.includes(x.id));
+  if (!on.length){ el.innerHTML = '<p class="muted empty">Elige al menos una empresa.</p>'; return; }
+  el.innerHTML = `<div class="cmini">${on.map(x => { const v = x.vs.filter(v=>v!=null), up = (x.chg??0) >= 0;
+    return `<div style="--c:var(${x.c})"><div class="hd"><b>${x.name}</b><span>${x.tk} · ${x.mkt}${x.lastUsd!=null ? ` · ${fx2(x.lastUsd)} USD` : ""}</span></div>`
+      + `<div class="px">${x.last==null?"–":fx2(x.last)}<small>${x.cur}</small>${x.chg==null?"":`<span class="st-chg ${up?"gain":"loss"}"><b class="pill">${up?"↑":"↓"} ${Math.abs(x.chg).toFixed(1)}%</b></span>`}</div>`
+      + `<div class="rng">Mín. ${fx2(Math.min(...v))} · Máx. ${fx2(Math.max(...v))} en el periodo</div><div class="chart stockc" data-id="${x.id}"></div></div>`; }).join("")}</div>`;
+  on.forEach(x => drawMini(el.querySelector(`.stockc[data-id="${x.id}"]`), x, D.ws, cmp.range));
+}
+function renderComp(){
+  document.querySelectorAll("#cRange button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.v===cmp.range)));
+  document.querySelectorAll("#cView button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.v===cmp.view)));
+  const rows = compRows(), el = document.getElementById("cChart"), leg = document.getElementById("cLeg");
+  if (rows.length < 2){ leg.innerHTML = ""; el.innerHTML = '<p class="muted empty">Los cierres se ven al abrir el tablero desde claude.ai con tu sesión iniciada.</p>'; }
+  else {
+    const D = compRange(rows, cmp.range);
+    leg.innerHTML = D.rows.map(x => `<button class="chip" style="--c:var(${x.c})" data-id="${x.id}" aria-pressed="${!cmp.off.includes(x.id)}"><i></i>${x.name}<b class="${x.chg==null?"":x.chg>=0?"gain":"loss"}">${x.chg==null?"–":sgnPct(x.chg)}</b><small>${x.from && x.from > D.ws[0] ? "desde "+dLabel(addD(x.from,4)) : x.last==null ? "" : fx2(x.last)+" "+x.cur}</small></button>`).join("");
+    if (cmp.view==="px") drawPrices(el, D); else drawComp(el, D, cmp.range);
+    const late = D.rows.filter(x=>x.from && x.from > D.ws[0]);
+    document.getElementById("cAsOf").textContent = (cmp.view==="px" ? `Precio de cierre semanal de cada acción ${COMP_R.find(x=>x[0]===cmp.range)[1]}, en pesos y con su propia escala; la línea punteada es el precio al inicio del periodo.` : `Cambio de la acción ${COMP_R.find(x=>x[0]===cmp.range)[1]}, con cierres semanales.`) + ` Último cierre: ${dLabel(D.asOf)}.` + D.rows.filter(x=>x.usd).map(x=>` ${x.name} cotiza en dólares en ${x.mkt === "NYSE" ? "Nueva York" : x.mkt}; la paso a pesos con el tipo de cambio de cada semana${x.fxLast?` (${fx2(x.fxLast)} pesos por dólar en la última)`:""}.`).join("") + late.map(x=>` ${x.name} empieza el ${dLabel(addD(x.from,4))}${x.since?` (${x.since})`:""}.`).join("");
+  }
+  const sd = '<span class="muted">s/d</span>', num = v => v==null ? sd : typeof v==="string" ? v : v.toLocaleString("es-MX");
+  document.getElementById("cTbl").innerHTML = COMP.filter(c=>c.q).map(c => { const q = c.q;
+    return `<tr${c.id==="walmex"?' class="ref"':""}><td><b>${c.name}</b><div class="cat">${c.tk} · ${c.mkt}</div></td><td><b>${q.q}</b><div class="cat">${q.date}</div></td>`
+      + `<td class="num">${num(q.rev)}</td><td class="num">${q.revG==null?sd:sgnPct(q.revG)}</td><td class="num">${q.sss==null?sd:sgnPct(q.sss)}</td>`
+      + `<td class="num">${q.ebitdaM==null?sd:q.ebitdaM.toFixed(1)+"%"}${q.ebitdaBp==null?"":` <span class="muted">(${q.ebitdaBp===0?"igual":(q.ebitdaBp>0?"+":"−")+Math.abs(q.ebitdaBp)+" pb"})</span>`}</td>`
+      + `<td class="num">${q.ni==null?sd:q.ni<0?`−${Math.abs(q.ni).toLocaleString("es-MX")} <span class="muted">(pérdida)</span>`:num(q.ni)}</td><td class="num">${q.niG==null?sd:sgnPct(q.niG)}</td>`
+      + `<td class="num">${num(q.stores)}</td><td class="num">${num(q.opened)}</td></tr>`; }).join("");
+  document.getElementById("cNote").innerHTML = COMP_NOTE;
+  document.getElementById("cPlans").innerHTML = COMP.filter(c=>c.plan).map(c => `<li style="--c:var(${c.c})"><span class="eyebrow">${c.name}</span><h3>${c.plan.h}</h3><p>${c.plan.p}</p><p class="src"><a href="${c.plan.url}" target="_blank" rel="noopener">${c.plan.src}</a> · Próximo reporte: ${c.plan.next}.</p></li>`).join("");
+}
+document.getElementById("cView").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; cmp.view = b.dataset.v; try{localStorage.setItem("pc-cmp",JSON.stringify(cmp));}catch(err){} renderComp(); });
+document.getElementById("cRange").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; cmp.range = b.dataset.v; try{localStorage.setItem("pc-cmp",JSON.stringify(cmp));}catch(err){} renderComp(); });
+document.getElementById("cLeg").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; const id = b.dataset.id;
+  cmp.off = cmp.off.includes(id) ? cmp.off.filter(x=>x!==id) : cmp.off.concat(id); try{localStorage.setItem("pc-cmp",JSON.stringify(cmp));}catch(err){} renderComp(); });
 // Pestañas
 function showTab(id, focus){
   ["mercado","walmex"].forEach(t => { const on = t===id, b = document.getElementById("t-"+t);
@@ -1058,7 +1315,7 @@ function opModel(){
   const ser = emSeries(); if (!ser.length) return null;
   const today = new Date().toISOString().slice(0,10);
   const last = ser.at(-1), ya = ser.find(p=>p.m===addM(last.m,-12)), dec = ser.find(p=>p.m===(+last.m.slice(0,4)-1)+"-12");
-  const cats = CATS.map(c=>{ const st = catStats(c), t = tcoOf(c); return {n:c.name, st, lvl:catLvl(c,st), tco:t && t.y12, top:t && t.top}; }).filter(x=>x.st && x.st.y12!=null).sort((a,b)=>b.st.y12-a.st.y12);
+  const cats = CATS.map(c=>{ const st = catStats(c), t = tcoOf(c); return {n:c.name, st, lvl:catLvl(c,st), tco:t && t.y12, top:t && t.top, topL:t && t.top && tcoPart(t,t.top.k)}; }).filter(x=>x.st && x.st.y12!=null).sort((a,b)=>b.st.y12-a.st.y12);
   const mp = MP.map(m=>({m, d:BY[m.main]})).filter(({d})=>d && !d.stale && !d.ref && !d.qual).map(({m,d})=>({n:m.short||m.name, y:yoy(d), aff:m.aff.some(a=>a[0]==="Todas") ? "todas tus categorías" + (m.but ? " menos " + listY(m.but) : "") : listY(m.aff.map(a=>a[0]))})).filter(x=>x.y!=null && x.y>5).sort((a,b)=>b.y-a.y);
   const risks = [...document.querySelectorAll("#tab-mercado .risk")].map(r=>{ const l = r.querySelector(".lvl"); return {lvl:["alto","medio","bajo"].find(k=>l.classList.contains(k))||"bajo",
     t:txt(r.querySelector("h3")), aff:txt(r.querySelector(".aff")), doIt:txt(r.querySelector(".do")).replace(/^Qué haría:\s*/,""), src:txt(r.querySelector(".src"))}; })
@@ -1066,10 +1323,14 @@ function opModel(){
   const D = wmxData(), wl = D.day.length ? D.day.at(-1) : null, wy = wl ? wmxRange(D,"ytd")[0] : null;
   const tc = cats.filter(x=>x.tco!=null).sort((a,b)=>b.tco-a.tco)[0];
   const up = cats[0], dn = cats.at(-1);
+  // Una línea de la competencia junto a WALMEX (Andres, 8 oct 2026): cambio de la acción en el año, 3B ya en pesos
+  const cr = compRows(), cd = cr.length > 1 ? compRange(cr, "ytd") : null;
+  const cmpY = cd ? cd.rows.filter(x=>x.id!=="walmex" && x.chg!=null).sort((a,b)=>b.chg-a.chg) : [];
+  const comp = cmpY.length ? {lbl:"Competencia en el año", txt:`${listY(cmpY.map(x=>`${x.name} ${pct(x.chg)}`))} (acción, cierre ${dLabel(cd.asOf,false)}; Tiendas 3B en pesos).`} : null;
   const know = [];
   know.push(`Tus categorías que más suben en 12 meses: ${listY(cats.slice(0,2).map(x=>`${x.n} (${pct(x.st.y12)})`))}${dn && dn.st.y12<0 ? `; la que más baja es ${dn.n} (${pct(dn.st.y12)})` : ""}. Dato INEGI a ${mLabel(up.st.last)}.`);
   if (mp.length) know.push(`Materias primas arriba de 5% en 12 meses: ${listY(mp.slice(0,3).map(x=>`${x.n} ${pct(x.y)} (pega en ${x.aff})`))}. Si te piden aumentos en esas categorías, compáralos contra el índice antes de aprobarlos.`);
-  if (tc && tc.top) know.push(`${tc.n} es la categoría cuyo costo total más sube: ${pct(tc.tco)} en 12 meses, sobre todo por ${lc(TCO_COMP[tc.top.k])} (${pct(tc.top.y12)}).`);
+  if (tc && tc.top) know.push(`${tc.n} es la categoría cuyo costo total más sube: ${pct(tc.tco)} en 12 meses, sobre todo por ${lc(tc.topL)} (${pct(tc.top.y12)}).`);
   return { week: txt(document.getElementById("week")), today,
     kpis: [
       {k:"Estructura Metálica", v:`$${fmt(last.v)}`, u:"MXN/kg", n:`${ya?pct((last.v/ya.v-1)*100)+" en 12 meses":""}${dec?" · "+pct((last.v/dec.v-1)*100)+" en el año":""}`},
@@ -1077,7 +1338,7 @@ function opModel(){
       {k:"Materias primas >5%", v:String(mp.length), u:"de "+MP.length, n:mp.length ? mp.slice(0,3).map(x=>x.n).join(", ") + (mp.length>3 ? ` y ${mp.length-3} más` : "") : "Ninguna sube más de 5%"},
       wl ? {k:"WALMEX", v:fx2(wl.v), u:"MXN", n:`${pct((wl.v/wy.v-1)*100)} en el año · cierre ${dLabel(wl.d,false)}`} : null
     ].filter(Boolean),
-    know, risks, cats, mpCount: mp.length,
+    comp, know, risks, cats, mpCount: mp.length,
     events: EVENTS.filter(e=>e.d>=today).slice(0,5),
     asOf: mLabel(up.st.last), emAsOf: mLabel(last.m), url: DASH_URL };
 }
@@ -1086,6 +1347,7 @@ const p1 = v => Math.abs(v)<0.05 ? "0.0%" : pct(v);
 function opHtml(o){
   return `<header class="op-hd"><div><span class="wk">${opEsc(o.week)}</span><h2 id="op-title">Pulso de Compras México</h2></div><span class="wk">GNFR Construcciones · México</span></header>
   <div class="op-kpis">${o.kpis.map(k=>`<div><span class="k">${k.k}</span><span class="v">${k.v} <small>${k.u}</small></span><span class="n">${opEsc(k.n)}</span></div>`).join("")}</div>
+  ${o.comp ? `<p class="op-comp"><b>${o.comp.lbl}:</b> ${opEsc(o.comp.txt)}</p>` : ""}
   <section class="op-sec"><h3>Lo que tienes que saber</h3><ol>${o.know.map(x=>`<li>${opEsc(x)}</li>`).join("")}</ol></section>
   <div class="op-2">
     <section class="op-sec"><h3>Riesgos y qué haría</h3><div class="op-risks">${o.risks.map(r=>`<div class="op-risk"><span class="lvl ${r.lvl}">${r.lvl}</span><div><p class="t">${opEsc(r.t)}</p><p><b>Qué haría:</b> ${opEsc(r.doIt)}</p><p class="s">${opEsc(r.aff)} · ${opEsc(r.src)}</p></div></div>`).join("")}</div></section>
@@ -1095,11 +1357,12 @@ function opHtml(o){
       <section class="op-sec"><h3>Próximas fechas</h3><ul class="op-ev">${o.events.map(e=>`<li><b>${opEsc(e.dl)}</b><span>${opEsc(e.t)}<small>${opEsc(e.cats)}</small></span></li>`).join("")}</ul></section>
     </div>
   </div>
-  <footer class="op-ft"><p>Índices de categoría: INEGI, INPP a ${o.asOf}; costo total con salario IMSS e INPP de servicios. Estructura por kg estimada a ${o.emAsOf}. Dólar: Banxico FIX. WALMEX: cierre de la BMV. Riesgos con su fuente en el tablero.</p><p>Tablero completo: <a href="${o.url}" target="_blank" rel="noopener">${o.url.replace("https://","")}</a></p></footer>`;
+  <footer class="op-ft"><p>Índices de categoría: INEGI, INPP a ${o.asOf}; costo total con salario IMSS e INPP de servicios. Estructura por kg estimada a ${o.emAsOf}. Dólar: Banxico FIX. WALMEX: cierre de la BMV; competencia: Yahoo Finance (3B de NYSE, a pesos). Riesgos con su fuente en el tablero.</p><p>Tablero completo: <a href="${o.url}" target="_blank" rel="noopener">${o.url.replace("https://","")}</a></p></footer>`;
 }
 function opText(o){
   const L = [`PULSO DE COMPRAS MÉXICO · ${o.week}`, ""];
   o.kpis.forEach(k=>L.push(`• ${k.k}: ${k.v} ${k.u} (${k.n})`));
+  if (o.comp) L.push(`• ${o.comp.lbl}: ${o.comp.txt}`);
   L.push("", "LO QUE TIENES QUE SABER"); o.know.forEach((x,i)=>L.push(`${i+1}. ${x}`));
   L.push("", "RIESGOS Y QUÉ HARÍA"); o.risks.forEach(r=>L.push(`[${r.lvl.toUpperCase()}] ${r.t}. Qué haría: ${r.doIt} (${r.aff} · ${r.src})`));
   L.push("", `TUS ${CATS.length} CATEGORÍAS (12 meses · en el año · costo total de propiedad)`); o.cats.forEach(x=>L.push(`${x.n}: ${pct(x.st.y12)} · ${x.st.ytd!=null?p1(x.st.ytd):"s/d"} · ${x.tco!=null?pct(x.tco):"s/d"} · nivel ${x.lvl}`));
@@ -1117,12 +1380,13 @@ function opMail(o){
   <p style="font:600 11px Menlo,Consolas,monospace;letter-spacing:.05em;text-transform:uppercase;color:${C.ink2};margin:0">${opEsc(o.week)}</p>
   <h2 style="font:800 24px Arial,sans-serif;margin:2px 0 10px;padding-bottom:8px;border-bottom:3px solid ${C.ink}">Pulso de Compras México</h2>
   <table role="presentation" style="width:100%;border-collapse:collapse"><tr>${o.kpis.map(k=>`<td style="vertical-align:top;padding:4px 8px 4px 10px;border-left:3px solid ${C.acc};width:25%"><div style="font:600 10px Menlo,Consolas,monospace;text-transform:uppercase;color:${C.ink3}">${k.k}</div><div style="font:700 19px Arial,sans-serif">${k.v} <span style="font:600 11px Menlo,monospace;color:${C.ink3}">${k.u}</span></div><div style="font-size:12px;color:${C.ink2}">${opEsc(k.n)}</div></td>`).join("")}</tr></table>
+  ${o.comp ? `<p style="margin:10px 0 0;font-size:13px;color:${C.ink2}"><b style="color:${C.ink}">${o.comp.lbl}:</b> ${opEsc(o.comp.txt)}</p>` : ""}
   ${h3("Lo que tienes que saber")}<ol style="margin:0;padding-left:20px">${o.know.map(x=>`<li style="margin:0 0 6px">${opEsc(x)}</li>`).join("")}</ol>
   ${h3("Riesgos y qué haría")}${o.risks.map(r=>`<p style="margin:0 0 10px">${tag(r.lvl)} <b>${opEsc(r.t)}</b><br><b>Qué haría:</b> ${opEsc(r.doIt)}<br><span style="font-size:12px;color:${C.ink3}">${opEsc(r.aff)} · ${opEsc(r.src)}</span></p>`).join("")}
   ${h3(`Tus ${CATS.length} categorías`)}<table style="width:100%;border-collapse:collapse;font-size:13px"><tr>${["Categoría","12 m","En el año","TCO",""].map((t,i)=>`<th style="font:600 10px Menlo,monospace;text-transform:uppercase;color:${C.ink3};text-align:${i&&i<4?"right":"left"};padding:4px 6px;border-bottom:1px solid ${C.line}">${t}</th>`).join("")}</tr>${
     o.cats.map(x=>`<tr>${td(opEsc(x.n))}${td(pct(x.st.y12),"text-align:right")}${td(x.st.ytd!=null?p1(x.st.ytd):"–","text-align:right")}${td(x.tco!=null?pct(x.tco):"–","text-align:right")}${td(tag(x.lvl))}</tr>`).join("")}</table>
   ${h3("Próximas fechas")}<table role="presentation" style="width:100%;border-collapse:collapse;font-size:13px">${o.events.map(e=>`<tr><td style="vertical-align:top;padding:3px 10px 3px 0;white-space:nowrap;font:600 12px Menlo,monospace">${opEsc(e.dl)}</td><td style="padding:3px 0">${opEsc(e.t)}<br><span style="font-size:12px;color:${C.ink3}">${opEsc(e.cats)}</span></td></tr>`).join("")}</table>
-  <p style="font-size:12px;color:${C.ink3};border-top:1px solid ${C.line};padding-top:8px;margin-top:18px">Índices de categoría: INEGI, INPP a ${o.asOf}. Estructura por kg estimada a ${o.emAsOf}. Dólar: Banxico FIX. WALMEX: cierre de la BMV.<br><a href="${o.url}" style="color:${C.acc}">Abrir el tablero completo</a></p></div>`;
+  <p style="font-size:12px;color:${C.ink3};border-top:1px solid ${C.line};padding-top:8px;margin-top:18px">Índices de categoría: INEGI, INPP a ${o.asOf}. Estructura por kg estimada a ${o.emAsOf}. Dólar: Banxico FIX. WALMEX: cierre de la BMV; competencia: Yahoo Finance (3B de NYSE, a pesos).<br><a href="${o.url}" style="color:${C.acc}">Abrir el tablero completo</a></p></div>`;
 }
 window.onePager = () => { const o = opModel(); if (!o) return null;
   return {subject:`Pulso de Compras · ${o.week.replace(/^Semana del /,"semana del ")}: estructura ${o.kpis[0].v}/kg`, text:opText(o), html:opHtml(o), mail:opMail(o)}; };
@@ -1325,7 +1589,7 @@ window.renderCatTrend = function(){
 };
 document.getElementById("trView").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; tr.view = b.dataset.v; try{localStorage.setItem("pc-tr",JSON.stringify(tr));}catch(err){} window.renderCatTrend(); });
 
-const TCO_C = {adq:"var(--s1)", log:"var(--s2)", ins:"var(--s3)", ope:"var(--s4)", mto:"var(--s5)", cum:"var(--s6)", fin:"var(--s7)"};
+const TCO_C = {adq:"var(--s1)", fnz:"var(--s8)", log:"var(--s2)", ins:"var(--s3)", ope:"var(--s4)", mto:"var(--s5)", cum:"var(--s6)", fin:"var(--s7)"};
 function tcoDrv(k, c){
   if (k==="cat"){ const s = catStats(c); return s ? s.y12 : null; }
   if (TCO_DRV[k]) return TCO_DRV[k].y12;
@@ -1349,7 +1613,8 @@ function tcoOf(c){
     top: [...parts].sort((a,b)=>b.contrib-a.contrib)[0],
     expo: dk => parts.reduce((a,p)=>{ const tw = p.ds.reduce((x,d)=>x+d.w,0), dw = p.ds.filter(d=>d.k===dk).reduce((x,d)=>x+d.w,0); return a + p.share*dw/tw; }, 0) };
 }
-const tcoBar = (r, cls="") => `<div class="tbar ${cls}" role="img" aria-label="${r.parts.map(p=>`${TCO_COMP[p.k]} ${p.share.toFixed(0)}%`).join(", ")}">${r.parts.map(p=>`<span style="--c:${TCO_C[p.k]};flex:${p.share}" title="${TCO_COMP[p.k]} ${p.share.toFixed(0)}%">${cls?"":p.share>=8?p.share.toFixed(0)+"%":""}</span>`).join("")}</div>`;
+const tcoPart = (r, k) => (r.t.lbl && r.t.lbl[k]) || TCO_COMP[k];
+const tcoBar = (r, cls="") => `<div class="tbar ${cls}" role="img" aria-label="${r.parts.map(p=>`${tcoPart(r,p.k)} ${p.share.toFixed(0)}%`).join(", ")}">${r.parts.map(p=>`<span style="--c:${TCO_C[p.k]};flex:${p.share}" title="${tcoPart(r,p.k)} ${p.share.toFixed(0)}%">${cls?"":p.share>=8?p.share.toFixed(0)+"%":""}</span>`).join("")}</div>`;
 const lc = s => s.charAt(0).toLowerCase() + s.slice(1);
 const mv = v => v>=0.05 ? `sube ${v.toFixed(1)}%` : v<=-0.05 ? `baja ${Math.abs(v).toFixed(1)}%` : "se mantiene";
 const listY = arr => arr.length<2 ? arr.join("") : arr.slice(0,-1).join(", ") + " y " + arr.at(-1);
@@ -1361,12 +1626,14 @@ window.renderTco = function(){
   if (!all.length){ tbl.innerHTML = '<p class="muted empty">Cargando índices INEGI…</p>'; det.innerHTML = ""; return; }
   // Lectura de la semana
   const b = [], t1 = all[0];
-  b.push(`<b>${t1.c.name}</b> es la categoría cuyo costo total más sube: <b>${pct(t1.r.y12)}</b> en 12 meses. Lo empuja sobre todo ${lc(TCO_COMP[t1.r.top.k])} (${pct(t1.r.top.y12)}).`);
+  b.push(`<b>${t1.c.name}</b> es la categoría cuyo costo total más sube: <b>${pct(t1.r.y12)}</b> en 12 meses. Lo empuja sobre todo ${lc(tcoPart(t1.r,t1.r.top.k))} (${pct(t1.r.top.y12)}).`);
   const gaps = all.filter(x=>x.r.adqY12!=null).map(x=>({...x, g:x.r.y12-x.r.adqY12})).sort((a,b)=>b.g-a.g);
   const hi = gaps[0], lo = gaps.at(-1);
   if (hi && hi.g>1){ const p = hi.r.parts.filter(p=>p.k!=="adq").sort((a,b)=>b.contrib-a.contrib)[0];
-    b.push(`Costo oculto en <b>${hi.c.name}</b>: la cotización ${mv(hi.r.adqY12)}, pero el costo total ${hi.r.y12<0?"solo ":""}<b>${mv(hi.r.y12)}</b>. La presión está en ${lc(TCO_COMP[p.k])} (${pct(p.y12)}), que no aparece en el precio.`); }
-  if (lo && lo.g<-1) b.push(`En <b>${lo.c.name}</b> pasa lo contrario: el precio de compra ${mv(lo.r.adqY12)}, pero el costo total ${lo.r.y12>0?"solo ":""}${mv(lo.r.y12)}, porque la compra es ${lo.r.adqShare.toFixed(0)}% del total. Ahí conviene negociar servicio y operación, no solo precio.`);
+    b.push(`Costo oculto en <b>${hi.c.name}</b>: la cotización ${mv(hi.r.adqY12)}, pero el costo total ${hi.r.y12<0?"solo ":""}<b>${mv(hi.r.y12)}</b>. La presión está en ${lc(tcoPart(hi.r,p.k))} (${pct(p.y12)}), que no aparece en el precio.`); }
+  const lf = lo && lo.r.parts.find(p=>p.k==="fnz");
+  if (lo && lo.g<-1 && lo.r.t.lease && lf && lf.y12<0) b.push(`En <b>${lo.c.name}</b> la renta del equipo ${mv(lo.r.adqY12)} con los insumos, pero un contrato nuevo hoy ${lo.r.y12>0?"costaría solo":"costaría"} ${pct(lo.r.y12)} contra hace un año, porque el costo financiero de la renta ${mv(lf.y12)} con la tasa de Banxico. Al renovar, pide que esa baja se vea en la renta.`);
+  else if (lo && lo.g<-1) b.push(`En <b>${lo.c.name}</b> pasa lo contrario: ${lo.r.t.lease?"la renta del equipo":"el precio de compra"} ${mv(lo.r.adqY12)}, pero el costo total ${lo.r.y12>0?"solo ":""}${mv(lo.r.y12)}, porque ${lo.r.t.lease?"esa renta":"la compra"} es ${lo.r.adqShare.toFixed(0)}% del total. Ahí conviene negociar servicio y operación, no solo precio.`);
   const mo = TCO_DRV.mo.y12;
   if (mo!=null){ const ex = all.map(x=>({n:x.c.name, e:x.r.expo("mo")})).sort((a,b)=>b.e-a.e).slice(0,3);
     b.push(`La mano de obra <b>${mv(mo)}</b> en 12 meses (salario promedio IMSS) y es ${listY(ex.map((x,i)=>`${x.e.toFixed(0)}% ${i?"del de":"del costo total de"} ${x.n}`))}. Pide tarifas de mano de obra fijas por 12 meses o indexadas al salario IMSS.`); }
@@ -1374,38 +1641,39 @@ window.renderTco = function(){
   if (en!=null){ const ex = all.map(x=>({n:x.c.name, e:x.r.expo("energia")})).sort((a,b)=>b.e-a.e).filter(x=>x.e>=10).slice(0,2);
     if (ex.length) b.push(`La energía ${mv(en)} en 12 meses (INPP) y pesa ${listY(ex.map(x=>`${x.e.toFixed(0)}% en ${x.n}`))}. Evalúa esas ofertas por consumo en kWh a lo largo de su vida, no solo por precio.`); }
   TCO_NOTES.forEach(n=>b.push(n));
-  brief.innerHTML = `<span class="tag">Lectura de la semana</span><ol>${b.slice(0,7).map(x=>`<li>${x}</li>`).join("")}</ol>`;
+  brief.innerHTML = `<span class="tag">Lectura de la semana</span><ol>${b.slice(0,8).map(x=>`<li>${x}</li>`).join("")}</ol>`;
   // Tabla general
   const sel = tco.sel && all.some(x=>x.c.name===tco.sel) ? tco.sel : all[0].c.name;
   tbl.innerHTML = `<div class="tbl-wrap"><table class="tco-t"><thead><tr><th>Categoría</th><th>Composición</th><th class="num">Compra en el TCO</th><th class="num">Precio de compra 12 m</th><th class="num">TCO 12 m</th><th>Lo que más empuja</th></tr></thead><tbody>${
-    all.map(({c,r})=>`<tr${c.name===sel?' class="on"':""}><td><button class="nmb" data-n="${esc(c.name)}" aria-pressed="${c.name===sel}">${icon(c.name)}${esc(c.name)}</button></td><td>${tcoBar(r,"sm")}</td><td class="num">${r.adqShare.toFixed(0)}%</td><td class="num">${r.adqY12!=null?pct(r.adqY12):"–"}</td><td class="num">${pill(r.y12)}</td><td class="why">${TCO_COMP[r.top.k]} <span class="muted">${pct(r.top.y12)}</span></td></tr>`).join("")
+    all.map(({c,r})=>`<tr${c.name===sel?' class="on"':""}><td><button class="nmb" data-n="${esc(c.name)}" aria-pressed="${c.name===sel}">${icon(c.name)}${esc(c.name)}</button>${r.t.lease?`<div class="cat">Arrendada a ${r.t.h} años</div>`:""}</td><td>${tcoBar(r,"sm")}</td><td class="num">${r.adqShare.toFixed(0)}%</td><td class="num">${r.adqY12!=null?pct(r.adqY12):"–"}</td><td class="num">${pill(r.y12)}</td><td class="why">${tcoPart(r,r.top.k)} <span class="muted">${pct(r.top.y12)}</span></td></tr>`).join("")
   }</tbody></table></div>
-  <div class="legend" style="margin-top:10px">${Object.keys(TCO_COMP).map(k=>`<span><i class="sw" style="background:${TCO_C[k]}"></i>${TCO_COMP[k]}</span>`).join("")}</div>`;
+  <div class="legend" style="margin-top:10px">${Object.keys(TCO_COMP).map(k=>`<span><i class="sw" style="background:${TCO_C[k]}"></i>${k==="adq" && Object.values(TCO).some(t=>t.lbl&&t.lbl.adq) ? "Compra o renta del equipo" : TCO_COMP[k]}</span>`).join("")}</div>`;
   tbl.querySelectorAll(".nmb").forEach(btn=>btn.onclick=()=>{ tco.sel = btn.dataset.n; try{localStorage.setItem("pc-tco",JSON.stringify(tco));}catch(e){} window.renderTco(); document.getElementById("tcoDet").scrollIntoView({behavior:"smooth", block:"nearest"}); });
   // Detalle
   const {c, r} = all.find(x=>x.c.name===sel), t = r.t;
-  const per100 = r.adqShare ? Math.round(100*100/r.adqShare) : null;
-  det.innerHTML = `<h3>${icon(c.name)}${esc(c.name)} <span class="muted" style="font:400 13px var(--f-body)">horizonte ${t.h} años</span></h3>
+  const per100 = r.adqShare ? Math.round(100*100/r.adqShare) : null, fz = r.parts.find(p=>p.k==="fnz"), neg = [...r.parts].sort((a,b)=>a.contrib-b.contrib).find(p=>p.contrib<0);
+  det.innerHTML = `<h3>${icon(c.name)}${esc(c.name)} <span class="muted" style="font:400 13px var(--f-body)">${t.lease?`arrendada a ${t.h} años, con operación y mantenimiento`:`horizonte ${t.h} años`}</span></h3>
     <div class="tiles">
-      <div class="tile"><span class="k">La compra es</span><span class="v">${r.adqShare.toFixed(0)}%</span><span class="n">del costo total en ${t.h} años</span></div>
-      <div class="tile"><span class="k">Por cada $100 de compra</span><span class="v">$${per100}</span><span class="n">pagas en total en ${t.h} años</span></div>
-      <div class="tile"><span class="k">Costo total, 12 meses</span><span class="v">${pct(r.y12)}</span><span class="n">precio de compra ${r.adqY12!=null?pct(r.adqY12):"s/d"}</span></div>
+      <div class="tile"><span class="k">${t.lease?"La renta del equipo es":"La compra es"}</span><span class="v">${r.adqShare.toFixed(0)}%</span><span class="n">del costo total en ${t.h} años</span></div>
+      ${fz ? `<div class="tile"><span class="k">Financiamiento</span><span class="v">${fz.share.toFixed(0)}%</span><span class="n">de lo que pagas en ${t.h} años; su costo ${mv(fz.y12)} en 12 meses</span></div>`
+        : `<div class="tile"><span class="k">Por cada $100 de compra</span><span class="v">$${per100}</span><span class="n">pagas en total en ${t.h} años</span></div>`}
+      <div class="tile"><span class="k">Costo total, 12 meses</span><span class="v">${pct(r.y12)}</span><span class="n">${t.lease?"si firmaras hoy; renta del equipo":"precio de compra"} ${r.adqY12!=null?pct(r.adqY12):"s/d"}</span></div>
     </div>
     ${tcoBar(r)}
     <div class="tbl-wrap"><table class="tco-c"><thead><tr><th>Parte del costo</th><th class="num">Peso</th><th>Qué la mueve</th><th class="num">12 meses</th><th class="num">Aporta al TCO</th></tr></thead><tbody>${
-      r.parts.map(p=>`<tr><td><i class="sw" style="background:${TCO_C[p.k]}"></i>${TCO_COMP[p.k]}<div class="drvm">${p.ds.map(d=>tcoLbl(d.k)).join(" · ")}</div></td><td class="num">${p.share.toFixed(0)}%</td><td>${p.ds.map(d=>`${tcoLbl(d.k)}${p.ds.length>1?` <small>${d.w}%</small>`:""}${d.v==null?' <small>(s/d)</small>':""}`).join("<br>")}</td><td class="num">${pill(p.y12)}</td><td class="num">${p.y12==null?"–":(p.contrib>=0?"+":"")+p.contrib.toFixed(2)+" pts"}</td></tr>`).join("")
+      r.parts.map(p=>`<tr><td><i class="sw" style="background:${TCO_C[p.k]}"></i>${tcoPart(r,p.k)}<div class="drvm">${p.ds.map(d=>tcoLbl(d.k)).join(" · ")}</div></td><td class="num">${p.share.toFixed(0)}%</td><td>${p.ds.map(d=>`${tcoLbl(d.k)}${p.ds.length>1?` <small>${d.w}%</small>`:""}${d.v==null?' <small>(s/d)</small>':""}`).join("<br>")}</td><td class="num">${pill(p.y12)}</td><td class="num">${p.y12==null?"–":(p.contrib>=0?"+":"")+p.contrib.toFixed(2)+" pts"}</td></tr>`).join("")
     }</tbody><tfoot><tr><td>Costo total</td><td class="num">100%</td><td></td><td class="num">${pill(r.y12)}</td><td class="num">${(r.y12>=0?"+":"")+r.y12.toFixed(2)} pts</td></tr></tfoot></table></div>
     <div class="grid2" style="gap:12px">
       <div class="box"><h4>Qué pedir en tu próximo concurso</h4><ul>${t.ask.map(a=>`<li>${a}</li>`).join("")}</ul></div>
-      <div class="box"><h4>Riesgo a vigilar</h4><p>${t.risk}</p><p>Esta semana lo que más empuja es <b>${lc(TCO_COMP[r.top.k])}</b> (${pct(r.top.y12)}), que aporta ${r.top.contrib.toFixed(1)} de los ${r.y12.toFixed(1)} puntos.</p></div>
+      <div class="box"><h4>Riesgo a vigilar</h4><p>${t.risk}</p><p>Esta semana lo que más empuja es <b>${lc(tcoPart(r,r.top.k))}</b> (${pct(r.top.y12)}), que aporta ${r.top.contrib.toFixed(1)} ${neg && r.top.contrib > r.y12 ? `puntos; lo que más resta es ${lc(tcoPart(r,neg.k))} (−${Math.abs(neg.contrib).toFixed(1)} puntos) y el total queda en ${pct(r.y12)}` : `de los ${r.y12.toFixed(1)} puntos`}.</p></div>
     </div>`;
   const srcs = Object.values(TCO_DRV).filter(d=>d.src).map(d=>d.url?`<a href="${d.url}" target="_blank" rel="noopener">${esc(d.lbl)}</a>: ${esc(d.src)}${d.asOf?`, ${esc(d.asOf)}`:""}`:`${esc(d.lbl)}: ${esc(d.src)}`);
-  document.getElementById("tcoNote").innerHTML = `Los pesos de cada parte son una estimación típica por categoría con referencias de la industria, no salen de tus contratos; si tus números son distintos, pídeme ajustarlos. La variación de 12 meses de cada parte combina: canasta INEGI de la categoría (compra), transporte y diésel (flete), salario y construcción (instalación), energía (operación), servicios, salario y refacciones (mantenimiento) e INPC (cumplimiento y reposición).${srcs.length?" Fuentes: "+srcs.join("; ")+".":""}`;
+  document.getElementById("tcoNote").innerHTML = `Los pesos de cada parte son una estimación típica por categoría con referencias de la industria, no salen de tus contratos; si tus números son distintos, pídeme ajustarlos. La variación de 12 meses de cada parte combina: canasta INEGI de la categoría (compra), transporte y diésel (flete), salario y construcción (instalación), energía (operación), servicios, salario y refacciones (mantenimiento) e INPC (cumplimiento y reposición). En lo arrendado, el financiamiento se mueve con la tasa de Banxico más un margen estimado del arrendador.${srcs.length?" Fuentes: "+srcs.join("; ")+".":""}`;
 };
 
 function renderSeries(){ addVirtual(); window.renderCatsSeries(); renderTiles(); renderEm(); renderCalc(); renderExplorer(); window.renderCatTrend && window.renderCatTrend(); window.renderTco && window.renderTco(); if (!document.getElementById("tab-walmex").hidden) renderWalmex(); if (!opEl.hidden) renderOP(); }
-const EX_HIDE = ["inpp_soldadura_yoy","inpp_alambron_yoy","inpp_fundidas_yoy","inpp_perfiles_yoy","inpp_bano_yoy","inpp_vidrio_yoy","inpp_cemento_yoy","inpp_imper_yoy","inpp_comercial_yoy","inpp_aluminio_yoy","inpp_concreto_yoy","inpp_cables_yoy","aluminio_lme"];
-const EX_LBL = {inpp_varilla_yoy:"Acero (INEGI)", inpp_cobre_yoy:"Cobre (INEGI)", inpp_tubplastico_yoy:"Plásticos (INEGI)", inpp_pinturas_yoy:"Pinturas (INEGI)", inpp_bombas_yoy:"Bombas (INEGI)", inpp_diesel_yoy:"Diésel (INEGI)"};
+const EX_HIDE = ["inpp_soldadura_yoy","inpp_alambron_yoy","inpp_fundidas_yoy","inpp_perfiles_yoy","inpp_bano_yoy","inpp_vidrio_yoy","inpp_cemento_yoy","inpp_imper_yoy","inpp_comercial_yoy","inpp_concreto_yoy","inpp_cables_yoy"];
+const EX_LBL = {inpp_varilla_yoy:"Acero (INEGI)", inpp_cobre_yoy:"Cobre (INEGI)", inpp_aluminio_yoy:"Aluminio (INEGI)", inpp_tubplastico_yoy:"Plásticos (INEGI)", inpp_pinturas_yoy:"Pinturas (INEGI)", inpp_bombas_yoy:"Bombas (INEGI)", inpp_diesel_yoy:"Diésel (INEGI)"};
 function addVirtual(){
   EX_HIDE.forEach(id=>{ if (SERIES[id]) SERIES[id].hide = true; });
   Object.entries(EX_LBL).forEach(([id,n])=>{ if (SERIES[id]) SERIES[id].short = n; });
