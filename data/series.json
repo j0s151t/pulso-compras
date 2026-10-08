@@ -3,43 +3,293 @@
   "cur": "USD",
   "group": "insumos",
   "kind": "price",
-  "name": "Aluminio LME (referencia)",
+  "name": "Aluminio LME, promedio mensual (referencia)",
   "order": 3,
   "points": [
    {
-    "m": "2025-10",
-    "v": 2720
+    "m": "2024-01",
+    "v": 2194.18
    },
    {
-    "m": "2026-10",
-    "v": 3123.5
+    "m": "2024-02",
+    "v": 2182.55
+   },
+   {
+    "m": "2024-03",
+    "v": 2222.35
+   },
+   {
+    "m": "2024-04",
+    "v": 2497.88
+   },
+   {
+    "m": "2024-05",
+    "v": 2565.19
+   },
+   {
+    "m": "2024-06",
+    "v": 2495.05
+   },
+   {
+    "m": "2024-07",
+    "v": 2362.3
+   },
+   {
+    "m": "2024-08",
+    "v": 2334.33
+   },
+   {
+    "m": "2024-09",
+    "v": 2451.67
+   },
+   {
+    "m": "2024-10",
+    "v": 2598.39
+   },
+   {
+    "m": "2024-11",
+    "v": 2583.19
+   },
+   {
+    "m": "2024-12",
+    "v": 2538.43
+   },
+   {
+    "m": "2025-01",
+    "v": 2574.95
+   },
+   {
+    "m": "2025-02",
+    "v": 2653.38
+   },
+   {
+    "m": "2025-03",
+    "v": 2657.21
+   },
+   {
+    "m": "2025-04",
+    "v": 2381.25
+   },
+   {
+    "m": "2025-05",
+    "v": 2442.4
+   },
+   {
+    "m": "2025-06",
+    "v": 2516.48
+   },
+   {
+    "m": "2025-07",
+    "v": 2604.15
+   },
+   {
+    "m": "2025-08",
+    "v": 2594.03
+   },
+   {
+    "m": "2025-09",
+    "v": 2653.25
+   },
+   {
+    "m": "2025-10",
+    "v": 2786.3
+   },
+   {
+    "m": "2025-11",
+    "v": 2822.93
+   },
+   {
+    "m": "2025-12",
+    "v": 2875.45
+   },
+   {
+    "m": "2026-01",
+    "v": 3148.4
+   },
+   {
+    "m": "2026-02",
+    "v": 3065.35
+   },
+   {
+    "m": "2026-03",
+    "v": 3370.16
+   },
+   {
+    "m": "2026-04",
+    "v": 3600.63
+   },
+   {
+    "m": "2026-05",
+    "v": 3670.18
+   },
+   {
+    "m": "2026-06",
+    "v": 3458.64
+   },
+   {
+    "m": "2026-07",
+    "v": 3155.98
+   },
+   {
+    "m": "2026-08",
+    "v": 3249.63
+   },
+   {
+    "m": "2026-09",
+    "v": 3276.82
    }
   ],
   "short": "Aluminio LME",
-  "src": "Trading Economics (oct-25 aprox.)",
+  "src": "LME, promedio mensual cash settlement, vía Westmetall",
   "unit": "t",
-  "url": "https://tradingeconomics.com/commodity/aluminum"
+  "url": "https://www.westmetall.com/en/markdaten.php?action=averages&field=LME_Al_cash",
+  "note": "m = mes; v = promedio mensual del precio de liquidación (cash settlement) de la LME; el mes en curso se agrega cuando cierra"
  },
  "cobre_lme": {
   "cur": "USD",
   "group": "insumos",
   "kind": "price",
-  "name": "Cobre LME (referencia para cotizar en México)",
+  "name": "Cobre LME, promedio mensual (referencia para cotizar en México)",
   "order": 2,
   "points": [
    {
-    "m": "2025-10",
-    "v": 10990
+    "m": "2024-01",
+    "v": 8344.3
    },
    {
-    "m": "2026-10",
-    "v": 14286
+    "m": "2024-02",
+    "v": 8310.74
+   },
+   {
+    "m": "2024-03",
+    "v": 8675.63
+   },
+   {
+    "m": "2024-04",
+    "v": 9482.43
+   },
+   {
+    "m": "2024-05",
+    "v": 10129.07
+   },
+   {
+    "m": "2024-06",
+    "v": 9641.6
+   },
+   {
+    "m": "2024-07",
+    "v": 9393.57
+   },
+   {
+    "m": "2024-08",
+    "v": 8963.71
+   },
+   {
+    "m": "2024-09",
+    "v": 9254.5
+   },
+   {
+    "m": "2024-10",
+    "v": 9539.24
+   },
+   {
+    "m": "2024-11",
+    "v": 9074.79
+   },
+   {
+    "m": "2024-12",
+    "v": 8919.53
+   },
+   {
+    "m": "2025-01",
+    "v": 8977.57
+   },
+   {
+    "m": "2025-02",
+    "v": 9329.25
+   },
+   {
+    "m": "2025-03",
+    "v": 9731.07
+   },
+   {
+    "m": "2025-04",
+    "v": 9192.13
+   },
+   {
+    "m": "2025-05",
+    "v": 9529.78
+   },
+   {
+    "m": "2025-06",
+    "v": 9833.74
+   },
+   {
+    "m": "2025-07",
+    "v": 9778.22
+   },
+   {
+    "m": "2025-08",
+    "v": 9645.85
+   },
+   {
+    "m": "2025-09",
+    "v": 9952.73
+   },
+   {
+    "m": "2025-10",
+    "v": 10696.02
+   },
+   {
+    "m": "2025-11",
+    "v": 10800.78
+   },
+   {
+    "m": "2025-12",
+    "v": 11803.79
+   },
+   {
+    "m": "2026-01",
+    "v": 13088.88
+   },
+   {
+    "m": "2026-02",
+    "v": 12967.83
+   },
+   {
+    "m": "2026-03",
+    "v": 12498.98
+   },
+   {
+    "m": "2026-04",
+    "v": 12891.38
+   },
+   {
+    "m": "2026-05",
+    "v": 13507.13
+   },
+   {
+    "m": "2026-06",
+    "v": 13574.32
+   },
+   {
+    "m": "2026-07",
+    "v": 13525.17
+   },
+   {
+    "m": "2026-08",
+    "v": 14353.4
+   },
+   {
+    "m": "2026-09",
+    "v": 14483.39
    }
   ],
   "short": "Cobre LME",
-  "src": "LME vía prensa (oct-25 aprox.)",
+  "src": "LME, promedio mensual cash settlement, vía Westmetall",
   "unit": "t",
-  "url": "https://brecorder.com/news/40442691/copper-ticks-up-as-fed-rate-hike-bets-cool"
+  "url": "https://www.westmetall.com/en/markdaten.php?action=averages&field=LME_Cu_cash",
+  "note": "m = mes; v = promedio mensual del precio de liquidación (cash settlement) de la LME; el mes en curso se agrega cuando cierra"
  },
  "comp_chedraui_wk": {
   "name": "Chedraui, cierre semanal (BMV)",
