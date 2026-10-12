@@ -4,6 +4,7 @@
   "group": "insumos",
   "kind": "price",
   "name": "Aluminio LME, promedio mensual (referencia)",
+  "note": "m = mes; v = promedio mensual del precio de liquidación (cash settlement) de la LME; el mes en curso se agrega cuando cierra",
   "order": 3,
   "points": [
    {
@@ -142,14 +143,14 @@
   "short": "Aluminio LME",
   "src": "LME, promedio mensual cash settlement, vía Westmetall",
   "unit": "t",
-  "url": "https://www.westmetall.com/en/markdaten.php?action=averages&field=LME_Al_cash",
-  "note": "m = mes; v = promedio mensual del precio de liquidación (cash settlement) de la LME; el mes en curso se agrega cuando cierra"
+  "url": "https://www.westmetall.com/en/markdaten.php?action=averages&field=LME_Al_cash"
  },
  "cobre_lme": {
   "cur": "USD",
   "group": "insumos",
   "kind": "price",
   "name": "Cobre LME, promedio mensual (referencia para cotizar en México)",
+  "note": "m = mes; v = promedio mensual del precio de liquidación (cash settlement) de la LME; el mes en curso se agrega cuando cierra",
   "order": 2,
   "points": [
    {
@@ -288,20 +289,16 @@
   "short": "Cobre LME",
   "src": "LME, promedio mensual cash settlement, vía Westmetall",
   "unit": "t",
-  "url": "https://www.westmetall.com/en/markdaten.php?action=averages&field=LME_Cu_cash",
-  "note": "m = mes; v = promedio mensual del precio de liquidación (cash settlement) de la LME; el mes en curso se agrega cuando cierra"
+  "url": "https://www.westmetall.com/en/markdaten.php?action=averages&field=LME_Cu_cash"
  },
  "comp_chedraui_wk": {
-  "name": "Chedraui, cierre semanal (BMV)",
-  "short": "Chedraui",
+  "asOf": "2026-10-09",
+  "cur": "MXN",
   "group": "walmart",
   "kind": "stock",
-  "cur": "MXN",
-  "unit": "acción",
+  "name": "Chedraui, cierre semanal (BMV)",
+  "note": "d = lunes de la semana; v = cierre del último día hábil de esa semana (semana del 5 oct 2026: cierre del 9 oct).",
   "order": 3,
-  "src": "Yahoo Finanzas, histórico semanal de CHDRAUIB.MX (precio de cierre, sin ajustar por dividendos)",
-  "url": "https://finance.yahoo.com/quote/CHDRAUIB.MX/history/",
-  "note": "d = lunes de la semana; v = cierre del último día hábil de esa semana; la semana en curso usa el último cierre (2026-10-07)",
   "points": [
    {
     "d": "2024-01-01",
@@ -597,7 +594,7 @@
    },
    {
     "d": "2025-05-26",
-    "v": 142.0
+    "v": 142
    },
    {
     "d": "2025-06-02",
@@ -653,7 +650,7 @@
    },
    {
     "d": "2025-09-01",
-    "v": 150.0
+    "v": 150
    },
    {
     "d": "2025-09-08",
@@ -673,7 +670,7 @@
    },
    {
     "d": "2025-10-06",
-    "v": 139.0
+    "v": 139
    },
    {
     "d": "2025-10-13",
@@ -793,7 +790,7 @@
    },
    {
     "d": "2026-05-04",
-    "v": 102.0
+    "v": 102
    },
    {
     "d": "2026-05-11",
@@ -805,7 +802,7 @@
    },
    {
     "d": "2026-05-25",
-    "v": 98.0
+    "v": 98
    },
    {
     "d": "2026-06-01",
@@ -881,22 +878,22 @@
    },
    {
     "d": "2026-10-05",
-    "v": 85.48
+    "v": 87.79
    }
   ],
-  "asOf": "2026-10-07"
+  "short": "Chedraui",
+  "src": "Yahoo Finanzas, histórico semanal de CHDRAUIB.MX (precio de cierre, sin ajustar por dividendos)",
+  "unit": "acción",
+  "url": "https://finance.yahoo.com/quote/CHDRAUIB.MX/history/"
  },
  "comp_lacomer_wk": {
-  "name": "La Comer, cierre semanal (BMV)",
-  "short": "La Comer",
+  "asOf": "2026-10-09",
+  "cur": "MXN",
   "group": "walmart",
   "kind": "stock",
-  "cur": "MXN",
-  "unit": "acción",
+  "name": "La Comer, cierre semanal (BMV)",
+  "note": "d = lunes de la semana; v = cierre del último día hábil de esa semana. La semana del 5 oct 2026 usa el cierre del 9 oct de Google Finance (31.55), porque Yahoo no respondió.",
   "order": 2,
-  "src": "Yahoo Finanzas, histórico semanal de LACOMERUBC.MX (precio de cierre, sin ajustar por dividendos)",
-  "url": "https://finance.yahoo.com/quote/LACOMERUBC.MX/history/",
-  "note": "d = lunes de la semana; v = cierre del último día hábil de esa semana; la semana en curso usa el último cierre (2026-10-07)",
   "points": [
    {
     "d": "2024-01-01",
@@ -1476,23 +1473,22 @@
    },
    {
     "d": "2026-10-05",
-    "v": 31.1
+    "v": 31.55
    }
   ],
-  "asOf": "2026-10-07"
+  "short": "La Comer",
+  "src": "Yahoo Finanzas, histórico semanal de LACOMERUBC.MX (precio de cierre, sin ajustar por dividendos)",
+  "unit": "acción",
+  "url": "https://finance.yahoo.com/quote/LACOMERUBC.MX/history/"
  },
  "comp_soriana_wk": {
   "asOf": "2026-10-07",
-  "name": "Soriana, cierre semanal (BMV)",
-  "short": "Soriana",
+  "cur": "MXN",
   "group": "walmart",
   "kind": "stock",
-  "cur": "MXN",
-  "unit": "acción",
+  "name": "Soriana, cierre semanal (BMV)",
+  "note": "d = lunes de la semana; v = cierre del último día hábil de esa semana. La semana del 5 oct 2026 usa el último cierre que pude confirmar (7 oct, 33.10); no encontré cierres del 8 y 9 oct.",
   "order": 4,
-  "src": "Yahoo Finanzas, histórico semanal de SORIANAB.MX (precio de cierre, sin ajustar por dividendos)",
-  "url": "https://finance.yahoo.com/quote/SORIANAB.MX/history/",
-  "note": "d = lunes de la semana; v = cierre del último día hábil de esa semana; la semana en curso usa el último cierre (2026-10-07)",
   "points": [
    {
     "d": "2025-10-06",
@@ -1520,7 +1516,7 @@
    },
    {
     "d": "2025-11-17",
-    "v": 29.0
+    "v": 29
    },
    {
     "d": "2025-11-24",
@@ -1528,7 +1524,7 @@
    },
    {
     "d": "2025-12-01",
-    "v": 29.0
+    "v": 29
    },
    {
     "d": "2025-12-08",
@@ -1556,7 +1552,7 @@
    },
    {
     "d": "2026-01-19",
-    "v": 34.0
+    "v": 34
    },
    {
     "d": "2026-01-26",
@@ -1564,19 +1560,19 @@
    },
    {
     "d": "2026-02-02",
-    "v": 36.0
+    "v": 36
    },
    {
     "d": "2026-02-09",
-    "v": 38.0
+    "v": 38
    },
    {
     "d": "2026-02-16",
-    "v": 37.0
+    "v": 37
    },
    {
     "d": "2026-02-23",
-    "v": 38.0
+    "v": 38
    },
    {
     "d": "2026-03-02",
@@ -1684,11 +1680,11 @@
    },
    {
     "d": "2026-08-31",
-    "v": 26.0
+    "v": 26
    },
    {
     "d": "2026-09-07",
-    "v": 26.0
+    "v": 26
    },
    {
     "d": "2026-09-14",
@@ -1700,25 +1696,26 @@
    },
    {
     "d": "2026-09-28",
-    "v": 34.0
+    "v": 34
    },
    {
     "d": "2026-10-05",
     "v": 33.1
    }
-  ]
+  ],
+  "short": "Soriana",
+  "src": "Yahoo Finanzas, histórico semanal de SORIANAB.MX (precio de cierre, sin ajustar por dividendos)",
+  "unit": "acción",
+  "url": "https://finance.yahoo.com/quote/SORIANAB.MX/history/"
  },
  "comp_tresb_wk": {
-  "name": "Tiendas 3B, cierre semanal (NYSE)",
-  "short": "Tiendas 3B",
+  "asOf": "2026-10-09",
+  "cur": "USD",
   "group": "walmart",
   "kind": "stock",
-  "cur": "USD",
-  "unit": "acción",
+  "name": "Tiendas 3B, cierre semanal (NYSE)",
+  "note": "d = lunes de la semana; v = cierre del último día hábil de esa semana en USD (semana del 5 oct 2026: cierre del 9 oct).",
   "order": 5,
-  "src": "Yahoo Finanzas, histórico semanal de TBBB (precio de cierre, sin ajustar por dividendos)",
-  "url": "https://finance.yahoo.com/quote/TBBB/history/",
-  "note": "d = lunes de la semana; v = cierre del último día hábil de esa semana; la semana en curso usa el último cierre (2026-10-07)",
   "points": [
    {
     "d": "2024-02-05",
@@ -1854,7 +1851,7 @@
    },
    {
     "d": "2024-09-23",
-    "v": 30.0
+    "v": 30
    },
    {
     "d": "2024-09-30",
@@ -1894,7 +1891,7 @@
    },
    {
     "d": "2024-12-02",
-    "v": 30.0
+    "v": 30
    },
    {
     "d": "2024-12-09",
@@ -2074,7 +2071,7 @@
    },
    {
     "d": "2025-10-13",
-    "v": 27.0
+    "v": 27
    },
    {
     "d": "2025-10-20",
@@ -2106,7 +2103,7 @@
    },
    {
     "d": "2025-12-08",
-    "v": 33.0
+    "v": 33
    },
    {
     "d": "2025-12-15",
@@ -2278,10 +2275,13 @@
    },
    {
     "d": "2026-10-05",
-    "v": 53.01
+    "v": 55.59
    }
   ],
-  "asOf": "2026-10-07"
+  "short": "Tiendas 3B",
+  "src": "Yahoo Finanzas, histórico semanal de TBBB (precio de cierre, sin ajustar por dividendos)",
+  "unit": "acción",
+  "url": "https://finance.yahoo.com/quote/TBBB/history/"
  },
  "diesel": {
   "cur": "MXN",
@@ -2496,17 +2496,13 @@
   "url": "https://dolardof.com/"
  },
  "fx_wk": {
-  "name": "Dólar (MXN por USD), cierre semanal",
-  "short": "USD/MXN semanal",
+  "asOf": "2026-10-09",
+  "cur": "ratio",
   "group": "walmart",
   "kind": "fx",
-  "cur": "ratio",
-  "unit": "MXN por USD",
-  "order": 6,
-  "src": "Yahoo Finanzas, histórico semanal de MXN=X (cierre del último día hábil de la semana)",
-  "url": "https://finance.yahoo.com/quote/MXN%3DX/history/",
+  "name": "Dólar (MXN por USD), cierre semanal",
   "note": "d = lunes de la semana; v = cierre de esa semana; la semana en curso usa el último cierre. Se usa para pasar a pesos la acción de Tiendas 3B (NYSE, USD)",
-  "asOf": "2026-10-07",
+  "order": 6,
   "points": [
    {
     "d": "2024-01-29",
@@ -3070,9 +3066,13 @@
    },
    {
     "d": "2026-10-05",
-    "v": 17.9692
+    "v": 18.3992
    }
-  ]
+  ],
+  "short": "USD/MXN semanal",
+  "src": "Yahoo Finanzas, histórico semanal de MXN=X (cierre del último día hábil de la semana)",
+  "unit": "MXN por USD",
+  "url": "https://finance.yahoo.com/quote/MXN%3DX/history/"
  },
  "inpc_yoy": {
   "cur": "pct",
@@ -3083,13 +3083,13 @@
   "points": [
    {
     "m": "2026-09",
-    "v": 3.42
+    "v": 3.45
    }
   ],
   "short": "INPC",
-  "src": "INEGI",
+  "src": "INEGI, INPC mensual",
   "unit": "%",
-  "url": "https://www.razon.com.mx/mexico/2026/09/24/inflacion-en-primera-quincena-de-septiembre-de-2026-subio-a-342-inegi/"
+  "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpc/inpc_2q2026_10.pdf"
  },
  "inpp_alambron_yoy": {
   "cur": "pct",
@@ -3642,6 +3642,10 @@
    {
     "m": "2026-08",
     "v": 0.16
+   },
+   {
+    "m": "2026-09",
+    "v": 0.17
    }
   ],
   "short": "Construcción mensual (INEGI)",
@@ -3787,6 +3791,10 @@
    {
     "m": "2026-08",
     "v": 5.91
+   },
+   {
+    "m": "2026-09",
+    "v": 5.71
    }
   ],
   "short": "INEGI construcción",
@@ -3943,15 +3951,11 @@
   "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"
  },
  "inpp_perfiles_yoy": {
-  "name": "INEGI: perfiles de hierro y acero, variación anual",
-  "short": "Perfiles de acero (INEGI)",
+  "cur": "pct",
   "group": "acero",
   "kind": "yoy",
-  "cur": "pct",
-  "unit": "%",
+  "name": "INEGI: perfiles de hierro y acero, variación anual",
   "order": 11,
-  "src": "INEGI vía CMIC CEICO (con huecos: solo se publica cuando entra al top 10 del mes)",
-  "url": "https://www.cmic.org.mx/ceico/registros/carrusel/portadas/CEICO_Informe_Febrero_2026_Variacion_precio_materiales2.pdf",
   "points": [
    {
     "m": "2023-12",
@@ -3971,7 +3975,7 @@
    },
    {
     "m": "2024-04",
-    "v": -10.0
+    "v": -10
    },
    {
     "m": "2024-05",
@@ -3979,7 +3983,7 @@
    },
    {
     "m": "2024-06",
-    "v": -18.0
+    "v": -18
    },
    {
     "m": "2024-07",
@@ -4013,7 +4017,11 @@
     "m": "2026-01",
     "v": 5.96
    }
-  ]
+  ],
+  "short": "Perfiles de acero (INEGI)",
+  "src": "INEGI vía CMIC CEICO (con huecos: solo se publica cuando entra al top 10 del mes)",
+  "unit": "%",
+  "url": "https://www.cmic.org.mx/ceico/registros/carrusel/portadas/CEICO_Informe_Febrero_2026_Variacion_precio_materiales2.pdf"
  },
  "inpp_pinturas_yoy": {
   "cur": "pct",
@@ -4350,6 +4358,10 @@
    {
     "m": "2026-08",
     "v": -0.45
+   },
+   {
+    "m": "2026-09",
+    "v": 0.37
    }
   ],
   "short": "Equipo eléctrico",
@@ -4495,6 +4507,10 @@
    {
     "m": "2026-08",
     "v": -0.85
+   },
+   {
+    "m": "2026-09",
+    "v": 0.2
    }
   ],
   "short": "Equipo electrónico",
@@ -4640,6 +4656,10 @@
    {
     "m": "2026-08",
     "v": -0.22
+   },
+   {
+    "m": "2026-09",
+    "v": 0.05
    }
   ],
   "short": "Maquinaria y equipo",
@@ -4785,6 +4805,10 @@
    {
     "m": "2026-08",
     "v": 3.08
+   },
+   {
+    "m": "2026-09",
+    "v": -0.36
    }
   ],
   "short": "Metálicas básicas",
@@ -4930,6 +4954,10 @@
    {
     "m": "2026-08",
     "v": -0.27
+   },
+   {
+    "m": "2026-09",
+    "v": -0.02
    }
   ],
   "short": "Minerales no metálicos",
@@ -5075,6 +5103,10 @@
    {
     "m": "2026-08",
     "v": 2.83
+   },
+   {
+    "m": "2026-09",
+    "v": 7.37
    }
   ],
   "short": "Derivados del petróleo",
@@ -5220,6 +5252,10 @@
    {
     "m": "2026-08",
     "v": 0.24
+   },
+   {
+    "m": "2026-09",
+    "v": 0.09
    }
   ],
   "short": "Plástico y hule",
@@ -5365,6 +5401,10 @@
    {
     "m": "2026-08",
     "v": 0.25
+   },
+   {
+    "m": "2026-09",
+    "v": 0.1
    }
   ],
   "short": "Productos metálicos",
@@ -5373,15 +5413,11 @@
   "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"
  },
  "sub_prof_mom": {
-  "name": "INPP Servicios profesionales, científicos y técnicos, variación mensual",
-  "short": "Servicios profesionales",
+  "cur": "pct",
   "group": "macro",
   "kind": "mom",
-  "cur": "pct",
-  "unit": "% mensual",
+  "name": "INPP Servicios profesionales, científicos y técnicos, variación mensual",
   "order": 110,
-  "src": "INEGI, boletín INPP (Cuadro 2, producción total, sector 54 que incluye la rama 5413 arquitectura e ingeniería)",
-  "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf",
   "points": [
    {
     "m": "2023-12",
@@ -5514,8 +5550,16 @@
    {
     "m": "2026-08",
     "v": 0.19
+   },
+   {
+    "m": "2026-09",
+    "v": -0.02
    }
-  ]
+  ],
+  "short": "Servicios profesionales",
+  "src": "INEGI, boletín INPP (Cuadro 2, producción total, sector 54 que incluye la rama 5413 arquitectura e ingeniería)",
+  "unit": "% mensual",
+  "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"
  },
  "sub_quim_mom": {
   "cur": "pct",
@@ -5655,6 +5699,10 @@
    {
     "m": "2026-08",
     "v": -0.99
+   },
+   {
+    "m": "2026-09",
+    "v": 0.39
    }
   ],
   "short": "Química",
@@ -5663,16 +5711,12 @@
   "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_09.pdf"
  },
  "walmex_d": {
-  "name": "WALMEX, cierre diario (BMV)",
-  "short": "WALMEX",
+  "cur": "MXN",
   "group": "walmart",
   "kind": "stock",
-  "cur": "MXN",
-  "unit": "acción",
-  "order": 1,
-  "src": "Yahoo Finanzas, histórico diario de WALMEX.MX (precio de cierre oficial de la BMV, sin ajustar por dividendos); coincide con Google Finance",
-  "url": "https://finance.yahoo.com/quote/WALMEX.MX/history/",
+  "name": "WALMEX, cierre diario (BMV)",
   "note": "d = día hábil; v = cierre del día. Yahoo no tiene el 22 abr 2026. El 6 oct 2026 Yahoo mostró 46.64 (último operado a las 13:59); se usa el cierre de Google, 46.69.",
+  "order": 1,
   "points": [
    {
     "d": "2025-09-01",
@@ -5692,7 +5736,7 @@
    },
    {
     "d": "2025-09-05",
-    "v": 57.0
+    "v": 57
    },
    {
     "d": "2025-09-08",
@@ -5828,7 +5872,7 @@
    },
    {
     "d": "2025-10-24",
-    "v": 61.0
+    "v": 61
    },
    {
     "d": "2025-10-27",
@@ -6080,7 +6124,7 @@
    },
    {
     "d": "2026-01-27",
-    "v": 58.0
+    "v": 58
    },
    {
     "d": "2026-01-28",
@@ -6568,7 +6612,7 @@
    },
    {
     "d": "2026-07-24",
-    "v": 48.0
+    "v": 48
    },
    {
     "d": "2026-07-27",
@@ -6668,7 +6712,7 @@
    },
    {
     "d": "2026-08-28",
-    "v": 48.0
+    "v": 48
    },
    {
     "d": "2026-08-31",
@@ -6777,20 +6821,28 @@
    {
     "d": "2026-10-07",
     "v": 46.76
+   },
+   {
+    "d": "2026-10-08",
+    "v": 47.25
+   },
+   {
+    "d": "2026-10-09",
+    "v": 47.3
    }
-  ]
+  ],
+  "short": "WALMEX",
+  "src": "Yahoo Finanzas, histórico diario de WALMEX.MX (precio de cierre oficial de la BMV, sin ajustar por dividendos); coincide con Google Finance",
+  "unit": "acción",
+  "url": "https://finance.yahoo.com/quote/WALMEX.MX/history/"
  },
  "walmex_wk": {
-  "name": "WALMEX, cierre semanal (BMV)",
-  "short": "WALMEX",
+  "cur": "MXN",
   "group": "walmart",
   "kind": "stock",
-  "cur": "MXN",
-  "unit": "acción",
-  "order": 0,
-  "src": "Yahoo Finanzas, histórico semanal de WALMEX.MX (precio de cierre, sin ajustar por dividendos)",
-  "url": "https://finance.yahoo.com/quote/WALMEX.MX/history/",
+  "name": "WALMEX, cierre semanal (BMV)",
   "note": "d = lunes de la semana; v = cierre del último día hábil de esa semana",
+  "order": 0,
   "points": [
    {
     "d": "2021-09-27",
@@ -7006,7 +7058,7 @@
    },
    {
     "d": "2022-10-03",
-    "v": 72.0
+    "v": 72
    },
    {
     "d": "2022-10-10",
@@ -7102,11 +7154,11 @@
    },
    {
     "d": "2023-03-20",
-    "v": 73.0
+    "v": 73
    },
    {
     "d": "2023-03-27",
-    "v": 72.0
+    "v": 72
    },
    {
     "d": "2023-04-03",
@@ -7290,7 +7342,7 @@
    },
    {
     "d": "2024-02-12",
-    "v": 68.0
+    "v": 68
    },
    {
     "d": "2024-02-19",
@@ -7518,7 +7570,7 @@
    },
    {
     "d": "2025-03-17",
-    "v": 56.0
+    "v": 56
    },
    {
     "d": "2025-03-24",
@@ -7614,7 +7666,7 @@
    },
    {
     "d": "2025-09-01",
-    "v": 57.0
+    "v": 57
    },
    {
     "d": "2025-09-08",
@@ -7642,7 +7694,7 @@
    },
    {
     "d": "2025-10-20",
-    "v": 61.0
+    "v": 61
    },
    {
     "d": "2025-10-27",
@@ -7798,7 +7850,7 @@
    },
    {
     "d": "2026-07-20",
-    "v": 48.0
+    "v": 48
    },
    {
     "d": "2026-07-27",
@@ -7818,7 +7870,7 @@
    },
    {
     "d": "2026-08-24",
-    "v": 48.0
+    "v": 48
    },
    {
     "d": "2026-08-31",
@@ -7839,7 +7891,15 @@
    {
     "d": "2026-09-28",
     "v": 46.1
+   },
+   {
+    "d": "2026-10-05",
+    "v": 47.3
    }
-  ]
+  ],
+  "short": "WALMEX",
+  "src": "Yahoo Finanzas, histórico semanal de WALMEX.MX (precio de cierre, sin ajustar por dividendos)",
+  "unit": "acción",
+  "url": "https://finance.yahoo.com/quote/WALMEX.MX/history/"
  }
 }
