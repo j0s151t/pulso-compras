@@ -476,13 +476,13 @@ table.op-t .lvl{font-size:10px;padding:1px 5px}
 
   <section id="tco" aria-labelledby="h-tco">
     <div class="sec-hd">
-      <div><span class="eyebrow">Costo total de propiedad</span><h2 id="h-tco">TCO por categoría</h2></div>
-      <p class="src">Lo que cuesta cada categoría en toda su vida útil, no solo al comprarla: compra, flete, instalación, operación, mantenimiento, cumplimiento y reposición. Cada parte se mueve con su propio índice.</p>
+      <div><span class="eyebrow">Tu alcance: compra, entrega e instalación</span><h2 id="h-tco">Costo total por categoría</h2></div>
+      <p class="src">Lo que pagas por cada categoría hasta dejarla entregada e instalada: compra, flete a obra e instalación. Cada parte se mueve con su propio índice. El mantenimiento no entra porque no es tu alcance, salvo en PTARs, cuya renta ya lo incluye.</p>
     </div>
     <div class="tco-brief" id="tcoBrief"><span class="tag">Lectura de la semana</span><p class="muted">Cargando índices…</p></div>
     <div class="panel">
       <h3>Todas tus categorías</h3>
-      <p class="src" style="margin:4px 0 12px">Ordenadas por cuánto subió su costo total en 12 meses. Toca una para ver su detalle abajo.</p>
+      <p class="src" style="margin:4px 0 12px">Ordenadas por cuánto subió su costo total en 12 meses, con compra, flete e instalación. Toca una para ver su detalle abajo.</p>
       <div id="tcoTable"></div>
     </div>
     <div class="panel tco-det" id="tcoDet"></div>
@@ -745,7 +745,8 @@ const CATS = [
   {name:"Proyectista", idx:[["prof",100,"Honorarios profesionales"]], note:"Proyecto arquitectónico, ejecutivo e ingenierías. Se mide con INEGI servicios profesionales, científicos y técnicos (sector 54, que incluye la rama 5413 de arquitectura e ingeniería)."}
 ];
 const IDX_LBL = {em:"Acero", quim:"Químicos y pigmentos", petro:"Solventes (petróleo)", plast:"Plásticos", minnomet:"Concreto y minerales", maq:"Bombas y maquinaria", electr:"Motores y equipo eléctrico", electron:"Electrónica", prof:"Servicios profesionales", fx:"Dólar", constr:"Mano de obra y obra", metbas:"Metálicas básicas", prodmet:"Productos metálicos"};
-// TCO: estructura típica del costo total en la vida útil (% del total, estimada con referencias de la industria, no de contratos).
+// Costo total del alcance de Andres: compra, entrega e instalación (% del total, estimado con referencias de la industria, no de contratos).
+// Andres, 13 oct 2026: el mantenimiento y la operación no son suyos, así que no entran; PTARs sí los lleva porque su renta los incluye.
 // Partes: adq compra · fnz financiamiento (solo en lo arrendado) · log flete y logística · ins instalación · ope operación (energía, agua, consumibles) · mto mantenimiento y refacciones · cum cumplimiento (normas, pruebas, seguros) · fin reposición y retiro.
 // Una categoría arrendada lleva lease:true y lbl para renombrar sus partes (p. ej. adq = renta del equipo).
 // Cada parte se mueve con una mezcla de índices [clave, peso]; "cat" es la canasta INEGI de la categoría. d sobrescribe la mezcla de TCO_DEF.
@@ -764,36 +765,36 @@ const TCO_DRV = {
 // Notas fijas del consultor para la lectura semanal (las actualiza la rutina).
 const TCO_NOTES = [
   "Tus PTARs se rentan a 5 años en pesos con operación y mantenimiento incluidos, así que la tasa no mueve tus rentas vigentes: pega al firmar o renovar. Banxico bajó de 7.50% a 6.50% en 12 meses y su minuta de septiembre abrió la puerta a otro recorte, así que un contrato nuevo hoy debería salir más barato que uno de hace un año. Ojo con el peso: si el arrendador importa sopladores o membranas, puede pedir ajuste por tipo de cambio al renovar. Revisa qué contratos vencen en 2027 y 2028 y negocia desde 6 a 12 meses antes: al año 5 el arrendador ya recuperó casi todo el equipo.",
-  "La jornada de 40 horas ya es ley: baja de 48 a 46 horas en enero de 2027 y llega a 40 en 2030, con registro electrónico de asistencia obligatorio desde 2027. Para una cuadrilla de 48 horas, el costo por hora sube entre 4% y 5% cada año solo por esto. En pólizas de mantenimiento e instalación que pasen de 2026, pide que el precio ya lo incluya para evitar reclamos de ajuste.",
-  "El salario mínimo subió 13% en 2026 ($315.04 diarios) y para 2027 se espera otro alza de 10% a 13%, que se publica en la segunda quincena de diciembre. Pega más en servicios con mucha mano de obra, como las pólizas de mantenimiento de SCI y ANSUL y los ayudantes de instalación: deja en tu presupuesto 2027 un ajuste de mano de obra arriba de la inflación."
+  "La jornada de 40 horas ya es ley: baja de 48 a 46 horas en enero de 2027 y llega a 40 en 2030, con registro electrónico de asistencia obligatorio desde 2027. Para una cuadrilla de 48 horas, el costo por hora sube entre 4% y 5% cada año solo por esto. En instalaciones que se ejecuten en 2027 o después, pide que el precio ya lo incluya para evitar reclamos de ajuste.",
+  "El salario mínimo subió 13% en 2026 ($315.04 diarios) y para 2027 se espera otro alza de 10% a 13%, que se publica en la segunda quincena de diciembre. Pega más donde la instalación pesa, como SCI y Sonido, y en los ayudantes de montaje: deja en tu presupuesto 2027 un ajuste de mano de obra arriba de la inflación."
 ];
 const TCO = {
-  "Estructura Metálica": {h:20, p:{adq:66, log:3, ins:13, mto:13, cum:3, fin:2}, d:{mto:[["mo",50],["quim",30],["serv",20]]},
-    ask:["Precio por kg con acero, fabricación, flete y montaje por separado.","Sistema de pintura anticorrosiva especificado (micras y años de garantía): define cuánto repintas en 20 años.","Escalatoria atada a INEGI (construcción y naves) en lugar de ajustes abiertos."],
-    risk:"El acero es casi todo el costo. El costo oculto está en el repintado y la revisión de tornillería durante la vida de la nave."},
-  "Sistema Contra Incendio": {h:15, p:{adq:34, log:3, ins:22, ope:4, mto:20, cum:14, fin:3},
-    ask:["Pruebas e inspección NFPA 25 cotizadas junto con el suministro.","Rociadores y válvulas listados UL/FM con refacciones disponibles en México.","Póliza de mantenimiento con precio fijo por 3 años."],
-    risk:"Pruebas, inspecciones y dictámenes suman un tercio del costo. Un hallazgo de la aseguradora obliga a gastar fuera de presupuesto."},
-  "ANSUL": {h:12, p:{adq:34, log:3, ins:10, mto:30, cum:15, fin:8}, d:{mto:[["mo",35],["serv",25],["quim",20],["fx",20]]},
-    ask:["Inspección semestral, fusibles y recarga de agente con precio fijo por 2 a 3 años.","Lista de refacciones en USD con tipo de cambio pactado.","Prueba hidrostática de cilindros (cada 12 años) dentro de la propuesta."],
-    risk:"El mantenimiento y la certificación pesan más que el equipo, y el agente y las refacciones se cotizan en dólares."},
-  // Pintura: Andres solo suministra el material (6 oct 2026); la aplicación no es suya, así que no lleva instalación ni mantenimiento.
-  "Pintura": {h:5, p:{adq:84, log:10, cum:3, fin:3},
+  "Estructura Metálica": {p:{adq:80, log:4, ins:16},
+    ask:["Precio por kg con acero, fabricación, flete y montaje por separado.","Montaje por kg o por tonelada montada, con grúas, maniobras y andamios incluidos, para que no lleguen como adicionales.","Escalatoria atada a INEGI (construcción y naves) en lugar de ajustes abiertos."],
+    risk:"El acero y su fabricación son casi todo el costo. Lo que no ves en el precio por kg son los adicionales de montaje: grúas, maniobras y tiempos muertos cuando la obra no tiene frente listo."},
+  "Sistema Contra Incendio": {p:{adq:58, log:5, ins:37},
+    ask:["Instalación, pruebas hidrostáticas y de aceptación y dictamen de entrega cotizados junto con el suministro.","Rociadores y válvulas listados UL/FM, con fecha de entrega en obra por escrito (muchos son importados).","Mano de obra con precio fijo hasta la entrega, o atada al salario IMSS con tope."],
+    risk:"La instalación es más de un tercio del costo y sigue al salario. El riesgo es que el dictamen de entrega o la aseguradora pidan cambios con el sistema ya instalado, y eso llega como adicional."},
+  "ANSUL": {p:{adq:72, log:6, ins:22},
+    ask:["Equipo y agente en pesos con vigencia clara, o en dólares con tipo de cambio pactado.","Instalación, prueba de funcionamiento y certificado de entrega incluidos en el precio.","Tiempo de entrega del equipo importado por escrito, por los cierres de Manzanillo."],
+    risk:"El equipo y el agente se importan y se cotizan en dólares: el tipo de cambio y los cierres del puerto mueven tu costo más que la instalación."},
+  // Pintura: Andres solo suministra el material (6 oct 2026); la aplicación no es suya, así que no lleva instalación.
+  "Pintura": {p:{adq:90, log:10}, alc:"solo suministro, puesto en obra", pago:"con flete a obra",
     ask:["Precio por litro con rendimiento teórico (m² por litro al espesor especificado) y % de sólidos en volumen: compara costo por m² cubierto, no por litro.","Lista de precios con vigencia de 90 días y ajuste atado a INEGI (química y derivados del petróleo), no aumentos abiertos por pigmento o solvente.","Flete a obra incluido, entregas parciales y caducidad mínima del lote al entregar, para no pagar merma."],
-    risk:"Solo suministras el material, así que tu costo total es casi todo el precio de la pintura y se mueve con resinas, pigmento (dióxido de titanio) y solventes. El riesgo es comparar por litro: una pintura con menos sólidos rinde menos m² y sale más cara por superficie cubierta."},
-  "Equipo Hidroneumático": {h:10, p:{adq:24, log:2, ins:8, ope:46, mto:15, cum:1, fin:4},
-    ask:["Curva de la bomba y consumo en kWh por año en el punto de operación.","Variador de frecuencia incluido o cotizado aparte.","Comparar ofertas a 10 años: precio, energía y mantenimiento."],
-    risk:"Casi la mitad del costo es electricidad. Una bomba 5% menos eficiente se come el ahorro de la compra."},
+    risk:"Solo suministras el material, así que tu costo es casi todo el precio de la pintura y se mueve con resinas, pigmento (dióxido de titanio) y solventes. El riesgo es comparar por litro: una pintura con menos sólidos rinde menos m² y sale más cara por superficie cubierta."},
+  "Equipo Hidroneumático": {p:{adq:71, log:6, ins:23},
+    ask:["Bomba, motor, variador de frecuencia y tablero de control cotizados juntos.","Instalación con tubería, conexión eléctrica y puesta en marcha incluidas.","País de origen y tiempo de entrega de bombas y motores importados."],
+    risk:"Bombas y motores siguen a la maquinaria y al dólar, y la instalación es casi una cuarta parte. Aunque la luz no es tu costo, una bomba barata e ineficiente la paga la tienda durante 10 años: pide la curva y el consumo en kWh para no comprar algo barato y caro de operar."},
   // PTARs: Andres las renta a 5 años en pesos con operación y mantenimiento incluidos (8 oct 2026). Lo que paga en 5 años: equipo instalado (adq),
   // costo financiero que el arrendador mete en la renta (fnz, ~28% de la parte de equipo con tasa implícita de 14%), y el servicio de operación, mantenimiento y análisis.
   "PTARs": {h:5, lease:true, lbl:{adq:"Renta del equipo"}, p:{adq:50, fnz:20, ope:18, mto:8, cum:4}, d:{adq:[["cat",80],["constr",20]], ope:[["energia",45],["quim",30],["mo",25]]},
     ask:["Renta separada en equipo y servicio (operación, mantenimiento y análisis), con la tasa implícita por escrito o el precio del equipo, el valor residual y el plazo para calcularla.","Al año 5: renovación solo con renta de servicio más el valor residual, u opción de compra a precio fijo pactada desde hoy.","Ajuste anual solo en la parte de servicio, atado a INPC o salario IMSS con tope; quién paga la luz de la planta y con qué consumo en kWh; cumplimiento NOM-001-SEMARNAT con penalización si el agua no cumple."],
     risk:"Tus rentas vigentes son fijas en pesos, así que el riesgo no es la tasa sino renovar al mismo precio un equipo que el arrendador ya recuperó casi completo, y aceptar ajustes anuales abiertos en la parte de servicio."},
-  "Sonido": {h:7, p:{adq:44, log:3, ins:20, ope:5, mto:13, cum:6, fin:9}, d:{cum:[["inpc",100]], fin:[["fx",50],["inpc",50]]},
-    ask:["Precio con cableado e instalación, no solo equipo.","Soporte y refacciones en México por al menos 5 años.","País de origen (T-MEC o no), por el riesgo de aranceles."],
-    risk:"Equipo importado en dólares que se vuelve obsoleto antes que el resto de la tienda."},
+  "Sonido": {p:{adq:66, log:4, ins:30},
+    ask:["Precio con cableado, canalización e instalación, no solo equipo.","Garantía del equipo con soporte y refacciones en México.","País de origen (T-MEC o no), por el riesgo de aranceles."],
+    risk:"Es equipo importado en dólares, y la instalación (cableado y canalización) es casi un tercio del costo y sigue al salario."},
   // Proyectista: servicio. Compra = honorarios; flete = viáticos y visitas a obra; cumplimiento = DRO y corresponsables, permisos y seguro de responsabilidad profesional.
-  "Proyectista": {h:2, p:{adq:83, log:5, cum:12}, d:{log:[["trans",50],["inpc",50]]},
+  "Proyectista": {p:{adq:83, log:5, cum:12}, alc:"servicio: honorarios, viáticos y trámites", pago:"con viáticos, DRO y permisos", base:"honorarios", d:{log:[["trans",50],["inpc",50]]},
     ask:["Honorarios por m² construido o por entregable (anteproyecto, ejecutivo, ingenierías), con el número de revisiones incluidas, no por hora abierta.","Seguro de responsabilidad civil profesional y compromiso de corregir sin costo los errores u omisiones que salgan en obra.","Ajuste anual atado a INEGI servicios profesionales, y visitas o asistencia técnica en obra con precio unitario por visita."],
     risk:"Los honorarios son casi todo su costo y siguen al salario de los despachos; la jornada de 40 horas también encarece su hora. El costo grande no está aquí: un error u omisión del proyecto se paga en obra con adicionales y retrabajos de las demás categorías, y eso este índice no lo mide."}
 };
@@ -1313,8 +1314,8 @@ const EVENTS = [
   {d:"2026-11-05", dl:"5 nov", t:"Banxico decide su tasa; la minuta abrió la puerta a un recorte", cats:"Dólar (Sonido, ANSUL, SCI) y renta de PTARs nuevas", lvl:"medio"},
   {d:"2026-11-13", dl:"13 al 17 nov", t:"Buen Fin; el Fin Irresistible empezaría antes y congela obra en piso de venta", cats:"Pintura y Sonido", lvl:"medio"},
   {d:"2026-12-05", dl:"5 dic, a más tardar", t:"Resolución final del antidumping a lámina rolada en frío de EE.UU., China y Malasia", cats:"Estructura Metálica y Sistema Contra Incendio", lvl:"alto"},
-  {d:"2026-12-31", dl:"15 al 31 dic", t:"Salario mínimo 2027 en el DOF (se espera +10% a 13%)", cats:"Instalación y mantenimiento, todas menos Pintura y Proyectista", lvl:"alto"},
-  {d:"2027-01-01", dl:"1 ene 2027", t:"La jornada laboral baja de 48 a 46 horas", cats:"Instalación, mantenimiento y honorarios de Proyectista", lvl:"medio"}
+  {d:"2026-12-31", dl:"15 al 31 dic", t:"Salario mínimo 2027 en el DOF (se espera +10% a 13%)", cats:"Mano de obra de instalación, todas menos Pintura y Proyectista", lvl:"alto"},
+  {d:"2027-01-01", dl:"1 ene 2027", t:"La jornada laboral baja de 48 a 46 horas", cats:"Instalación y honorarios de Proyectista", lvl:"medio"}
 ];
 const DASH_URL = window.__STATIC__ ? "https://j0s151t.github.io/pulso-compras/" : "https://claude.ai/artifact/RNbnGAatVz42BP1jsWmjkF";
 const txt = el => el ? el.textContent.replace(/\s+/g," ").trim() : "";
@@ -1324,13 +1325,12 @@ function opModel(){
   const ser = emSeries(); if (!ser.length) return null;
   const today = new Date().toISOString().slice(0,10);
   const last = ser.at(-1), ya = ser.find(p=>p.m===addM(last.m,-12)), dec = ser.find(p=>p.m===(+last.m.slice(0,4)-1)+"-12");
-  const cats = CATS.map(c=>{ const st = catStats(c), t = tcoOf(c); return {n:c.name, st, lvl:catLvl(c,st), tco:t && t.y12, top:t && t.top, topL:t && t.top && tcoPart(t,t.top.k)}; }).filter(x=>x.st && x.st.y12!=null).sort((a,b)=>b.st.y12-a.st.y12);
+  const cats = CATS.map(c=>{ const st = catStats(c); return {n:c.name, st, lvl:catLvl(c,st)}; }).filter(x=>x.st && x.st.y12!=null).sort((a,b)=>b.st.y12-a.st.y12);
   const mp = MP.map(m=>({m, d:BY[m.main]})).filter(({d})=>d && !d.stale && !d.ref && !d.qual).map(({m,d})=>({n:m.short||m.name, y:yoy(d), aff:m.aff.some(a=>a[0]==="Todas") ? "todas tus categorías" + (m.but ? " menos " + listY(m.but) : "") : listY(m.aff.map(a=>a[0]))})).filter(x=>x.y!=null && x.y>5).sort((a,b)=>b.y-a.y);
   const risks = [...document.querySelectorAll("#tab-mercado .risk")].map(r=>{ const l = r.querySelector(".lvl"); return {lvl:["alto","medio","bajo"].find(k=>l.classList.contains(k))||"bajo",
     t:txt(r.querySelector("h3")), aff:txt(r.querySelector(".aff")), doIt:txt(r.querySelector(".do")).replace(/^Qué haría:\s*/,""), src:txt(r.querySelector(".src"))}; })
     .sort((a,b)=>RANK[b.lvl]-RANK[a.lvl]).slice(0,3);
   const D = wmxData(), wl = D.day.length ? D.day.at(-1) : null, wy = wl ? wmxRange(D,"ytd")[0] : null;
-  const tc = cats.filter(x=>x.tco!=null).sort((a,b)=>b.tco-a.tco)[0];
   const up = cats[0], dn = cats.at(-1);
   // Una línea de la competencia junto a WALMEX (Andres, 8 oct 2026): cambio de la acción en el año, 3B ya en pesos
   const cr = compRows(), cd = cr.length > 1 ? compRange(cr, "ytd") : null;
@@ -1339,7 +1339,6 @@ function opModel(){
   const know = [];
   know.push(`Tus categorías que más suben en 12 meses: ${listY(cats.slice(0,2).map(x=>`${x.n} (${pct(x.st.y12)})`))}${dn && dn.st.y12<0 ? `; la que más baja es ${dn.n} (${pct(dn.st.y12)})` : ""}. Dato INEGI a ${mLabel(up.st.last)}.`);
   if (mp.length) know.push(`Materias primas arriba de 5% en 12 meses: ${listY(mp.slice(0,3).map(x=>`${x.n} ${pct(x.y)} (pega en ${x.aff})`))}. Si te piden aumentos en esas categorías, compáralos contra el índice antes de aprobarlos.`);
-  if (tc && tc.top) know.push(`${tc.n} es la categoría cuyo costo total más sube: ${pct(tc.tco)} en 12 meses, sobre todo por ${lc(tc.topL)} (${pct(tc.top.y12)}).`);
   return { week: txt(document.getElementById("week")), today,
     kpis: [
       {k:"Estructura Metálica", v:`$${fmt(last.v)}`, u:"MXN/kg", n:`${ya?pct((last.v/ya.v-1)*100)+" en 12 meses":""}${dec?" · "+pct((last.v/dec.v-1)*100)+" en el año":""}`},
@@ -1361,12 +1360,12 @@ function opHtml(o){
   <div class="op-2">
     <section class="op-sec"><h3>Riesgos y qué haría</h3><div class="op-risks">${o.risks.map(r=>`<div class="op-risk"><span class="lvl ${r.lvl}">${r.lvl}</span><div><p class="t">${opEsc(r.t)}</p><p><b>Qué haría:</b> ${opEsc(r.doIt)}</p><p class="s">${opEsc(r.aff)} · ${opEsc(r.src)}</p></div></div>`).join("")}</div></section>
     <div class="op-sec" style="align-content:start;gap:16px">
-      <section class="op-sec"><h3>Tus ${CATS.length} categorías</h3><div style="overflow-x:auto"><table class="op-t"><thead><tr><th>Categoría</th><th class="num">12 m</th><th class="num c-ytd">En el año</th><th class="num" title="Costo total de propiedad">TCO</th><th><span class="vh">Nivel</span></th></tr></thead><tbody>${
-        o.cats.map(x=>`<tr><td>${opEsc(x.n)}</td><td class="num">${pct(x.st.y12)}</td><td class="num c-ytd">${x.st.ytd!=null?p1(x.st.ytd):"–"}</td><td class="num">${x.tco!=null?pct(x.tco):"–"}</td><td><span class="lvl ${x.lvl}">${x.lvl}</span></td></tr>`).join("")}</tbody></table></div></section>
+      <section class="op-sec"><h3>Tus ${CATS.length} categorías</h3><div style="overflow-x:auto"><table class="op-t"><thead><tr><th>Categoría</th><th class="num">12 m</th><th class="num c-ytd">En el año</th><th><span class="vh">Nivel</span></th></tr></thead><tbody>${
+        o.cats.map(x=>`<tr><td>${opEsc(x.n)}</td><td class="num">${pct(x.st.y12)}</td><td class="num c-ytd">${x.st.ytd!=null?p1(x.st.ytd):"–"}</td><td><span class="lvl ${x.lvl}">${x.lvl}</span></td></tr>`).join("")}</tbody></table></div></section>
       <section class="op-sec"><h3>Próximas fechas</h3><ul class="op-ev">${o.events.map(e=>`<li><b>${opEsc(e.dl)}</b><span>${opEsc(e.t)}<small>${opEsc(e.cats)}</small></span></li>`).join("")}</ul></section>
     </div>
   </div>
-  <footer class="op-ft"><p>Índices de categoría: INEGI, INPP a ${o.asOf}; costo total con salario IMSS e INPP de servicios. ${o.emFt} Dólar: Banxico FIX. WALMEX: cierre de la BMV; competencia: Yahoo Finance (3B de NYSE, a pesos). Riesgos con su fuente en el tablero.</p><p>Tablero completo: <a href="${o.url}" target="_blank" rel="noopener">${o.url.replace("https://","")}</a></p></footer>`;
+  <footer class="op-ft"><p>Índices de categoría: INEGI, INPP a ${o.asOf}. ${o.emFt} Dólar: Banxico FIX. WALMEX: cierre de la BMV; competencia: Yahoo Finance (3B de NYSE, a pesos). Riesgos con su fuente en el tablero.</p><p>Tablero completo: <a href="${o.url}" target="_blank" rel="noopener">${o.url.replace("https://","")}</a></p></footer>`;
 }
 function opText(o){
   const L = [`PULSO DE COMPRAS MÉXICO · ${o.week}`, ""];
@@ -1374,7 +1373,7 @@ function opText(o){
   if (o.comp) L.push(`• ${o.comp.lbl}: ${o.comp.txt}`);
   L.push("", "LO QUE TIENES QUE SABER"); o.know.forEach((x,i)=>L.push(`${i+1}. ${x}`));
   L.push("", "RIESGOS Y QUÉ HARÍA"); o.risks.forEach(r=>L.push(`[${r.lvl.toUpperCase()}] ${r.t}. Qué haría: ${r.doIt} (${r.aff} · ${r.src})`));
-  L.push("", `TUS ${CATS.length} CATEGORÍAS (12 meses · en el año · costo total de propiedad)`); o.cats.forEach(x=>L.push(`${x.n}: ${pct(x.st.y12)} · ${x.st.ytd!=null?p1(x.st.ytd):"s/d"} · ${x.tco!=null?pct(x.tco):"s/d"} · nivel ${x.lvl}`));
+  L.push("", `TUS ${CATS.length} CATEGORÍAS (12 meses · en el año)`); o.cats.forEach(x=>L.push(`${x.n}: ${pct(x.st.y12)} · ${x.st.ytd!=null?p1(x.st.ytd):"s/d"} · nivel ${x.lvl}`));
   L.push("", "PRÓXIMAS FECHAS"); o.events.forEach(e=>L.push(`${e.dl}: ${e.t} (${e.cats})`));
   L.push("", `Fuentes: INEGI (INPP a ${o.asOf}), Banxico FIX, BMV. Tablero completo: ${o.url}`);
   return L.join("\n");
@@ -1392,8 +1391,8 @@ function opMail(o){
   ${o.comp ? `<p style="margin:10px 0 0;font-size:13px;color:${C.ink2}"><b style="color:${C.ink}">${o.comp.lbl}:</b> ${opEsc(o.comp.txt)}</p>` : ""}
   ${h3("Lo que tienes que saber")}<ol style="margin:0;padding-left:20px">${o.know.map(x=>`<li style="margin:0 0 6px">${opEsc(x)}</li>`).join("")}</ol>
   ${h3("Riesgos y qué haría")}${o.risks.map(r=>`<p style="margin:0 0 10px">${tag(r.lvl)} <b>${opEsc(r.t)}</b><br><b>Qué haría:</b> ${opEsc(r.doIt)}<br><span style="font-size:12px;color:${C.ink3}">${opEsc(r.aff)} · ${opEsc(r.src)}</span></p>`).join("")}
-  ${h3(`Tus ${CATS.length} categorías`)}<table style="width:100%;border-collapse:collapse;font-size:13px"><tr>${["Categoría","12 m","En el año","TCO",""].map((t,i)=>`<th style="font:600 10px Menlo,monospace;text-transform:uppercase;color:${C.ink3};text-align:${i&&i<4?"right":"left"};padding:4px 6px;border-bottom:1px solid ${C.line}">${t}</th>`).join("")}</tr>${
-    o.cats.map(x=>`<tr>${td(opEsc(x.n))}${td(pct(x.st.y12),"text-align:right")}${td(x.st.ytd!=null?p1(x.st.ytd):"–","text-align:right")}${td(x.tco!=null?pct(x.tco):"–","text-align:right")}${td(tag(x.lvl))}</tr>`).join("")}</table>
+  ${h3(`Tus ${CATS.length} categorías`)}<table style="width:100%;border-collapse:collapse;font-size:13px"><tr>${["Categoría","12 m","En el año",""].map((t,i)=>`<th style="font:600 10px Menlo,monospace;text-transform:uppercase;color:${C.ink3};text-align:${i&&i<3?"right":"left"};padding:4px 6px;border-bottom:1px solid ${C.line}">${t}</th>`).join("")}</tr>${
+    o.cats.map(x=>`<tr>${td(opEsc(x.n))}${td(pct(x.st.y12),"text-align:right")}${td(x.st.ytd!=null?p1(x.st.ytd):"–","text-align:right")}${td(tag(x.lvl))}</tr>`).join("")}</table>
   ${h3("Próximas fechas")}<table role="presentation" style="width:100%;border-collapse:collapse;font-size:13px">${o.events.map(e=>`<tr><td style="vertical-align:top;padding:3px 10px 3px 0;white-space:nowrap;font:600 12px Menlo,monospace">${opEsc(e.dl)}</td><td style="padding:3px 0">${opEsc(e.t)}<br><span style="font-size:12px;color:${C.ink3}">${opEsc(e.cats)}</span></td></tr>`).join("")}</table>
   <p style="font-size:12px;color:${C.ink3};border-top:1px solid ${C.line};padding-top:8px;margin-top:18px">Índices de categoría: INEGI, INPP a ${o.asOf}. ${o.emFt} Dólar: Banxico FIX. WALMEX: cierre de la BMV; competencia: Yahoo Finance (3B de NYSE, a pesos).<br><a href="${o.url}" style="color:${C.acc}">Abrir el tablero completo</a></p></div>`;
 }
@@ -1639,13 +1638,13 @@ window.renderTco = function(){
   const gaps = all.filter(x=>x.r.adqY12!=null).map(x=>({...x, g:x.r.y12-x.r.adqY12})).sort((a,b)=>b.g-a.g);
   const hi = gaps[0], lo = gaps.at(-1);
   if (hi && hi.g>1){ const p = hi.r.parts.filter(p=>p.k!=="adq").sort((a,b)=>b.contrib-a.contrib)[0];
-    b.push(`Costo oculto en <b>${hi.c.name}</b>: la cotización ${mv(hi.r.adqY12)}, pero el costo total ${hi.r.y12<0?"solo ":""}<b>${mv(hi.r.y12)}</b>. La presión está en ${lc(tcoPart(hi.r,p.k))} (${pct(p.y12)}), que no aparece en el precio.`); }
+    b.push(`En <b>${hi.c.name}</b> el precio ${mv(hi.r.adqY12)}, pero el costo total ${hi.r.y12<0?"solo ":""}<b>${mv(hi.r.y12)}</b>. La presión está en ${lc(tcoPart(hi.r,p.k))} (${pct(p.y12)}): pídela desglosada en la cotización y con precio fijo hasta la entrega.`); }
   const lf = lo && lo.r.parts.find(p=>p.k==="fnz");
   if (lo && lo.g<-1 && lo.r.t.lease && lf && lf.y12<0) b.push(`En <b>${lo.c.name}</b> la renta del equipo ${mv(lo.r.adqY12)} con los insumos, pero un contrato nuevo hoy ${lo.r.y12>0?"costaría solo":"costaría"} ${pct(lo.r.y12)} contra hace un año, porque el costo financiero de la renta ${mv(lf.y12)} con la tasa de Banxico. Al renovar, pide que esa baja se vea en la renta.`);
-  else if (lo && lo.g<-1) b.push(`En <b>${lo.c.name}</b> pasa lo contrario: ${lo.r.t.lease?"la renta del equipo":"el precio de compra"} ${mv(lo.r.adqY12)}, pero el costo total ${lo.r.y12>0?"solo ":""}${mv(lo.r.y12)}, porque ${lo.r.t.lease?"esa renta":"la compra"} es ${lo.r.adqShare.toFixed(0)}% del total. Ahí conviene negociar servicio y operación, no solo precio.`);
+  else if (lo && lo.g<-1) b.push(`En <b>${lo.c.name}</b> pasa lo contrario: ${lo.r.t.lease?"la renta del equipo":"el precio de compra"} ${mv(lo.r.adqY12)}, pero el costo total ${lo.r.y12>0?"solo ":""}${mv(lo.r.y12)}, porque ${lo.r.t.lease?"esa renta":"la compra"} es ${lo.r.adqShare.toFixed(0)}% del total y lo demás sube menos. Si te piden ese aumento sobre el precio completo, acéptalo solo sobre la compra, no sobre flete e instalación.`);
   const mo = TCO_DRV.mo.y12;
   if (mo!=null){ const ex = all.map(x=>({n:x.c.name, e:x.r.expo("mo")})).sort((a,b)=>b.e-a.e).slice(0,3);
-    b.push(`La mano de obra <b>${mv(mo)}</b> en 12 meses (salario promedio IMSS) y es ${listY(ex.map((x,i)=>`${x.e.toFixed(0)}% ${i?"del de":"del costo total de"} ${x.n}`))}. Pide tarifas de mano de obra fijas por 12 meses o indexadas al salario IMSS.`); }
+    b.push(`La mano de obra <b>${mv(mo)}</b> en 12 meses (salario promedio IMSS) y es ${listY(ex.map((x,i)=>`${x.e.toFixed(0)}% ${i?"del de":"del costo total de"} ${x.n}`))}. Pide la instalación con precio fijo hasta la entrega, o indexada al salario IMSS con tope.`); }
   const en = TCO_DRV.energia.y12;
   if (en!=null){ const ex = all.map(x=>({n:x.c.name, e:x.r.expo("energia")})).sort((a,b)=>b.e-a.e).filter(x=>x.e>=10).slice(0,2);
     if (ex.length) b.push(`La energía ${mv(en)} en 12 meses (INPP) y pesa ${listY(ex.map(x=>`${x.e.toFixed(0)}% en ${x.n}`))}. Evalúa esas ofertas por consumo en kWh a lo largo de su vida, no solo por precio.`); }
@@ -1653,23 +1652,23 @@ window.renderTco = function(){
   brief.innerHTML = `<span class="tag">Lectura de la semana</span><ol>${b.slice(0,8).map(x=>`<li>${x}</li>`).join("")}</ol>`;
   // Tabla general
   const sel = tco.sel && all.some(x=>x.c.name===tco.sel) ? tco.sel : all[0].c.name;
-  tbl.innerHTML = `<div class="tbl-wrap"><table class="tco-t"><thead><tr><th>Categoría</th><th>Composición</th><th class="num">Compra en el TCO</th><th class="num">Precio de compra 12 m</th><th class="num">TCO 12 m</th><th>Lo que más empuja</th></tr></thead><tbody>${
+  tbl.innerHTML = `<div class="tbl-wrap"><table class="tco-t"><thead><tr><th>Categoría</th><th>Composición</th><th class="num">Compra en el total</th><th class="num">Precio de compra 12 m</th><th class="num">Costo total 12 m</th><th>Lo que más empuja</th></tr></thead><tbody>${
     all.map(({c,r})=>`<tr${c.name===sel?' class="on"':""}><td><button class="nmb" data-n="${esc(c.name)}" aria-pressed="${c.name===sel}">${icon(c.name)}${esc(c.name)}</button>${r.t.lease?`<div class="cat">Arrendada a ${r.t.h} años</div>`:""}</td><td>${tcoBar(r,"sm")}</td><td class="num">${r.adqShare.toFixed(0)}%</td><td class="num">${r.adqY12!=null?pct(r.adqY12):"–"}</td><td class="num">${pill(r.y12)}</td><td class="why">${tcoPart(r,r.top.k)} <span class="muted">${pct(r.top.y12)}</span></td></tr>`).join("")
   }</tbody></table></div>
-  <div class="legend" style="margin-top:10px">${Object.keys(TCO_COMP).map(k=>`<span><i class="sw" style="background:${TCO_C[k]}"></i>${k==="adq" && Object.values(TCO).some(t=>t.lbl&&t.lbl.adq) ? "Compra o renta del equipo" : TCO_COMP[k]}</span>`).join("")}</div>`;
+  <div class="legend" style="margin-top:10px">${Object.keys(TCO_COMP).filter(k=>Object.values(TCO).some(t=>t.p[k])).map(k=>`<span><i class="sw" style="background:${TCO_C[k]}"></i>${k==="adq" && Object.values(TCO).some(t=>t.lbl&&t.lbl.adq) ? "Compra o renta del equipo" : TCO_COMP[k]}</span>`).join("")}</div>`;
   tbl.querySelectorAll(".nmb").forEach(btn=>btn.onclick=()=>{ tco.sel = btn.dataset.n; try{localStorage.setItem("pc-tco",JSON.stringify(tco));}catch(e){} window.renderTco(); document.getElementById("tcoDet").scrollIntoView({behavior:"smooth", block:"nearest"}); });
   // Detalle
   const {c, r} = all.find(x=>x.c.name===sel), t = r.t;
   const per100 = r.adqShare ? Math.round(100*100/r.adqShare) : null, fz = r.parts.find(p=>p.k==="fnz"), neg = [...r.parts].sort((a,b)=>a.contrib-b.contrib).find(p=>p.contrib<0);
-  det.innerHTML = `<h3>${icon(c.name)}${esc(c.name)} <span class="muted" style="font:400 13px var(--f-body)">${t.lease?`arrendada a ${t.h} años, con operación y mantenimiento`:`horizonte ${t.h} años`}</span></h3>
+  det.innerHTML = `<h3>${icon(c.name)}${esc(c.name)} <span class="muted" style="font:400 13px var(--f-body)">${t.lease?`arrendada a ${t.h} años, con operación y mantenimiento`:(t.alc||"compra, entrega e instalación")}</span></h3>
     <div class="tiles">
-      <div class="tile"><span class="k">${t.lease?"La renta del equipo es":"La compra es"}</span><span class="v">${r.adqShare.toFixed(0)}%</span><span class="n">del costo total en ${t.h} años</span></div>
+      <div class="tile"><span class="k">${t.lease?"La renta del equipo es":"La compra es"}</span><span class="v">${r.adqShare.toFixed(0)}%</span><span class="n">${t.lease?`de lo que pagas en ${t.h} años`:"de lo que pagas"}</span></div>
       ${fz ? `<div class="tile"><span class="k">Financiamiento</span><span class="v">${fz.share.toFixed(0)}%</span><span class="n">de lo que pagas en ${t.h} años; su costo ${mv(fz.y12)} en 12 meses</span></div>`
-        : `<div class="tile"><span class="k">Por cada $100 de compra</span><span class="v">$${per100}</span><span class="n">pagas en total en ${t.h} años</span></div>`}
+        : `<div class="tile"><span class="k">Por cada $100 de ${t.base||"compra"}</span><span class="v">$${per100}</span><span class="n">pagas ${t.pago||"con flete e instalación"}</span></div>`}
       <div class="tile"><span class="k">Costo total, 12 meses</span><span class="v">${pct(r.y12)}</span><span class="n">${t.lease?"si firmaras hoy; renta del equipo":"precio de compra"} ${r.adqY12!=null?pct(r.adqY12):"s/d"}</span></div>
     </div>
     ${tcoBar(r)}
-    <div class="tbl-wrap"><table class="tco-c"><thead><tr><th>Parte del costo</th><th class="num">Peso</th><th>Qué la mueve</th><th class="num">12 meses</th><th class="num">Aporta al TCO</th></tr></thead><tbody>${
+    <div class="tbl-wrap"><table class="tco-c"><thead><tr><th>Parte del costo</th><th class="num">Peso</th><th>Qué la mueve</th><th class="num">12 meses</th><th class="num">Aporta al total</th></tr></thead><tbody>${
       r.parts.map(p=>`<tr><td><i class="sw" style="background:${TCO_C[p.k]}"></i>${tcoPart(r,p.k)}<div class="drvm">${p.ds.map(d=>tcoLbl(d.k)).join(" · ")}</div></td><td class="num">${p.share.toFixed(0)}%</td><td>${p.ds.map(d=>`${tcoLbl(d.k)}${p.ds.length>1?` <small>${d.w}%</small>`:""}${d.v==null?' <small>(s/d)</small>':""}`).join("<br>")}</td><td class="num">${pill(p.y12)}</td><td class="num">${p.y12==null?"–":(p.contrib>=0?"+":"")+p.contrib.toFixed(2)+" pts"}</td></tr>`).join("")
     }</tbody><tfoot><tr><td>Costo total</td><td class="num">100%</td><td></td><td class="num">${pill(r.y12)}</td><td class="num">${(r.y12>=0?"+":"")+r.y12.toFixed(2)} pts</td></tr></tfoot></table></div>
     <div class="grid2" style="gap:12px">
@@ -1677,7 +1676,7 @@ window.renderTco = function(){
       <div class="box"><h4>Riesgo a vigilar</h4><p>${t.risk}</p><p>Esta semana lo que más empuja es <b>${lc(tcoPart(r,r.top.k))}</b> (${pct(r.top.y12)}), que aporta ${r.top.contrib.toFixed(1)} ${neg && r.top.contrib > r.y12 ? `puntos; lo que más resta es ${lc(tcoPart(r,neg.k))} (−${Math.abs(neg.contrib).toFixed(1)} puntos) y el total queda en ${pct(r.y12)}` : `de los ${r.y12.toFixed(1)} puntos`}.</p></div>
     </div>`;
   const srcs = Object.values(TCO_DRV).filter(d=>d.src).map(d=>d.url?`<a href="${d.url}" target="_blank" rel="noopener">${esc(d.lbl)}</a>: ${esc(d.src)}${d.asOf?`, ${esc(d.asOf)}`:""}`:`${esc(d.lbl)}: ${esc(d.src)}`);
-  document.getElementById("tcoNote").innerHTML = `Los pesos de cada parte son una estimación típica por categoría con referencias de la industria, no salen de tus contratos; si tus números son distintos, pídeme ajustarlos. La variación de 12 meses de cada parte combina: canasta INEGI de la categoría (compra), transporte y diésel (flete), salario y construcción (instalación), energía (operación), servicios, salario y refacciones (mantenimiento) e INPC (cumplimiento y reposición). En lo arrendado, el financiamiento se mueve con la tasa de Banxico más un margen estimado del arrendador.${srcs.length?" Fuentes: "+srcs.join("; ")+".":""}`;
+  document.getElementById("tcoNote").innerHTML = `Los pesos de cada parte son una estimación típica por categoría con referencias de la industria, no salen de tus contratos; si tus números son distintos, pídeme ajustarlos. Solo cuenta tu alcance: compra, entrega e instalación; el mantenimiento y la operación de la tienda no entran, salvo en PTARs, cuya renta los incluye. La variación de 12 meses de cada parte combina: canasta INEGI de la categoría (compra), transporte y diésel (flete) y salario y construcción (instalación). En PTARs, el financiamiento se mueve con la tasa de Banxico más un margen estimado del arrendador, y la operación y el mantenimiento con energía, químicos, salario y servicios; en Proyectista, los trámites con servicios e INPC.${srcs.length?" Fuentes: "+srcs.join("; ")+".":""}`;
 };
 
 function renderSeries(){ addVirtual(); window.renderCatsSeries(); renderTiles(); renderEm(); renderCalc(); renderExplorer(); window.renderCatTrend && window.renderCatTrend(); window.renderTco && window.renderTco(); if (!document.getElementById("tab-walmex").hidden) renderWalmex(); if (!opEl.hidden) renderOP(); }
