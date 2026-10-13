@@ -406,7 +406,6 @@ table.op-t .lvl{font-size:10px;padding:1px 5px}
   <section id="estructura" aria-labelledby="h-em">
     <div class="sec-hd">
       <div><span class="eyebrow">Donde se concentra tu gasto</span><h2 id="h-em">Estructura Metálica</h2></div>
-      <p class="src">Una sola partida: estructura de nave fabricada y montada por kg (columnas, trabes, armaduras, largueros, contraventeos, placas y anclas, cubierta, soldadura, pintura, fletes y montaje).</p>
     </div>
     <div class="tiles" id="emTiles"><p class="muted">Cargando series…</p></div>
     <div class="panel">
@@ -419,12 +418,6 @@ table.op-t .lvl{font-size:10px;padding:1px 5px}
         </div>
       </div>
       <div id="emChart" class="chart"></div>
-      <p class="src" id="emNote"></p>
-    </div>
-    <div class="panel">
-      <h3>Cómo se arma el precio por kg</h3>
-      <p class="src">Referencia de mercado estimada a agosto 2026 para estructura de nave fabricada y montada, sin IVA, contra lo que paga GNFR. Desde ahí, la curva se mueve cada mes con INEGI.</p>
-      <div class="calc-out" id="calcOut"></div>
     </div>
   </section>
 
@@ -477,7 +470,6 @@ table.op-t .lvl{font-size:10px;padding:1px 5px}
   <section id="tco" aria-labelledby="h-tco">
     <div class="sec-hd">
       <div><span class="eyebrow">Tu alcance: compra, entrega e instalación</span><h2 id="h-tco">Costo total por categoría</h2></div>
-      <p class="src">Lo que pagas por cada categoría hasta dejarla entregada e instalada: compra, flete a obra e instalación. Cada parte se mueve con su propio índice. El mantenimiento no entra porque no es tu alcance, salvo en PTARs, cuya renta ya lo incluye.</p>
     </div>
     <div class="tco-brief" id="tcoBrief"><span class="tag">Lectura de la semana</span><p class="muted">Cargando índices…</p></div>
     <div class="panel">
@@ -486,7 +478,6 @@ table.op-t .lvl{font-size:10px;padding:1px 5px}
       <div id="tcoTable"></div>
     </div>
     <div class="panel tco-det" id="tcoDet"></div>
-    <p class="src" id="tcoNote"></p>
   </section>
 
   <section id="mp" aria-labelledby="h-mp">
@@ -966,7 +957,6 @@ function emAnchor(){
   if (EM_OWN) return {v:EM_OWN.total, m:EM_OWN.m, from:"gnfr"};
   return {v:EM_MKT.total, m:EM_MKT.m, from:"mercado"};
 }
-const emFrom = a => a.from==="mercado" ? "precio de mercado estimado" : a.from==="gnfr" ? EM_OWN.lbl + ", sin IVA, con suministro, fabricación, flete y montaje" : "tu precio registrado";
 const anchorPt = (arr, m) => arr.find(p=>p.m===m) || (m>arr.at(-1).m ? arr.at(-1) : arr[0]);
 function emSeries(){
   const idx = emIndex(); if (!idx.length) return [];
@@ -991,13 +981,11 @@ const em = { view:"line", range:24 };
 try { Object.assign(em, JSON.parse(localStorage.getItem("pc-em")||"{}")); } catch(e){}
 function renderEm(){
   ["emView","emRange"].forEach(g => document.querySelectorAll(`#${g} button`).forEach(b => b.setAttribute("aria-pressed", String(g==="emView"?em.view:em.range)===b.dataset.v)));
-  const el = document.getElementById("emChart"), note = document.getElementById("emNote");
+  const el = document.getElementById("emChart");
   const ser = emSeries().map(toCur);
-  if (!ser.length){ el.innerHTML = '<p class="muted empty">Sin datos todavía.</p>'; note.textContent=""; return; }
+  if (!ser.length){ el.innerHTML = '<p class="muted empty">Sin datos todavía.</p>'; return; }
   const s = {short:"Estructura Metálica", name:"Estructura Metálica (estimado)", kind:"price", cur, unit:"kg"};
   const quotes = pointsOf("estructura_pagada").map(p=>toCur({m:p.m, v:+p.v}));
-  const a = emAnchor();
-  note.textContent = `Precio por kg: parte de $${fmt(a.v)}/kg en ${mLabel(a.m)} (${emFrom(a)}) movido mes a mes con INEGI: variación mensual del índice de construcción, ajustada al ritmo anual del índice de naves y plantas industriales. Los % salen de INEGI; el precio de cada proyecto varía con su tamaño, proveedor y zona.` + (cur==="USD"?" En USD se convierte con el FIX de cada mes.":"");
   if (em.view==="years"){
     const yrs = [...new Set(ser.map(p=>p.m.slice(0,4)))].filter(y=>ser.filter(p=>p.m.startsWith(y)).length>1).slice(-4);
     const MM = Array.from({length:12},(_,i)=>String(i+1).padStart(2,"0"));
@@ -1017,15 +1005,6 @@ function renderEm(){
     return;
   }
   drawChart2(el, d, em.view);
-}
-
-// ---------- Cómo se arma el precio ----------
-function renderCalc(){
-  const out = document.getElementById("calcOut"), ser = emSeries();
-  if (!ser.length){ out.innerHTML = ""; return; }
-  const last = ser.at(-1), a = emAnchor();
-  out.innerHTML = `<div class="calc-rows">${EM_MKT.parts.map(([k,v,r])=>`<div><span>${k} <small class="muted">(rango ${r})</small></span><b>$${v}</b></div>`).join("")}<div class="tot"><span>Referencia de mercado: suministro, fabricación, flete y montaje <small class="muted">(rango ${EM_MKT.lo}–${EM_MKT.hi})</small></span><b>$${EM_MKT.total} /kg</b></div>${a.from==="gnfr"?`<div class="tot"><span>Promedio pagado por GNFR, 2º semestre 2026 <small class="muted">(${a.v>=EM_MKT.lo&&a.v<=EM_MKT.hi?"dentro del rango de mercado":"fuera del rango de mercado"})</small></span><b>$${fmt(a.v)} /kg</b></div>`:""}</div>
-    <p class="src">Con INEGI, ${a.from==="gnfr"?"el promedio de GNFR":"ese precio"} queda en <b>$${fmt(last.v)}/kg</b> a ${mLabel(last.m)}; es el que ves en la gráfica. Si un contratista pide un ajuste mayor que la variación del índice, pide el desglose.</p>`;
 }
 
 // ---------- Walmart (WALMEX) ----------
@@ -1675,11 +1654,9 @@ window.renderTco = function(){
       <div class="box"><h4>Qué pedir en tu próximo concurso</h4><ul>${t.ask.map(a=>`<li>${a}</li>`).join("")}</ul></div>
       <div class="box"><h4>Riesgo a vigilar</h4><p>${t.risk}</p><p>Esta semana lo que más empuja es <b>${lc(tcoPart(r,r.top.k))}</b> (${pct(r.top.y12)}), que aporta ${r.top.contrib.toFixed(1)} ${neg && r.top.contrib > r.y12 ? `puntos; lo que más resta es ${lc(tcoPart(r,neg.k))} (−${Math.abs(neg.contrib).toFixed(1)} puntos) y el total queda en ${pct(r.y12)}` : `de los ${r.y12.toFixed(1)} puntos`}.</p></div>
     </div>`;
-  const srcs = Object.values(TCO_DRV).filter(d=>d.src).map(d=>d.url?`<a href="${d.url}" target="_blank" rel="noopener">${esc(d.lbl)}</a>: ${esc(d.src)}${d.asOf?`, ${esc(d.asOf)}`:""}`:`${esc(d.lbl)}: ${esc(d.src)}`);
-  document.getElementById("tcoNote").innerHTML = `Los pesos de cada parte son una estimación típica por categoría con referencias de la industria, no salen de tus contratos; si tus números son distintos, pídeme ajustarlos. Solo cuenta tu alcance: compra, entrega e instalación; el mantenimiento y la operación de la tienda no entran, salvo en PTARs, cuya renta los incluye. La variación de 12 meses de cada parte combina: canasta INEGI de la categoría (compra), transporte y diésel (flete) y salario y construcción (instalación). En PTARs, el financiamiento se mueve con la tasa de Banxico más un margen estimado del arrendador, y la operación y el mantenimiento con energía, químicos, salario y servicios; en Proyectista, los trámites con servicios e INPC.${srcs.length?" Fuentes: "+srcs.join("; ")+".":""}`;
 };
 
-function renderSeries(){ addVirtual(); window.renderCatsSeries(); renderTiles(); renderEm(); renderCalc(); renderExplorer(); window.renderCatTrend && window.renderCatTrend(); window.renderTco && window.renderTco(); if (!document.getElementById("tab-walmex").hidden) renderWalmex(); if (!opEl.hidden) renderOP(); }
+function renderSeries(){ addVirtual(); window.renderCatsSeries(); renderTiles(); renderEm(); renderExplorer(); window.renderCatTrend && window.renderCatTrend(); window.renderTco && window.renderTco(); if (!document.getElementById("tab-walmex").hidden) renderWalmex(); if (!opEl.hidden) renderOP(); }
 const EX_HIDE = ["inpp_soldadura_yoy","inpp_alambron_yoy","inpp_fundidas_yoy","inpp_perfiles_yoy","inpp_bano_yoy","inpp_vidrio_yoy","inpp_cemento_yoy","inpp_imper_yoy","inpp_comercial_yoy","inpp_concreto_yoy","inpp_cables_yoy"];
 const EX_LBL = {inpp_varilla_yoy:"Acero (INEGI)", inpp_cobre_yoy:"Cobre (INEGI)", inpp_aluminio_yoy:"Aluminio (INEGI)", inpp_tubplastico_yoy:"Plásticos (INEGI)", inpp_pinturas_yoy:"Pinturas (INEGI)", inpp_bombas_yoy:"Bombas (INEGI)", inpp_diesel_yoy:"Diésel (INEGI)"};
 function addVirtual(){
