@@ -423,7 +423,7 @@ table.op-t .lvl{font-size:10px;padding:1px 5px}
     </div>
     <div class="panel">
       <h3>Cómo se arma el precio por kg</h3>
-      <p class="src">Precio de mercado estimado a agosto 2026 para estructura de nave fabricada y montada, sin IVA. Desde ahí, la curva se mueve cada mes con INEGI.</p>
+      <p class="src">Referencia de mercado estimada a agosto 2026 para estructura de nave fabricada y montada, sin IVA, contra lo que paga GNFR. Desde ahí, la curva se mueve cada mes con INEGI.</p>
       <div class="calc-out" id="calcOut"></div>
     </div>
   </section>
@@ -956,11 +956,16 @@ const EM_MKT = { m:"2026-08", total:63, lo:56, hi:71, parts:[
   ["Flete a obra", 2, "1–3"],
   ["Montaje (grúa, cuadrilla, tornillería)", 8, "6–10"],
   ["Indirectos y utilidad (≈17%)", 9, "8–11"] ] };
+// Precio promedio pagado por GNFR Construcciones en el 2º semestre de 2026 (Andres, 12 oct 2026), sin IVA, con suministro, fabricación, flete y montaje.
+// Va en agosto, a la mitad de las compras de julio a octubre; desde ahí la curva se mueve con INEGI. Andres decidió que también se vea en el link público.
+const EM_OWN = { m:"2026-08", total:68.94, lbl:"promedio pagado por GNFR en el 2º semestre de 2026" };
 function emAnchor(){
   const q = QUOTES.filter(q=>q.series==="estructura_pagada").sort((x,y)=>x.m<y.m?-1:1).at(-1);
   if (q) return {v:+q.v, m:q.m, from:"precio registrado"};
-  const idx = emIndex(); return {v:EM_MKT.total, m:EM_MKT.m, from:"mercado"};
+  if (EM_OWN) return {v:EM_OWN.total, m:EM_OWN.m, from:"gnfr"};
+  return {v:EM_MKT.total, m:EM_MKT.m, from:"mercado"};
 }
+const emFrom = a => a.from==="mercado" ? "precio de mercado estimado" : a.from==="gnfr" ? EM_OWN.lbl + ", sin IVA, con suministro, fabricación, flete y montaje" : "tu precio registrado";
 const anchorPt = (arr, m) => arr.find(p=>p.m===m) || (m>arr.at(-1).m ? arr.at(-1) : arr[0]);
 function emSeries(){
   const idx = emIndex(); if (!idx.length) return [];
@@ -975,7 +980,7 @@ function renderTiles(){
   const y12 = ser.slice(-12), lo = y12.reduce((a,b)=>b.v<a.v?b:a), hi = y12.reduce((a,b)=>b.v>a.v?b:a);
   const t = (k,v,n,extra="") => `<div class="tile"><span class="k">${k}</span><span class="v">${v}</span><span class="n">${n}</span>${extra}</div>`;
   const yy = (id) => { const p = pointsOf(id).at(-1); return p ? t(esc(SERIES[id].short), pct(p.v), `anual a ${mLabel(p.m)} · INEGI`) : ""; };
-  el.innerHTML = t("Estructura Metálica", `$${fmt(last.v)}<small> ${cur}/kg</small>`, `estimado a ${mLabel(last.m)}`, spark(ser.slice(-24)))
+  el.innerHTML = t("Estructura Metálica", `$${fmt(last.v)}<small> ${cur}/kg</small>`, `${emAnchor().from==="gnfr"?"base: compras GNFR · ":"estimado "}a ${mLabel(last.m)}`, spark(ser.slice(-24)))
     + (ya ? t("Contra hace un año", pct((last.v/ya.v-1)*100), `${mLabel(ya.m)}: $${fmt(ya.v)}/kg`) : "")
     + (dec ? t(`En lo que va de ${last.m.slice(0,4)}`, pct((last.v/dec.v-1)*100), `desde dic ${dec.m.slice(2,4)}: $${fmt(dec.v)}/kg`) : "")
     + t("Rango últimos 12 meses", `$${fmt(lo.v)}–${fmt(hi.v)}`, `mín. ${mLabel(lo.m)} · máx. ${mLabel(hi.m)}`)
@@ -991,7 +996,7 @@ function renderEm(){
   const s = {short:"Estructura Metálica", name:"Estructura Metálica (estimado)", kind:"price", cur, unit:"kg"};
   const quotes = pointsOf("estructura_pagada").map(p=>toCur({m:p.m, v:+p.v}));
   const a = emAnchor();
-  note.textContent = `Precio estimado: parte de $${fmt(a.v)}/kg en ${mLabel(a.m)} (${a.from==="mercado"?"precio de mercado estimado":"tu precio registrado"}) movido mes a mes con INEGI: variación mensual del índice de construcción, ajustada al ritmo anual del índice de naves y plantas industriales. Sirve para ver la tendencia; tu precio real depende del proyecto.` + (cur==="USD"?" En USD se convierte con el FIX de cada mes.":"");
+  note.textContent = `Precio por kg: parte de $${fmt(a.v)}/kg en ${mLabel(a.m)} (${emFrom(a)}) movido mes a mes con INEGI: variación mensual del índice de construcción, ajustada al ritmo anual del índice de naves y plantas industriales. Los % salen de INEGI; el precio de cada proyecto varía con su tamaño, proveedor y zona.` + (cur==="USD"?" En USD se convierte con el FIX de cada mes.":"");
   if (em.view==="years"){
     const yrs = [...new Set(ser.map(p=>p.m.slice(0,4)))].filter(y=>ser.filter(p=>p.m.startsWith(y)).length>1).slice(-4);
     const MM = Array.from({length:12},(_,i)=>String(i+1).padStart(2,"0"));
@@ -1017,9 +1022,9 @@ function renderEm(){
 function renderCalc(){
   const out = document.getElementById("calcOut"), ser = emSeries();
   if (!ser.length){ out.innerHTML = ""; return; }
-  const last = ser.at(-1);
-  out.innerHTML = `<div class="calc-rows">${EM_MKT.parts.map(([k,v,r])=>`<div><span>${k} <small class="muted">(rango ${r})</small></span><b>$${v}</b></div>`).join("")}<div class="tot"><span>Total suministro, fabricación, flete y montaje <small class="muted">(rango ${EM_MKT.lo}–${EM_MKT.hi})</small></span><b>$${EM_MKT.total} /kg</b></div></div>
-    <p class="src">Con INEGI, ese precio queda en <b>$${fmt(last.v)}/kg</b> a ${mLabel(last.m)}. Si un contratista pide un ajuste mayor que la variación del índice, pide el desglose.</p>`;
+  const last = ser.at(-1), a = emAnchor();
+  out.innerHTML = `<div class="calc-rows">${EM_MKT.parts.map(([k,v,r])=>`<div><span>${k} <small class="muted">(rango ${r})</small></span><b>$${v}</b></div>`).join("")}<div class="tot"><span>Referencia de mercado: suministro, fabricación, flete y montaje <small class="muted">(rango ${EM_MKT.lo}–${EM_MKT.hi})</small></span><b>$${EM_MKT.total} /kg</b></div>${a.from==="gnfr"?`<div class="tot"><span>Promedio pagado por GNFR, 2º semestre 2026 <small class="muted">(${a.v>=EM_MKT.lo&&a.v<=EM_MKT.hi?"dentro del rango de mercado":"fuera del rango de mercado"})</small></span><b>$${fmt(a.v)} /kg</b></div>`:""}</div>
+    <p class="src">Con INEGI, ${a.from==="gnfr"?"el promedio de GNFR":"ese precio"} queda en <b>$${fmt(last.v)}/kg</b> a ${mLabel(last.m)}; es el que ves en la gráfica. Si un contratista pide un ajuste mayor que la variación del índice, pide el desglose.</p>`;
 }
 
 // ---------- Walmart (WALMEX) ----------
@@ -1344,7 +1349,7 @@ function opModel(){
     ].filter(Boolean),
     comp, know, risks, cats, mpCount: mp.length,
     events: EVENTS.filter(e=>e.d>=today).slice(0,5),
-    asOf: mLabel(up.st.last), emAsOf: mLabel(last.m), url: DASH_URL };
+    asOf: mLabel(up.st.last), emAsOf: mLabel(last.m), emFt: emAnchor().from==="gnfr" ? `Estructura por kg: ${EM_OWN.lbl}, movido con INEGI hasta ${mLabel(last.m)}.` : `Estructura por kg estimada a ${mLabel(last.m)}.`, url: DASH_URL };
 }
 const opEsc = s => esc(s);
 const p1 = v => Math.abs(v)<0.05 ? "0.0%" : pct(v);
@@ -1361,7 +1366,7 @@ function opHtml(o){
       <section class="op-sec"><h3>Próximas fechas</h3><ul class="op-ev">${o.events.map(e=>`<li><b>${opEsc(e.dl)}</b><span>${opEsc(e.t)}<small>${opEsc(e.cats)}</small></span></li>`).join("")}</ul></section>
     </div>
   </div>
-  <footer class="op-ft"><p>Índices de categoría: INEGI, INPP a ${o.asOf}; costo total con salario IMSS e INPP de servicios. Estructura por kg estimada a ${o.emAsOf}. Dólar: Banxico FIX. WALMEX: cierre de la BMV; competencia: Yahoo Finance (3B de NYSE, a pesos). Riesgos con su fuente en el tablero.</p><p>Tablero completo: <a href="${o.url}" target="_blank" rel="noopener">${o.url.replace("https://","")}</a></p></footer>`;
+  <footer class="op-ft"><p>Índices de categoría: INEGI, INPP a ${o.asOf}; costo total con salario IMSS e INPP de servicios. ${o.emFt} Dólar: Banxico FIX. WALMEX: cierre de la BMV; competencia: Yahoo Finance (3B de NYSE, a pesos). Riesgos con su fuente en el tablero.</p><p>Tablero completo: <a href="${o.url}" target="_blank" rel="noopener">${o.url.replace("https://","")}</a></p></footer>`;
 }
 function opText(o){
   const L = [`PULSO DE COMPRAS MÉXICO · ${o.week}`, ""];
@@ -1390,7 +1395,7 @@ function opMail(o){
   ${h3(`Tus ${CATS.length} categorías`)}<table style="width:100%;border-collapse:collapse;font-size:13px"><tr>${["Categoría","12 m","En el año","TCO",""].map((t,i)=>`<th style="font:600 10px Menlo,monospace;text-transform:uppercase;color:${C.ink3};text-align:${i&&i<4?"right":"left"};padding:4px 6px;border-bottom:1px solid ${C.line}">${t}</th>`).join("")}</tr>${
     o.cats.map(x=>`<tr>${td(opEsc(x.n))}${td(pct(x.st.y12),"text-align:right")}${td(x.st.ytd!=null?p1(x.st.ytd):"–","text-align:right")}${td(x.tco!=null?pct(x.tco):"–","text-align:right")}${td(tag(x.lvl))}</tr>`).join("")}</table>
   ${h3("Próximas fechas")}<table role="presentation" style="width:100%;border-collapse:collapse;font-size:13px">${o.events.map(e=>`<tr><td style="vertical-align:top;padding:3px 10px 3px 0;white-space:nowrap;font:600 12px Menlo,monospace">${opEsc(e.dl)}</td><td style="padding:3px 0">${opEsc(e.t)}<br><span style="font-size:12px;color:${C.ink3}">${opEsc(e.cats)}</span></td></tr>`).join("")}</table>
-  <p style="font-size:12px;color:${C.ink3};border-top:1px solid ${C.line};padding-top:8px;margin-top:18px">Índices de categoría: INEGI, INPP a ${o.asOf}. Estructura por kg estimada a ${o.emAsOf}. Dólar: Banxico FIX. WALMEX: cierre de la BMV; competencia: Yahoo Finance (3B de NYSE, a pesos).<br><a href="${o.url}" style="color:${C.acc}">Abrir el tablero completo</a></p></div>`;
+  <p style="font-size:12px;color:${C.ink3};border-top:1px solid ${C.line};padding-top:8px;margin-top:18px">Índices de categoría: INEGI, INPP a ${o.asOf}. ${o.emFt} Dólar: Banxico FIX. WALMEX: cierre de la BMV; competencia: Yahoo Finance (3B de NYSE, a pesos).<br><a href="${o.url}" style="color:${C.acc}">Abrir el tablero completo</a></p></div>`;
 }
 window.onePager = () => { const o = opModel(); if (!o) return null;
   return {subject:`Pulso de Compras · ${o.week.replace(/^Semana del /,"semana del ")}: estructura ${o.kpis[0].v}/kg`, text:opText(o), html:opHtml(o), mail:opMail(o)}; };
@@ -1682,7 +1687,7 @@ function addVirtual(){
   EX_HIDE.forEach(id=>{ if (SERIES[id]) SERIES[id].hide = true; });
   Object.entries(EX_LBL).forEach(([id,n])=>{ if (SERIES[id]) SERIES[id].short = n; });
   st.sel = st.sel.filter(id=>!SERIES[id] || !SERIES[id].hide);
-  const ser = emSeries(); if (ser.length) SERIES.em_kg = {name:"Estructura Metálica, precio estimado por kg", short:"Estructura $/kg", group:"acero", kind:"price", cur:"MXN", unit:"kg", order:0, src:"INEGI (construcción y naves) + precio de mercado", points:ser, virtual:true}; }
+  const ser = emSeries(); if (ser.length) SERIES.em_kg = {name:"Estructura Metálica, precio estimado por kg", short:"Estructura $/kg", group:"acero", kind:"price", cur:"MXN", unit:"kg", order:0, src:"INEGI (construcción y naves) + " + (emAnchor().from==="gnfr" ? "promedio pagado por GNFR" : "precio de mercado"), points:ser, virtual:true}; }
 window.renderSeries = renderSeries;
 
 ["vView","vMode","vRange"].forEach(g => document.getElementById(g).addEventListener("click", e => {
