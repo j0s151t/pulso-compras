@@ -1709,12 +1709,12 @@
   "url": "https://finance.yahoo.com/quote/SORIANAB.MX/history/"
  },
  "comp_tresb_wk": {
-  "asOf": "2026-10-09",
+  "asOf": "2026-10-16",
   "cur": "USD",
   "group": "walmart",
   "kind": "stock",
   "name": "Tiendas 3B, cierre semanal (NYSE)",
-  "note": "d = lunes de la semana; v = cierre del último día hábil de esa semana en USD (semana del 5 oct 2026: cierre del 9 oct).",
+  "note": "d = lunes de la semana; v = cierre del último día hábil de esa semana en USD (semana del 12 oct 2026: cierre del 16 oct, de stockanalysis.com porque Yahoo aún no lo tenía).",
   "order": 5,
   "points": [
    {
@@ -2276,6 +2276,10 @@
    {
     "d": "2026-10-05",
     "v": 55.59
+   },
+   {
+    "d": "2026-10-12",
+    "v": 57.68
    }
   ],
   "short": "Tiendas 3B",
@@ -2496,12 +2500,12 @@
   "url": "https://dolardof.com/"
  },
  "fx_wk": {
-  "asOf": "2026-10-09",
+  "asOf": "2026-10-16",
   "cur": "ratio",
   "group": "walmart",
   "kind": "fx",
   "name": "Dólar (MXN por USD), cierre semanal",
-  "note": "d = lunes de la semana; v = cierre de esa semana; la semana en curso usa el último cierre. Se usa para pasar a pesos la acción de Tiendas 3B (NYSE, USD)",
+  "note": "d = lunes de la semana; v = cierre de esa semana; la semana en curso usa el último cierre. Semana del 12 oct 2026: FIX de Banxico del 16 oct (18.4930), porque Yahoo solo mostraba un dato parcial de la semana. Se usa para pasar a pesos la acción de Tiendas 3B (NYSE, USD)",
   "order": 6,
   "points": [
    {
@@ -3067,6 +3071,10 @@
    {
     "d": "2026-10-05",
     "v": 18.3992
+   },
+   {
+    "d": "2026-10-12",
+    "v": 18.493
    }
   ],
   "short": "USD/MXN semanal",
@@ -6829,6 +6837,26 @@
    {
     "d": "2026-10-09",
     "v": 47.3
+   },
+   {
+    "d": "2026-10-12",
+    "v": 47.84
+   },
+   {
+    "d": "2026-10-13",
+    "v": 47.21
+   },
+   {
+    "d": "2026-10-14",
+    "v": 47.74
+   },
+   {
+    "d": "2026-10-15",
+    "v": 48.25
+   },
+   {
+    "d": "2026-10-16",
+    "v": 49.3
    }
   ],
   "short": "WALMEX",
@@ -7895,6 +7923,10 @@
    {
     "d": "2026-10-05",
     "v": 47.3
+   },
+   {
+    "d": "2026-10-12",
+    "v": 49.3
    }
   ],
   "short": "WALMEX",
