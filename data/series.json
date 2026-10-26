@@ -292,7 +292,7 @@
   "url": "https://www.westmetall.com/en/markdaten.php?action=averages&field=LME_Cu_cash"
  },
  "comp_chedraui_wk": {
-  "asOf": "2026-10-09",
+  "asOf": "2026-10-23",
   "cur": "MXN",
   "group": "walmart",
   "kind": "stock",
@@ -879,6 +879,14 @@
    {
     "d": "2026-10-05",
     "v": 87.79
+   },
+   {
+    "d": "2026-10-12",
+    "v": 90.04
+   },
+   {
+    "d": "2026-10-19",
+    "v": 90.91
    }
   ],
   "short": "Chedraui",
@@ -887,12 +895,12 @@
   "url": "https://finance.yahoo.com/quote/CHDRAUIB.MX/history/"
  },
  "comp_lacomer_wk": {
-  "asOf": "2026-10-09",
+  "asOf": "2026-10-23",
   "cur": "MXN",
   "group": "walmart",
   "kind": "stock",
   "name": "La Comer, cierre semanal (BMV)",
-  "note": "d = lunes de la semana; v = cierre del último día hábil de esa semana. La semana del 5 oct 2026 usa el cierre del 9 oct de Google Finance (31.55), porque Yahoo no respondió.",
+  "note": "d = lunes de la semana; v = cierre del último día hábil de esa semana. La semana del 5 oct 2026 usa el cierre del 9 oct de Google Finance (31.55), que luego coincidió con Yahoo.",
   "order": 2,
   "points": [
    {
@@ -1474,6 +1482,14 @@
    {
     "d": "2026-10-05",
     "v": 31.55
+   },
+   {
+    "d": "2026-10-12",
+    "v": 32.53
+   },
+   {
+    "d": "2026-10-19",
+    "v": 31.4
    }
   ],
   "short": "La Comer",
@@ -1482,12 +1498,12 @@
   "url": "https://finance.yahoo.com/quote/LACOMERUBC.MX/history/"
  },
  "comp_soriana_wk": {
-  "asOf": "2026-10-07",
+  "asOf": "2026-10-23",
   "cur": "MXN",
   "group": "walmart",
   "kind": "stock",
   "name": "Soriana, cierre semanal (BMV)",
-  "note": "d = lunes de la semana; v = cierre del último día hábil de esa semana. La semana del 5 oct 2026 usa el último cierre que pude confirmar (7 oct, 33.10); no encontré cierres del 8 y 9 oct.",
+  "note": "d = lunes de la semana; v = cierre del último día hábil de esa semana. Soriana opera poco: del 7 al 19 oct 2026 Yahoo repite 33.10 sin volumen, y el 23 oct su último precio (32.14) fue a las 9:40.",
   "order": 4,
   "points": [
    {
@@ -1701,6 +1717,14 @@
    {
     "d": "2026-10-05",
     "v": 33.1
+   },
+   {
+    "d": "2026-10-12",
+    "v": 33.1
+   },
+   {
+    "d": "2026-10-19",
+    "v": 32.14
    }
   ],
   "short": "Soriana",
@@ -1709,7 +1733,7 @@
   "url": "https://finance.yahoo.com/quote/SORIANAB.MX/history/"
  },
  "comp_tresb_wk": {
-  "asOf": "2026-10-16",
+  "asOf": "2026-10-23",
   "cur": "USD",
   "group": "walmart",
   "kind": "stock",
@@ -2280,6 +2304,10 @@
    {
     "d": "2026-10-12",
     "v": 57.68
+   },
+   {
+    "d": "2026-10-19",
+    "v": 58.5
    }
   ],
   "short": "Tiendas 3B",
@@ -2316,7 +2344,7 @@
    },
    {
     "m": "2026-10",
-    "v": 27.01
+    "v": 27
    }
   ],
   "short": "Diésel",
@@ -2500,12 +2528,12 @@
   "url": "https://dolardof.com/"
  },
  "fx_wk": {
-  "asOf": "2026-10-16",
+  "asOf": "2026-10-23",
   "cur": "ratio",
   "group": "walmart",
   "kind": "fx",
   "name": "Dólar (MXN por USD), cierre semanal",
-  "note": "d = lunes de la semana; v = cierre de esa semana; la semana en curso usa el último cierre. Semana del 12 oct 2026: FIX de Banxico del 16 oct (18.4930), porque Yahoo solo mostraba un dato parcial de la semana. Se usa para pasar a pesos la acción de Tiendas 3B (NYSE, USD)",
+  "note": "d = lunes de la semana; v = cierre de esa semana; la semana en curso usa el último cierre. Se usa para pasar a pesos la acción de Tiendas 3B (NYSE, USD). Último cierre semanal (23 oct 2026, 18.6535) cerca del FIX de ese día (18.6670).",
   "order": 6,
   "points": [
    {
@@ -3074,7 +3102,11 @@
    },
    {
     "d": "2026-10-12",
-    "v": 18.493
+    "v": 18.478
+   },
+   {
+    "d": "2026-10-19",
+    "v": 18.6535
    }
   ],
   "short": "USD/MXN semanal",
@@ -3182,12 +3214,16 @@
    {
     "m": "2026-08",
     "v": 11.62
+   },
+   {
+    "m": "2026-09",
+    "v": 11.89
    }
   ],
   "short": "INEGI aluminio",
   "src": "INEGI vía CMIC CEICO",
   "unit": "%",
-  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/10_Octubre/CEICO_Informe_Octubre_2026_Variacion_precio_materiales.pdf"
  },
  "inpp_bano_yoy": {
   "cur": "pct",
@@ -3297,12 +3333,16 @@
    {
     "m": "2026-08",
     "v": 17.15
+   },
+   {
+    "m": "2026-09",
+    "v": 18.91
    }
   ],
   "short": "INEGI cables",
   "src": "INEGI vía CMIC CEICO",
   "unit": "%",
-  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/10_Octubre/CEICO_Informe_Octubre_2026_Variacion_precio_materiales.pdf"
  },
  "inpp_cemento_yoy": {
   "cur": "pct",
@@ -3395,12 +3435,16 @@
    {
     "m": "2026-08",
     "v": 22.27
+   },
+   {
+    "m": "2026-09",
+    "v": 27.79
    }
   ],
   "short": "INEGI tubo de cobre",
   "src": "INEGI vía CMIC CEICO",
   "unit": "%",
-  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/10_Octubre/CEICO_Informe_Octubre_2026_Variacion_precio_materiales.pdf"
  },
  "inpp_comercial_yoy": {
   "cur": "pct",
@@ -3828,12 +3872,16 @@
    {
     "m": "2026-07",
     "v": 17.04
+   },
+   {
+    "m": "2026-09",
+    "v": 14.88
    }
   ],
   "short": "INEGI diésel",
   "src": "INEGI vía CMIC CEICO",
   "unit": "%",
-  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/10_Octubre/CEICO_Informe_Octubre_2026_Variacion_precio_materiales.pdf"
  },
  "inpp_fundidas_yoy": {
   "cur": "pct",
@@ -3951,12 +3999,16 @@
    {
     "m": "2026-08",
     "v": 5.1
+   },
+   {
+    "m": "2026-09",
+    "v": 5.04
    }
   ],
   "short": "INEGI naves industriales",
   "src": "INEGI vía CMIC CEICO",
   "unit": "%",
-  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/10_Octubre/CEICO_Informe_Octubre_2026_Variacion_precio_materiales.pdf"
  },
  "inpp_perfiles_yoy": {
   "cur": "pct",
@@ -4139,12 +4191,16 @@
    {
     "m": "2026-08",
     "v": 16.35
+   },
+   {
+    "m": "2026-09",
+    "v": 14.96
    }
   ],
   "short": "INEGI tubería plástica",
   "src": "INEGI vía CMIC CEICO",
   "unit": "%",
-  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/10_Octubre/CEICO_Informe_Octubre_2026_Variacion_precio_materiales.pdf"
  },
  "inpp_varilla_yoy": {
   "cur": "pct",
@@ -5723,7 +5779,7 @@
   "group": "walmart",
   "kind": "stock",
   "name": "WALMEX, cierre diario (BMV)",
-  "note": "d = día hábil; v = cierre del día. Yahoo no tiene el 22 abr 2026. El 6 oct 2026 Yahoo mostró 46.64 (último operado a las 13:59); se usa el cierre de Google, 46.69.",
+  "note": "d = día hábil; v = cierre del día. Yahoo no tiene el 22 abr 2026. El 6 oct 2026 Yahoo mostró 46.64 (último operado a las 13:59); se usa el cierre de Google, 46.69. 22 oct 2026: la tabla de Yahoo dice 50.31 y Stock Analysis mostró 50.34 a las 13:59; se usa el de la tabla porque Google no tenía ese día.",
   "order": 1,
   "points": [
    {
@@ -6857,6 +6913,26 @@
    {
     "d": "2026-10-16",
     "v": 49.3
+   },
+   {
+    "d": "2026-10-19",
+    "v": 50.1
+   },
+   {
+    "d": "2026-10-20",
+    "v": 49.94
+   },
+   {
+    "d": "2026-10-21",
+    "v": 49.52
+   },
+   {
+    "d": "2026-10-22",
+    "v": 50.31
+   },
+   {
+    "d": "2026-10-23",
+    "v": 50.73
    }
   ],
   "short": "WALMEX",
@@ -7927,6 +8003,10 @@
    {
     "d": "2026-10-12",
     "v": 49.3
+   },
+   {
+    "d": "2026-10-19",
+    "v": 50.73
    }
   ],
   "short": "WALMEX",
