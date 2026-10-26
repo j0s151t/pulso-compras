@@ -1299,7 +1299,8 @@ const EVENTS = [
   {d:"2026-12-31", dl:"15 al 31 dic", t:"Salario mínimo 2027 en el DOF (se espera +10% a 13%)", cats:"Mano de obra de instalación, todas menos Pintura y Proyectista", lvl:"alto"},
   {d:"2027-01-01", dl:"1 ene 2027", t:"La jornada laboral baja de 48 a 46 horas", cats:"Instalación y honorarios de Proyectista", lvl:"medio"}
 ];
-const DASH_URL = window.__STATIC__ ? "https://j0s151t.github.io/pulso-compras/" : "https://claude.ai/artifact/RNbnGAatVz42BP1jsWmjkF";
+// El onepager (dialogo, texto, correo y PDF) siempre apunta al link publico: el correo se reenvia y el link privado no le sirve a nadie mas (Andres, 26 oct 2026).
+const DASH_URL = "https://j0s151t.github.io/pulso-compras/";
 const txt = el => el ? el.textContent.replace(/\s+/g," ").trim() : "";
 const catLvl = (c, st) => { let l = !st || st.y12==null ? "bajo" : st.y12>25 ? "alto" : st.y12>5 ? "medio" : "bajo"; if (c.extra && RANK[c.extra]>RANK[l]) l = c.extra; return l; };
 // Junta los datos del onepager; html, text y mail salen de aquí para que el botón y el correo digan lo mismo.
