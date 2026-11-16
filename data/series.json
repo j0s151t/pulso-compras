@@ -300,7 +300,7 @@
   "url": "https://www.westmetall.com/en/markdaten.php?action=averages&field=LME_Cu_cash"
  },
  "comp_chedraui_wk": {
-  "asOf": "2026-11-06",
+  "asOf": "2026-11-13",
   "cur": "MXN",
   "group": "walmart",
   "kind": "stock",
@@ -903,6 +903,10 @@
    {
     "d": "2026-11-02",
     "v": 107.91
+   },
+   {
+    "d": "2026-11-09",
+    "v": 110.56
    }
   ],
   "short": "Chedraui",
@@ -2572,12 +2576,12 @@
   "url": "https://dolardof.com/"
  },
  "fx_wk": {
-  "asOf": "2026-11-06",
+  "asOf": "2026-11-13",
   "cur": "ratio",
   "group": "walmart",
   "kind": "fx",
   "name": "Dólar (MXN por USD), cierre semanal",
-  "note": "d = lunes de la semana; v = cierre de esa semana; la semana en curso usa el último cierre. Se usa para pasar a pesos la acción de Tiendas 3B (NYSE, USD). Último cierre semanal (6 nov 2026, 18.6193) cerca del FIX de ese día (18.6297).",
+  "note": "d = lunes de la semana; v = cierre de esa semana; la semana en curso usa el último cierre. Se usa para pasar a pesos la acción de Tiendas 3B (NYSE, USD). Último cierre semanal (13 nov 2026, 18.5215) cerca del FIX del 12 nov (18.6188); el FIX del 13 nov sale en el DOF del 17 nov, porque el 16 fue feriado.",
   "order": 6,
   "points": [
    {
@@ -3159,6 +3163,10 @@
    {
     "d": "2026-11-02",
     "v": 18.6193
+   },
+   {
+    "d": "2026-11-09",
+    "v": 18.5215
    }
   ],
   "short": "USD/MXN semanal",
@@ -3754,6 +3762,10 @@
    {
     "m": "2026-09",
     "v": 0.17
+   },
+   {
+    "m": "2026-10",
+    "v": 0.65
    }
   ],
   "short": "Construcción mensual (INEGI)",
@@ -3903,6 +3915,10 @@
    {
     "m": "2026-09",
     "v": 5.71
+   },
+   {
+    "m": "2026-10",
+    "v": 6.23
    }
   ],
   "short": "INEGI construcción",
@@ -4482,6 +4498,10 @@
    {
     "m": "2026-09",
     "v": 0.37
+   },
+   {
+    "m": "2026-10",
+    "v": 1.74
    }
   ],
   "short": "Equipo eléctrico",
@@ -4631,6 +4651,10 @@
    {
     "m": "2026-09",
     "v": 0.2
+   },
+   {
+    "m": "2026-10",
+    "v": 3.8
    }
   ],
   "short": "Equipo electrónico",
@@ -4780,6 +4804,10 @@
    {
     "m": "2026-09",
     "v": 0.05
+   },
+   {
+    "m": "2026-10",
+    "v": 2.84
    }
   ],
   "short": "Maquinaria y equipo",
@@ -4929,6 +4957,10 @@
    {
     "m": "2026-09",
     "v": -0.36
+   },
+   {
+    "m": "2026-10",
+    "v": 1.27
    }
   ],
   "short": "Metálicas básicas",
@@ -5078,6 +5110,10 @@
    {
     "m": "2026-09",
     "v": -0.02
+   },
+   {
+    "m": "2026-10",
+    "v": 0.76
    }
   ],
   "short": "Minerales no metálicos",
@@ -5227,6 +5263,10 @@
    {
     "m": "2026-09",
     "v": 7.37
+   },
+   {
+    "m": "2026-10",
+    "v": 5.64
    }
   ],
   "short": "Derivados del petróleo",
@@ -5376,6 +5416,10 @@
    {
     "m": "2026-09",
     "v": 0.09
+   },
+   {
+    "m": "2026-10",
+    "v": 1.63
    }
   ],
   "short": "Plástico y hule",
@@ -5525,6 +5569,10 @@
    {
     "m": "2026-09",
     "v": 0.1
+   },
+   {
+    "m": "2026-10",
+    "v": 1.82
    }
   ],
   "short": "Productos metálicos",
@@ -5674,6 +5722,10 @@
    {
     "m": "2026-09",
     "v": -0.02
+   },
+   {
+    "m": "2026-10",
+    "v": 0.53
    }
   ],
   "short": "Servicios profesionales",
@@ -5823,6 +5875,10 @@
    {
     "m": "2026-09",
     "v": 0.39
+   },
+   {
+    "m": "2026-10",
+    "v": 1.72
    }
   ],
   "short": "Química",
@@ -7025,6 +7081,26 @@
    {
     "d": "2026-11-06",
     "v": 54.2
+   },
+   {
+    "d": "2026-11-09",
+    "v": 54.44
+   },
+   {
+    "d": "2026-11-10",
+    "v": 54.45
+   },
+   {
+    "d": "2026-11-11",
+    "v": 53.6
+   },
+   {
+    "d": "2026-11-12",
+    "v": 54.36
+   },
+   {
+    "d": "2026-11-13",
+    "v": 54.67
    }
   ],
   "short": "WALMEX",
@@ -8107,6 +8183,10 @@
    {
     "d": "2026-11-02",
     "v": 54.2
+   },
+   {
+    "d": "2026-11-09",
+    "v": 54.67
    }
   ],
   "short": "WALMEX",
