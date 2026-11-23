@@ -300,7 +300,7 @@
   "url": "https://www.westmetall.com/en/markdaten.php?action=averages&field=LME_Cu_cash"
  },
  "comp_chedraui_wk": {
-  "asOf": "2026-11-13",
+  "asOf": "2026-11-20",
   "cur": "MXN",
   "group": "walmart",
   "kind": "stock",
@@ -907,6 +907,10 @@
    {
     "d": "2026-11-09",
     "v": 110.56
+   },
+   {
+    "d": "2026-11-16",
+    "v": 114.01
    }
   ],
   "short": "Chedraui",
@@ -915,7 +919,7 @@
   "url": "https://finance.yahoo.com/quote/CHDRAUIB.MX/history/"
  },
  "comp_lacomer_wk": {
-  "asOf": "2026-11-06",
+  "asOf": "2026-11-20",
   "cur": "MXN",
   "group": "walmart",
   "kind": "stock",
@@ -1518,6 +1522,14 @@
    {
     "d": "2026-11-02",
     "v": 30.56
+   },
+   {
+    "d": "2026-11-09",
+    "v": 30.12
+   },
+   {
+    "d": "2026-11-16",
+    "v": 29.25
    }
   ],
   "short": "La Comer",
@@ -1526,7 +1538,7 @@
   "url": "https://finance.yahoo.com/quote/LACOMERUBC.MX/history/"
  },
  "comp_soriana_wk": {
-  "asOf": "2026-11-06",
+  "asOf": "2026-11-19",
   "cur": "MXN",
   "group": "walmart",
   "kind": "stock",
@@ -1761,6 +1773,14 @@
    {
     "d": "2026-11-02",
     "v": 31
+   },
+   {
+    "d": "2026-11-09",
+    "v": 29
+   },
+   {
+    "d": "2026-11-16",
+    "v": 29.09
    }
   ],
   "short": "Soriana",
@@ -1769,7 +1789,7 @@
   "url": "https://finance.yahoo.com/quote/SORIANAB.MX/history/"
  },
  "comp_tresb_wk": {
-  "asOf": "2026-11-06",
+  "asOf": "2026-11-20",
   "cur": "USD",
   "group": "walmart",
   "kind": "stock",
@@ -2352,6 +2372,14 @@
    {
     "d": "2026-11-02",
     "v": 65.62
+   },
+   {
+    "d": "2026-11-09",
+    "v": 70.02
+   },
+   {
+    "d": "2026-11-16",
+    "v": 64.89
    }
   ],
   "short": "Tiendas 3B",
@@ -2576,12 +2604,12 @@
   "url": "https://dolardof.com/"
  },
  "fx_wk": {
-  "asOf": "2026-11-13",
+  "asOf": "2026-11-20",
   "cur": "ratio",
   "group": "walmart",
   "kind": "fx",
   "name": "Dólar (MXN por USD), cierre semanal",
-  "note": "d = lunes de la semana; v = cierre de esa semana; la semana en curso usa el último cierre. Se usa para pasar a pesos la acción de Tiendas 3B (NYSE, USD). Último cierre semanal (13 nov 2026, 18.5215) cerca del FIX del 12 nov (18.6188); el FIX del 13 nov sale en el DOF del 17 nov, porque el 16 fue feriado.",
+  "note": "d = lunes de la semana; v = cierre de esa semana; la semana en curso usa el último cierre. Se usa para pasar a pesos la acción de Tiendas 3B (NYSE, USD). Último cierre semanal (20 nov 2026, 19.1437) cerca del FIX del 19 nov (19.0270); el lunes 23 temprano cotizaba en 19.23.",
   "order": 6,
   "points": [
    {
@@ -3167,6 +3195,10 @@
    {
     "d": "2026-11-09",
     "v": 18.5215
+   },
+   {
+    "d": "2026-11-16",
+    "v": 19.1437
    }
   ],
   "short": "USD/MXN semanal",
@@ -3401,12 +3433,16 @@
    {
     "m": "2026-09",
     "v": 18.91
+   },
+   {
+    "m": "2026-10",
+    "v": 22.11
    }
   ],
   "short": "INEGI cables",
   "src": "INEGI vía CMIC CEICO",
   "unit": "%",
-  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/10_Octubre/CEICO_Informe_Octubre_2026_Variacion_precio_materiales.pdf"
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/11_Noviembre/CEICO_Informe_Noviembre_2026_Variacion_precio_materiales.pdf"
  },
  "inpp_cemento_yoy": {
   "cur": "pct",
@@ -3503,12 +3539,16 @@
    {
     "m": "2026-09",
     "v": 27.79
+   },
+   {
+    "m": "2026-10",
+    "v": 32.15
    }
   ],
   "short": "INEGI tubo de cobre",
   "src": "INEGI vía CMIC CEICO",
   "unit": "%",
-  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/10_Octubre/CEICO_Informe_Octubre_2026_Variacion_precio_materiales.pdf"
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/11_Noviembre/CEICO_Informe_Noviembre_2026_Variacion_precio_materiales.pdf"
  },
  "inpp_comercial_yoy": {
   "cur": "pct",
@@ -3564,12 +3604,20 @@
    {
     "m": "2026-08",
     "v": 5.57
+   },
+   {
+    "m": "2026-09",
+    "v": 5.4
+   },
+   {
+    "m": "2026-10",
+    "v": 5.83
    }
   ],
   "short": "INEGI inmuebles comerciales",
   "src": "INEGI vía CMIC CEICO",
   "unit": "%",
-  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/11_Noviembre/CEICO_Informe_Noviembre_2026_Variacion_precio_materiales.pdf"
  },
  "inpp_concreto_yoy": {
   "cur": "pct",
@@ -3948,12 +3996,16 @@
    {
     "m": "2026-09",
     "v": 14.88
+   },
+   {
+    "m": "2026-10",
+    "v": 16.4
    }
   ],
   "short": "INEGI diésel",
   "src": "INEGI vía CMIC CEICO",
   "unit": "%",
-  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/10_Octubre/CEICO_Informe_Octubre_2026_Variacion_precio_materiales.pdf"
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/11_Noviembre/CEICO_Informe_Noviembre_2026_Variacion_precio_materiales.pdf"
  },
  "inpp_fundidas_yoy": {
   "cur": "pct",
@@ -4075,12 +4127,16 @@
    {
     "m": "2026-09",
     "v": 5.04
+   },
+   {
+    "m": "2026-10",
+    "v": 5.58
    }
   ],
   "short": "INEGI naves industriales",
   "src": "INEGI vía CMIC CEICO",
   "unit": "%",
-  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/10_Octubre/CEICO_Informe_Octubre_2026_Variacion_precio_materiales.pdf"
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/11_Noviembre/CEICO_Informe_Noviembre_2026_Variacion_precio_materiales.pdf"
  },
  "inpp_perfiles_yoy": {
   "cur": "pct",
@@ -4234,12 +4290,16 @@
    {
     "m": "2026-08",
     "v": 8.53
+   },
+   {
+    "m": "2026-10",
+    "v": 8.58
    }
   ],
   "short": "INEGI soldaduras",
   "src": "INEGI vía CMIC CEICO",
   "unit": "%",
-  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/09_Septiembre/CEICO_Informe_Septiembre_2026_Variacion_precio_materiales.pdf"
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/11_Noviembre/CEICO_Informe_Noviembre_2026_Variacion_precio_materiales.pdf"
  },
  "inpp_tubplastico_yoy": {
   "cur": "pct",
@@ -4267,12 +4327,16 @@
    {
     "m": "2026-09",
     "v": 14.96
+   },
+   {
+    "m": "2026-10",
+    "v": 17.12
    }
   ],
   "short": "INEGI tubería plástica",
   "src": "INEGI vía CMIC CEICO",
   "unit": "%",
-  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/10_Octubre/CEICO_Informe_Octubre_2026_Variacion_precio_materiales.pdf"
+  "url": "https://www.cmic.org.mx/comisiones/Tematicas/costosyp/Informes_CEICO/INEGI/2026/11_Noviembre/CEICO_Informe_Noviembre_2026_Variacion_precio_materiales.pdf"
  },
  "inpp_varilla_yoy": {
   "cur": "pct",
@@ -7101,6 +7165,22 @@
    {
     "d": "2026-11-13",
     "v": 54.67
+   },
+   {
+    "d": "2026-11-17",
+    "v": 55.11
+   },
+   {
+    "d": "2026-11-18",
+    "v": 54.57
+   },
+   {
+    "d": "2026-11-19",
+    "v": 55.4
+   },
+   {
+    "d": "2026-11-20",
+    "v": 54.42
    }
   ],
   "short": "WALMEX",
@@ -8187,6 +8267,10 @@
    {
     "d": "2026-11-09",
     "v": 54.67
+   },
+   {
+    "d": "2026-11-16",
+    "v": 54.42
    }
   ],
   "short": "WALMEX",
